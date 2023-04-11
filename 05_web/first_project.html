@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>30. A first project &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_web/first_project';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="31. Implementing MVC" href="mvc.html" />
+    <link rel="prev" title="29. The toolbox" href="toolbox.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05_web/first_project.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A first project</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">30.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">30.1.1. Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps">30.2. The steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-tomcat-as-webserver">30.2.1. Configure Tomcat as webserver</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-gradle-managed-web-project">30.2.2. Create a Gradle-managed web project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-gradle">30.2.3. Configure Gradle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-web-inf-folder">30.2.4. The WEB-INF folder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-resource-bundle">30.2.5. Create a resource bundle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-to-use-thymeleaf">30.2.6. Prepare to use Thymeleaf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-servlet">30.2.7. Create a Servlet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finally-run-it">30.2.8. Finally: run it</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-first-project">
+<h1><span class="section-number">30. </span>A first project<a class="headerlink" href="#a-first-project" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">30.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>The topic of this presentation is getting started with a Java web application using a Thymeleaf View that serves an internationalized welcome message.</p>
+<p>Since JSP and not Thymeleaf is the default for basic Java web applications, this involves quite a few steps:</p>
+<ol class="arabic simple">
+<li><p>configuring IntelliJ with the application server Tomcat</p></li>
+<li><p>creating a Gradle-managed web project</p></li>
+<li><p>creating a Thymeleaf template</p></li>
+<li><p>configuring the use of Thymeleaf</p></li>
+<li><p>creating a servlet</p></li>
+<li><p>running the web application</p></li>
+</ol>
+<p>You should realise that creating a web app from scratch is something you don’t do very often so it is not that terrible it takes some time. Also, this example makes use of a resource bundle supporting multiple languages (internationalization) and that is something you won’t do with every app you build.</p>
+<div class="section" id="prerequisites">
+<h3><span class="section-number">30.1.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Tomcat</strong>. I assume you have a working version of Tomcat server (see <a class="reference external" href="http://tomcat.apache.org/">http://tomcat.apache.org/</a>). This tutorial uses Tomcat 9.0.XX - (Tomcat 10 failed for mysterious reasons on my machine!). Simply extract the downloaded zip at a convenient location. Don’t forget to make the <code class="docutils literal notranslate"><span class="pre">*.sh</span></code> scripts in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> folder executable!</p></li>
+<li><p><strong>IntelliJ Idea</strong>. This blog uses the 2022.2.1 Ultimate version. Please refer to Jetbrains for educational licences.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-steps">
+<h2><span class="section-number">30.2. </span>The steps<a class="headerlink" href="#the-steps" title="Permalink to this headline">#</a></h2>
+<div class="section" id="configure-tomcat-as-webserver">
+<h3><span class="section-number">30.2.1. </span>Configure Tomcat as webserver<a class="headerlink" href="#configure-tomcat-as-webserver" title="Permalink to this headline">#</a></h3>
+<p>After extraction of Tomcat the Tomcat server application (and making the *.sh scripts executable), you’ll have to let IntelliJ know where it is.
+You do this via <code class="docutils literal notranslate"><span class="pre">Preferences</span></code> → <code class="docutils literal notranslate"><span class="pre">Build,</span> <span class="pre">Execution,</span> <span class="pre">Deployment</span></code> → <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Servers</span></code> → click <code class="docutils literal notranslate"><span class="pre">+</span></code> (Add) and point to the location where you extracted Tomcat.</p>
+<p><img alt="Configure Tomcat" src="../_images/Configure-Tomcat.png" /></p>
+</div>
+<div class="section" id="create-a-gradle-managed-web-project">
+<h3><span class="section-number">30.2.2. </span>Create a Gradle-managed web project<a class="headerlink" href="#create-a-gradle-managed-web-project" title="Permalink to this headline">#</a></h3>
+<p>Creating a Gradle-managed web project in IntelliJ:</p>
+<ul class="simple">
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">File</span></code> → <code class="docutils literal notranslate"><span class="pre">New</span></code> → <code class="docutils literal notranslate"><span class="pre">Project</span></code></p></li>
+</ul>
+<p>You see something like this:</p>
+<p><img alt="Gradle project creation" src="../_images/Create-Gradle-project-1.png" /></p>
+<p>Enter GroupId (your unique identifier to this project), ArtifactId (its name) and Version and click <code class="docutils literal notranslate"><span class="pre">Create</span></code>.</p>
+<p>You may get an error message like this:
+<img alt="Gradle project creation" src="../_images/Create-Gradle-project-1a.png" /></p>
+<p>Don’t worry, simply click <code class="docutils literal notranslate"><span class="pre">Yes</span></code>. We’ll fix that first.</p>
+<p>You will have something like this, after Gradle has build the project (this may take some time, depending on your machine and internet connection):</p>
+<p><img alt="New Gradle project" src="../_images/Create-Gradle-project-3.png" /></p>
+<p>To solve the warning (if you had any), open file <code class="docutils literal notranslate"><span class="pre">gradle-wrapper.properties</span></code> under <code class="docutils literal notranslate"><span class="pre">gradle/wrapper/</span></code> and change the version number to 7.5, then hit “Load Gradle Changes” button:</p>
+<p><img alt="New Gradle project" src="../_images/Create-Gradle-project-4.png" /></p>
+</div>
+<div class="section" id="configure-gradle">
+<h3><span class="section-number">30.2.3. </span>Configure Gradle<a class="headerlink" href="#configure-gradle" title="Permalink to this headline">#</a></h3>
+<p>In this project, we’ll be using Thymeleaf and JUnit5 (and the Servlet API). Since they are not available in Java by default (i.e. not in the standard JDK), you’ll need to configure them as your projects dependencies.
+Fortunately, Gradle is an excellent tool for dependency management.
+Here is the contents of a basic <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> configuration file for a web app:</p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span>plugins {
+    id &#39;war&#39;
+    id &#39;java&#39;
+    id &#39;idea&#39;
+}
+
+group &#39;nl.bioinf.nomi&#39;
+version &#39;0.0.1&#39;
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //Servlets
+    implementation &#39;javax.servlet:javax.servlet-api:4.0.0&#39; # or 3.1.0
+    //Thymeleaf
+    implementation &#39;org.thymeleaf:thymeleaf:3.0.15.RELEASE&#39;
+    //JUnit
+    testImplementation &#39;org.junit.jupiter:junit-jupiter-api:5.8.1&#39;
+    testRuntimeOnly &#39;org.junit.jupiter:junit-jupiter-engine:5.8.1&#39;
+}
+
+test {
+    useJUnitPlatform()
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-web-inf-folder">
+<h3><span class="section-number">30.2.4. </span>The WEB-INF folder<a class="headerlink" href="#the-web-inf-folder" title="Permalink to this headline">#</a></h3>
+<p>Under <code class="docutils literal notranslate"><span class="pre">main</span></code>, create folder <code class="docutils literal notranslate"><span class="pre">webapp</span></code>, create a folder called <code class="docutils literal notranslate"><span class="pre">WEB-INF</span></code> and within that one a folder called <code class="docutils literal notranslate"><span class="pre">templates</span></code>. Within <code class="docutils literal notranslate"><span class="pre">templates</span></code>, create the html file called <code class="docutils literal notranslate"><span class="pre">welcome.html</span></code>. You can do that via context menu <code class="docutils literal notranslate"><span class="pre">New</span></code> → <code class="docutils literal notranslate"><span class="pre">Thymeleaf</span></code> or simply <code class="docutils literal notranslate"><span class="pre">New</span></code> → HTML File.</p>
+<p><img alt="Create WEB-INF" src="../_images/create-WEB-INF.png" /></p>
+<p>Your file <code class="docutils literal notranslate"><span class="pre">welcome.html</span></code> should have this contents:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html SYSTEM &quot;http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd&quot;&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Thymeleaf Starter<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- welcome message read from resource bundle welcome.html--&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;#{welcome.msg}&quot;</span><span class="p">&gt;</span>Welcome Offline<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- date forwarded from the servlet--&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Date: <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${currentDate}&quot;</span><span class="p">&gt;</span>Sat Oct 24 2015<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">&lt;!DOCTYPE...&gt;</span></code> declaration on top declaring it to be a Thymeleaf page.
+There are several non-html syntax elements that make this page special:
+<strong><code class="docutils literal notranslate"><span class="pre">#{...}</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">${...}</span></code></strong> and the Thymeleaf tag attributes <code class="docutils literal notranslate"><span class="pre">th:text</span></code>.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">#{...}</span></code></strong> fetches the value from the <strong><em>resource bundle</em></strong> (files named <code class="docutils literal notranslate"><span class="pre">xxxxx.properties</span></code> discussed below). The expression <strong><code class="docutils literal notranslate"><span class="pre">#{welcome.msg}</span></code></strong> gets the value of key <code class="docutils literal notranslate"><span class="pre">welcome.msg</span></code> from the file <code class="docutils literal notranslate"><span class="pre">welcome_xx.properties</span></code>. The expression <code class="docutils literal notranslate"><span class="pre">${...}</span></code> fetches the value set in the <code class="docutils literal notranslate"><span class="pre">WebContext</span></code> instance. The expression <code class="docutils literal notranslate"><span class="pre">${currentDate}</span></code> gets the value for the attribute <code class="docutils literal notranslate"><span class="pre">currentDate</span></code> set in <code class="docutils literal notranslate"><span class="pre">WebContext</span></code>.</p>
+<p>Much more on that stuff.</p>
+<p>Other than that, this is a plain old html file. You can open it in any browser and it will show you the non-processed view. This is what makes Thymeleaf so nice; you can develop the view of your app without using servers or template engines!</p>
+</div>
+<div class="section" id="create-a-resource-bundle">
+<h3><span class="section-number">30.2.5. </span>Create a resource bundle<a class="headerlink" href="#create-a-resource-bundle" title="Permalink to this headline">#</a></h3>
+<p>A resource bundle is where you store your web page texts, if you ever want to support more than one language. Instead of creating web pages for every language you are willing to support, you create text-free web pages and store the texts for the different languages in separate files called <em>resource bundles</em>.</p>
+<p>This is how you add language support to your web app:</p>
+<p>Right-click the templates folder, select <code class="docutils literal notranslate"><span class="pre">New</span></code> → <code class="docutils literal notranslate"><span class="pre">Resource</span> <span class="pre">Bundle</span></code> →<br />
+Type welcome as base name →<br />
+Click <code class="docutils literal notranslate"><span class="pre">+</span></code> under <code class="docutils literal notranslate"><span class="pre">Locales</span> <span class="pre">to</span> <span class="pre">add</span></code> and add <code class="docutils literal notranslate"><span class="pre">en</span></code> →<br />
+Click <code class="docutils literal notranslate"><span class="pre">OK</span></code> → Click <code class="docutils literal notranslate"><span class="pre">OK</span></code> again to finish.</p>
+<p><img alt="Create Resource bundle 1" src="../_images/Create-Resource-Bundle-1.png" /></p>
+<p>The resource bundle will open in your editor. It has plain text view and “Resource Bundle” view. (You may need to install the Plugin for that via <code class="docutils literal notranslate"><span class="pre">Preferences</span></code> → <code class="docutils literal notranslate"><span class="pre">Plugins</span></code> → search for Resource Bundle Editor in Marketplace).<br />
+Here I choose the latter. Click ‘+’ to add a new Property key and name it <code class="docutils literal notranslate"><span class="pre">welcome.msg</span></code>.</p>
+<p><img alt="Create Resource bundle 2" src="../_images/Create-Resource-Bundle-2.png" /></p>
+<p>Give some Dutch (or other language of course) and English values for <code class="docutils literal notranslate"><span class="pre">welcome.msg</span></code>.</p>
+<p><img alt="Create Resource bundle 3" src="../_images/Create-Resource-Bundle-3.png" /></p>
+<p>Now you have internationalized your view.<br />
+Note that in Text view (the default when no plugin is present), you can simply enter <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pairs in each of your resource bundle files. This one is in <code class="docutils literal notranslate"><span class="pre">welcome.properties</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>welcome.msg=Hallo dan!
+</pre></div>
+</div>
+</div>
+<div class="section" id="prepare-to-use-thymeleaf">
+<h3><span class="section-number">30.2.6. </span>Prepare to use Thymeleaf<a class="headerlink" href="#prepare-to-use-thymeleaf" title="Permalink to this headline">#</a></h3>
+<p>Thymeleaf needs some configuration to get going. Here is some boilerplate code that you can simply copy-and-paste.</p>
+<p>Under <code class="docutils literal notranslate"><span class="pre">main/java</span></code>, create a base package using the context menu looking like this <code class="docutils literal notranslate"><span class="pre">&lt;your_._domain&gt;.&lt;your_name&gt;.&lt;your_project&gt;</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">nl.bioinf.nomi.mywebapp</span></code>. Within it, create two additional packages: <code class="docutils literal notranslate"><span class="pre">config</span></code> and <code class="docutils literal notranslate"><span class="pre">servlets</span></code>. Under <code class="docutils literal notranslate"><span class="pre">config</span></code>, create a new Java class file <code class="docutils literal notranslate"><span class="pre">WebConfig.java</span></code>. Put this code in there, and change the package declaration to match your situation:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.config</span><span class="p">;</span><span class="w"> </span><span class="c1">//change this for your situation!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.thymeleaf.TemplateEngine</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.thymeleaf.templateresolver.ServletContextTemplateResolver</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletContext</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WebConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">TemplateEngine</span><span class="w"> </span><span class="nf">createTemplateEngine</span><span class="p">(</span><span class="n">ServletContext</span><span class="w"> </span><span class="n">servletContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ServletContextTemplateResolver</span><span class="w"> </span><span class="n">templateResolver</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">ServletContextTemplateResolver</span><span class="p">(</span><span class="n">servletContext</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateResolver</span><span class="p">.</span><span class="na">setTemplateMode</span><span class="p">(</span><span class="s">&quot;XHTML&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateResolver</span><span class="p">.</span><span class="na">setPrefix</span><span class="p">(</span><span class="s">&quot;/WEB-INF/templates/&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateResolver</span><span class="p">.</span><span class="na">setSuffix</span><span class="p">(</span><span class="s">&quot;.html&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateResolver</span><span class="p">.</span><span class="na">setCacheTTLMs</span><span class="p">(</span><span class="mi">3600000L</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Cache is set to true by default.</span>
+<span class="w">        </span><span class="c1">// Set to false if you want templates to be automatically</span>
+<span class="w">        </span><span class="c1">// updated when modified.</span>
+<span class="w">        </span><span class="n">templateResolver</span><span class="p">.</span><span class="na">setCacheable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">TemplateEngine</span><span class="w"> </span><span class="n">templateEngine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TemplateEngine</span><span class="p">();</span>
+<span class="w">        </span><span class="n">templateEngine</span><span class="p">.</span><span class="na">setTemplateResolver</span><span class="p">(</span><span class="n">templateResolver</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">templateEngine</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">      * Configures the response in a standard way.</span>
+<span class="cm">      * @param response</span>
+<span class="cm">      */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configureResponse</span><span class="p">(</span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">&quot;text/html;charset=UTF-8&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span><span class="s">&quot;Pragma&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;no-cache&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span><span class="s">&quot;Cache-Control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;no-cache&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setDateHeader</span><span class="p">(</span><span class="s">&quot;Expires&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The main role of this class is to provide a <strong><em>template engine</em></strong>. This is the component of your application that is responsible for processing the Thymeleaf templates into html views. To do this, the template engine needs to know -amongst other things- where these templates are. That is the responsibility of the <code class="docutils literal notranslate"><span class="pre">TemplateResolver</span></code>. have a look at the code and try to understand what’s happening.</p>
+</div>
+<div class="section" id="create-a-servlet">
+<h3><span class="section-number">30.2.7. </span>Create a Servlet<a class="headerlink" href="#create-a-servlet" title="Permalink to this headline">#</a></h3>
+<p>Finally, everything is going to fall into place. Under package <code class="docutils literal notranslate"><span class="pre">....servlets</span></code>, create a new Servlet class with the contents listed below. If you have that context menu item whan right-clicking on the <code class="docutils literal notranslate"><span class="pre">servlets</span></code> package, you can use the <code class="docutils literal notranslate"><span class="pre">New</span></code> → <code class="docutils literal notranslate"><span class="pre">Servlet</span></code> wizard; if not, use <code class="docutils literal notranslate"><span class="pre">New</span></code> → <code class="docutils literal notranslate"><span class="pre">Java</span> <span class="pre">class</span></code> to create one from scratch.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.servlets</span><span class="p">;</span><span class="w"> </span><span class="c1">//change to your situation!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.config.WebConfig</span><span class="p">;</span><span class="w"> </span><span class="c1">//change to your situation!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.thymeleaf.context.WebContext</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletContext</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="p">;</span>
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;WelcomeServlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/welcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">loadOnStartup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WelcomeServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Initializing Thymeleaf template engine&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">ServletContext</span><span class="w"> </span><span class="n">servletContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">();</span>
+<span class="w">        </span><span class="n">WebConfig</span><span class="p">.</span><span class="na">createTemplateEngine</span><span class="p">(</span><span class="n">servletContext</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">{</span>
+<span class="w">        </span><span class="n">process</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">{</span>
+<span class="w">        </span><span class="n">process</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//this step is optional; standard settings also suffice</span>
+<span class="w">        </span><span class="n">WebConfig</span><span class="p">.</span><span class="na">configureResponse</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+<span class="w">        </span><span class="n">WebContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebContext</span><span class="p">(</span>
+<span class="w">                </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                </span><span class="n">response</span><span class="p">,</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">getLocale</span><span class="p">());</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;currentDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">());</span>
+<span class="w">        </span><span class="n">WebConfig</span><span class="p">.</span><span class="na">createTemplateEngine</span><span class="p">(</span><span class="n">getServletContext</span><span class="p">()).</span>
+<span class="w">            </span><span class="n">process</span><span class="p">(</span><span class="s">&quot;welcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Of course, the package declarations will be different, as well as the first <code class="docutils literal notranslate"><span class="pre">import</span></code> statement.
+The alert reader may notice that this will create a <code class="docutils literal notranslate"><span class="pre">TemplateEngine</span></code> for each single servlet. This is absolutely not the best strategy, but for simplicity we’ll stick to it for now.
+Have a look at the <a class="reference external" href="https://bitbucket.org/minoba/java_web_thymeleaf_demo">Demo repo</a> for a final solution with the template resolver.</p>
+</div>
+<div class="section" id="finally-run-it">
+<h3><span class="section-number">30.2.8. </span>Finally: run it<a class="headerlink" href="#finally-run-it" title="Permalink to this headline">#</a></h3>
+<p>Create a new run configuration (it’s in the top bar, <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Configuration</span></code>).
+Click <code class="docutils literal notranslate"><span class="pre">+</span></code> → select <code class="docutils literal notranslate"><span class="pre">Tomcat</span> <span class="pre">Server/Local</span></code> (NOT <code class="docutils literal notranslate"><span class="pre">TomEE</span> <span class="pre">Server</span></code>!). Make sure the <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">server</span></code> is defined (your unpacked Tomcat location), use for <code class="docutils literal notranslate"><span class="pre">URL</span></code>
+this address: <code class="docutils literal notranslate"><span class="pre">http://localhost:8080/welcome</span></code>.</p>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">no</span> <span class="pre">artifacts...</span></code> message at the bottom. Click <code class="docutils literal notranslate"><span class="pre">Fix</span></code> → select either one of the options <code class="docutils literal notranslate"><span class="pre">Gradle....war</span></code> and in <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">context</span></code> (you are now under Tab <code class="docutils literal notranslate"><span class="pre">Deployment</span></code>) fill in <code class="docutils literal notranslate"><span class="pre">/</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/Gradle___nl_bioinf_nomi___MyWebApp_0_0_1_war</span></code>. If you don’t do this, you will need to add this to your URLs!</p>
+<p><img alt="Run the Application 1" src="../_images/Run-the-Application-1.png" /></p>
+<p><img alt="Run the Application 2" src="../_images/Run-the-Application-2.png" /></p>
+<p>If you run the configuration (Green triangle in menu bar), the browser will fire op or you’ll have to do it yourself, and go to <code class="docutils literal notranslate"><span class="pre">http://localhost:8080/welcome</span></code>.<br />
+(If you get an error message like “… Permission denied” you may have forgotten to make the files in the /bin folder of your Tomcat folder executable.</p>
+<p>I hope you’ll see something like this:</p>
+<p><img alt="Run the Application NL" src="../_images/Run-the-Application-nl.png" /></p>
+<p>Go to <code class="docutils literal notranslate"><span class="pre">chrome://settings/languages</span></code> and change your language to English, refresh the view of your welcome page and you’ll see this:</p>
+<p><img alt="Run the Application EN" src="../_images/Run-the-Application-en.png" /></p>
+<p>That’s it. It was quite some work, but this is the foundation for a nice basic Java + Thymeleaf driven web application.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./05_web"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="toolbox.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">29. </span>The toolbox</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mvc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">31. </span>Implementing MVC</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">30.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">30.1.1. Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps">30.2. The steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-tomcat-as-webserver">30.2.1. Configure Tomcat as webserver</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-gradle-managed-web-project">30.2.2. Create a Gradle-managed web project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-gradle">30.2.3. Configure Gradle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-web-inf-folder">30.2.4. The WEB-INF folder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-resource-bundle">30.2.5. Create a resource bundle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-to-use-thymeleaf">30.2.6. Prepare to use Thymeleaf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-servlet">30.2.7. Create a Servlet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finally-run-it">30.2.8. Finally: run it</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

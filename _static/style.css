@@ -1,0 +1,39 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+
+p code {
+  white-space: inherit;
+}
+
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+
+pre code {
+  white-space: inherit;
+}
+
+/*my own styling*/
+
+pre.console_out {
+    color: #fef9e7 !important;
+    background-color: #17202a !important;
+    font-weight: bold !important;
+    font: 1rem Inconsolata, monospace !important;
+}
+
+.even {
+    background-color: aliceblue !important;
+}
+
+.odd {
+    background-color: lightcyan !important;
+}
+
+.first {
+    background-color: coral !important;
+}
+

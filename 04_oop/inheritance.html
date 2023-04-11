@@ -1,0 +1,900 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>23. Inheritance and UML &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_oop/inheritance';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="24. Enums: constants on steroids" href="enums.html" />
+    <link rel="prev" title="22. Access modifiers &amp; Other keywords" href="access_modifiers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/04_oop/inheritance.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Inheritance and UML</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-testtube-with-cells">23.1. The TestTube with cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-specs-different-types-of-cells">23.1.1. New specs: different types of cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-bacterium">23.1.2. class <code class="docutils literal notranslate"><span class="pre">Bacterium</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-eukaryote">23.1.3. class <code class="docutils literal notranslate"><span class="pre">Eukaryote</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-testtube">23.1.4. class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-inheritance-to-model-what-is-common">23.2. Apply inheritance to model what is common</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-type-cast-when-you-need-the-specific-type">23.2.1. Use a type cast when you need the specific type</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="inheritance-and-uml">
+<h1><span class="section-number">23. </span>Inheritance and UML<a class="headerlink" href="#inheritance-and-uml" title="Permalink to this headline">#</a></h1>
+<p>In this post, the concept of inheritance will be revisited and expanded. Since this is a good place for it, a visualization standard called UML (Unified Modelling Language) is also introduced.</p>
+<div class="section" id="the-testtube-with-cells">
+<h2><span class="section-number">23.1. </span>The TestTube with cells<a class="headerlink" href="#the-testtube-with-cells" title="Permalink to this headline">#</a></h2>
+<p>Here is the TestTube at the end of this post &#64;ref(encapsulation). Instead of showing code, a UML diagram is displayed.</p>
+<p><img alt="Test tube UML" src="../_images/testtube2_all_s.png" /></p>
+<p>You can generate such a thing yourself in IntelliJ by selecting the source files you want to visualize → right-click → Diagrams → Show Diagram.</p>
+<p>The diagram above shows everything: fields, methods, constructors, with any access level. Using the Diagrams menu (and general settings - see the <a class="reference external" href="https://www.jetbrains.com/help/idea/class-diagram.html">doc</a>) you can filter what you want to show. Here are the same classes with only the public fields shown, and no constructors:</p>
+<p><img alt="Test tube public" src="../_images/testtube2_public_s.png" /></p>
+<p>So, what does this tell us? Class <code class="docutils literal notranslate"><span class="pre">CellGrowthSimulator</span></code> has a singular field of type <code class="docutils literal notranslate"><span class="pre">TestTube</span></code> and creates the instance itself. Class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code> has 1 to many instances of <code class="docutils literal notranslate"><span class="pre">Cell</span></code> (held in a <code class="docutils literal notranslate"><span class="pre">List&lt;Cell&gt;</span></code>), and instantiates them itself. These <strong><em>HAS_A</em></strong> relations (class A has an instance of class B) are depicted with the arrow-with-diamond connector.</p>
+<div class="section" id="new-specs-different-types-of-cells">
+<h3><span class="section-number">23.1.1. </span>New specs: different types of cells<a class="headerlink" href="#new-specs-different-types-of-cells" title="Permalink to this headline">#</a></h3>
+<p>So here comes your boss and tells you</p>
+<p><em>“…but how about het difference between bacteria and eukaryotic cells??
+They are of way different size and grow at different speeds.<br />
+I WANT TO GROW MANY TYPES OF CELLS IN MY TEST TUBE!!<br />
+And didn’t I tell you? They should be able to divide as well.”</em></p>
+<p>You start thinking about the new specs.</p>
+<ul class="simple">
+<li><p>When to divide?</p></li>
+<li><p>Who controls division:</p>
+<ul>
+<li><p>TestTube or the cell itself?</p></li>
+</ul>
+</li>
+<li><p>How does this relate to growing?</p></li>
+<li><p>The different cell types is easy! Just give every type its own class</p></li>
+</ul>
+<p>As an expert on the subject, you decide that the cells and not the test tube should know when to divide; in fact, they should be solely responsible for their size and increment (not the testtube). Division is depending on the cell size: when a certain size is reached, it is time to divide.</p>
+<p>Here is the new design. Note that I simplified the names again and removed comments for conciseness’ sake.</p>
+</div>
+<div class="section" id="class-bacterium">
+<h3><span class="section-number">23.1.2. </span>class <code class="docutils literal notranslate"><span class="pre">Bacterium</span></code><a class="headerlink" href="#class-bacterium" title="Permalink to this headline">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Bacterium</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">growthIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumDiameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getDiameter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">diameter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Bacterium</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">growthIncrement</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maximumDiameter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bacterium</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-eukaryote">
+<h3><span class="section-number">23.1.3. </span>class <code class="docutils literal notranslate"><span class="pre">Eukaryote</span></code><a class="headerlink" href="#class-eukaryote" title="Permalink to this headline">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Eukaryote</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">growthIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumDiameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getDiameter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">diameter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Eukaryote</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">growthIncrement</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maximumDiameter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Eukaryote</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See how similar it is to class <code class="docutils literal notranslate"><span class="pre">Bacterium</span></code>?</p>
+</div>
+<div class="section" id="class-testtube">
+<h3><span class="section-number">23.1.4. </span>class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code><a class="headerlink" href="#class-testtube" title="Permalink to this headline">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestTube</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfLifeCyclesToRun</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cellType</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Bacterium</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bacteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Eukaryote</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eukaryotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">TestTube</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfLifeCyclesToRun</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cellType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//check code omitted</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">numberOfLifeCyclesToRun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numberOfLifeCyclesToRun</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">initialCellCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cellType</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">initializeCells</span><span class="p">();</span>
+<span class="w">        </span><span class="n">runLifeCycles</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runLifeCycles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">numberOfLifeCyclesToRun</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">growCells</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initializeCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">initialCellCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Bacteria&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">bacteria</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Bacterium</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Eukarya&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">eukaryotes</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Eukaryote</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">//room for more cell types</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Bacteria&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Bacterium</span><span class="w"> </span><span class="n">bacterium</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">bacteria</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">bacterium</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Eukarya&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Eukaryote</span><span class="w"> </span><span class="n">eukaryote</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">eukaryotes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">eukaryote</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//room for more cell types</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See how much duplicated code there is in class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code>, and repeated use of same <code class="docutils literal notranslate"><span class="pre">if/else</span></code> blocks?</p>
+<p>Here is the UML of this situation (private fields included). It shows the duplication clearly as well.</p>
+<p><img alt="Test tube UML" src="../_images/testtube3_first_s.png" /></p>
+<p>Repeated code and similar <code class="docutils literal notranslate"><span class="pre">if/else</span></code> algorithm logic are typical signs of <strong><em>smelly code</em></strong> that can be solved using some Object Oriented design techniques, in this case inheritance.</p>
+</div>
+</div>
+<div class="section" id="apply-inheritance-to-model-what-is-common">
+<h2><span class="section-number">23.2. </span>Apply inheritance to model what is common<a class="headerlink" href="#apply-inheritance-to-model-what-is-common" title="Permalink to this headline">#</a></h2>
+<p>Inheritance can be used when there is a <strong><em>IS-A</em></strong> relationship: when it can be said that class A IS-A class B. For example, Apple IS-A Fruit and Pear IS-A Fruit (but not Pear IS-A Apple!). In this case, the IS-A relation ship can be defined as “Bacterium IS-A Cell” and “Eukaryote IS-A Cell”.</p>
+<p>Once this prerequisite for inheritance is established, the common superclass should be created and all common code from the subclasses moved to it.</p>
+<p>Class Cell can clearly hold the <code class="docutils literal notranslate"><span class="pre">diameter</span></code>, the <code class="docutils literal notranslate"><span class="pre">growthIncrement</span></code> and the <code class="docutils literal notranslate"><span class="pre">maximumDiameter</span></code> fields, even though they will be different between the subclasses. Class Cell can also publish the <code class="docutils literal notranslate"><span class="pre">growCells()</span></code> method, even though they will be implemented differently in the subclasses. Key here is that <em>all subclasses will be able to grow</em>. When you know the functionality should be there, but don’t know how, your should make it <strong><em>abstract</em></strong>. As a consequence, your class needs to be abstract as well. Let’s review this with class <code class="docutils literal notranslate"><span class="pre">Cell</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cell</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//no decent defaults possible at level of class Cell,</span>
+<span class="w">    </span><span class="c1">//but we know this field is relevant</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">diameter</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Cell</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initialDiameter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initialDiameter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getDiameter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">diameter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDiameter</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">newDiameter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newDiameter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="nf">grow</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that both the class declaration and the method <code class="docutils literal notranslate"><span class="pre">grow()</span></code> have been marked <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. <strong><em>An abstract method has no method body, only a signature</em></strong> - the same as with interfaces. <strong><em>An abstract class cannot be instantiated.</em></strong>. This snippet <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">cell</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Cell(12)</span></code> will not compile.</p>
+<p>The next step is declaring your subclasses to <code class="docutils literal notranslate"><span class="pre">extend</span></code> the superclass (only Bacterium shown here):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Bacterium</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Cell</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bacterialInitialDiameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">growthIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumDiameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Bacterium</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">bacterialInitialDiameter</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">setDiameter</span><span class="p">(</span><span class="n">getDiameter</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">growthIncrement</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">getDiameter</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maximumDiameter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bacterium</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Class <code class="docutils literal notranslate"><span class="pre">Bacterium</span></code> is required to implement a constructor serving an initial size to the class Cell constructor. It has no diameter property anymore, and no getter for it. It has implemented the <code class="docutils literal notranslate"><span class="pre">grow()</span></code> method, and because of that is is not abstract and can be instantiated. Note that, although the  method signature is <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Cell</span> <span class="pre">grow()</span></code>, it returns a <code class="docutils literal notranslate"><span class="pre">Bacterium</span></code> instance. This is a typical example of <strong><em>polymorphism</em></strong>.</p>
+<p>You may notice that the <em>static</em> variables <code class="docutils literal notranslate"><span class="pre">growthIncrement</span></code> and <code class="docutils literal notranslate"><span class="pre">maximumDiameter</span></code> will be specified in all subclasses and could be specified once (in class Cell). This is true, and several solutions exist for static fields, but focus here lies on different aspects.</p>
+<p>You may also notice there is not much won with respect to amount of code. That is correct, but in this case the improvement lies in class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestTube</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfLifeCyclesToRun</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cellType</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Constructs with the two essential parameters</span>
+<span class="cm">     * @param numberOfLifeCyclesToRun a number between 1 and 100</span>
+<span class="cm">     * @param initialCellCount a number between 1 and 1000</span>
+<span class="cm">     * @param cellType the cell type [&quot;</span>
+<span class="cm">     * @return testtube a TestTube instance</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">TestTube</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfLifeCyclesToRun</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cellType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//check code omitted</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">numberOfLifeCyclesToRun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numberOfLifeCyclesToRun</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">initialCellCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cellType</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * starts the growth process</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">initializeCells</span><span class="p">();</span>
+<span class="w">        </span><span class="n">runLifeCycles</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runLifeCycles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">numberOfLifeCyclesToRun</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">growCells</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Grow cycle &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; finished; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; cells present&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initializeCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">initialCellCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Bacteria&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">cells</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Bacterium</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cellType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Eukarya&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">cells</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Eukaryote</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unknown cell type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cellType</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">//room for more cell types - yes this can be improved as well</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//I have no clue what is growing here and don&#39;t care</span>
+<span class="w">        </span><span class="c1">//enhanced for loop will cause a ConcurrentModificationException</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Cell</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can see the cell growing logic has been completely decoupled from the actual cells that are being grown. Both <code class="docutils literal notranslate"><span class="pre">grow()</span></code> methods in the subclasses have specific signatures with respect to the return type (<code class="docutils literal notranslate"><span class="pre">Bacterium</span></code>, <code class="docutils literal notranslate"><span class="pre">Eukaryote</span></code>), but still adhere to the superclass contract (otherwise <code class="docutils literal notranslate"><span class="pre">&#64;Override</span></code> would have instigated a compiler error).</p>
+<p>For completeness, here is the simulator class, and some output:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CellGrowthSimulator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">TestTube</span><span class="w"> </span><span class="n">testTube</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">startSimulation</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startSimulation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">testTube</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestTube</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bacteria&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">testTube</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>outputs</p>
+<pre class="console_output">
+Grow cycle 10 finished; 5 cells present
+Grow cycle 20 finished; 5 cells present
+Grow cycle 30 finished; 55 cells present
+Grow cycle 40 finished; 105 cells present
+Grow cycle 50 finished; 430 cells present
+Grow cycle 60 finished; 1255 cells present
+Grow cycle 70 finished; 3680 cells present
+Grow cycle 80 finished; 12105 cells present
+Grow cycle 90 finished; 35105 cells present
+Grow cycle 100 finished; 111230 cells present
+</pre>
+<p>Finally, there is some logic that should be moved for good design. The Cell creation logic should be put in a  <strong><em>static factory method</em></strong> inside class <code class="docutils literal notranslate"><span class="pre">Cell</span></code> to abstract away the cell creation logic and put it in one place for the entire application:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;Bacteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bacterium</span><span class="p">();</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;Eukarya&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Eukaryote</span><span class="p">();</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unknown cell type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">type</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and class `TestTube becomes even less aware of whet is being grown:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initializeCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">initialCellCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cells</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Cell</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">cellType</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is the final UML.</p>
+<p><img alt="Test tube final" src="../_images/testtube3_final_s.png" /></p>
+<p>This also shows that actual cell types are hidden behind the abstract Cell class. The subtype constructors could even have been marked <code class="docutils literal notranslate"><span class="pre">protected</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;default&gt;</span></code> to emphasize this.</p>
+<p>This is the power of polymorphism implemented with inheritance!</p>
+<p><strong><em>Polymorphism</em></strong> allows one type to express some sort of contract, and for other types to implement that contract (often through class inheritance) in different ways. Code using that contract should not have to care about which implementation is involved, only that the contract is obeyed.</p>
+<div class="section" id="use-a-type-cast-when-you-need-the-specific-type">
+<h3><span class="section-number">23.2.1. </span>Use a type cast when you need the specific type<a class="headerlink" href="#use-a-type-cast-when-you-need-the-specific-type" title="Permalink to this headline">#</a></h3>
+<p>You have seen it is often best to code against generic types, like in this block:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Cell</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>But what if you have the need for specific functionality? For instance, you have a <code class="docutils literal notranslate"><span class="pre">WhiteBloodCell</span></code> which can also <code class="docutils literal notranslate"><span class="pre">eatOtherCell(Cell</span> <span class="pre">cell)</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WhiteBloodCell</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Eukaryote</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">WhiteBloodCell</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eatOtherCell</span><span class="p">(</span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;White blood cell, eating other cell&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//cell eating logic</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that this class extends <code class="docutils literal notranslate"><span class="pre">Eukaryote</span></code> and thereby inherits the <code class="docutils literal notranslate"><span class="pre">grow()</span></code> method. Now if you want to do something specifically white-blood-cellish, perform a type-test-and-cast:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Cell</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="n">cells</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">//test and cast</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cell</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">WhiteBloodCell</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">WhiteBloodCell</span><span class="w"> </span><span class="n">wbc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">WhiteBloodCell</span><span class="p">)</span><span class="n">cell</span><span class="p">;</span>
+<span class="w">                </span><span class="n">wbc</span><span class="p">.</span><span class="na">eatOtherCell</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The lesson here: <strong>Objects never ever change type, only the reference to them changes.</strong></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./04_oop"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="access_modifiers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>Access modifiers &amp; Other keywords</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="enums.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Enums: constants on steroids</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-testtube-with-cells">23.1. The TestTube with cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-specs-different-types-of-cells">23.1.1. New specs: different types of cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-bacterium">23.1.2. class <code class="docutils literal notranslate"><span class="pre">Bacterium</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-eukaryote">23.1.3. class <code class="docutils literal notranslate"><span class="pre">Eukaryote</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-testtube">23.1.4. class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-inheritance-to-model-what-is-common">23.2. Apply inheritance to model what is common</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-type-cast-when-you-need-the-specific-type">23.2.1. Use a type cast when you need the specific type</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

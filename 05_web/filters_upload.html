@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>38. Web filters and File uploads &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_web/filters_upload';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="39. Exercises intro" href="webbased_exercises1.html" />
+    <link rel="prev" title="37. A simple web service using Ajax" href="ajax.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05_web/filters_upload.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Web filters and File uploads</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-filters">38.1. Web filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basic-example">38.1.1. A basic example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-for-authentication">38.1.2. Check for authentication</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-uploads">38.2. File uploads</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upload-form">38.2.1. Upload form</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="web-filters-and-file-uploads">
+<h1><span class="section-number">38. </span>Web filters and File uploads<a class="headerlink" href="#web-filters-and-file-uploads" title="Permalink to this headline">#</a></h1>
+<p>This is the last post in this course. It deals with two loose ends: uploading files and intercepting requests.</p>
+<div class="section" id="web-filters">
+<h2><span class="section-number">38.1. </span>Web filters<a class="headerlink" href="#web-filters" title="Permalink to this headline">#</a></h2>
+<p>Suppose you want to intercept requests for a (group of) servlets, to log what is requested and where it came from.
+For instance, to do analyse the web traffic later on in order to pinpoint the most used resources.<br />
+Or more relevant: intercept requests to asses authentication status of the user. And reject a request if the user is not authorized to see a resource.</p>
+<div class="section" id="a-basic-example">
+<h3><span class="section-number">38.1.1. </span>A basic example<a class="headerlink" href="#a-basic-example" title="Permalink to this headline">#</a></h3>
+<p>Here is our old friend, the PhraseServlet (only relevant code show):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.servlets</span><span class="p">;</span>
+
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PhraseServlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/give.phrase&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PhraseServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TemplateEngine</span><span class="w"> </span><span class="n">templateEngine</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">phraseType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;phrase_category&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Locale</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getLocale</span><span class="p">();</span>
+<span class="w">        </span><span class="n">WebContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebContext</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">(),</span><span class="w"> </span><span class="n">locale</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">phrase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PhraseFactory</span><span class="p">.</span><span class="na">getPhrase</span><span class="p">(</span><span class="n">phraseType</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;phrase_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">phraseType</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;phrase_num&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">phrase</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateEngine</span><span class="p">.</span><span class="na">process</span><span class="p">(</span><span class="s">&quot;phrase_of_the_day&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is the way to keep track of requests for <code class="docutils literal notranslate"><span class="pre">/give.phrase</span></code>; a <code class="docutils literal notranslate"><span class="pre">&#64;WebFilter</span></code> annotation on a class implementing <code class="docutils literal notranslate"><span class="pre">javax.servlet.Filter</span></code> does the trick:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.webfilters</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebFilter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="nd">@WebFilter</span><span class="p">(</span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/give.phrase&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PhraseServletFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Request for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">((</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="n">request</span><span class="p">).</span><span class="na">getRequestURL</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Query: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">((</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="n">request</span><span class="p">).</span><span class="na">getQueryString</span><span class="p">());</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Remote address: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getRemoteAddr</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//pass on the request after you are done</span>
+<span class="w">            </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">FilterConfig</span><span class="w"> </span><span class="n">filterConfig</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*not interesting here*/</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*not interesting here*/</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Whe the <code class="docutils literal notranslate"><span class="pre">/give.phrase?phrase_category=bullshit</span></code> resource is requested, the Tomcat logs show</p>
+<pre class="console_out">
+Request for http://localhost:8080/give.phrase
+Query: phrase_category=bullshit
+Remote address: 0:0:0:0:0:0:0:1
+</pre>
+</div>
+<div class="section" id="check-for-authentication">
+<h3><span class="section-number">38.1.2. </span>Check for authentication<a class="headerlink" href="#check-for-authentication" title="Permalink to this headline">#</a></h3>
+<p>Suppose you have an application with a few public pages and a few pages for which authentication is required. This is a typical use case for WebFilter.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.webfilters</span><span class="p">;</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebFilter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpSession</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="nd">@WebFilter</span><span class="p">(</span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;/user.dashboard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/list.secrets&quot;</span><span class="p">})</span><span class="w"> </span><span class="c1">//use &quot;/*&quot; for catch-all</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthenticationFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="n">request</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;[AuthenticationFilter] Intercepted URL: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getRequestURL</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getSession</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;[AuthenticationFilter] no authenticated user: redirecting to /login&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="p">((</span><span class="n">HttpServletResponse</span><span class="p">)</span><span class="n">response</span><span class="p">).</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;[AuthenticationFilter] authenticated status checked; user= &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">));</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">FilterConfig</span><span class="w"> </span><span class="n">filterConfig</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*not interesting here*/</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*not interesting here*/</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is the output after a few requests</p>
+<pre class="console_out">
+[AuthenticationFilter] Intercepted URL: http://localhost:8080/list.secrets 
+[AuthenticationFilter] no authenticated user: redirecting to /login
+
+&lt;logged in as Henk&gt;
+
+[AuthenticationFilter] Intercepted URL: http://localhost:8080/list.secrets 
+[AuthenticationFilter] authenticated status checked; user= User{name='Henk', email='henk@example.com', password='null', role=USER}
+[AuthenticationFilter] Intercepted URL: http://localhost:8080/user.dashboard 
+[AuthenticationFilter] authenticated status checked; user= User{name='Henk', email='henk@example.com', password='null', role=USER}
+</pre>
+</div>
+</div>
+<div class="section" id="file-uploads">
+<h2><span class="section-number">38.2. </span>File uploads<a class="headerlink" href="#file-uploads" title="Permalink to this headline">#</a></h2>
+<p>File Upload is an essential feature! Many websites provide some form of upload functionality:</p>
+<ul class="simple">
+<li><p>Photos &amp; Video</p></li>
+<li><p>Data</p></li>
+<li><p>Configuration</p></li>
+</ul>
+<p>Fortunately, uploading is boilerplate code!</p>
+<p>The harder thing is: what will you do with the file?</p>
+<ul class="simple">
+<li><p>Into database</p></li>
+<li><p>Store locally</p></li>
+<li><p>Process directly</p></li>
+</ul>
+<div class="section" id="upload-form">
+<h3><span class="section-number">38.2.1. </span>Upload form<a class="headerlink" href="#upload-form" title="Permalink to this headline">#</a></h3>
+<p>Suppose we want to offer a scv data upload.
+Here is the html for uploading csv data. Key are <code class="docutils literal notranslate"><span class="pre">enctype=&quot;multipart/form-data&quot;</span></code> in the <code class="docutils literal notranslate"><span class="pre">form</span></code> tag and the <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;file&quot;</span> <span class="pre">name=&quot;scv_data&quot;</span> <span class="pre">accept=&quot;text/csv&quot;&gt;</span></code> tag.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">th:action</span><span class="o">=</span><span class="s">&quot;@{&#39;data_upload&#39;}&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;scv_data&quot;</span> <span class="na">accept</span><span class="o">=</span><span class="s">&quot;text/csv&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Upload&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The servlet handling the file upload needs to be annotated as such:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@MultipartConfig</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s">&quot;/tmp&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">fileSizeThreshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span>
+<span class="w">        </span><span class="n">maxFileSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="n">maxRequestSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;FileUploadServlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/data_upload&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileUploadServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//class body</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;MultipartConfig</span></code> annotation has several parameters:</p>
+<ul class="simple">
+<li><p><strong><em>location</em></strong>: An absolute path to a directory on the file system. This location is used to store files temporarily while the parts are processed or when the size of the file exceeds the specified <code class="docutils literal notranslate"><span class="pre">fileSizeThreshold</span></code> setting. The default location is “”.</p></li>
+<li><p><strong><em>fileSizeThreshold</em></strong>: The file size in bytes after which the file will be temporarily stored on disk. The default size is 0 bytes.</p></li>
+<li><p><strong><em>maxFileSize</em></strong>: The maximum size allowed for uploaded files, in bytes. If the size is greater, the container will throw an exception (<code class="docutils literal notranslate"><span class="pre">IllegalStateExceptio</span></code>n). The default size is unlimited.</p></li>
+<li><p><strong><em>maxRequestSize</em></strong>: The maximum size allowed for a multipart/form-data request, in bytes. The web container will throw an exception if the overall size of all uploaded files exceeds this threshold. The default size is unlimited.</p></li>
+</ul>
+<p>Instead of hardcoding the constraints, you can also put them in web.xml:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>FileUploadServlet<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>/data_upload<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span>
+<span class="w">    </span><span class="nt">&lt;servlet&gt;</span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>FileUploadServlet<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;servlet-class&gt;</span>nl.bioinf.wis_on_thymeleaf.servlets.FileUploadServlet<span class="nt">&lt;/servlet-class&gt;</span>
+<span class="w">        </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">            </span><span class="nt">&lt;param-name&gt;</span>upload_dir<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">            </span><span class="nt">&lt;param-value&gt;</span>/path/to/file/upload<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;multipart-config&gt;</span>
+<span class="w">            </span><span class="nt">&lt;location&gt;</span>/path/to/tmp/tmp<span class="nt">&lt;/location&gt;</span>
+<span class="w">            </span><span class="cm">&lt;!-- all in bytes --&gt;</span>
+<span class="w">            </span><span class="nt">&lt;max-file-size&gt;</span>20848820<span class="nt">&lt;/max-file-size&gt;</span>
+<span class="w">            </span><span class="nt">&lt;max-request-size&gt;</span>418018841<span class="nt">&lt;/max-request-size&gt;</span>
+<span class="w">            </span><span class="nt">&lt;file-size-threshold&gt;</span>1048576<span class="nt">&lt;/file-size-threshold&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/multipart-config&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/servlet&gt;</span>
+</pre></div>
+</div>
+<p>Here is the servlet dealing with the uploads. The final upload location is specified using an <code class="docutils literal notranslate"><span class="pre">init-param</span></code> in the <code class="docutils literal notranslate"><span class="pre">web.xml</span></code> deployment descriptor of course.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.servlets</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.config.WebConfig</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.thymeleaf.TemplateEngine</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.thymeleaf.context.WebContext</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.Part</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="c1">//moved to web.xml</span>
+<span class="c1">//@MultipartConfig(location=&quot;/tmp&quot;,</span>
+<span class="c1">//        fileSizeThreshold = 1024 * 1024,</span>
+<span class="c1">//        maxFileSize = 1024 * 1024 * 5,</span>
+<span class="c1">//        maxRequestSize = 1024 * 1024 * 5 * 5)</span>
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;FileUploadServlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/data_upload&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileUploadServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TemplateEngine</span><span class="w"> </span><span class="n">templateEngine</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">uploadDir</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">templateEngine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebConfig</span><span class="p">.</span><span class="na">getTemplateEngine</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">uploadDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getInitParameter</span><span class="p">(</span><span class="s">&quot;upload_dir&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//or, use relative to this app:</span>
+<span class="w">        </span><span class="c1">// gets absolute path of the web application</span>
+<span class="w">        </span><span class="c1">//String applicationPath = getServletContext().getRealPath(&quot;&quot;);</span>
+<span class="w">        </span><span class="c1">//String uploadFilePath = applicationPath + File.separator + uploadDir;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//simply go back to upload form</span>
+<span class="w">        </span><span class="n">WebContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebContext</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getLocale</span><span class="p">());</span>
+<span class="w">        </span><span class="n">templateEngine</span><span class="p">.</span><span class="na">process</span><span class="p">(</span><span class="s">&quot;upload_form&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">File</span><span class="w"> </span><span class="n">fileSaveDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">uploadDir</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">fileSaveDir</span><span class="p">.</span><span class="na">exists</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Upload dir does not exist: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">uploadDir</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">//Do this only if you are sure there won&#39;t be any file name conflicts!</span>
+<span class="w">        </span><span class="c1">//An existing one will simply be overwritten</span>
+<span class="c1">//        String fileName;</span>
+<span class="c1">//        for (Part part : request.getParts()) {</span>
+<span class="c1">//            fileName = part.getSubmittedFileName();</span>
+<span class="c1">//            part.write(this.uploadDir + File.separator + fileName);</span>
+<span class="c1">//        }</span>
+
+<span class="w">        </span><span class="c1">//the safe way, with a generated file name becomes something like this</span>
+<span class="w">        </span><span class="c1">//my_app_upload14260971264207930189.csv</span>
+<span class="w">        </span><span class="n">File</span><span class="w"> </span><span class="n">generatedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="na">createTempFile</span><span class="p">(</span><span class="s">&quot;my_app_upload&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.csv&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Part</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParts</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">part</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">uploadDir</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="na">separator</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">generatedFile</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">//go back to the upload form</span>
+<span class="w">        </span><span class="n">WebContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebContext</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getLocale</span><span class="p">());</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upload successfull, wanna do another on?&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateEngine</span><span class="p">.</span><span class="na">process</span><span class="p">(</span><span class="s">&quot;upload_form&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to be sure files won’t get overwritten, you should use random generated file names, as in the above code example.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./05_web"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ajax.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">37. </span>A simple web service using Ajax</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="webbased_exercises1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">39. </span>Exercises intro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-filters">38.1. Web filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basic-example">38.1.1. A basic example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-for-authentication">38.1.2. Check for authentication</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-uploads">38.2. File uploads</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upload-form">38.2.1. Upload form</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

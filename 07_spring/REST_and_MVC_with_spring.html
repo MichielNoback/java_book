@@ -1,0 +1,703 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>45. REST and MVC with Spring &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_spring/REST_and_MVC_with_spring';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="46. Dependency Injection in Spring" href="Dependency_injection.html" />
+    <link rel="prev" title="44. Demo case refactoring" href="../06_leftovers/demo_case_refactoring.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/07_spring/REST_and_MVC_with_spring.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>REST and MVC with Spring</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-project">45.1. Create a new project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-rest-response">45.2. Create a REST response</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-json-literals">45.2.1. Serve Json literals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variables">45.2.2. Path Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-parameters">45.2.3. Request Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-html-view-instead-of-json">45.2.4. An html view instead of Json</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="rest-and-mvc-with-spring">
+<h1><span class="section-number">45. </span>REST and MVC with Spring<a class="headerlink" href="#rest-and-mvc-with-spring" title="Permalink to this headline">#</a></h1>
+<p>These tutorials assume you have Jetbrands IntelliJ Idea ultimate. They also assume you have a working knowledge of http, Java - in particular Servlets, and annotations, Gradle, Thymeleaf and html. It is recommended to use Postman for testing your endpoints (visit <a class="reference external" href="https://www.postman.com/">Website</a>).</p>
+<div class="section" id="create-a-new-project">
+<h2><span class="section-number">45.1. </span>Create a new project<a class="headerlink" href="#create-a-new-project" title="Permalink to this headline">#</a></h2>
+<p>Let’s start with a quick rundown of how you create and run a Spring MVC Web application.</p>
+<ol class="arabic">
+<li><p>Open IntelliJ</p></li>
+<li><p>Choose New Project…
+a. Spring Initializr → Next<br />
+b. Give Group &amp; Artifact → Next<br />
+c. Choose Gradle / Java / Jar → Next<br />
+d. Choose Dependencies:<br />
+i. Web → Spring Web<br />
+ii. Template Engines → ThymeleafSQL → JDBC API / Spring Data JPA / JDBC / MySQL Driver [This depends on what you are going to do with the app of course. These can be  added later in <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> as well]<br />
+e. Choose location → Next &amp; Finish</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> file will have these dependencies:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">dependencies</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="nx">implementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-thymeleaf&#39;</span>
+<span class="w">	</span><span class="nx">implementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-web&#39;</span>
+<span class="w">	</span><span class="nx">testImplementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-test&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you look at the “External Libraries” section in the project panel you will see a huge amount of dependencies are pulled in with only these three top level dependencies.</p>
+</li>
+<li><p>Go to root folder <code class="docutils literal notranslate"><span class="pre">/main/java/&lt;your/package&gt;/</span></code> and open <code class="docutils literal notranslate"><span class="pre">&lt;YourProject&gt;Application.java</span></code>.  Run the application by clicking on the green triangle in the editor margin.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SpringDemoProjectApplication</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">SpringDemoProjectApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Go to your browser (or Postman!) and open <a class="reference external" href="http://localhost:8080">localhost:8080</a>. This will generate “Whitelabel Error Page” in the browser. In Postman you get this - a Json literal:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">	</span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-01-12T09:54:58.110+00:00&quot;</span><span class="p">,</span>
+<span class="w">	</span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span>
+<span class="w">	</span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Not Found&quot;</span><span class="p">,</span>
+<span class="w">	</span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">	</span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>OK, the app works, but there nothing (no data or web page) being served by the application at this url. Therefore you get an <code class="docutils literal notranslate"><span class="pre">404/Not</span> <span class="pre">Found</span></code>. Let’s fix that</p>
+</div>
+<div class="section" id="create-a-rest-response">
+<h2><span class="section-number">45.2. </span>Create a REST response<a class="headerlink" href="#create-a-rest-response" title="Permalink to this headline">#</a></h2>
+<p>Right click on base package → New → Package → name = <code class="docutils literal notranslate"><span class="pre">webcontrol</span></code>
+Right click on this package → New → Java Class → name = <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code></p>
+<p>In the  editor, modify the class so it looks like this</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/hello&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloRest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/rest1&quot;</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello Spring Boot!&quot;</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The corresponding import statements will appear as well. There are several core <em>Spring annotations</em> here that warrant some explanation.</p>
+<p>The annotation <code class="docutils literal notranslate"><span class="pre">&#64;RestController</span></code> tells the Spring container that this class will service REST (REpresentational State Transfer) endpoints. See <a class="reference external" href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a> for details.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;RequestMapping</span></code> publishes to the container that this class will serve all urls that start with <code class="docutils literal notranslate"><span class="pre">/hello</span></code> relative to the <em>context path</em> (or base url) of this application. <code class="docutils literal notranslate"><span class="pre">&#64;GetMapping</span></code> serves the same purpose, but only for GET requests. And in this case it applies only to the method it annotates. Therefore, the url <code class="docutils literal notranslate"><span class="pre">&lt;app_root&gt;/hello/rest1</span></code> will map to the method <code class="docutils literal notranslate"><span class="pre">getHello()</span></code>. Since the entire class is annotated as being a REST controller, all return values of its controller methods (i.e. web-serving methods) will be converted into JSON literals automagically (using the Jackson library).</p>
+<p>Now reload the app by pressing this button in the lower panel:</p>
+<p><img alt="" src="../_images/reload.png" /></p>
+<p>Go to Postman and hit the endpoint <a class="reference external" href="http://localhost:8080/hello/rest1">http://localhost:8080/hello/rest1</a>.
+You should get this:</p>
+<blockquote>
+<div><p>Hello Spring Boot!</p>
+</div></blockquote>
+<div class="section" id="serve-json-literals">
+<h3><span class="section-number">45.2.1. </span>Serve Json literals<a class="headerlink" href="#serve-json-literals" title="Permalink to this headline">#</a></h3>
+<p>Create a new package (<code class="docutils literal notranslate"><span class="pre">model</span></code>) with a new class, <code class="docutils literal notranslate"><span class="pre">Bird</span></code>, and generate a constructor, <code class="docutils literal notranslate"><span class="pre">toString()</span></code> and getters for all fields.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.model</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Bird</span><span class="p">{</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="nf">Bird</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//boilerplate code omitted</span>
+</pre></div>
+</div>
+<p>Create a new method within class <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/rest2&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Bird</span><span class="w"> </span><span class="nf">getBird</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bird</span><span class="p">(</span><span class="s">&quot;Long-legged buzzard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;extremely rare&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Hit the endpoint <a class="reference external" href="http://localhost:8080/hello/rest2">http://localhost:8080/hello/rest2</a>. As you can see, a JSON literal is returned representing a Java Bird instance. That is because your annotated the class with <code class="docutils literal notranslate"><span class="pre">&#64;RestController</span></code>. All objects returned from the controller methods will be converted into a Json representation. In fact, it works for the whole object graph, so if you return a list of Java objects you will get a Javascript array containing these objects as json!</p>
+</div>
+<div class="section" id="path-variables">
+<h3><span class="section-number">45.2.2. </span>Path Variables<a class="headerlink" href="#path-variables" title="Permalink to this headline">#</a></h3>
+<p>Create a new method within <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/echo/{msg}&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">doEcho</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;You said&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;...I say goodbye.&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the three occurrences of “msg” should be typed exactly the same! Hit the endpoint <a class="reference external" href="http://localhost:8080/hello/echo/I%20Rule%20Rest">http://localhost:8080/hello/echo/I%20Rule%20Rest</a>. You will get this:<br />
+<code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">said</span> <span class="pre">I</span> <span class="pre">Rule</span> <span class="pre">Rest...I</span> <span class="pre">say</span> <span class="pre">goodbye.</span></code></p>
+<p>There is a new annotation here: <code class="docutils literal notranslate"><span class="pre">&#64;PathVariable</span></code>. It is used on a method parameter. Together with the <code class="docutils literal notranslate"><span class="pre">value=&quot;/echo/{msg}&quot;</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">&#64;GetMapping</span></code>, it tells the container that there is a request variable embedded in the url and it should be extracted into <code class="docutils literal notranslate"><span class="pre">String</span> <span class="pre">msg</span></code>.</p>
+</div>
+<div class="section" id="request-parameters">
+<h3><span class="section-number">45.2.3. </span>Request Parameters<a class="headerlink" href="#request-parameters" title="Permalink to this headline">#</a></h3>
+<p>Create a new method within <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/echo_name&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">doEchoName</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;You said&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;...I say goodbye.&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And go to url <a class="reference external" href="http://localhost:8080/hello/echo_name?name=%3Cyour_name%3E">http://localhost:8080/hello/echo_name?name=&lt;your_name&gt;</a></p>
+<p>The annotation <code class="docutils literal notranslate"><span class="pre">&#64;RequestParam(value</span> <span class="pre">=</span> <span class="pre">&quot;name&quot;)</span></code> tells the system that the GET request should contain a request parameter called <code class="docutils literal notranslate"><span class="pre">name</span></code> and it should be inserted into the value of <code class="docutils literal notranslate"><span class="pre">String</span> <span class="pre">name</span></code>. You can specify whether it is a required parameter, and whether it should have a default value.:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/echo_name&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">doEchoName</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span>
+<span class="w">			</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">			</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span>
+<span class="w">			</span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;JohnDoe&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;You said &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;...I say goodbye.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="an-html-view-instead-of-json">
+<h3><span class="section-number">45.2.4. </span>An html view instead of Json<a class="headerlink" href="#an-html-view-instead-of-json" title="Permalink to this headline">#</a></h3>
+<p>So far you have seen three basic ways of serving data using a REST endpoint. Now we’ll switch to serving an html view using Thymeleaf.
+Create a new class within package <code class="docutils literal notranslate"><span class="pre">webcontrol</span></code> called <code class="docutils literal notranslate"><span class="pre">HelloMvc</span></code>, with this content</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;greeting&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloMvc</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getGreeting</span><span class="p">(</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">model</span><span class="p">.</span><span class="na">addAttribute</span><span class="p">(</span><span class="s">&quot;greeting&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello to MVC&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;greeting&quot;</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Under folder <code class="docutils literal notranslate"><span class="pre">/src/main/resources/templates</span></code>, right-click and select New → Thymeleaf. This will generate a standard html page. Replace</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>	<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">th:tekst</span><span class="o">=</span><span class="s">&quot;#{page.title}&quot;</span><span class="p">&gt;</span>Offline title<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span> 
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h1</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${greeting}&quot;</span><span class="p">&gt;</span>_greeting_<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Reload the app and hit the endpoint <a class="reference external" href="http://localhost:8080/greeting/hello">http://localhost:8080/greeting/hello</a>. Postman will show this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>	<span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</span>
+	<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span> <span class="p">/&gt;</span>
+		<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Phrase of the day<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello to MVC<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Whereas the browser will show</p>
+<p><img alt="hello MVC" src="../_images/hello_mvc.png" /></p>
+<p>This concludes a first acquaintance with several aspects of the Spring (Boot) framework. You have seen the creation and consuming of both REST and MVC-type endpoints. All discussed annotations are listed and explained <a class="reference internal" href="spring_annotations.html"><span class="doc std std-doc">here</span></a></p>
+<p>Demo code can be found in this git repo <a class="github reference external" href="https://github.com/MichielNoback/spring-demo">MichielNoback/spring-demo</a>. Use tag <code class="docutils literal notranslate"><span class="pre">tutorial1</span></code> to get the current version of the repo.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./07_spring"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../06_leftovers/demo_case_refactoring.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">44. </span>Demo case refactoring</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Dependency_injection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">46. </span>Dependency Injection in Spring</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-project">45.1. Create a new project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-rest-response">45.2. Create a REST response</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-json-literals">45.2.1. Serve Json literals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variables">45.2.2. Path Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-parameters">45.2.3. Request Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-html-view-instead-of-json">45.2.4. An html view instead of Json</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

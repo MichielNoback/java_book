@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. A first IntelliJ project &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01_getting_started/intellij';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. The essence of Java" href="essentials.html" />
+    <link rel="prev" title="Keyboard shortcuts" href="../keyboard_shortcuts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/01_getting_started/intellij.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A first IntelliJ project</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-management">1.1. Dependency management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-project">1.2. A first project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribute-an-executable">1.3. Distribute an executable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">1.4. Wrap-up</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-first-intellij-project">
+<h1><span class="section-number">1. </span>A first IntelliJ project<a class="headerlink" href="#a-first-intellij-project" title="Permalink to this headline">#</a></h1>
+<p>This course uses the IntelliJ Idea Integrated Development Environment (IDE) to
+develop Java programs. This chapter deals with using IntelliJ Idea to create
+Java applications.</p>
+<div class="section" id="dependency-management">
+<h2><span class="section-number">1.1. </span>Dependency management<a class="headerlink" href="#dependency-management" title="Permalink to this headline">#</a></h2>
+<p>As you probably already know by now, code you write is always
+dependent on other code. This can be code native to the platform (such as the
+<code class="docutils literal notranslate"><span class="pre">integer</span></code> “class” in R, or the <code class="docutils literal notranslate"><span class="pre">str</span></code> class in Python) but it can also be code
+that is not distributed with the standard platform (such as <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> in R, or <code class="docutils literal notranslate"><span class="pre">numpy</span></code> in Python).
+These “non-core” dependencies need to be managed. Many tools exist for dependency management; in Python this can be <code class="docutils literal notranslate"><span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span></code>, in R you use <code class="docutils literal notranslate"><span class="pre">install.packages()</span></code> and in Java there are also several technologies for this. In this course we’ll use <strong><em>Gradle</em></strong>. It does much more than dependency management but for
+now this is the only relevant aspect.</p>
+<p>Let’s dive in and see the different players in a Java coding project work together.</p>
+</div>
+<div class="section" id="a-first-project">
+<h2><span class="section-number">1.2. </span>A first project<a class="headerlink" href="#a-first-project" title="Permalink to this headline">#</a></h2>
+<p>Start IntelliJ and select “<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">Create</span> <span class="pre">New</span> <span class="pre">Project</span></code>” from the start screen (or New → Project from the File menu).</p>
+<p><img alt="Start screen" src="../_images/IntelliJ_start_screen.png" /></p>
+<p>In the New Project wizard, select Gradle on the left menu and then a project SDK (Standard Development Kit) - this example
+shows Java 10. Only check Java in the Additional Libraries section.</p>
+<p><img alt="Create project" src="../_images/IntelliJ_create_Gradle_project_1.png" /></p>
+<p>Click “Next”. In the next window, give your project a Name and Location. Expand the Artifact Coordinates section which is hidden by default and give your project a <strong><em>GroupId</em></strong>, an <strong><em>ArtifactId</em></strong> and a <strong><em>Version</em></strong>.</p>
+<p><img alt="Define project" src="../_images/IntelliJ_create_Gradle_project_2.png" /></p>
+<p>The group ID should be a unique identifier; in Java this is usually the web domain of you or your employer, reversed and with a project name appended. It is a way to guarantee a unique <em>name space</em>. Note the underscores; in Java you specify package names with underscores and lowercase letters. The artifact ID is the name of your project, also in lowercase but usually with hyphens between words. Give it version 0.0.1.</p>
+<p>Click “Finish”. A brand new Gradle-managed Java project will be created with a layout as shown below.</p>
+<p><img alt="A new project" src="../_images/IntelliJ_new_Gradle_project.png" /></p>
+<p>Several folders and files have been created. The <code class="docutils literal notranslate"><span class="pre">src</span></code> folder is where the magic is going to happen of course: that’s where your code is going to live. The other folders are for project management (<code class="docutils literal notranslate"><span class="pre">./.gradle</span></code>, <code class="docutils literal notranslate"><span class="pre">./gradle</span></code>, <code class="docutils literal notranslate"><span class="pre">./.idea</span></code>) and deployment (<code class="docutils literal notranslate"><span class="pre">./build</span></code> which is not present yet).</p>
+<p>At the root of the project there is a file called <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code>. It contains the configuration of your project. One dependency has been added: JUnit 4, which is a <a class="reference external" href="https://en.wikipedia.org/wiki/Unit_testing">unit testing framework</a>. Since JUnit 4 is an older version, we’ll immediately change this into JUnit 5. You should modify the <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> file so it looks exactly like this (except for the <code class="docutils literal notranslate"><span class="pre">group</span></code> declaration):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">//I am using Gradle to manage a Java project</span>
+<span class="nx">plugins</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="w"> </span><span class="s1">&#39;java&#39;</span>
+<span class="p">}</span>
+
+<span class="c1">//The group ID</span>
+<span class="nx">group</span><span class="w"> </span><span class="s1">&#39;nl.bioinf.nomi.my_first_project&#39;</span>
+<span class="c1">//my version</span>
+<span class="nx">version</span><span class="w"> </span><span class="s1">&#39;0.0.1&#39;</span>
+<span class="c1">//working with Java 11 as target</span>
+<span class="nx">sourceCompatibility</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JavaVersion</span><span class="p">.</span><span class="nx">VERSION_11</span>
+
+<span class="c1">//This is where dependencies should be found</span>
+<span class="nx">repositories</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mavenCentral</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">//the actual dependencies of my project, besides the Java SDK:</span>
+<span class="c1">// only the JUnit 5 test framework in this course</span>
+<span class="nx">dependencies</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">testImplementation</span><span class="p">(</span><span class="s2">&quot;org.junit.jupiter:junit-jupiter-api:5.6.2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">testRuntimeOnly</span><span class="p">(</span><span class="s2">&quot;org.junit.jupiter:junit-jupiter-engine:5.6.2&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//this says: use Gradle for test management, not IntelliJ</span>
+<span class="nx">test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">useJUnitPlatform</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As you can see this is programming code (Groovy) that configures a programming project (Java).</p>
+<p>Whenever you make changes to <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> you should refresh your project via the small pop-up that appears in the editor pane, or via the Gradle Tool Window on the right (Re-import All Gradle Projects).</p>
+<p>Finally, let’s create some Java code. Right-click on the <code class="docutils literal notranslate"><span class="pre">src/main/java</span></code> folder in the Project panel (left side) and select “New” → “Package” and give it the same name as your group ID (it is also in <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code>).</p>
+<p><img alt="New package" src="../_images/new_package.png" /></p>
+<p>Select the new <code class="docutils literal notranslate"><span class="pre">package</span></code>, right-click it and select “New” -&gt; “Java Class”. Name it <code class="docutils literal notranslate"><span class="pre">HelloWorld</span></code> (do not give any file extension!).</p>
+<p><img alt="New Java class" src="../_images/new_java_class_1.png" /></p>
+<p>Click “OK”.</p>
+<p><img alt="New Java class" src="../_images/new_java_class_2.png" /></p>
+<p>The class file will open in an editor. Within the class, put the caret below the line <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">class</span> <span class="pre">HelloWorld</span></code>. Next, type “psvm” and press tab.</p>
+<p><img alt="Create main" src="../_images/new_main_method_1.png" /></p>
+<p><img alt="Create main" src="../_images/new_main_method_2.png" /></p>
+<p>A brand new <code class="docutils literal notranslate"><span class="pre">main()</span></code> method is created using this <em>keyboard shortcut</em>. Here is another extremely useful shortcut, assuming the caret is within <code class="docutils literal notranslate"><span class="pre">main()</span></code>. Type “sout” followed by the tab.</p>
+<p><img alt="Generate console output" src="../_images/shortcut_sout.png" /></p>
+<p>The statement <code class="docutils literal notranslate"><span class="pre">System.out.println();</span></code> appears. Within this print call, type “Hello, World”. Your class should look like this, except that your package will be named differently:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.my_first_project</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloWorld</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello, World&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Click the green triangle within the editor border and select “run ‘HelloWorld.main()’ Note there is also a shortcut for running <code class="docutils literal notranslate"><span class="pre">main()</span></code>: <code class="docutils literal notranslate"><span class="pre">^</span> <span class="pre">+</span> <span class="pre">shift</span> <span class="pre">+</span> <span class="pre">R</span></code>.</p>
+<p><img alt="Run the app" src="../_images/run_main.png" /></p>
+<p>In the console output on the lower pane, you will see this output, including the “Hello, World” message:</p>
+<pre class="console_out">
+20:38:51: Executing task 'HelloWorld.main()'...
+
+> Task :compileJava
+> Task :processResources NO-SOURCE
+> Task :classes
+
+> Task :HelloWorld.main()
+Hello, World
+
+BUILD SUCCESSFUL in 0s
+2 actionable tasks: 2 executed
+20:38:52: Task execution finished 'HelloWorld.main()'.
+</pre>
+<p>The “Tasks” are gradle stuff. It says, amongst others, that the source is compiled (Java is a compiled language!) and main() is run. You may notice that a new folder has appeared at the root of your project: <code class="docutils literal notranslate"><span class="pre">build</span></code>. Have a look at what’s inside.</p>
+<p>If you get any errors (e.g. <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">LinkageError</span> <span class="pre">occurred</span> <span class="pre">while</span> <span class="pre">loading</span> <span class="pre">main</span> <span class="pre">class</span> <span class="pre">nl.bioinf.nomi.my_first_project.HelloWorld</span></code>), you need to make sure your specified Java version in build.gradle corresponds to the one configured for your project in IntelliJ (sometimes they get mixed up). Go to File → Project Structure and check under <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Settings/Project</span></code> and <code class="docutils literal notranslate"><span class="pre">Platform</span> <span class="pre">Settings/SDKs</span></code>. The project SDK should have a version at least as high as the language level specified in build.gradle (in this case, Java 11):</p>
+<p><img alt="Specify SDK" src="../_images/specify_SDK_and_Java_version_1.png" /></p>
+<p><img alt="Specify SDK" src="../_images/specify_SDK_and_Java_version_2.png" /></p>
+</div>
+<div class="section" id="distribute-an-executable">
+<h2><span class="section-number">1.3. </span>Distribute an executable<a class="headerlink" href="#distribute-an-executable" title="Permalink to this headline">#</a></h2>
+<p>The final step is getting the app to your users. In Java you use a <code class="docutils literal notranslate"><span class="pre">jar</span></code> (Java ARchive) for that.</p>
+<p>Gradle can do the whole build-to-executable process. You first need to specify where your “main class” is located: the class which contains the <code class="docutils literal notranslate"><span class="pre">main()</span></code> method that you want to use as “entry point” of your application.</p>
+<p>Since we use Gradle for the build process, the place to do this is the <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> file; open it again and add this section at the bottom:</p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">jar</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="n">manifest</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="n">attributes</span><span class="o">(</span>
+<span class="w">                </span><span class="s1">&#39;Main-Class&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;nl.bioinf.nomi.my_first_project.HelloWorld&#39;</span>
+<span class="w">        </span><span class="o">)</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Main-Class</span></code> line specifies for the JVM -when your application  is going to be executed- to go look in class <code class="docutils literal notranslate"><span class="pre">HelloWorld</span></code> for a <code class="docutils literal notranslate"><span class="pre">main()</span></code> method to run when the application starts up. You can in fact have many <code class="docutils literal notranslate"><span class="pre">main()</span></code> methods in your application, but only one can serve as entry point in an executable. (Yes, you can make different executables with a single code base by simply specifying different entry points!)</p>
+<p>Refresh your project as before.
+Next, Go to the right Gradle Tool Window on the right (make it visible if required: View → Tool Windows → Gradle) and expand the panel.</p>
+<p>Select Tasks → build → double click “jar”. Your jar will be build under <code class="docutils literal notranslate"><span class="pre">build/libs</span></code>; go there with a terminal application (IntelliJ also has one) and type <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">my-first-project-0.0.1.jar</span></code>.</p>
+<p>You should see as output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>~/IdeaProjects/my-first-project$ 
+~/IdeaProjects/my-first-project$ cd build
+~/IdeaProjects/my-first-project/build$ cd libs
+~/IdeaProjects/my-first-project/build/libs$ java -jar my-first-project-0.0.1.jar 
+Hello, World
+</pre></div>
+</div>
+</div>
+<div class="section" id="wrap-up">
+<h2><span class="section-number">1.4. </span>Wrap-up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">#</a></h2>
+<p>That’s it. This is how you create, run and build a Gradle-managed Java project.</p>
+<p>These are the keyboard shortcuts you should remember:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">psvm</span></code></strong> - create main()</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sout</span></code></strong> - create print statement</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">^</span> <span class="pre">+</span> <span class="pre">shift</span> <span class="pre">+</span> <span class="pre">R</span></code></strong> - run main()</p></li>
+</ul>
+<p>Next up: some basic about-Java stuff to get a feel for the language.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./01_getting_started"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../keyboard_shortcuts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Keyboard shortcuts</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="essentials.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>The essence of Java</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-management">1.1. Dependency management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-project">1.2. A first project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribute-an-executable">1.3. Distribute an executable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">1.4. Wrap-up</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

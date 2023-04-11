@@ -1,0 +1,1008 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>33. Thymeleaf flow control and fragments &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_web/thymeleaf_flow_control';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="34. Sessions &amp; Scopes" href="sessions.html" />
+    <link rel="prev" title="32. Thymeleaf expressions" href="thymeleaf_expressions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05_web/thymeleaf_flow_control.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Thymeleaf flow control and fragments</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">33.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration">33.1.1. Iteration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditionals-if-and-th-block">33.1.2. Conditionals: if (and th:block)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditionals-switch">33.1.3. Conditionals: switch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-fragments">33.2. Working with fragments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-difference-between-th-insert-and-th-replace">33.2.1. The difference between <code class="docutils literal notranslate"><span class="pre">th:insert</span></code> and <code class="docutils literal notranslate"><span class="pre">th:replace</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="thymeleaf-flow-control-and-fragments">
+<h1><span class="section-number">33. </span>Thymeleaf flow control and fragments<a class="headerlink" href="#thymeleaf-flow-control-and-fragments" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">33.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>This post is the second on Thymeleaf. It deals with these templating techniques that Thymeleaf offers:</p>
+<ul class="simple">
+<li><p>conditionals</p></li>
+<li><p>loops</p></li>
+<li><p>using fragments as building blocks</p></li>
+</ul>
+<p>For a complete overview you should refer to <a class="reference external" href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html">the official docs</a>.</p>
+<p>These examples all make use of the <code class="docutils literal notranslate"><span class="pre">Movie</span></code> class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Movie</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mainActors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Movie</span><span class="o">&gt;</span><span class="w"> </span><span class="n">movies</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Movie</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Movie</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Movie</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rating</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rating</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Movie</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rating</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mainActors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rating</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mainActors</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">mainActors</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getTitle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getYear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getRating</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rating</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getMainActors</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">actors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">actors</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">mainActors</span><span class="p">);</span>
+<span class="w">        </span><span class="n">actors</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">compareTo</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">actors</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setRating</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">rating</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rating</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addActor</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">actor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mainActors</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">actor</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Movie</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAllMovies</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Movie</span><span class="p">.</span><span class="na">movies</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//create a list from IMDB top 20</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Movie</span><span class="o">&gt;</span><span class="w"> </span><span class="n">movies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Movie</span><span class="w"> </span><span class="n">movie</span><span class="p">;</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;The Shawshank Redemption&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1994</span><span class="p">,</span><span class="w"> </span><span class="mf">9.2</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Tim Robbins&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Morgan Freeman&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;The Dark Knight&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2008</span><span class="p">,</span><span class="w"> </span><span class="mf">9.0</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Christian Bale,&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Heath Ledger&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;Pulp Fiction&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1994</span><span class="p">,</span><span class="w"> </span><span class="mf">8.9</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;John Travolta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Uma Thurman&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Samuel L. Jackson&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;Fight Club &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1999</span><span class="p">,</span><span class="w"> </span><span class="mf">8.8</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Brad Pitt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Edward Norton&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;Forrest Gump&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1994</span><span class="p">,</span><span class="w"> </span><span class="mf">8.7</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Tom Hanks&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Robin Wright&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gary Sinise&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;Inception&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2010</span><span class="p">,</span><span class="w"> </span><span class="mf">8.7</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Leonardo DiCaprio&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Joseph Gordon-Levitt&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;One Flew Over the Cuckoo&#39;s Nest&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1975</span><span class="p">,</span><span class="w"> </span><span class="mf">8.7</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Jack Nicholson&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Louise Fletcher&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Will Sampson&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Movie</span><span class="p">(</span><span class="s">&quot;The Usual Suspects&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1995</span><span class="p">,</span><span class="w"> </span><span class="mf">8.5</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Kevin Spacey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gabriel Byrne&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Chazz Palminteri&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">movies</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">movie</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Movie</span><span class="p">.</span><span class="na">movies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movies</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The list of movies is attached to the WebContxt object using</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;movies&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Movie</span><span class="p">.</span><span class="na">getAllMovies</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>so for all examples the <code class="docutils literal notranslate"><span class="pre">$movies</span></code> variable is available.</p>
+<div class="section" id="iteration">
+<h3><span class="section-number">33.1.1. </span>Iteration<a class="headerlink" href="#iteration" title="Permalink to this headline">#</a></h3>
+<p>Iteration with Thymeleaf is as simple as in Java code; simply use <code class="docutils literal notranslate"><span class="pre">th:each</span></code>.
+This is an example with the movies list:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Year of release<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>IMDB rating<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;movie:${movies}&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.title}&quot;</span><span class="p">&gt;</span>_title_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.year}&quot;</span><span class="p">&gt;</span>_year_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.rating}&quot;</span><span class="p">&gt;</span>_rating_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the <strong><em>local scope</em></strong> syntax:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>    <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;movie:${movies}&quot;</span> <span class="na">th:object</span><span class="o">=</span><span class="s">&quot;${movie}&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;*{title}&quot;</span><span class="p">&gt;</span>_title_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;*{year}&quot;</span><span class="p">&gt;</span>_year_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;*{rating}&quot;</span><span class="p">&gt;</span>_rating_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>both of which result in this table:</p>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Year of release</th>
+        <th>IMDB rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>The Shawshank Redemption</td>
+        <td>1994</td>
+        <td>9.2</td>
+    </tr>
+    <tr>
+        <td>The Dark Knight</td>
+        <td>2008</td>
+        <td>9.0</td>
+    </tr>
+    <tr>
+        <td>Pulp Fiction</td>
+        <td>1994</td>
+        <td>8.9</td>
+    </tr>
+    <tr>
+        <td>Fight Club </td>
+        <td>1999</td>
+        <td>8.8</td>
+    </tr>
+    <tr>
+        <td>Forrest Gump</td>
+        <td>1994</td>
+        <td>8.7</td>
+    </tr>
+    <tr>
+        <td>Inception</td>
+        <td>2010</td>
+        <td>8.7</td>
+    </tr>
+    <tr>
+        <td>One Flew Over the Cuckoo's Nest</td>
+        <td>1975</td>
+        <td>8.7</td>
+    </tr>
+    <tr>
+        <td>The Usual Suspects</td>
+        <td>1995</td>
+        <td>8.5</td>
+    </tr>
+    </tbody>
+</table>
+<p>You can also sort stuff in Thymeleaf. Given an extra model parameter passed from the servlet, and the utility object <code class="docutils literal notranslate"><span class="pre">#lists</span></code>.<br />
+Of course, sorting is something you usually leave to your Javascript front-end (Datatables.js). But there are uses for it, and this prevents you from attaching the same list twice to the WebContext object.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//java 8+ type Comparator</span>
+<span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;movies_year_sorter&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Movie</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">o1</span><span class="p">.</span><span class="na">getYear</span><span class="p">(),</span><span class="w"> </span><span class="n">o2</span><span class="p">.</span><span class="na">getYear</span><span class="p">()));</span>
+
+<span class="c1">//or, a pre-java 8 Comparator</span>
+<span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;movies_year_sorter&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Movie</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Movie</span><span class="w"> </span><span class="n">m1</span><span class="p">,</span><span class="w"> </span><span class="n">Movie</span><span class="w"> </span><span class="n">m2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="na">getYear</span><span class="p">(),</span><span class="w"> </span><span class="n">m2</span><span class="p">.</span><span class="na">getYear</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>then in Thymeleaf, use the Comparator object:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;movie:${#lists.sort(movies, movies_year_sorter)}&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Thymeleaf also provides a mechanism that stores the state of the iteration process. It has several useful properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code>: the current iteration index, starting with 0 (zero)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: the number of elements processed so far</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: the total number of elements in the list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">even/odd</span></code>: boolean - true if the current iteration index is even or odd</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first</span></code>: boolean - true if the current iteration is the first one</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last</span></code>: boolean - true if the current iteration is the last one</p></li>
+</ul>
+<p>The next piece of code demonstrates the use of this iteration statistics object, as well as another technique: the if/else ternary operator for Thymeleaf. This example shows you can even nest these.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Pos<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Year of release<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>IMDB rating<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;movie, it_stat:${movies}&quot;</span> 
+        <span class="na">th:class</span><span class="o">=</span><span class="s">&quot;${it_stat.first} ? &#39;first&#39; : (${it_stat.even} ? &#39;even&#39; : &#39;odd&#39;)&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${it_stat.count} + &#39; / &#39; + ${it_stat.size}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.title}&quot;</span><span class="p">&gt;</span>_title_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.year}&quot;</span><span class="p">&gt;</span>_year_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.rating}&quot;</span><span class="p">&gt;</span>_rating_<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>when this css is applied:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">even</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">aliceblue</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">odd</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">lightcyan</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">first</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">coral</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>this is the result:</p>
+<table>
+    <thead>
+    <tr>
+        <th>Pos</th>
+        <th>Title</th>
+        <th>Year of release</th>
+        <th>IMDB rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="first">
+        <td>1 / 8</td>
+        <td>The Shawshank Redemption</td>
+        <td>1994</td>
+        <td>9.2</td>
+    </tr>
+    <tr class="even">
+        <td>2 / 8</td>
+        <td>The Dark Knight</td>
+        <td>2008</td>
+        <td>9.0</td>
+    </tr>
+    <tr class="odd">
+        <td>3 / 8</td>
+        <td>Pulp Fiction</td>
+        <td>1994</td>
+        <td>8.9</td>
+    </tr>
+    <tr class="even">
+        <td>4 / 8</td>
+        <td>Fight Club </td>
+        <td>1999</td>
+        <td>8.8</td>
+    </tr>
+    <tr class="odd">
+        <td>5 / 8</td>
+        <td>Forrest Gump</td>
+        <td>1994</td>
+        <td>8.7</td>
+    </tr>
+    <tr class="even">
+        <td>6 / 8</td>
+        <td>Inception</td>
+        <td>2010</td>
+        <td>8.7</td>
+    </tr>
+    <tr class="odd">
+        <td>7 / 8</td>
+        <td>One Flew Over the Cuckoo's Nest</td>
+        <td>1975</td>
+        <td>8.7</td>
+    </tr>
+    <tr class="even">
+        <td>8 / 8</td>
+        <td>The Usual Suspects</td>
+        <td>1995</td>
+        <td>8.5</td>
+    </tr>
+    </tbody>
+</table>
+<p>There is a lot going on in this statement:<br />
+<code class="docutils literal notranslate"><span class="pre">&lt;tr</span> <span class="pre">th:each=&quot;movie,</span> <span class="pre">it_stat:${movies}&quot;</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">th:class=&quot;${it_stat.first}</span> <span class="pre">?</span> <span class="pre">'first'</span> <span class="pre">:</span> <span class="pre">(${it_stat.even}</span> <span class="pre">?</span> <span class="pre">'even'</span> <span class="pre">:</span> <span class="pre">'odd')&quot;&gt;</span></code>.
+Let’s dissect.</p>
+<p>First there is the iteration initialization where an <code class="docutils literal notranslate"><span class="pre">it_stat</span></code> object is requested as well: <code class="docutils literal notranslate"><span class="pre">th:each=&quot;movie,</span> <span class="pre">it_stat:${movies}&quot;</span></code>. In the second part, a nested ternary statement sets the <code class="docutils literal notranslate"><span class="pre">class</span></code> attribute of the current row. The first level determines the first row: <code class="docutils literal notranslate"><span class="pre">th:class=&quot;${it_stat.first}</span> <span class="pre">?</span> <span class="pre">'first'</span> <span class="pre">:</span> <span class="pre">(&lt;nested</span> <span class="pre">ternary&gt;)&quot;</span></code>. The nested ternary determines the class of all rows except the first: <code class="docutils literal notranslate"><span class="pre">${it_stat.even}</span> <span class="pre">?</span> <span class="pre">'even'</span> <span class="pre">:</span> <span class="pre">'odd'</span></code>.</p>
+</div>
+<div class="section" id="conditionals-if-and-th-block">
+<h3><span class="section-number">33.1.2. </span>Conditionals: if (and th:block)<a class="headerlink" href="#conditionals-if-and-th-block" title="Permalink to this headline">#</a></h3>
+<p>Besides the ternary operator structure shown in the previous section, regular “if” tests can be applied. Here is a test for the rating of the movie; only movies with a rating higher than 9 are displayed:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;movie:${movies}&quot;</span> 
+        <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.title} + &#39; (&#39; + ${movie.year} + &#39;) - &#39; + ${movie.rating}&quot;</span> 
+        <span class="na">th:if</span><span class="o">=</span><span class="s">&quot;${movie.rating &gt;= 9}&quot;</span><span class="p">&gt;</span>_movie_<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The specified expression evaluates to a boolean following these rules:</p>
+<p><strong><em>test evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code> if value is not <code class="docutils literal notranslate"><span class="pre">null</span></code> and value is</em></strong></p>
+<ul class="simple">
+<li><p>a boolean and is true</p></li>
+<li><p>a number and is non-zero</p></li>
+<li><p>a character and is non-zero</p></li>
+<li><p>a String and is not “false”, “off” or “no”</p></li>
+<li><p>not a boolean, a number, a character or a String</p></li>
+</ul>
+<p>The Thymeleaf <code class="docutils literal notranslate"><span class="pre">th:if</span></code> attribute has an inverse attribute, <code class="docutils literal notranslate"><span class="pre">th:unless</span></code>.
+This makes an if/else-like structure possible. Here, you see it in combination with <code class="docutils literal notranslate"><span class="pre">th:block</span></code> which is a handy Thymeleaf element which does not generate a html DOM element. Using th:block prevents excessive use of nested div and span elements.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th:block</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;movie : ${movies}&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">th:if</span><span class="o">=</span><span class="s">&quot;${movie.rating &gt;= 9}&quot;</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.title} + &#39; - &#39; + ${movie.rating} + &#39; - WOW!&#39;&quot;</span> <span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">th:unless</span><span class="o">=</span><span class="s">&quot;${movie.rating &gt;= 9}&quot;</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${movie.title} + &#39; - &#39; + ${movie.rating} + &#39; - JUST OK&#39;&quot;</span> <span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">th:block</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conditionals-switch">
+<h3><span class="section-number">33.1.3. </span>Conditionals: switch<a class="headerlink" href="#conditionals-switch" title="Permalink to this headline">#</a></h3>
+<p>Here you see a combination of iteration and switch/case to build an ordered list.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">th:each</span><span class="o">=</span><span class="s">&quot;user:${users}&quot;</span> <span class="na">th:switch</span><span class="o">=</span><span class="s">&quot;${user.role.toString()}&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:case</span><span class="o">=</span><span class="s">&quot;${&#39;ADMIN&#39;}&quot;</span> 
+            <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${user.name} + &#39; (&#39; + ${user.role} + &#39;) manages all accounts&#39;&quot;</span><span class="p">&gt;</span>_admin_<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:case</span><span class="o">=</span><span class="s">&quot;${&#39;USER&#39;}&quot;</span> 
+            <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${user.name} + &#39; (&#39; + ${user.role} + &#39;) can browse and share all site content&#39;&quot;</span><span class="p">&gt;</span>_user_<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:case</span><span class="o">=</span><span class="s">&quot;${&#39;GUEST&#39;}&quot;</span> 
+            <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${user.name} + &#39; (&#39; + ${user.role} + &#39;) can only see our front page&#39;&quot;</span><span class="p">&gt;</span>_guest_<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:case</span><span class="o">=</span><span class="s">&quot;*&quot;</span> 
+            <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${user.name} + &#39;(&#39; + ${user.role} + &#39;) we do not know this role&#39;&quot;</span><span class="p">&gt;</span>_unknown_<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">th:switch</span></code> expression selects the User role (an enum) in each loop iteration, takes its String representation and compares this to a string literal in each <code class="docutils literal notranslate"><span class="pre">th:case</span></code>. Only the <code class="docutils literal notranslate"><span class="pre">th:case</span></code> that matches will be evaluated. When no match is found, the <em>default</em> is evaluated, specified with <code class="docutils literal notranslate"><span class="pre">th:case=&quot;*&quot;</span></code>. The result when applied to this list of User instances:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">User</span><span class="w"> </span><span class="n">u</span><span class="p">;</span>
+<span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Hank&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;henk@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Role</span><span class="p">.</span><span class="na">ADMIN</span><span class="p">);</span>
+<span class="n">users</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+<span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Roger&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;roger@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Role</span><span class="p">.</span><span class="na">USER</span><span class="p">);</span>
+<span class="n">users</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+<span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Diana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;diana@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Role</span><span class="p">.</span><span class="na">GUEST</span><span class="p">);</span>
+<span class="n">users</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>is this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Hank (ADMIN) manages all accounts<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Roger (USER) can browse and share all site content<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Diana (GUEST) can only see our front page<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Note that with just one <code class="docutils literal notranslate"><span class="pre">th:case</span></code>, you can put everything within a single <code class="docutils literal notranslate"><span class="pre">li</span></code> tag - no need for the <code class="docutils literal notranslate"><span class="pre">span</span></code>.</p>
+</div>
+</div>
+<div class="section" id="working-with-fragments">
+<h2><span class="section-number">33.2. </span>Working with fragments<a class="headerlink" href="#working-with-fragments" title="Permalink to this headline">#</a></h2>
+<p>Parts of your pages will be reused over multiple other pages. Specifically, this is the case for banners, footers, menus and headers. Instead of copy-and-paste, Thymeleaf offers a nice mechanism for reusing page fragments - even conditionally! The strategy of choice here is to create a single Thymeleaf html page called “template” or “fragments” and to include elements of this page in others.
+Consider this html file called <code class="docutils literal notranslate"><span class="pre">template.html</span></code>:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html SYSTEM &quot;http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd&quot;&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span>
+      <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span> <span class="na">th:fragment</span><span class="o">=</span><span class="s">&quot;headerFragment&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>_TITLE_<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">th:href</span><span class="o">=</span><span class="s">&quot;@{/css/main.css}&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../../css/main.css&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:fragment</span><span class="o">=</span><span class="s">&quot;banner&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;logo&quot;</span> <span class="na">th:src</span><span class="o">=</span><span class="s">&quot;@{/graphics/Awesome.png}&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;../../graphics/Awesome.png&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;banner pic&quot;</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;banner_title&quot;</span><span class="p">&gt;</span>Welcome, ye of lesser quality<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="cm">&lt;!--these can be conditionally selected--&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:fragment</span><span class="o">=</span><span class="s">&quot;menu&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>my secret content<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:fragment</span><span class="o">=</span><span class="s">&quot;menu&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;normaluser&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>my regular content<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Template layout<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+            &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat.&quot;
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="cm">&lt;!-- receives an argument called pub --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:fragment</span><span class="o">=</span><span class="s">&quot;footer(pub)&quot;</span><span class="p">&gt;</span>
+        <span class="ni">&amp;copy;</span> 2018 Team Awesome. Please don&#39;t contact us; we are too busy!<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+        But if you really need to communicate, you can find us at the local pub:
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${pub}&quot;</span><span class="p">&gt;</span>_PUB_<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The different parts (divs) have been marked with <code class="docutils literal notranslate"><span class="pre">th:fragment=&quot;&lt;fragment_name&gt;&quot;</span></code>. These <code class="docutils literal notranslate"><span class="pre">th:fragment</span></code> tags make them available for inclusion in other pages.</p>
+<p>This is how you include a fragment from this page into another:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:insert</span><span class="o">=</span><span class="s">&quot;~{template :: banner}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="cm">&lt;!-- shorthand --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:insert</span><span class="o">=</span><span class="s">&quot;template :: banner&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">th:insert</span></code> expression expects a fragment expression (<code class="docutils literal notranslate"><span class="pre">~{...}</span></code>), which is an expression that results in a fragment. The first part of this expression is the name of the html file (<code class="docutils literal notranslate"><span class="pre">template.html</span></code>) without the extension and the second part is the fragment to be included. With a non-complex fragment expression, the (<code class="docutils literal notranslate"><span class="pre">~{</span></code>,<code class="docutils literal notranslate"><span class="pre">}</span></code>) enclosing is optional, so the shorthand notation suffices.</p>
+<p>Here is another example, the footer. This fragment takes an argument called <code class="docutils literal notranslate"><span class="pre">pub</span></code> that is available as variable by that same name. This is how to pass a variable</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:insert</span><span class="o">=</span><span class="s">&quot;~{template :: footer(&#39;The Bear Inn&#39;)}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>and using it with the fragment is standard variable expression syntax: <code class="docutils literal notranslate"><span class="pre">${pub}</span></code>.</p>
+<p>Finally, different variants of a fragment can be conditionally included - here demonstrated with a ternary statement:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:insert</span><span class="o">=</span><span class="s">&quot;~{template :: (${users[0].getRole().toString() == &#39;ADMIN&#39;} ? &#39;menu.admin&#39; : &#39;menu.normaluser&#39;)}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>If the Role is ADMIN, <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">th:fragment=&quot;menu&quot;</span> <span class="pre">class=&quot;admin&quot;&gt;...</span></code> is selected, otherwise <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">th:fragment=&quot;menu&quot;</span> <span class="pre">class=&quot;normaluser&quot;&gt;...</span></code>.</p>
+<div class="section" id="the-difference-between-th-insert-and-th-replace">
+<h3><span class="section-number">33.2.1. </span>The difference between <code class="docutils literal notranslate"><span class="pre">th:insert</span></code> and <code class="docutils literal notranslate"><span class="pre">th:replace</span></code><a class="headerlink" href="#the-difference-between-th-insert-and-th-replace" title="Permalink to this headline">#</a></h3>
+<p>th:insert is the simplest: it will simply insert the specified fragment as the body of its host tag.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">th:replace</span></code> expression actually replaces its host tag with the specified fragment.</p>
+<p>So, this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:insert</span><span class="o">=</span><span class="s">&quot;~{template :: (${users[0].getRole().toString() == &#39;ADMIN&#39;} ? &#39;menu.admin&#39; : &#39;menu.normaluser&#39;)}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>results in</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>my secret content<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>whereas</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:replace</span><span class="o">=</span><span class="s">&quot;~{template :: (${users[0].getRole().toString() == &#39;ADMIN&#39;} ? &#39;menu.admin&#39; : &#39;menu.normaluser&#39;)}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>results in</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>my secret content<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./05_web"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="thymeleaf_expressions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">32. </span>Thymeleaf expressions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sessions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">34. </span>Sessions &amp; Scopes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">33.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration">33.1.1. Iteration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditionals-if-and-th-block">33.1.2. Conditionals: if (and th:block)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditionals-switch">33.1.3. Conditionals: switch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-fragments">33.2. Working with fragments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-difference-between-th-insert-and-th-replace">33.2.1. The difference between <code class="docutils literal notranslate"><span class="pre">th:insert</span></code> and <code class="docutils literal notranslate"><span class="pre">th:replace</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

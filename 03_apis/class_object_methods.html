@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15. Methods of class Object &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_apis/class_object_methods';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="16. Records" href="records.html" />
+    <link rel="prev" title="14. The Java Collections API" href="collections.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_apis/class_object_methods.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Methods of class Object</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">15.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tostring-a-string-representation-of-the-object">15.2. <code class="docutils literal notranslate"><span class="pre">toString()</span></code>: a string representation of the object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-determining-logical-similarity-between-objects">15.3. <code class="docutils literal notranslate"><span class="pre">equals()</span></code> determining logical similarity between objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hashcode-required-when-equals-is-implemented">15.4. <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code>: required when <code class="docutils literal notranslate"><span class="pre">equals()</span></code> is implemented</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getclass-gives-meta-information-the-objects-class">15.5. <code class="docutils literal notranslate"><span class="pre">getClass()</span></code> gives meta-information the objects class</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="methods-of-class-object">
+<h1><span class="section-number">15. </span>Methods of class Object<a class="headerlink" href="#methods-of-class-object" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">15.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Previously you have seen some collection types: List, Map, Set.
+One of the methods that is universal to all collection types is <code class="docutils literal notranslate"><span class="pre">contains()</span></code>.
+How does the JVM determine that two objects are equal?
+This is through the <code class="docutils literal notranslate"><span class="pre">equals()</span></code> method.</p>
+<p><strong><em>When you use the statement <code class="docutils literal notranslate"><span class="pre">myCollection.contains(myObject)</span></code>, you get <code class="docutils literal notranslate"><span class="pre">true</span></code> returned if one of the elements in myCollection returns <code class="docutils literal notranslate"><span class="pre">true</span></code> for <code class="docutils literal notranslate"><span class="pre">element.equals(myObject)</span></code>.</em></strong></p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">equals()</span></code> is there, even though you did not implement it. This is because they are declared and implemented in class <code class="docutils literal notranslate"><span class="pre">Object</span></code>, and <strong><em>every class in Java extends from Object implicitly</em></strong>. Whenever you create a class, such as this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>you get this implicitly:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since User extends Object, it inherits all Object properties and methods. If you create an object (of any type), type the variable name followed by a dot, IntelliJ will show you the methods of class Object:</p>
+<p><img alt="Methods of class object" src="../_images/methods_of_Object.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">notify..()</span></code> and <code class="docutils literal notranslate"><span class="pre">wait..()</span></code> methods have to do with multithreading and are not dealt with here.
+The ones of interest are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">toString()</span></code> returns a String representation of the current object. Implemented in class Object as the objects’ memory hash.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">equals()</span></code> returns a boolean indicating whether the argument
+is logically the same as the current object. Implemented in class Object as: <code class="docutils literal notranslate"><span class="pre">true</span></code> if both refer to the same object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> returns the hashCode (an int) of the current object. Implemented in class Object to return an integer representing the objects memory address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getClass()</span></code> returns the class of the current object</p></li>
+</ul>
+</div>
+<div class="section" id="tostring-a-string-representation-of-the-object">
+<h2><span class="section-number">15.2. </span><code class="docutils literal notranslate"><span class="pre">toString()</span></code>: a string representation of the object<a class="headerlink" href="#tostring-a-string-representation-of-the-object" title="Permalink to this headline">#</a></h2>
+<p>If you want to see a nice textual representation of an object during software development, you use toString().
+In IntelliJ, type <code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">O</span></code> if you want to override a super class method.</p>
+<p><img alt="Override methods" src="../_images/override_methods.png" /></p>
+<p>If you choose toString(), you will get something like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">super</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">&#64;Override</span></code> <strong><em>annotation</em></strong>.
+Annotations are syntactic sugar in Java, and this one says to the compiler:
+please check whether this override is correct, else fail compilation.
+Correct with respect to toString() means: take no arguments and return a String.
+The statement <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">super.toString();</span></code> simply states: call the super class toString (of Object in this case) and return its result. Which means you get the uninformative:</p>
+<p><code class="docutils literal notranslate"><span class="pre">snippets.apis.User&#64;78b1cc93</span></code></p>
+<p>To make toString useful, you’ll need te redefine its logic, for instance:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;A user with name &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>which outputs <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">user</span> <span class="pre">with</span> <span class="pre">name</span> <span class="pre">Henk</span></code></p>
+<p>Although this is logically correct, and will compile just fine, there are some conventions used in Java to be informative. To get a toString() which follows this rule, use another IntelliJ shortcut: <code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">N</span></code> (for generate code), and select toString().</p>
+<p><img alt="Generate toString()" src="../_images/generate_code_toString.png" /></p>
+<p>Then, select the instance variables you want included in the string representation, click OK and you have something like this</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;User{&quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="s">&quot;id=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="s">&quot;, name=&#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;\&#39;&#39;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="sc">&#39;}&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>outputting <code class="docutils literal notranslate"><span class="pre">User{id=15,</span> <span class="pre">name='Henk'}</span></code>, which is a good textual representation of the underlying object.</p>
+</div>
+<div class="section" id="equals-determining-logical-similarity-between-objects">
+<h2><span class="section-number">15.3. </span><code class="docutils literal notranslate"><span class="pre">equals()</span></code> determining logical similarity between objects<a class="headerlink" href="#equals-determining-logical-similarity-between-objects" title="Permalink to this headline">#</a></h2>
+<p>Consider these three User objects, where the first constructor argument is the user ID and the second the username.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">User</span><span class="w"> </span><span class="n">user1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Henk&quot;</span><span class="p">);</span>
+<span class="c1">//same, equal?</span>
+<span class="n">User</span><span class="w"> </span><span class="n">user2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user1</span><span class="p">;</span>
+
+<span class="n">User</span><span class="w"> </span><span class="n">user3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Dirk&quot;</span><span class="p">);</span>
+<span class="c1">//same, or equal User as user3?</span>
+<span class="n">User</span><span class="w"> </span><span class="n">user4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Dirk&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Is <code class="docutils literal notranslate"><span class="pre">user1</span></code> equal to <code class="docutils literal notranslate"><span class="pre">user2</span></code>? Is <code class="docutils literal notranslate"><span class="pre">user1</span></code> equal to itself, <code class="docutils literal notranslate"><span class="pre">user1</span></code>? Is <code class="docutils literal notranslate"><span class="pre">user3</span></code> equal to <code class="docutils literal notranslate"><span class="pre">user4</span></code>?<br />
+There is an important distinction to be made: <strong><em>equality versus sameness</em></strong>.
+Two references are considered the same if they both <em>point to a single object on the heap</em>.
+On the other hand, equality is a more fuzzy concept. In general, we consider
+two references equal if they point either to one single object,
+or to two distinct objects that are logically similar.</p>
+<p>So, in the above code snippet, <code class="docutils literal notranslate"><span class="pre">user1</span></code> is definitely the same as <code class="docutils literal notranslate"><span class="pre">user</span></code> two since they refer to the same object.
+But since they are the same, they must therefore also be equal.<br />
+On the other hand, <code class="docutils literal notranslate"><span class="pre">user3</span></code> and <code class="docutils literal notranslate"><span class="pre">user4</span></code> are two distinct objects (the constructor has run twice!),
+but <strong><em>logically similar</em></strong> because they have exactly the same internal data.</p>
+<p>In Java, <code class="docutils literal notranslate"><span class="pre">==</span></code> tests for sameness and <code class="docutils literal notranslate"><span class="pre">equals()</span></code> for logical similarity.</p>
+<p>Therefore, we would like our User class to behave like this.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1 == user1 -- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">user1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">user1</span><span class="p">));</span><span class="w"> </span><span class="c1">//should be true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1.equals(user1) -- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">user1</span><span class="p">));</span><span class="w"> </span><span class="c1">//should be true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1 == user2 -- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">user1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">user2</span><span class="p">));</span><span class="w"> </span><span class="c1">//should be true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1.equals(user2) -- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">user2</span><span class="p">));</span><span class="w"> </span><span class="c1">//should be true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1.equals(user3) -- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">user3</span><span class="p">));</span><span class="w"> </span><span class="c1">//should be false</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user3.equals(user4) -- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user3</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">user4</span><span class="p">));</span><span class="w"> </span><span class="c1">//should be true!</span>
+</pre></div>
+</div>
+<p>but in actuality this is what we get</p>
+<pre class="console_out">
+user1 == user1 -- true
+user1.equals(user1) -- true
+user1 == user2 -- true
+user1.equals(user2) -- true
+user1.equals(user3) -- false
+user3.equals(user4) -- false
+</pre>
+<p>Up to the last test, everything works out fine. Why does the last test return false? Because Java doesn’t not know about logical similarity between User objects! We have to tell it. Therefore, by default this is what the <code class="docutils literal notranslate"><span class="pre">Object.equals()</span></code> method does:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s change the <code class="docutils literal notranslate"><span class="pre">equals()</span></code> method to reflect (my opinion of) similarity:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">otherUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="w"> </span><span class="n">other</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">otherUser</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">otherUser</span><span class="p">.</span><span class="na">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There is a lot to say about this implementation. Can you spot the flaws?</p>
+<p>There are several, so maybe it is better to let IntelliJ handle this for us, via <code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">N</span></code> (generate) -&gt; <code class="docutils literal notranslate"><span class="pre">equals()</span> <span class="pre">and</span> <span class="pre">hashCode()</span></code> -&gt; choose template (Java 7+), choose name and ID –&gt; next, next next, Finish:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="w"> </span><span class="n">o</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">            </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Study this carefully! Why is each statement inserted?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">equals()</span></code> method must exhibit the following properties:</p>
+<ul class="simple">
+<li><p><strong><em>Symmetry</em></strong>: For two references, a and b, a.equals(b) if and only if b.equals(a) as well</p></li>
+<li><p><strong><em>Reflexivity</em></strong>: For all non-null references, a.equals(a)</p></li>
+<li><p><strong><em>Transitivity</em></strong>: If a.equals(b) and b.equals(c), then a.equals(c)</p></li>
+<li><p><strong><em>Consistency with hashCode()</em></strong>: Two equal objects must have the same hashCode() value</p></li>
+</ul>
+</div>
+<div class="section" id="hashcode-required-when-equals-is-implemented">
+<h2><span class="section-number">15.4. </span><code class="docutils literal notranslate"><span class="pre">hashCode()</span></code>: required when <code class="docutils literal notranslate"><span class="pre">equals()</span></code> is implemented<a class="headerlink" href="#hashcode-required-when-equals-is-implemented" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> method is kind of the mysterious sister of <code class="docutils literal notranslate"><span class="pre">equals()</span></code>. You implement them together, but only equals() is easily understood.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> method is used for <strong><em>bucketing</em></strong> in Hash implementations like HashMap, HashTable, HashSet, etc.
+The value received from <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> is used as the bucket number for storing elements of the set/map.
+This bucket number is the address of the element inside the set/map.
+When you do <code class="docutils literal notranslate"><span class="pre">contains()</span></code> it will take the hash code of the element, then look for the bucket where hash code points to.
+If more than 1 element is found in the same bucket (multiple objects can have the same hash code),
+then it uses the <code class="docutils literal notranslate"><span class="pre">equals()</span></code> method to evaluate if the objects are equal, and then decide
+if <code class="docutils literal notranslate"><span class="pre">contains()</span></code> is true or false, or decide if element could be added in the set or not.
+(<em>This paragraph is copied from a post on <a class="reference external" href="https://stackoverflow.com/questions/3563847/what-is-the-use-of-hashcode-in-java">Stackoverflow</a></em>)</p>
+<p>The general contract of hashCode() states:</p>
+<ul class="simple">
+<li><p>Whenever it is invoked on the same object more than once, <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> must consistently return the same value, provided no information used in equals comparisons on the object is modified. This value needs not remain consistent from one execution of an application to another execution of the same application</p></li>
+<li><p>If two objects are equal according to the <code class="docutils literal notranslate"><span class="pre">equals(Object)</span></code> method, then calling the <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> method on each of the two objects must produce the same value</p></li>
+<li><p>It is not required that if two objects are unequal according to the <code class="docutils literal notranslate"><span class="pre">equals(java.lang.Object)</span></code> method, then calling the hashCode method on each of the two objects must produce distinct integer results. However, developers should be aware that producing distinct integer results for unequal objects improves the performance of hash tables</p></li>
+</ul>
+<p>Of course, we let IntelliJ do the hard work (<code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">N</span></code>):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//uses a utility method from class Objects</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">hash</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getclass-gives-meta-information-the-objects-class">
+<h2><span class="section-number">15.5. </span><code class="docutils literal notranslate"><span class="pre">getClass()</span></code> gives meta-information the objects class<a class="headerlink" href="#getclass-gives-meta-information-the-objects-class" title="Permalink to this headline">#</a></h2>
+<p>Example code is best here:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1.getClass().getSimpleName() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user1</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getSimpleName</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1.getClass().getName() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user1</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user1.getClass().getPackageName() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user1</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getPackageName</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>outputs</p>
+<pre class="console_out">
+user1.getClass().getSimpleName() = User
+user1.getClass().getName() = snippets.apis.User
+user1.getClass().getPackageName() = snippets.apis
+</pre>
+<p>There are a lot more methods in class <code class="docutils literal notranslate"><span class="pre">java.lang.Class</span></code>, but they serve difficult stuff, like introspection.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_apis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="collections.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>The Java Collections API</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="records.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Records</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">15.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tostring-a-string-representation-of-the-object">15.2. <code class="docutils literal notranslate"><span class="pre">toString()</span></code>: a string representation of the object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-determining-logical-similarity-between-objects">15.3. <code class="docutils literal notranslate"><span class="pre">equals()</span></code> determining logical similarity between objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hashcode-required-when-equals-is-implemented">15.4. <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code>: required when <code class="docutils literal notranslate"><span class="pre">equals()</span></code> is implemented</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getclass-gives-meta-information-the-objects-class">15.5. <code class="docutils literal notranslate"><span class="pre">getClass()</span></code> gives meta-information the objects class</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

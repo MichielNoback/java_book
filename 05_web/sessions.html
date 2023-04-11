@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>34. Sessions &amp; Scopes &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_web/sessions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="35. Servlet details and lifecycle hooks" href="servlet_details.html" />
+    <link rel="prev" title="33. Thymeleaf flow control and fragments" href="thymeleaf_flow_control.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05_web/sessions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sessions & Scopes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">34.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scopes">34.2. Scopes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-scope-web-xml">34.2.1. Application scope: web.xml</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-deployment-descriptor">34.2.2. Adding a deployment descriptor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-an-application-scoped-variable">34.2.3. Add an application-scoped variable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-application-scoped-variable">34.2.4. Using the application-scoped variable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-scope-cross-request-memory">34.2.5. Session scope: cross-request “memory”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">34.2.6. Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#login-form">34.2.7. Login form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#login-servlet">34.2.8. Login servlet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test">34.2.9. Test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-scopes">34.3. Summary of scopes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-scope">34.3.1. Application scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-scope">34.3.2. Session scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-scope">34.3.3. “Request” scope</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="sessions-scopes">
+<h1><span class="section-number">34. </span>Sessions &amp; Scopes<a class="headerlink" href="#sessions-scopes" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">34.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>In this post, some seemingly diverse topics are dealt with. After reading, you should be aware that they actually relate.</p>
+<p>The topics are:</p>
+<ul class="simple">
+<li><p>application-scoped variables with web.xml</p></li>
+<li><p>user authentication</p></li>
+<li><p>sessions</p></li>
+<li><p>overview of the different scopes and when to use which</p></li>
+</ul>
+<img style="float: left; margin: 10px;" src="figures/warning_64.png">
+<p><strong>DISCLAIMER<br />
+<em>Everything in this presentation related to authentication is purely for the purpose of showing principles.
+For real-world applications you will need to do much work on security</em></strong></p>
+</div>
+<div class="section" id="scopes">
+<h2><span class="section-number">34.2. </span>Scopes<a class="headerlink" href="#scopes" title="Permalink to this headline">#</a></h2>
+<div class="section" id="application-scope-web-xml">
+<h3><span class="section-number">34.2.1. </span>Application scope: web.xml<a class="headerlink" href="#application-scope-web-xml" title="Permalink to this headline">#</a></h3>
+<p>You use application-scoped variables for everything that
+relates to the entire application: admin email, database type and url, servlet configuration, etc.
+<strong><em>Application-scoped variables</em></strong> are available withing servlets but also within Thymeleaf templates. These variables are defined within an xml file named <code class="docutils literal notranslate"><span class="pre">web.xml</span></code> and it is called a <strong><em>deployment descriptor</em></strong>.</p>
+</div>
+<div class="section" id="adding-a-deployment-descriptor">
+<h3><span class="section-number">34.2.2. </span>Adding a deployment descriptor<a class="headerlink" href="#adding-a-deployment-descriptor" title="Permalink to this headline">#</a></h3>
+<p>These are the steps you can take to have IntelliJ add a web.xml file in the correct location.</p>
+<ol class="arabic simple">
+<li><p>Go to Project Structure (<code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">;</span></code> on Mac)</p></li>
+<li><p>Facets → Web → Web Gradle (select your project)</p></li>
+<li><p>Under pane Deployment Descriptors, click “+”</p></li>
+<li><p>Select “web.xml”</p></li>
+<li><p>In the path, put this: <code class="docutils literal notranslate"><span class="pre">&lt;your</span> <span class="pre">project</span> <span class="pre">root&gt;/src/main/webapp/WEB-INF/web.xml</span></code></p></li>
+</ol>
+<p>You’ll get something like this</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;web-app</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+<span class="w">         </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">         </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span>
+<span class="w">         </span><span class="na">version=</span><span class="s">&quot;4.0&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/web-app&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-an-application-scoped-variable">
+<h3><span class="section-number">34.2.3. </span>Add an application-scoped variable<a class="headerlink" href="#add-an-application-scoped-variable" title="Permalink to this headline">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">web.xml</span></code>, put the following snippet:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">&lt;context-param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param-name&gt;</span>admin_email<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param-value&gt;</span>admin@example.com<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/context-param&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-application-scoped-variable">
+<h3><span class="section-number">34.2.4. </span>Using the application-scoped variable<a class="headerlink" href="#using-the-application-scoped-variable" title="Permalink to this headline">#</a></h3>
+<p>In your servlets, use the web app variable like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">getServletContext</span><span class="p">().</span><span class="na">getInitParameter</span><span class="p">(</span><span class="s">&quot;admin_email&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In your Thymeleaf template, the application-scoped variable, is available like this</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>th:text=&quot;${#servletContext.getInitParameter(&#39;admin_email&#39;)}&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="session-scope-cross-request-memory">
+<h3><span class="section-number">34.2.5. </span>Session scope: cross-request “memory”<a class="headerlink" href="#session-scope-cross-request-memory" title="Permalink to this headline">#</a></h3>
+<p>A server handling your request will have no memory of your visit after it is processed.
+To be able to “keep in touch” you will need to have a tracking system: we call this a session.
+The most well-known session implementation system is by means of cookies.</p>
+<p>This is a cookie according to Wikipedia: “In computing, a cookie (also tracking cookie, browser cookie, and HTTP cookie) is a small piece of text stored on a user’s computer by a web browser. A cookie consists of one or more name-value pairs containing bits of information such as … the identifier for a server-based session….”</p>
+<p>Thus, sessions represent <strong><em>cross-request memory</em></strong>.</p>
+<p>Typical usages of session objects are</p>
+<ul class="simple">
+<li><p>keeping an authenticated user “logged in”</p></li>
+<li><p>keeping track of “shopping baskets”</p></li>
+<li><p>keeping track of history (“here at the items you have looked at previously”)</p></li>
+</ul>
+<p>In java, sessions are usually maintained by means of a JSessionID stored as a cookie.
+You will probably never create a cookie directly. You simply use this statement:
+<code class="docutils literal notranslate"><span class="pre">HttpSession</span> <span class="pre">session</span> <span class="pre">=</span> <span class="pre">request.getSession();</span></code></p>
+</div>
+<div class="section" id="authentication">
+<h3><span class="section-number">34.2.6. </span>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">#</a></h3>
+<p>You do not need to have an authenticated user to create a session, but authentication is never done without using session.</p>
+<p>There are several reasons why you would like to know who it is that requests a certain page, the main reason being that you want only authorized persons to have access (and with a certain role).</p>
+<p>Let’s look at some sample code to create a login system using sessions.</p>
+</div>
+<div class="section" id="login-form">
+<h3><span class="section-number">34.2.7. </span>Login form<a class="headerlink" href="#login-form" title="Permalink to this headline">#</a></h3>
+<p>Here is the first element, a login form. Take notice of the form field names eg <code class="docutils literal notranslate"><span class="pre">name=&quot;username&quot;</span></code>. These names are going to be used in the servlet to fetch the login credentials. Also note the <code class="docutils literal notranslate"><span class="pre">action=&quot;login&quot;</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">&lt;form&gt;</span></code> tag. It will direct to the server requesting resource <code class="docutils literal notranslate"><span class="pre">login</span></code>.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html SYSTEM &quot;http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd&quot;&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span>
+      <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Authentication demo<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">th:href</span><span class="o">=</span><span class="s">&quot;@{/css/main.css}&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../../css/main.css&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Log in<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h4</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${message}&quot;</span> <span class="na">th:class</span><span class="o">=</span><span class="s">&quot;${message_type}&quot;</span><span class="p">&gt;</span>_message_<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;login&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;username_field&quot;</span><span class="p">&gt;</span> User name: <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;username_field&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span> <span class="na">required</span><span class="p">/&gt;</span> <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;password_field&quot;</span><span class="p">&gt;</span> User password: <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;password_field&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">required</span><span class="p">/&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;login_field&quot;</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;OK&quot;</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>If you have any problems, please contact <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${#servletContext.getInitParameter(&#39;admin_email&#39;)}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>and it looks like this in the browser:</p>
+<p><img alt="Login form 1" src="../_images/login_form1s.png" /></p>
+<img style="float: left; margin: 10px;" src="figures/warning_64.png">
+<p><strong>Actually, when you see a <code class="docutils literal notranslate"><span class="pre">http://</span></code> protocol instead of an <code class="docutils literal notranslate"><span class="pre">https://</span></code> protocol in the location bar of your browser, you do NOT have safety on you connection, even though you cannot see the password in the form!</strong></p>
+<p>But that issue is not within the scope of this course.</p>
+</div>
+<div class="section" id="login-servlet">
+<h3><span class="section-number">34.2.8. </span>Login servlet<a class="headerlink" href="#login-servlet" title="Permalink to this headline">#</a></h3>
+<p>This is the servlet dealing with the login form.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.wis_on_thymeleaf.servlets</span><span class="p">;</span>
+
+<span class="c1">//many imports</span>
+
+<span class="nd">@WebServlet</span><span class="p">(</span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TemplateEngine</span><span class="w"> </span><span class="n">templateEngine</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">templateEngine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebConfig</span><span class="p">.</span><span class="na">getTemplateEngine</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">WebContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebContext</span><span class="p">(</span>
+<span class="w">                </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                </span><span class="n">response</span><span class="p">,</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">getLocale</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">//fetch the session object</span>
+<span class="w">        </span><span class="c1">//if it is not present, one will be created</span>
+<span class="w">        </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">();</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nextPage</span><span class="p">;</span>
+<span class="w">        </span>
+<span class="w">        </span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="na">isNew</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">authenticated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">authenticated</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">session</span><span class="p">.</span><span class="na">setAttribute</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Henk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;henk@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Role</span><span class="p">.</span><span class="na">USER</span><span class="p">));</span>
+<span class="w">                </span><span class="n">nextPage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mainSite&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Your password and/or username are incorrect; please try again&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;message_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">nextPage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;login&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">nextPage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mainSite&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">templateEngine</span><span class="p">.</span><span class="na">process</span><span class="p">(</span><span class="n">nextPage</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">authenticate</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">username</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Henk&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">password</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;henk&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//simple GET requests are immediately forwarded to the login page</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">WebContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebContext</span><span class="p">(</span>
+<span class="w">                </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                </span><span class="n">response</span><span class="p">,</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">getLocale</span><span class="p">());</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Fill out the login form&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="na">setVariable</span><span class="p">(</span><span class="s">&quot;message_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">templateEngine</span><span class="p">.</span><span class="na">process</span><span class="p">(</span><span class="s">&quot;login&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Above the class declaration you see the <code class="docutils literal notranslate"><span class="pre">&#64;WebServlet(urlPatterns</span> <span class="pre">=</span> <span class="pre">&quot;/login&quot;)</span></code> annotation which tells the application server to route all requests to the URL <code class="docutils literal notranslate"><span class="pre">/login</span></code> to this servlet class.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">doPost()</span></code> method -which has several code smells (do you know which)- creates a session object. Next, it checks the session status and proceeds. If it is new (or empty): check user credentials. Else: go directly to the main page - why check credentials if the user already is logged in?
+The <code class="docutils literal notranslate"><span class="pre">authenticate()</span></code> method is a dummy of course. We’ll visit that part of authentication in the post on database interaction because -obviously- user data are stored in a database and are never hard-coded. If authentication is successful, the user is forwarded to the sites’ main page:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html SYSTEM &quot;http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd&quot;&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span>
+      <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>_TITLE_<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Welcome to our main page, [[${session.user.name}]]! Feel free to browse our content<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">[[${session.user.name}]]!</span></code> expression is an inline text expression - it does not need to be embedded in a html tag.</p>
+<p>Alternatively, we could have used this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Welcome to our main page, <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${session.user.name}&quot;</span><span class="p">&gt;</span>__offline__<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>! Feel free to browse our content<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test">
+<h3><span class="section-number">34.2.9. </span>Test<a class="headerlink" href="#test" title="Permalink to this headline">#</a></h3>
+<p>Start the server and run</p>
+<ul class="simple">
+<li><p>Log in</p></li>
+<li><p>Enter username and password</p></li>
+<li><p>Test false credentials</p></li>
+<li><p>Test correct credentials</p></li>
+</ul>
+<p>What is the result, what do you see?
+Can you detect weaknesses and/or improve on the design?</p>
+</div>
+</div>
+<div class="section" id="summary-of-scopes">
+<h2><span class="section-number">34.3. </span>Summary of scopes<a class="headerlink" href="#summary-of-scopes" title="Permalink to this headline">#</a></h2>
+<p>As in all programming environments, scopes are really important  in web applications.
+We have seen the three main ones:</p>
+<div class="section" id="application-scope">
+<h3><span class="section-number">34.3.1. </span>Application scope<a class="headerlink" href="#application-scope" title="Permalink to this headline">#</a></h3>
+<p>Specified in <code class="docutils literal notranslate"><span class="pre">web.xml</span></code> and accessed through
+<code class="docutils literal notranslate"><span class="pre">${#servletContext.getInitParameter('admin_email')}</span></code> in the Thymeleaf files or <code class="docutils literal notranslate"><span class="pre">getServletContext().getInitParameter(&quot;&lt;attrib_name&gt;&quot;)</span></code> in the servlet code</p>
+</div>
+<div class="section" id="session-scope">
+<h3><span class="section-number">34.3.2. </span>Session scope<a class="headerlink" href="#session-scope" title="Permalink to this headline">#</a></h3>
+<p>Stored in <code class="docutils literal notranslate"><span class="pre">HttpSession</span></code> object. When available, accessed through
+<code class="docutils literal notranslate"><span class="pre">${session.&lt;attrib_name&gt;}</span></code> in the Thymeleaf files and
+<code class="docutils literal notranslate"><span class="pre">getSession.getAttribute(&quot;&lt;attrib_name&gt;&quot;)</span></code> in the servlet code. Set through <code class="docutils literal notranslate"><span class="pre">getSession.setAttribute(&quot;&lt;attrib_name&gt;&quot;,</span> <span class="pre">&lt;attrib&gt;)</span></code>.</p>
+</div>
+<div class="section" id="request-scope">
+<h3><span class="section-number">34.3.3. </span>“Request” scope<a class="headerlink" href="#request-scope" title="Permalink to this headline">#</a></h3>
+<p>Each http request generates its own <code class="docutils literal notranslate"><span class="pre">HttpRequest</span></code> object.
+It can be accessed through <code class="docutils literal notranslate"><span class="pre">${#request.&lt;attrib_name&gt;}</span></code> in the Thymeleaf files. In servlet context, use <code class="docutils literal notranslate"><span class="pre">request.getParameter(&quot;&lt;attrib_name&gt;&quot;)</span></code> to get it or <code class="docutils literal notranslate"><span class="pre">request.setAttribute(&quot;&lt;attrib_name&gt;&quot;,</span> <span class="pre">&quot;&lt;attrib&gt;&quot;)</span></code> to set it.
+The <code class="docutils literal notranslate"><span class="pre">WebContext</span></code> object is of course used much more in Thymeleaf, and in that context simply accessed as <code class="docutils literal notranslate"><span class="pre">${attrib_name&gt;}</span></code></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./05_web"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="thymeleaf_flow_control.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>Thymeleaf flow control and fragments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="servlet_details.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">35. </span>Servlet details and lifecycle hooks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">34.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scopes">34.2. Scopes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-scope-web-xml">34.2.1. Application scope: web.xml</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-deployment-descriptor">34.2.2. Adding a deployment descriptor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-an-application-scoped-variable">34.2.3. Add an application-scoped variable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-application-scoped-variable">34.2.4. Using the application-scoped variable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-scope-cross-request-memory">34.2.5. Session scope: cross-request “memory”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">34.2.6. Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#login-form">34.2.7. Login form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#login-servlet">34.2.8. Login servlet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test">34.2.9. Test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-scopes">34.3. Summary of scopes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-scope">34.3.1. Application scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-scope">34.3.2. Session scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-scope">34.3.3. “Request” scope</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

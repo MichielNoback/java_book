@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14. The Java Collections API &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_apis/collections';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15. Methods of class Object" href="class_object_methods.html" />
+    <link rel="prev" title="13. Interfaces" href="interfaces.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_apis/collections.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Java Collections API</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-old-way">14.1. The old way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-arraylist-and-linkedlist">14.2. Lists: ArrayList and LinkedList</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generics">14.2.1. Generics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arraylist-operations">14.2.2. ArrayList operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-against-interfaces-not-implementations">14.3. Code against interfaces, not implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-collection-interfaces-map-list-set">14.4. The collection interfaces: Map, List, Set</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#map-hashmap">14.4.1. Map: HashMap</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives-as-objects">14.4.1.1. Primitives as objects</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autoboxing">14.4.1.2. Autoboxing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map-operations">14.4.1.3. Map operations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-hashset">14.4.2. Set: HashSet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collections-utility-methods">14.5. Collections utility methods</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-java-collections-api">
+<h1><span class="section-number">14. </span>The Java Collections API<a class="headerlink" href="#the-java-collections-api" title="Permalink to this headline">#</a></h1>
+<p>Storing variables collectively is nice; doing so in Arrays is usually not so
+nice - simply because they are static and cannot be extended or shortened or inserted within.
+The Java Collections API offers a wealth of other ways to store data, in the form of Lists, Queues,
+Sets, Maps, in variations and hybrids of these.</p>
+<p>Finally (not a collection but essential to show you), we will see a nice way to deal with changeable String data: class StringBuilder.</p>
+<div class="section" id="the-old-way">
+<h2><span class="section-number">14.1. </span>The old way<a class="headerlink" href="#the-old-way" title="Permalink to this headline">#</a></h2>
+<p>In a previous lecture, you have seen the most basic collection type: array.
+Arrays store a fixed number of variables. But suppose you want to do something like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span><span class="o">[]</span><span class="w"> </span><span class="nf">readSequences</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//open file</span>
+<span class="w">    </span><span class="c1">//read sequences</span>
+<span class="w">    </span><span class="c1">//return the sequences as an array of Sequence objects</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There is a problem here: You usually don’t know how many sequences there are in a file!
+So, the simple solution is to create a very large array that is as large as the biggest sequence file you know:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">readSequences</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="mi">10_000_000</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//open file</span>
+<span class="w">    </span><span class="c1">//read sequences</span>
+<span class="w">    </span><span class="c1">//return the sequences as an arrays of Strings</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When you read only 1 or 2 sequences you will have wasted all this memory space! Moreover, all
+these null values are <code class="docutils literal notranslate"><span class="pre">NullPointerExceptions</span></code> in the waiting.</p>
+<p><img alt="Unused space" src="../_images/unused_array_space.png" /></p>
+<p>When somebody invents a new sequencing machine that generates 100 million sequences
+in one run, you have a bigger problem! You will get <code class="docutils literal notranslate"><span class="pre">ArrayIndexOutOfRangeExceptions</span></code>
+or other errors. Actually, these machines already exist!</p>
+<p>There is a nice class that will really make your day: <code class="docutils literal notranslate"><span class="pre">java.util.ArrayList</span></code>.</p>
+</div>
+<div class="section" id="lists-arraylist-and-linkedlist">
+<h2><span class="section-number">14.2. </span>Lists: ArrayList and LinkedList<a class="headerlink" href="#lists-arraylist-and-linkedlist" title="Permalink to this headline">#</a></h2>
+<p>ArrayList is the workhorse for most collections where you want to store a number of variables
+in an ordered way. It is, as the name suggests, an Array-like List. The big -no huge- difference
+is that is will grow and shrink according to your needs. So, the previous method could be
+refactored as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">readSequences</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//no initial size needed (although you can give one, </span>
+<span class="w">    </span><span class="c1">//if you are really into efficiency)</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">//open file</span>
+<span class="w">    </span><span class="c1">//read sequences</span>
+<span class="w">    </span><span class="c1">//return the sequences as an arrays of Strings</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At the top is a line <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">java.util.ArrayList;</span></code> which is an <strong><em>import declaration</em></strong>, You need to import classes that are not part of the Java core API (i.e. reside in package <code class="docutils literal notranslate"><span class="pre">java.lang</span></code>). Since most of the collection classes are in package <code class="docutils literal notranslate"><span class="pre">java.util</span></code> they need to be imported. More on imports and namespaces later.</p>
+<p>There is another element here that you haven’t seen before: it is the <strong><em>generic type declaration</em></strong>:</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+ArrayList<span style="color:darkred;">&lt;String&gt; </span>sequences = new ArrayList<span style="color:darkred;">&lt;&gt;</span>();
+</pre>
+<div class="section" id="generics">
+<h3><span class="section-number">14.2.1. </span>Generics<a class="headerlink" href="#generics" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;String&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> have everything to do with Java being strongly typed. Since everything is typed, a collection that is being instantiated must also know what type it will contain. You specify the type of its elements using the <strong><em>diamond operators</em></strong>. This mechanism is called <strong><em>generics</em></strong> in Java, because it makes collection classes generic usable.
+Before Java 8, you had to do it twice (<code class="docutils literal notranslate"><span class="pre">ArrayList&lt;String&gt;</span> <span class="pre">sequences</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">ArrayList&lt;String&gt;();</span></code>) but in newer versions of Java you can leave the second set of diamond operators empty.</p>
+<p>Leaving the type declaration out does not yield a compiler error, but makes your life so much harder:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//typed collection</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Game&quot;</span><span class="p">);</span>
+<span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;of&quot;</span><span class="p">);</span>
+<span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Thrones&quot;</span><span class="p">);</span>
+
+<span class="c1">//type is inferred from collection</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;word = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//&quot;raw&quot; type collection: everything is Object</span>
+<span class="n">ArrayList</span><span class="w"> </span><span class="n">wordsNonGeneric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="p">();</span>
+<span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;House&quot;</span><span class="p">);</span>
+<span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;of&quot;</span><span class="p">);</span>
+<span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Cards&quot;</span><span class="p">);</span>
+<span class="c1">//danger!</span>
+<span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">());</span>
+
+<span class="c1">//iterate over Object type</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">//need to cast to actual type</span>
+<span class="w">    </span><span class="c1">//this will give a ClassCastException exception on the Duck, which is of course not a String!</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;word = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So, without the type declaration, you need to cast to the actual type. That makes your code less obvious. But more problematic is that <em>any</em> object can be inserted into the collection, without warning. So, when you attempt to cast a Duck to a String, you get a <code class="docutils literal notranslate"><span class="pre">ClassCastException</span></code>. You can circumvent this problem by checking the type (using the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> operator):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wordsNonGeneric</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">element</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;word = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;skipped non-String element of type &quot;</span><span class="w"> </span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="n">element</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getSimpleName</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>but why would you make your life harder than it already is?</p>
+</div>
+<div class="section" id="arraylist-operations">
+<h3><span class="section-number">14.2.2. </span>ArrayList operations<a class="headerlink" href="#arraylist-operations" title="Permalink to this headline">#</a></h3>
+<p>Lists in general, and ArrayList is no exception, are used to store in an ordered way. Operations on ArrayLists are of course related to the property. Here are some example usages.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//create</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="c1">//add elements</span>
+<span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Game&quot;</span><span class="p">);</span>
+<span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;of&quot;</span><span class="p">);</span>
+<span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Thrones&quot;</span><span class="p">);</span>
+<span class="c1">//won&#39;t compile!</span>
+<span class="c1">//words.add(new Duck());</span>
+
+<span class="c1">//foreach iteration</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;word = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//iteration with counter; note the use of &quot;.size()&quot;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//fetch by index - zero based!</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;word = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">words</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;Thrones&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">//true</span>
+<span class="n">words</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="c1">//3</span>
+<span class="n">words</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">();</span><span class="w"> </span><span class="c1">//false</span>
+<span class="c1">//same as</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="n">words</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="s">&quot;of&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">//deletes word</span>
+<span class="n">words</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">//second element</span>
+<span class="n">words</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">//empty list</span>
+</pre></div>
+</div>
+<p>One operation needs special attention: converting an array to a List. This is done with <code class="docutils literal notranslate"><span class="pre">Arrays.asList()</span></code> but be aware that this generates an <strong><em>immutable view</em></strong> of your array:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">wordsArr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Lord&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;of&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;the&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rings&quot;</span><span class="p">};</span>
+<span class="c1">//create immutable List from Array</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">immutableStrings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">wordsArr</span><span class="p">);</span>
+<span class="c1">//immutable: UnsupportedOperationException!</span>
+<span class="n">immutableStrings</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;!&quot;</span><span class="p">);</span>
+<span class="c1">//make mutable copy</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mutableString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="c1">//no problem</span>
+<span class="n">mutableString</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="code-against-interfaces-not-implementations">
+<h2><span class="section-number">14.3. </span>Code against interfaces, not implementations<a class="headerlink" href="#code-against-interfaces-not-implementations" title="Permalink to this headline">#</a></h2>
+<p>Be aware that the <code class="docutils literal notranslate"><span class="pre">contains()</span></code> method performs at <strong>O(n)</strong> (see your Algorithms &amp; Data structures course!), so if you plan to check for
+element presence often, List types are not a good choice. Also, if you are going to do a lot of insert and/or delete operations, LinkedList is a much better choice. Fortunately, you only need to change one line of code in your application to achieve this, and if you design your code well, you only need to change a single word:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//This is OK but not efficient with insert/delete </span>
+<span class="c1">//Also, the type declaration is an implementation (ArrayList) and not an </span>
+<span class="c1">//interface (List)</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">//Better, declare the interface (abstraction) type and </span>
+<span class="c1">//use this type in the rest of your code</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">//Best: LinkedList is very good at insertions and deletions</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This is an example of the rule <strong><em>code against interfaces (abstractions), not implementations</em></strong>.</p>
+<p><em>When you code against interfaces, i.e. declare variables of an interface type, it is really easy to change the implementation class that you use.</em></p>
+<p>In the example above,
+it took only one changes word to use a LinkedList instead of an ArrayList.</p>
+</div>
+<div class="section" id="the-collection-interfaces-map-list-set">
+<h2><span class="section-number">14.4. </span>The collection interfaces: Map, List, Set<a class="headerlink" href="#the-collection-interfaces-map-list-set" title="Permalink to this headline">#</a></h2>
+<p>There four base collection types, each with several dedicated implementations.
+You have already seen the <code class="docutils literal notranslate"><span class="pre">List</span></code> type, with two implementations: <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> and <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code>.</p>
+<p>Here is a -very incomplete- listing of some collection type implementations,
+followed by a demonstration of only the HashMap and HashSet types - you have already seen the <code class="docutils literal notranslate"><span class="pre">List</span></code> type.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">List</span></code> interface</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> simplest and general purpose list type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> coupled elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stack</span></code> last in first out (LIFO)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Map</span></code> interface</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">HashMap</span></code> the Python dict equivalent</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TreeMap</span></code> a sorted hashmap</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Set</span></code> interface</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">HashSet</span></code> the basic Set implementation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TreeSet</span></code> a sorted Set</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Queue</span></code> interface</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">PriorityQueue</span></code> priority queue when first in first out (FIFO) is not enough</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code> double-ended queue</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="map-hashmap">
+<h3><span class="section-number">14.4.1. </span>Map: HashMap<a class="headerlink" href="#map-hashmap" title="Permalink to this headline">#</a></h3>
+<p>HashMap is the main Map implementation in Java. It is a dictionary type mapping keys to values. Like all collection types, it uses generics to declare the type of the keys and values. Here is an example of an ID to User mapping:</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+Map<span style="color:darkred;">&lt;Integer, User&gt; </span>users = new HashMap<span style="color:darkred;">&lt;&gt;</span>();
+</pre>
+<p>Note the use of <code class="docutils literal notranslate"><span class="pre">Integer</span></code> instead of <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="section" id="primitives-as-objects">
+<h4><span class="section-number">14.4.1.1. </span>Primitives as objects<a class="headerlink" href="#primitives-as-objects" title="Permalink to this headline">#</a></h4>
+<p>Each primitive type in the Java language has an object counterpart. The reason for this is that collection types, amongst others, can not hold primitives but only objects.</p>
+<p>These are the primitives and their <strong><em>wrapper classes</em></strong>:</p>
+<ul class="simple">
+<li><p>boolean, byte, short, char, int, long, float, double.</p></li>
+<li><p>Boolean, Byte, Short, Character, Integer, Long, Float, Double.</p></li>
+</ul>
+<p>So only Character and Integer have a different name (longer) the others are simply the primitive name capitalized.</p>
+</div>
+<div class="section" id="autoboxing">
+<h4><span class="section-number">14.4.1.2. </span>Autoboxing<a class="headerlink" href="#autoboxing" title="Permalink to this headline">#</a></h4>
+<p>The wrapper classes can be converted to and from pretty easy:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">33</span><span class="p">;</span>
+
+<span class="c1">//deprecated though legal</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">counter1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Integer</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+<span class="c1">//Explicit; uses caching</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">counter2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+<span class="c1">//explicit unwrapping</span>
+<span class="n">counter2</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span>
+
+<span class="c1">//autoboxing!</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">counter3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="c1">//auto-unboxing</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">counter4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter3</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The last two examples show the mechanism of <strong><em>autoboxing</em></strong> primitives.
+This means the compiler deals with wrapping and unwrapping for you. This is how you typically use primitives in collections. See use cases below.</p>
+</div>
+<div class="section" id="map-operations">
+<h4><span class="section-number">14.4.1.3. </span>Map operations<a class="headerlink" href="#map-operations" title="Permalink to this headline">#</a></h4>
+<p>See listing below.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">User</span><span class="w"> </span><span class="n">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Henk&quot;</span><span class="p">);</span>
+<span class="c1">//add to Map; note autoboxing of int value (id)</span>
+<span class="n">users</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">u1</span><span class="p">.</span><span class="na">id</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+<span class="n">User</span><span class="w"> </span><span class="n">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Dirk&quot;</span><span class="p">);</span>
+<span class="n">users</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">u2</span><span class="p">.</span><span class="na">id</span><span class="p">,</span><span class="w"> </span><span class="n">u2</span><span class="p">);</span>
+<span class="n">User</span><span class="w"> </span><span class="n">u3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mike&quot;</span><span class="p">);</span>
+<span class="n">users</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">u3</span><span class="p">.</span><span class="na">id</span><span class="p">,</span><span class="w"> </span><span class="n">u3</span><span class="p">);</span>
+
+<span class="c1">//read size</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="c1">//check for presence of key</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;users.containsKey(15) = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="mi">15</span><span class="p">));</span>
+<span class="c1">//check for presence of value</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;users.containsValue() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">containsValue</span><span class="p">(</span><span class="n">u1</span><span class="p">));</span>
+<span class="c1">//is not in map</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;users.containsValue() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">containsValue</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nick&quot;</span><span class="p">)));</span>
+
+<span class="c1">//iterate values</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">//iterate keys</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">//iterate entries</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">//empties map</span>
+<span class="n">users</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="set-hashset">
+<h3><span class="section-number">14.4.2. </span>Set: HashSet<a class="headerlink" href="#set-hashset" title="Permalink to this headline">#</a></h3>
+<p>Typical set operations are <strong><em>intersection</em></strong>, <strong><em>union</em></strong> and <strong><em>relative complement</em></strong>.</p>
+<p><img alt="Set theory operations" src="../_images/Set_Theory_Operations.png" /></p>
+<p>This is how its done in Java.</p>
+<p>First a small utility method, which generically creates a Set of any type from a varargs input:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">setOf</span><span class="p">(</span><span class="n">T</span><span class="p">...</span><span class="w"> </span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">values</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here are three of the fundamental set operations.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">setA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">setB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setOf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
+
+<span class="c1">//Intersection</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">intersectSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">setA</span><span class="p">);</span>
+<span class="n">intersectSet</span><span class="p">.</span><span class="na">retainAll</span><span class="p">(</span><span class="n">setB</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;intersectSet = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">intersectSet</span><span class="p">);</span>
+
+<span class="c1">//Union</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">unionSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">setA</span><span class="p">);</span>
+<span class="n">unionSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">setB</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;unionSet = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">unionSet</span><span class="p">);</span>
+
+<span class="c1">//Relative complement</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">differenceSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">setA</span><span class="p">);</span>
+<span class="n">differenceSet</span><span class="p">.</span><span class="na">removeAll</span><span class="p">(</span><span class="n">setB</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;differenceSet = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">differenceSet</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>with output</p>
+<pre class="console_out">
+intersectSet = [2, 4]
+unionSet = [1, 2, 3, 4, 6, 8, 9]
+differenceSet = [1, 3]
+</pre>
+</div>
+</div>
+<div class="section" id="collections-utility-methods">
+<h2><span class="section-number">14.5. </span>Collections utility methods<a class="headerlink" href="#collections-utility-methods" title="Permalink to this headline">#</a></h2>
+<p>The Collections class has many useful utility functions. Their name are pretty self-explanatory:</p>
+<ul class="simple">
+<li><p>singletonList()</p></li>
+<li><p>unmodifiableList()</p></li>
+<li><p>min(), max()</p></li>
+<li><p>shuffle()</p></li>
+<li><p>frequency()</p></li>
+<li><p>sort() - see next post</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_apis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interfaces.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Interfaces</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="class_object_methods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Methods of class Object</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-old-way">14.1. The old way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-arraylist-and-linkedlist">14.2. Lists: ArrayList and LinkedList</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generics">14.2.1. Generics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arraylist-operations">14.2.2. ArrayList operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-against-interfaces-not-implementations">14.3. Code against interfaces, not implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-collection-interfaces-map-list-set">14.4. The collection interfaces: Map, List, Set</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#map-hashmap">14.4.1. Map: HashMap</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives-as-objects">14.4.1.1. Primitives as objects</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autoboxing">14.4.1.2. Autoboxing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map-operations">14.4.1.3. Map operations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-hashset">14.4.2. Set: HashSet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collections-utility-methods">14.5. Collections utility methods</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

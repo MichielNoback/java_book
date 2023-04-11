@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9. Methods &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_syntax/methods';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10. Packages and Imports" href="packages_imports.html" />
+    <link rel="prev" title="8. Flow control" href="flow_control.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02_syntax/methods.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-signature">9.1. Method signature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-modifier-public-or-private">9.1.1. access modifier: public or private?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-static-vs-instance-methods">9.1.2. Scope: static vs instance methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-type">9.1.3. Return type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-name">9.1.4. Method name</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-versus-arguments">9.1.5. Parameters (versus arguments)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cheating-the-contract">9.1.6. Cheating the contract</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-state">9.2. Interacting with state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overloading">9.3. Method overloading</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="methods">
+<h1><span class="section-number">9. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
+<p>This post constitutes the link between basic syntax and design. Variables, operators and flow control
+form the basis of your algorithms. These algorithms have to be organized and combined into bigger
+systems, and building systems is done using classes and their methods.</p>
+<p>Methods are pieces of code that are used as a “black box”: you don’t need to know how they work, as long as you know (and trust) what goes in and what comes out.</p>
+<p>In Java, there exists quite a variety of method-like structures:</p>
+<ul class="simple">
+<li><p><strong><em>instance methods</em></strong></p></li>
+<li><p><strong><em>class methods</em></strong></p></li>
+<li><p><strong><em>constructors</em></strong></p></li>
+<li><p><strong><em>class initializers</em></strong></p></li>
+<li><p><strong><em>object initializers</em></strong></p></li>
+</ul>
+<p>This post only deals with the first two: class and instance methods.</p>
+<p>Methods define the behavior of an object or a class, modified by its state.
+Methods can unseen serve the inner workings of an object, or be available to the outside world: this is something you decide upon, and which is an extremely important design aspect!</p>
+<div class="section" id="method-signature">
+<h2><span class="section-number">9.1. </span>Method signature<a class="headerlink" href="#method-signature" title="Permalink to this headline">#</a></h2>
+<p>Every method has a <strong><em>signature</em></strong>. In Java, this is a binding contract.
+The signature defines what can go in, what comes out, and what the method scope or visibility is.
+So, the signature is the description of the method contract to the outside world: everything but its implementation (the method body).</p>
+<p>Here, the method signature is shown in red and the method body in blue.</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+<span style="color:darkred;">public int addInts(int x, int y)</span> {
+    int result = x + y;
+    return result;
+}
+</pre>
+<p>Zooming in on the signature, these are the signature elements:</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+<span style="color:purple;font-style:italic;">access_modifier</span> <span style="color:darkgreen;font-style:italic;">scope</span> <span style="color:darkred;font-style:italic;">return_type</span> methodName(<span style="color:orange;font-style:italic;">parameter(s)</span>) { }
+</pre>
+<div class="section" id="access-modifier-public-or-private">
+<h3><span class="section-number">9.1.1. </span>access modifier: public or private?<a class="headerlink" href="#access-modifier-public-or-private" title="Permalink to this headline">#</a></h3>
+<p>The access modifier defines the <strong><em>visibility</em></strong> of your method. There are four levels of visibility, but we’ll start out with only two:</p>
+<ul class="simple">
+<li><p><strong><em><code class="docutils literal notranslate"><span class="pre">public</span></code></em></strong> - accessible anywhere in the <strong><em>class path</em></strong>: all other code can “see” and access the method.</p></li>
+<li><p><strong><em><code class="docutils literal notranslate"><span class="pre">private</span></code></em></strong> - accessible only within the same class</p></li>
+</ul>
+<p>We’ll come back to access modifiers later (see <a class="reference internal" href="../04_oop/access_modifiers.html"><span class="doc std std-doc">access modfiers</span></a>), when discussing class design. This is because access modifiers can be applied not only to methods, but to classes and instance variables as well.</p>
+<p>The general rule is this:<br />
+<strong><em>Make a method public when it is part of your class API and make it private when it only serves the inner workings of your class</em></strong></p>
+</div>
+<div class="section" id="scope-static-vs-instance-methods">
+<h3><span class="section-number">9.1.2. </span>Scope: static vs instance methods<a class="headerlink" href="#scope-static-vs-instance-methods" title="Permalink to this headline">#</a></h3>
+<p>Some methods live outside object scope and are only available as class methods: these can be recognized by the <strong><em><code class="docutils literal notranslate"><span class="pre">static</span></code></em></strong> keyword. Static methods can be called on a class and on an instance. Instance methods can only be called on an instance, usually because they are dependent on instance variable(s).</p>
+<p>You have of course seen a <code class="docutils literal notranslate"><span class="pre">static</span></code> method several times: <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">void</span> <span class="pre">main(String[]</span> <span class="pre">args){}</span></code></p>
+<p>Here are two methods that do the same, but are be used in different contexts.</p>
+<p>Consider this class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StaticVsInstance</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * static / class method</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">addIntsStatic</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * instance method</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">addIntsInstance</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The only difference lies in the <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword. These are the different ways these methods can (not) be called:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//only static can be called on the class</span>
+<span class="n">StaticVsInstance</span><span class="p">.</span><span class="na">addIntsStatic</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">//WILL NOT COMPILE: can not be called on a class</span>
+<span class="c1">//StaticVsInstance.addIntsInstance(3, 4);</span>
+
+<span class="n">StaticVsInstance</span><span class="w"> </span><span class="n">statInst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StaticVsInstance</span><span class="p">();</span>
+<span class="c1">//BOTH can be called on an instance</span>
+<span class="n">statInst</span><span class="p">.</span><span class="na">addIntsStatic</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span>
+<span class="n">statInst</span><span class="p">.</span><span class="na">addIntsInstance</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="return-type">
+<h3><span class="section-number">9.1.3. </span>Return type<a class="headerlink" href="#return-type" title="Permalink to this headline">#</a></h3>
+<p>The return type defines what a method can (and must) return. This can be any Java type; primitive or reference type. There is a special case when the method does not return anything: this is the <strong><em><code class="docutils literal notranslate"><span class="pre">void</span></code></em></strong> return type:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printWelcome</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, we hope you enjoy our app.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Returning multiple values?</strong><br />
+Forget it! There is NO way you can return multiple values from a method.
+Unless…you put these values in a composite form. The following shows a legal but not very nice solution.
+Note the use of the <strong><em>varargs</em></strong> method parameter that enables you to let a method be called with a variable number of arguments of the same type.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* Calculates the sum and average of a series of numbers and</span>
+<span class="cm">* returns this as an array with the sum at index 0 and the average at index 1</span>
+<span class="cm">* @param numbers</span>
+<span class="cm">* @return statistics</span>
+<span class="cm">*/</span>
+<span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="o">[]</span><span class="w"> </span><span class="nf">doStatistics</span><span class="p">(</span><span class="kt">int</span><span class="p">...</span><span class="w"> </span><span class="n">numbers</span><span class="p">){</span><span class="w"> </span><span class="c1">//VARARGS!</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">average</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">sum</span><span class="o">/</span><span class="n">numbers</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{(</span><span class="kt">double</span><span class="p">)</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">average</span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//usage</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doStatistics(1, 2, 3) = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">doStatistics</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doStatistics(1, 2, 3, 4) = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">doStatistics</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)));</span>
+<span class="c1">//outputs</span>
+<span class="c1">//doStatistics(1, 2, 3) = [6.0, 2.0]</span>
+<span class="c1">//doStatistics(1, 2, 3, 4) = [10.0, 2.5]</span>
+</pre></div>
+</div>
+<p>Why is this not nice? You coerce an int into a double where this is not appropriate.
+Besides this, you need extensive comments (documentation) to explain what is going on.</p>
+<p><strong>THINK OBJECTS!</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//a simple data class</span>
+<span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Statistics</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">average</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//makes printing objects a breeze!</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Statistics{sum=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, average=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">average</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * the refactored method</span>
+<span class="cm"> * Calculates the sum and average of a series of numbers and</span>
+<span class="cm"> * returns this as an stats object</span>
+<span class="cm"> * @param numbers</span>
+<span class="cm"> * @return statistics</span>
+<span class="cm"> */</span>
+<span class="kd">static</span><span class="w"> </span><span class="n">Statistics</span><span class="w"> </span><span class="nf">doStatistics</span><span class="p">(</span><span class="kt">int</span><span class="p">...</span><span class="w"> </span><span class="n">numbers</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">average</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">sum</span><span class="o">/</span><span class="n">numbers</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Statistics</span><span class="w"> </span><span class="n">statistics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Statistics</span><span class="p">();</span>
+<span class="w">    </span><span class="n">statistics</span><span class="p">.</span><span class="na">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="w">    </span><span class="n">statistics</span><span class="p">.</span><span class="na">average</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">average</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">statistics</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//usage</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doStatistics(1,2,5,6) = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">doStatisticsTheGoodWay</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">));</span>
+<span class="c1">//outputs</span>
+<span class="c1">//doStatistics(1,2,5,6) = Statistics{sum=14, average=3.5}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">toString()</span></code> method is similar to the Python <code class="docutils literal notranslate"><span class="pre">__str__()</span></code> method. It will be discussed in detail later.</p>
+</div>
+<div class="section" id="method-name">
+<h3><span class="section-number">9.1.4. </span>Method name<a class="headerlink" href="#method-name" title="Permalink to this headline">#</a></h3>
+<p>The name can be any compilable Java identifier, but as stated earlier it is good practice to have method names</p>
+<ul class="simple">
+<li><p>be a noun, in camelcase starting with a lowercase letter</p></li>
+<li><p>be as descriptive as possible</p></li>
+</ul>
+</div>
+<div class="section" id="parameters-versus-arguments">
+<h3><span class="section-number">9.1.5. </span>Parameters (versus arguments)<a class="headerlink" href="#parameters-versus-arguments" title="Permalink to this headline">#</a></h3>
+<p>The method parameters are the number and type of variables that go in. Again, these can be of any valid Java
+type.</p>
+<p>Java is pass-by-value. This means: pass-by-copy. Passing a reference means: pass a copy of the reference.
+This reference copy will <strong><em>point to the same object</em></strong> as the original reference. This is sometimes confusing for
+beginners:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MyDataClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">workWithClass</span><span class="p">(</span><span class="n">MyDataClass</span><span class="w"> </span><span class="n">myDataClass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">myDataClass</span><span class="p">.</span><span class="na">x</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//usage </span>
+<span class="n">MyDataClass</span><span class="w"> </span><span class="n">myDataClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyDataClass</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;myDataClass.x = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">myDataClass</span><span class="p">.</span><span class="na">x</span><span class="p">);</span>
+<span class="n">workWithClass</span><span class="p">(</span><span class="n">myDataClass</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;myDataClass.x = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">myDataClass</span><span class="p">.</span><span class="na">x</span><span class="p">);</span>
+
+<span class="c1">//outputs</span>
+<span class="c1">//myDataClass.x = 42</span>
+<span class="c1">//myDataClass.x = 43</span>
+</pre></div>
+</div>
+<p><strong>On the difference between parameters and arguments</strong><br />
+A parameter is the variable which is part of the method’s signature (method declaration)
+An argument is an expression used when calling the method.</p>
+</div>
+<div class="section" id="cheating-the-contract">
+<h3><span class="section-number">9.1.6. </span>Cheating the contract<a class="headerlink" href="#cheating-the-contract" title="Permalink to this headline">#</a></h3>
+<p>This is not possible: the compiler won’t let you get away with it. Here are some
+examples showing what is legal and what isn’t.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyMathTools</span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/*test the math function*/</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="n">MyMathTools</span><span class="w"> </span><span class="n">mt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyMathTools</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">//WON&#39;T COMPILE: argument too little</span>
+<span class="w">        </span><span class="n">mt</span><span class="p">.</span><span class="na">addInts</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//WON&#39;T COMPILE: argument too many</span>
+<span class="w">        </span><span class="n">mt</span><span class="p">.</span><span class="na">addInts</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//WON&#39;T COMPILE: argument of wrong type</span>
+<span class="w">        </span><span class="n">mt</span><span class="p">.</span><span class="na">addInts</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//WON&#39;T COMPILE: double to int is loss-of-precision (unsafe)</span>
+<span class="w">        </span><span class="n">mt</span><span class="p">.</span><span class="na">addInts</span><span class="p">(</span><span class="mf">1.66</span><span class="p">,</span><span class="w"> </span><span class="mf">2.33</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//WILL COMPILE; explicit cast (will return 1 + 2)</span>
+<span class="w">        </span><span class="n">mt</span><span class="p">.</span><span class="na">addInts</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="mf">1.66</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">2.33</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//WILL COMPILE; int can be implicitly converted to double</span>
+<span class="w">        </span><span class="n">addDoubles</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">addInts</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">addDoubles</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">addIntsWrong</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//WON&#39;T COMPILE: should return an int</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="interacting-with-state">
+<h2><span class="section-number">9.2. </span>Interacting with state<a class="headerlink" href="#interacting-with-state" title="Permalink to this headline">#</a></h2>
+<p>The essence of Object-oriented programming is that methods often interact with an object’s state: they display behavior that is dependent on the value of the objects’ instance variables. Here is a simple class that uses its state to modify method behavior.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">PowerUpper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">powerUp</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">power</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//calling code</span>
+<span class="n">PowerUpper</span><span class="w"> </span><span class="n">powerUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PowerUpper</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;4 ^ 2 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">powerUpper</span><span class="p">.</span><span class="na">powerUp</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+<span class="n">powerUpper</span><span class="p">.</span><span class="na">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;4 ^ 3 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">powerUpper</span><span class="p">.</span><span class="na">powerUp</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>outputs:</p>
+<pre class="console_out">
+4 ^ 2 = 16
+4 ^ 3 = 64
+</pre>
+</div>
+<div class="section" id="method-overloading">
+<h2><span class="section-number">9.3. </span>Method overloading<a class="headerlink" href="#method-overloading" title="Permalink to this headline">#</a></h2>
+<p>Java does not know about <strong><em>default parameter values</em></strong>. Fortunately, it can be implemented using a more flexible
+mechanism called <strong><em>method overloading</em></strong>. Method overloading is the implementation of multiple methods with the
+same name and return type, but with different (numbers of) arguments. It is a bit of a hassle, but more versatile at the same time, since this not only supports default values but also extra pieces of algorithm code on top of default behavior.</p>
+<p>Here is an adjusted version of the PowerUpper class, implementing different overloading techniques.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PowerUpper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns x ^ 2</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">powerUp</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;method A&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">powerUp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns x ^ power</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">powerUp</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">power</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;method B&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//THIS WILL CAUSE A STACK OVERFLOW</span>
+<span class="w">        </span><span class="c1">//return powerUp(x, power);</span>
+
+<span class="w">        </span><span class="c1">//OK</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">powerUp</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">power</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns x ^ power from two doubles, but converts the result to int</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">powerUp</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">power</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;method C&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">power</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//this is not an overload! a different return type</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">powerUp</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">power</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;method D&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">power</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//WON&#39;T COMPILE! is not an overload, but a redefenition of &quot;int powerUp(double x, double power)&quot;</span>
+<span class="w">    </span><span class="c1">//double powerUp(double x, double power) {</span>
+<span class="w">    </span><span class="c1">//    return Math.pow(x, power);</span>
+<span class="w">    </span><span class="c1">//}</span>
+<span class="p">}</span>
+
+<span class="c1">//usage</span>
+<span class="n">PowerUpper</span><span class="w"> </span><span class="n">powerUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PowerUpper</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;4 ^ 2 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">powerUpper</span><span class="p">.</span><span class="na">powerUp</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;4 ^ 3 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">powerUpper</span><span class="p">.</span><span class="na">powerUp</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;4.0 ^ 3.0 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">powerUpper</span><span class="p">.</span><span class="na">powerUp</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;4.7 ^ 3.9 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">powerUpper</span><span class="p">.</span><span class="na">powerUp</span><span class="p">(</span><span class="mf">4.7</span><span class="p">,</span><span class="w"> </span><span class="mf">3.9</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Outputs:</p>
+<pre class="console_out">
+method A
+method B
+method C
+4 ^ 2 = 16
+method B
+method C
+4 ^ 3 = 64
+method C
+4.0 ^ 3.0 = 64
+method C
+4.7 ^ 3.9 = 418
+</pre>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./02_syntax"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="flow_control.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Flow control</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="packages_imports.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Packages and Imports</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-signature">9.1. Method signature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-modifier-public-or-private">9.1.1. access modifier: public or private?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-static-vs-instance-methods">9.1.2. Scope: static vs instance methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-type">9.1.3. Return type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-name">9.1.4. Method name</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-versus-arguments">9.1.5. Parameters (versus arguments)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cheating-the-contract">9.1.6. Cheating the contract</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-state">9.2. Interacting with state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overloading">9.3. Method overloading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

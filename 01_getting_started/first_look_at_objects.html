@@ -1,0 +1,1061 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. Objects and classes &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01_getting_started/first_look_at_objects';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Data Types" href="../02_syntax/data_types.html" />
+    <link rel="prev" title="3. Basic program structure and flow" href="basic_program_design.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/01_getting_started/first_look_at_objects.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Objects and classes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ninjas">4.1. Ninjas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#growing-cells">4.2. Growing cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-java">4.2.1. Cell.java</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#junit-testing">4.2.1.1. JUnit testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#testtube-java">4.2.1.2. TestTube.java</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cellgrowthsimulator-java">4.2.1.3. CellGrowthSimulator.java</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-construction-first-iteration">4.3. Object construction (first iteration)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-first-discussion">4.4. Inheritance (first discussion)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="objects-and-classes">
+<h1><span class="section-number">4. </span>Objects and classes<a class="headerlink" href="#objects-and-classes" title="Permalink to this headline">#</a></h1>
+<p>This chapter presents two independent discussions of what classes and objects are.
+The first “Ninjas” focuses on what an object is and does, and how it relates to a class.
+The second, “Cells” also discusses object relationships and testing.</p>
+<div class="section" id="ninjas">
+<h2><span class="section-number">4.1. </span>Ninjas<a class="headerlink" href="#ninjas" title="Permalink to this headline">#</a></h2>
+<p>Suppose you are creating a game with ninjas, trolls and all other sorts of nasty creatures.
+In an Object-Oriented Programming (OOP) environment such as Java you will start by defining the entities that play a role in the app you are developing.</p>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> will be one of the entities, or <em><strong>Types</strong></em> populating the application.
+Other types in this game may be <code class="docutils literal notranslate"><span class="pre">Troll</span></code>, <code class="docutils literal notranslate"><span class="pre">Game</span></code>, <code class="docutils literal notranslate"><span class="pre">Player</span></code>, <code class="docutils literal notranslate"><span class="pre">Weapon</span></code>, <code class="docutils literal notranslate"><span class="pre">ScoreBoard</span></code>, and so on.
+Each of these Types will have <em><strong>properties</strong></em> and <em><strong>behavior</strong></em>: things they <em>have</em> and things they <em>can do</em>.</p>
+<p>A Type is represented by a blueprint, its <em><strong>class</strong></em>.
+In Java, a class resides in a single source file <em>with the same name as the class</em>.
+This is unlike for instance Python in which there is no such enforced rule.
+The class of a type specifies how it should be created and initialized when needed.
+Here is an extremely simple class that is defined within source file <code class="docutils literal notranslate"><span class="pre">Ninja.java</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">fight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; is fighting. Hack hack swoosh.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And we can create an instance of the Ninja type like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Ninja</span><span class="w"> </span><span class="n">silentKiller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ninja</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Although the code is simple enough, a lot is going on here, some visible and some invisible.</p>
+<ol class="arabic simple">
+<li><p>We defined a blueprint using the keyword <code class="docutils literal notranslate"><span class="pre">class</span></code>, followed by the name of the type (<code class="docutils literal notranslate"><span class="pre">Ninja</span></code>).\</p></li>
+<li><p>Class <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> resides in file <code class="docutils literal notranslate"><span class="pre">Ninja.java</span></code>\</p></li>
+<li><p>Every <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> that will ever be created will have a <code class="docutils literal notranslate"><span class="pre">name</span></code> property (also called instance variable) and <code class="docutils literal notranslate"><span class="pre">fight()</span></code> behavior. The <code class="docutils literal notranslate"><span class="pre">fight()</span></code> behavior will be “dependent” on its <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p></li>
+<li><p>An instance of a class is created using the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, followed by the class name with a pair of parentheses: <code class="docutils literal notranslate"><span class="pre">Ninja()</span></code>. <code class="docutils literal notranslate"><span class="pre">Ninja()</span></code> is <em>calling the constructor (method)</em>. There is no constructor method here of course, but we got it for free from the compiler. It’s the same with Python; you can give a class an <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method but if your don’t the objects will still be constructed.</p></li>
+<li><p>Class names are nouns starting with uppercase, (instance) variables are nouns starting with lowercase and methods are verbs starting with lowercase. All names are in <em><strong>CamelCase</strong></em>.</p></li>
+<li><p>Whenever an instance is created, its properties are initialized to their default values, unless specified otherwise. A <code class="docutils literal notranslate"><span class="pre">String</span></code> property will be <code class="docutils literal notranslate"><span class="pre">null</span></code>, and an <code class="docutils literal notranslate"><span class="pre">int</span></code> will be <code class="docutils literal notranslate"><span class="pre">0</span></code>. If you want properties to have other initial values you can specify that within the class:</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;The Black One&quot;</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">fight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; is fighting. Hack hack swoosh.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the Java core packages many types are predefined.
+There are basic types, for instance <code class="docutils literal notranslate"><span class="pre">Integer</span></code> (representing whole numbers) and <code class="docutils literal notranslate"><span class="pre">String</span></code> (representing character data) but there are also more complex Types, such as <code class="docutils literal notranslate"><span class="pre">LocalDate</span></code>.
+When programming you will create novel Types all the time.
+A <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> type for instance.</p>
+<blockquote>
+<div><p>Java also has non-object types.
+These are the <em>primitive</em> types representing numbers and logicals.
+They are easily recognized because their names start with lowercase: <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code> etc.
+More on primitive types later.</p>
+</div></blockquote>
+<p>We’ll have a another look at the <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> type and create a slightly more realistic blueprint for it.
+In our game, Ninjas can do what you would expect of them: they have a name and an energy level (0 means they’re dead, 100 is freshly spawned), they have a position in the game and they can move, and attack their opponents.</p>
+<p>Given the above description, this is a second version of a Ninja class.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//package defines namespace</span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.ninjas</span><span class="p">;</span>
+
+<span class="c1">//the actual class</span>
+<span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">//Here are the properties every Ninja will HAVE</span>
+<span class="w">    </span><span class="c1">//We call these INSTANCE VARIABLES</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">energyLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">topCoordinate</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">leftCoordinate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//Here are the methods - what every Ninja can DO</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">top</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">topCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">top</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">leftCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">attack</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">power</span><span class="p">,</span><span class="w"> </span><span class="n">GameCharacter</span><span class="w"> </span><span class="n">opponent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//energy is drawn from its own reserve for an attack</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">energyLevel</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">power</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//but has double effect on its opponent</span>
+<span class="w">        </span><span class="n">opponent</span><span class="p">.</span><span class="na">drainEnergy</span><span class="p">(</span><span class="n">power</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="c1">//end of the class</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>I kept this class really clean - no access modifiers (<code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, <code class="docutils literal notranslate"><span class="pre">static</span></code>, etc) that will distract from the key points being made here.</p>
+<p>At the top of the file there is a <em><strong>package declaration</strong></em>.
+This defines the namespace this class lives in.
+Since nobody in their right mind would use my web domain, I’m pretty sure the <em>fully qualified name</em> <code class="docutils literal notranslate"><span class="pre">nl.bioinf.nomi.ninjas.Ninja</span></code> will uniquely point to this class.
+Think about it: how many <code class="docutils literal notranslate"><span class="pre">User</span></code> classes will have been designed over the world, and how can you make distinction between those, especially when you use more than one in a single code base?</p>
+<p>Next, there is the line <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Ninja</span> <span class="pre">{</span></code> which delimits the actual <strong>class body</strong>.
+No code except for the package declaration and import statements can live outside the class body - it will not compile.</p>
+<p>Below the class name declaration you find its instance variables.
+You can see only one of the instance variables has an assigned value: <code class="docutils literal notranslate"><span class="pre">energyLevel</span></code>.
+This means that every Ninja will have an energy level of 100 once it is constructed.
+The other variables will get the default value of the type.
+For object types this is <code class="docutils literal notranslate"><span class="pre">null</span></code>, for boolean it is <code class="docutils literal notranslate"><span class="pre">false</span></code> and for numeric types it is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+So this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">energyLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">topCoordinate</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">leftCoordinate</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>is exactly te same as this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">energyLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">topCoordinate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">leftCoordinate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Within the class body, no statements are allowed other than declaration and assignment of its instance variables.
+All other statements should reside withing a method.
+So these are allowed: <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">leftCoordinate;</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">energyLevel</span> <span class="pre">=</span> <span class="pre">100;</span></code>, but a <code class="docutils literal notranslate"><span class="pre">for</span></code>-loop is not.
+For example, this is illegal and will not compile (although the error message may be less than straightforward):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Roaming the Ninja class body&quot;</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">fight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; is fighting. Hack hack swoosh.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, there are two methods defined: <code class="docutils literal notranslate"><span class="pre">move()</span></code> and <code class="docutils literal notranslate"><span class="pre">attack()</span></code>.
+Method <code class="docutils literal notranslate"><span class="pre">move()</span></code> is pretty straightforward.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">top</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">topCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">top</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">leftCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>It changes the location of the Ninja object on which the method is called -the <em>current</em> object- by the given lateral and vertical offsets. Note the use of the <code class="docutils literal notranslate"><span class="pre">+=</span></code> operator. The statement <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">2</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code>.
+The use of <code class="docutils literal notranslate"><span class="pre">this.</span></code> indicates we are accessing the current objects’ instance variables and methods.
+Use of <code class="docutils literal notranslate"><span class="pre">this.</span></code> is not required unless there is a naming conflict, but strongly encouraged.
+The method does not return anything; this is declared by the <code class="docutils literal notranslate"><span class="pre">void</span></code> return statement.</p>
+<p>The next method, <code class="docutils literal notranslate"><span class="pre">attack()</span></code> is a little more complex.
+this is its <em><strong>signature</strong></em>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">attack</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">power</span><span class="p">,</span><span class="w"> </span><span class="n">GameCharacter</span><span class="w"> </span><span class="n">opponent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It says it should receive a <code class="docutils literal notranslate"><span class="pre">power</span></code> value for its attack as well as an instance of the <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> class (below) which will be the subject of the attack. This method does not return anything either.
+Here is the <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.ninjas</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GameCharacter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">energyLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">drainEnergy</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">energyLevel</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So, not only does <code class="docutils literal notranslate"><span class="pre">attack()</span></code> operate on its own instance variables, it also also <em><strong>calls</strong></em> a method on the object it is attacking: <code class="docutils literal notranslate"><span class="pre">opponent.drainEnergy(power</span> <span class="pre">*</span> <span class="pre">2);</span></code>.</p>
+<p>Here is some example code usages within a class called <code class="docutils literal notranslate"><span class="pre">Game</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">main()</span></code> method is the <em>entry point</em> of this application, as discussed in a previous chapter.
+This is the second place we see the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword.
+Whenever you see the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, it means a new object is instantiated of the type specified after <code class="docutils literal notranslate"><span class="pre">new</span></code>.
+So <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Ninja();</span></code> means a new Ninja instance (object) has been created, in which the instance variables have been created and given their specified values, or the default values discussed above.
+See the section later in this chapter for more details on object construction.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.ninjas</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Game</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//spawn (instantiate) a Ninja</span>
+<span class="w">        </span><span class="n">Ninja</span><span class="w"> </span><span class="n">ninja</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ninja</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">//change its name</span>
+<span class="w">        </span><span class="n">ninja</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rogue Bastard&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//print some values of the ninja</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ninja name     = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">name</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ninja energy   = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">energyLevel</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ninja position = [&quot;</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">topCoordinate</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">leftCoordinate</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//spawn an opponent</span>
+<span class="w">        </span><span class="n">GameCharacter</span><span class="w"> </span><span class="n">opponent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GameCharacter</span><span class="p">();</span>
+<span class="w">        </span><span class="n">opponent</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Delirious Troll&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">//change position twice</span>
+<span class="w">        </span><span class="n">ninja</span><span class="p">.</span><span class="na">move</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ninja</span><span class="p">.</span><span class="na">move</span><span class="p">(</span><span class="o">-</span><span class="mf">6.4</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ninja position  = [&quot;</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">topCoordinate</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">leftCoordinate</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//attack opponent</span>
+<span class="w">        </span><span class="n">ninja</span><span class="p">.</span><span class="na">attack</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">opponent</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//energy of both has changed</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ninja energy    = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ninja</span><span class="p">.</span><span class="na">energyLevel</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Opponent name   = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">opponent</span><span class="p">.</span><span class="na">name</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Opponent energy = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">opponent</span><span class="p">.</span><span class="na">energyLevel</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The terminal output, when <code class="docutils literal notranslate"><span class="pre">main()</span></code> is run, will be:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;console_out&quot;</span><span class="p">&gt;</span>
+Ninja name      = Rogue Bastard
+Ninja energy    = 100
+Ninja position  = [0.0:0.0]
+Ninja position  = [-4.4:12.5]
+Ninja energy    = 95
+Opponent name   = Delirious Troll
+Opponent energy = 90
+<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>This concludes a first acquaintance with classes and objects. We have used the core Java class <code class="docutils literal notranslate"><span class="pre">String</span></code>, and defined three of our own: <code class="docutils literal notranslate"><span class="pre">Ninja</span></code>, <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> and <code class="docutils literal notranslate"><span class="pre">Game</span></code>.
+Besides this, we have used the <em>primitive types</em> <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
+<p>Next up: Cells and TestTubes in a second round of getting to know objects.
+As extra layer, JUnit testing will be introduced as a more structured means of verifying and demonstrating use of your created code.</p>
+</div>
+<div class="section" id="growing-cells">
+<h2><span class="section-number">4.2. </span>Growing cells<a class="headerlink" href="#growing-cells" title="Permalink to this headline">#</a></h2>
+<p>This sections already peeks ahead to some more advanced topics, such as exceptions and flow control, to create a more realistic application. Don’t worry if you don’t get everything at once. They will be discussed in length later in the book. All code can be found in the <code class="docutils literal notranslate"><span class="pre">snippets</span></code> package of the JavaIntroProgrammingAssignments repository.</p>
+<p>Suppose you want to build a cell growth simulation application.
+After careful analysis of the domain you decided that this involves three entities: A simulator that controls the simulation process, a test tube that will hold the cells that are growing, and the cells themselves.</p>
+<p>The next step in the modeling process is to determine the <em><strong>relationships</strong></em> between the different entities.
+In this case the relationships / interactions are as follows.
+The simulator will receive configuration arguments (e.g. how many cells to grow) from the command-line, <em>start</em> the simulation process and <em>instantiate a test tube</em>.
+The test tube will be responsible for <em>instantiating the initial cell population</em>.
+Finally, there will be cells <em>growing</em> within the test tube.</p>
+<p>Three separate source files are created (within a single package), each holding one class:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CellGrowthSimulator.java</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TestTube.java</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cell.java</span></code></p></li>
+</ul>
+<p>Each of these will be discussed in more detail.</p>
+<div class="section" id="cell-java">
+<h3><span class="section-number">4.2.1. </span>Cell.java<a class="headerlink" href="#cell-java" title="Permalink to this headline">#</a></h3>
+<p>Let’s start with the simplest one: Cell.
+It has an instance variable <code class="docutils literal notranslate"><span class="pre">size</span></code> which has a default value of 5 when Cell objects are instantiated.
+Every call of the <code class="docutils literal notranslate"><span class="pre">grow()</span></code> method makes it increase its size by one.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Cell</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Instance variable &quot;size&quot;; 5 micrometer is the default diameter when Cell objects are instantiated</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Lets this cell grow in a single 1-micrometer increment</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//grow by 1 micrometer</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;I am a Cell. My size is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To test the logic and correctness of this class we will have to wait until other components are developed, such as TestTube and CellGrowthSimulator.
+<em><strong>Unless you use (J)Unit testing</strong></em>.</p>
+<div class="section" id="junit-testing">
+<h4><span class="section-number">4.2.1.1. </span>JUnit testing<a class="headerlink" href="#junit-testing" title="Permalink to this headline">#</a></h4>
+<p>JUnit is a <a class="reference external" href="https://en.wikipedia.org/wiki/Unit_testing">unit testing</a> framework for Java.
+Its main purpose is to have a suite of test methods guaranteeing the correctness of your <em><strong>production code</strong></em> methods. Unit tests only test methods, not variables.
+To create JUnit a test method, you need to have the JUnit libraries defined as dependencies on your <em><strong>class path</strong></em>.
+This piece should be in your <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> file:</p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="n">testImplementation</span><span class="o">(</span><span class="s2">&quot;org.junit.jupiter:junit-jupiter-api:5.6.2&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="n">testRuntimeOnly</span><span class="o">(</span><span class="s2">&quot;org.junit.jupiter:junit-jupiter-engine:5.6.2&quot;</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>See the post <a class="reference internal" href="intellij.html"><span class="doc std std-doc">“A first IntelliJ project”</span></a> for more details on dependency management.</p>
+<p>Next, you need to create a test class.
+In the editor, place the cursor on the class name (<code class="docutils literal notranslate"><span class="pre">Cell</span></code>) and press <code class="docutils literal notranslate"><span class="pre">alt+enter</span></code>.
+Select “Create Test”.</p>
+<p><img alt="Create JUnit class" src="../_images/create_junit_test_class_1.png" /></p>
+<p>Select the method(s) you want to create test(s) for and press “OK”.</p>
+<p><img alt="Create JUnit class" src="../_images/create_junit_test_class_2.png" /></p>
+<p>The test class opens in the editor and looks something like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CellTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s put some testing code in it to see whether our program logic works as intended:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">//the initial diameter is supposed to be 5</span>
+<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="w">        </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">//the diameter should have increased by one</span>
+<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">assertTrue()</span></code> method call is key here. This and many related <code class="docutils literal notranslate"><span class="pre">assertXxxx()</span></code> methods are the core of the testing framework. Essentially, it comes down to specifying what you <em>expect</em> the code to do. If that is not the case, the method will throw an error and your test fails.</p>
+<p>When you click on the little green triangle in the editor margin, the test will be executed and you get output like this on the lower panel of IntelliJ (it opens automatically):</p>
+<p><img alt="Create JUnit method" src="../_images/create_junit_test_method_1.png" /></p>
+<p>The green checks indicate the test <em><strong>assertions</strong></em> passed. You should really experiment whith this a little bit: change the test (e.g. <code class="docutils literal notranslate"><span class="pre">assertTrue(cell.diameter</span> <span class="pre">==</span> <span class="pre">7)</span></code>) or the production code, rerun the test and see what happens.</p>
+<p>For now, knowing the Cell class is OK, let’s proceed to class TestTube.</p>
+</div>
+<div class="section" id="testtube-java">
+<h4><span class="section-number">4.2.1.2. </span>TestTube.java<a class="headerlink" href="#testtube-java" title="Permalink to this headline">#</a></h4>
+<p>TestTube is slightly more complex. Note that much of the code is actually API documentation that describes how a method should be used in a formal way called Javadoc.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Constructs with an initial cell count.</span>
+<span class="cm">     * An exception is thrown when the initial cell count is below 1 or above 10e4.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param initialCellCount the initial cell count</span>
+<span class="cm">     * @throws IllegalArgumentException ex</span>
+<span class="cm">     */</span>
+</pre></div>
+</div>
+<p>Here is the complete class.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">TestTube</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//an array of cells to be initialized later</span>
+<span class="w">    </span><span class="n">Cell</span><span class="o">[]</span><span class="w"> </span><span class="n">cells</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Constructs a TestTube with an initial cell count.</span>
+<span class="cm">     * An exception is thrown when the initial cell count is below 1 or above 10e4.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param initialCellCount the initial cell count</span>
+<span class="cm">     * @throws IllegalArgumentException ex</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">TestTube</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">initialCellCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">initialCellCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="n">e4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;initial cell count should be above 1 and below 10e4: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//initialize the array with new Cells</span>
+<span class="w">        </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="o">[</span><span class="n">initialCellCount</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cells</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Grows all the cells withing this testtube in a single iteration.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">cells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code> defines a <em><strong>constructor</strong></em>, <code class="docutils literal notranslate"><span class="pre">TestTube(int</span> <span class="pre">initialCellCount)</span> <span class="pre">{...}</span></code>, that makes it mandatory to provide an initial number of cells.
+It will throw an error -specifically an <code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code>- when a wrong value is passed for the <code class="docutils literal notranslate"><span class="pre">initialCellCount</span></code> parameter.
+You again see the use of the keyword <code class="docutils literal notranslate"><span class="pre">new</span></code> to instantiate Cell objects.</p>
+<p>There are two for-loops present in this class representing the two ways to perform iteration in Java. Here is the first, with a counter:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">initialCellCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cells</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It has three elements between the parentheses:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for (&lt;LOOP INITIALIZATION&gt;; &lt;EXIT CONDITION&gt;; &lt;ITERATION INCREMENT&gt;)
+</pre></div>
+</div>
+<p>The for-loop itself will be dealt with in the post <a class="reference internal" href="../02_syntax/flow_control.html"><span class="doc std std-doc">“Flow control structures”</span></a>.</p>
+<p>The other for-loop does not use a counter - it simply iterates a collection:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">cells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here are two JUnit test to verify the construction of the TestTube:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">TestTubeTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">TestTube</span><span class="w"> </span><span class="n">testTube</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestTube</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">testTube</span><span class="p">.</span><span class="na">cells</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">growCells_withZeroInput</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestTube</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The first verifies that the array of cells has the size that was specified in the constructor and the second verifies that an exception is actually thrown when a zero size is passed.</p>
+</div>
+<div class="section" id="cellgrowthsimulator-java">
+<h4><span class="section-number">4.2.1.3. </span>CellGrowthSimulator.java<a class="headerlink" href="#cellgrowthsimulator-java" title="Permalink to this headline">#</a></h4>
+<p>The last class of the system is <code class="docutils literal notranslate"><span class="pre">CellGrowthSimulator</span></code>.
+Here is a first version:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube</span><span class="p">;</span>
+<span class="cm">/**</span>
+<span class="cm"> * &quot;Controller&quot; class</span>
+<span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">CellGrowthSimulator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * @param args command-line args should be length one, </span>
+<span class="cm">     * containing an initial cell number.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;You must provide an initial cell count. Aborting.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//args[] is a String array, so the item at index [0] </span>
+<span class="w">        </span><span class="c1">//should be converted into and `int` first.</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+<span class="w">        </span><span class="n">startSimulation</span><span class="p">(</span><span class="n">initialCellNumber</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startSimulation</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initialCellNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">TestTube</span><span class="w"> </span><span class="n">testTube</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestTube</span><span class="p">(</span><span class="n">initialCellNumber</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//do one iteration of growing</span>
+<span class="w">        </span><span class="n">testTube</span><span class="p">.</span><span class="na">growCells</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">String[]</span> <span class="pre">args</span></code> argument to <code class="docutils literal notranslate"><span class="pre">main()</span></code> is the argument array passed from the terminal when you start the application.</p>
+<p>(Be aware that this type of use of command-line arguments is discouraged; you should implement and support a standards-adhering command-line syntax, e.g. <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">GrowthSimulator</span> <span class="pre">--initial_count</span> <span class="pre">5</span></code>).</p>
+<p>The final model now has this chain of relationships:</p>
+<p><em><strong>CellGrowthSimulator HAS-A TestTube and TestTube HAS one or more Cells</strong></em>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="object-construction-first-iteration">
+<h2><span class="section-number">4.3. </span>Object construction (first iteration)<a class="headerlink" href="#object-construction-first-iteration" title="Permalink to this headline">#</a></h2>
+<p>You have seen the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword used several times now.
+But what does happen, exactly, when you type</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword combined with the class name followed by parentheses calls the <em>constructor</em> method of that class.
+The constructor instantiates an instance of the class and returns the reference to the object.
+The parentheses <code class="docutils literal notranslate"><span class="pre">()</span></code> enclose the argument list for the constructor method, which is empty in this case.
+In class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code> we <em>did</em> see a constructor argument however - one specifying the number of cells to grow.</p>
+<p>The three steps of object construction are <em><strong>declaration</strong></em>, <em><strong>creation</strong></em> and <em><strong>assignment</strong></em>:</p>
+<ol class="arabic simple">
+<li><p>The code <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">cell</span></code> <em><strong>declares</strong></em> a variable of type Cell.</p></li>
+<li><p>The code <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Cell()</span></code> <em><strong>instantiates</strong></em> an object of type Cell, stores this in memory and returns a reference to this stored object.</p></li>
+<li><p>The equals sign <code class="docutils literal notranslate"><span class="pre">=</span></code> <em><strong>assigns</strong></em> (couples) the returned reference to the declared variable.</p></li>
+</ol>
+<p>So…where is this constructor method in class Cell and what does it do?
+If you look at the class you don’t see a constructor, as we have seen in class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code>.
+It is created by the Java compiler if you don’t specify it yourself.
+The compiler-processed code will have something like this inserted:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">Cell</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>More on constructors in later chapters.</p>
+</div>
+<div class="section" id="inheritance-first-discussion">
+<h2><span class="section-number">4.4. </span>Inheritance (first discussion)<a class="headerlink" href="#inheritance-first-discussion" title="Permalink to this headline">#</a></h2>
+<p>Inheritance is one of the key features of object-oriented programming.</p>
+<p>This is a very powerful mechanism to introduce new or adjusted behavior in a software system because subclasses inherit all properties and methods of their superclass.
+For example, the <code class="docutils literal notranslate"><span class="pre">CancerCell</span></code> class below <code class="docutils literal notranslate"><span class="pre">extends</span> <span class="pre">Cell</span></code> and thus declares itself to be a <em><strong>subclass</strong></em> of <code class="docutils literal notranslate"><span class="pre">Cell</span></code>.
+It not only extends itself with new functionality (<code class="docutils literal notranslate"><span class="pre">move()</span></code>), but also modifies the behavior of the <code class="docutils literal notranslate"><span class="pre">grow()</span></code> method by changing the <code class="docutils literal notranslate"><span class="pre">growthIncrement</span></code> property of its <em>supertype part</em>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Cell.java</span>
+<span class="kd">class</span> <span class="nc">Cell</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">growthIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Lets this cell grow in a single increment</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//grow by 1 micrometer</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">growthIncrement</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;I am a Cell. My size is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//CancerCell.java</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CancerCell</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CancerCell</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">growthIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Moving through the body&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//usage within GrowthSimulator</span>
+<span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="p">();</span>
+<span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;..........&quot;</span><span class="p">);</span>
+<span class="n">CancerCell</span><span class="w"> </span><span class="n">cCell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CancerCell</span><span class="p">();</span>
+<span class="n">cCell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="n">cCell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
+<span class="n">cCell</span><span class="p">.</span><span class="na">move</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;console_out&quot;</span><span class="p">&gt;</span>
+I am a Cell. My size is 6
+I am a Cell. My size is 7
+..........
+I am a Cell. My size is 8
+I am a Cell. My size is 11
+Moving through the body
+<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>This is of course not the only place where we’ll see inheritance discussed.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./01_getting_started"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="basic_program_design.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Basic program structure and flow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../02_syntax/data_types.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Data Types</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ninjas">4.1. Ninjas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#growing-cells">4.2. Growing cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-java">4.2.1. Cell.java</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#junit-testing">4.2.1.1. JUnit testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#testtube-java">4.2.1.2. TestTube.java</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cellgrowthsimulator-java">4.2.1.3. CellGrowthSimulator.java</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-construction-first-iteration">4.3. Object construction (first iteration)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-first-discussion">4.4. Inheritance (first discussion)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

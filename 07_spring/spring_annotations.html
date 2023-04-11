@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>47. Core (Spring) annotations &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_spring/spring_annotations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="46. Dependency Injection in Spring" href="Dependency_injection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency_injection.html">46. Dependency Injection in Spring</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">47. Core (Spring) annotations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/07_spring/spring_annotations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Core (Spring) annotations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-annotations">47.1. Generic annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-oriented-annotations">47.2. Web oriented annotations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="core-spring-annotations">
+<h1><span class="section-number">47. </span>Core (Spring) annotations<a class="headerlink" href="#core-spring-annotations" title="Permalink to this headline">#</a></h1>
+<p>This page lists the most common annotations of the Spring (MVC) framework.</p>
+<p>The Component scan process is central to all annotations. Annotated classes, methods and fields will only be found and processed if they are included in the component scanning process. Spring Boot automatically includes all source folders in this scan. Many annotations are actually subtypes of each other. In particular, <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> is the supertype for many other class-level annotations such as <code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>. For instance, if you look up class <code class="docutils literal notranslate"><span class="pre">Controller</span></code> by pressing <code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">(Ctr)</span> <span class="pre">+</span> <span class="pre">B</span></code> when the cursor is on the name where it is used, you can see it is itself annotated with <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Indicates that an annotated class is a &quot;Controller&quot; (e.g. a web controller).</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;This annotation serves as a specialization of {@link Component @Component},</span>
+<span class="cm"> * allowing for implementation classes to be autodetected through classpath scanning.</span>
+<span class="cm"> * It is typically used in combination with annotated handler methods based on the</span>
+<span class="cm"> * {@link org.springframework.web.bind.annotation.RequestMapping} annotation.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author Arjen Poutsma</span>
+<span class="cm"> * @author Juergen Hoeller</span>
+<span class="cm"> * @since 2.5</span>
+<span class="cm"> * @see Component</span>
+<span class="cm"> * @see org.springframework.web.bind.annotation.RequestMapping</span>
+<span class="cm"> * @see org.springframework.context.annotation.ClassPathBeanDefinitionScanner</span>
+<span class="cm"> */</span>
+<span class="nd">@Target</span><span class="p">({</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">})</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Controller</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * The value may indicate a suggestion for a logical component name,</span>
+<span class="cm">	 * to be turned into a Spring bean in case of an autodetected component.</span>
+<span class="cm">	 * @return the suggested component name, if any (or empty String otherwise)</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="nd">@AliasFor</span><span class="p">(</span><span class="n">annotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Component</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="nf">value</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that by looking these up you can also see which properties can be set, and what the default is when they are not required. Also note that the Javadoc section is highly informative!</p>
+<div class="section" id="generic-annotations">
+<h2><span class="section-number">47.1. </span>Generic annotations<a class="headerlink" href="#generic-annotations" title="Permalink to this headline">#</a></h2>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code></strong> – tells the Spring container that this class published components, i.e. Beans</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code></strong> – annotated on methods, telling the container that the method serves a component. The bean will have the name of the method by default.</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;Bean(initMethod</span> <span class="pre">=</span> <span class="pre">&quot;someMethod&quot;)</span></code> to hook into init.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code> to hook into init (this alternative adds extra dependencies in your Bean).</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Scope</span></code></strong> – annotated on Beans. There are six types of bean scopes in Spring:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">singleton</span></code> - with this scope, the container creates a single instance of a bean. All requests for such a bean will return the same object, which is cached. This is the default scope if no other scope is specified.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prototype</span></code> - with this scope, the container will create a new instance every time it is requested.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request</span></code>, <code class="docutils literal notranslate"><span class="pre">session</span></code>, <code class="docutils literal notranslate"><span class="pre">application</span></code>, <code class="docutils literal notranslate"><span class="pre">websocket</span></code> - these scopes are available only in a web-aware application context and are less often used in practice.</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code></strong> – annotated on classes. Tells the Spring container the class models a component of the system and should be instantiated by it.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Repository</span></code></strong> – subclasses <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> and adds a semantic layer: publishes a data repository.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code></strong> – subclasses <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> and adds a semantic layer: publishes a service conponent.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code></strong> – used to indicate this bean is a primary choice when multiple candidates exist (multiple implementers of the same interface). Related to <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier</span></code>, but used in the service instead of the consumer.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Qualifier</span></code></strong> – Used to indicate which of several implementers (Bean interfaces) should be taken. Can be used on constructor fields, setters (below <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code>) and fields (same) . Related to <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code>, but this done in the consumer instead of the service.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;SpringBootApplication</span></code></strong> – entry / start point of the application. Can be used to configure several aspects of the app config.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;PostConstruct</span></code></strong> &amp; <strong><code class="docutils literal notranslate"><span class="pre">&#64;PreDestroy</span></code></strong> – annotation on Components, to be used as lifecycle hooks.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Profile</span></code></strong> – used to instantiate and serve Beans in a profile-dependent manner.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;PropertySource</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">&#64;TestPropertySource</span></code></strong> – used to configure additional sources of properties. E.g., this
+<img alt="&#64;PropertySource" src="../_images/propertysource.png" /></p>
+<p>Will look under /src/main/resources for the given properties file.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="web-oriented-annotations">
+<h2><span class="section-number">47.2. </span>Web oriented annotations<a class="headerlink" href="#web-oriented-annotations" title="Permalink to this headline">#</a></h2>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code></strong> – tells the framework this class deals with http requests.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;RestController</span></code></strong> – See <code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code>, but for REST endpoints and will return json by default.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;GetMapping</span></code></strong> – A method that listens to an http Get request url.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;PostMapping</span></code></strong> – idem, for Post requests.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;RequestMapping</span></code></strong> – maps a URL to a class or method.  In the example below, the url <code class="docutils literal notranslate"><span class="pre">/projects</span></code> maps to the entire class as base url for the methods contained therein. So, <code class="docutils literal notranslate"><span class="pre">&#64;GetMapping(&quot;/1&quot;)</span></code> maps to <code class="docutils literal notranslate"><span class="pre">/projects/1</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;projects&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="nf">findOne</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Project</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;PathVariable</span></code></strong> – Used within the method signature of <code class="docutils literal notranslate"><span class="pre">&#64;xxxMapping</span></code> methods to indicate the value of this variable should be obtained from the url. Used in combination with the <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">&quot;&quot;</span></code> attribute of the mapping, as in this example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="o">/</span><span class="s">&quot;id&quot;</span><span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="nf">findOne</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">()</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">projectsService</span><span class="p">.</span><span class="na">fid</span><span class="o">=</span><span class="n">ndById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;RequestBody</span></code></strong> – Annotation used when in the body of a Post request a Json literal is sent that can be mapped onto a Java class.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@PostMapping</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">project</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">projectService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">project</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./07_spring"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Dependency_injection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">46. </span>Dependency Injection in Spring</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-annotations">47.1. Generic annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-oriented-annotations">47.2. Web oriented annotations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
