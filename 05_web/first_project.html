@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/first_look_at_objects.html">4. Objects and classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/objects_and_classes.html">4. Objects and classes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
 <ul class="nav bd-sidenav">
@@ -451,32 +451,32 @@ You do this via <code class="docutils literal notranslate"><span class="pre">Pre
 <p>In this project, we’ll be using Thymeleaf and JUnit5 (and the Servlet API). Since they are not available in Java by default (i.e. not in the standard JDK), you’ll need to configure them as your projects dependencies.
 Fortunately, Gradle is an excellent tool for dependency management.
 Here is the contents of a basic <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> configuration file for a web app:</p>
-<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span>plugins {
-    id &#39;war&#39;
-    id &#39;java&#39;
-    id &#39;idea&#39;
-}
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="n">plugins</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">id</span><span class="w"> </span><span class="s1">&#39;war&#39;</span>
+<span class="w">    </span><span class="nb">id</span><span class="w"> </span><span class="s1">&#39;java&#39;</span>
+<span class="w">    </span><span class="nb">id</span><span class="w"> </span><span class="s1">&#39;idea&#39;</span>
+<span class="p">}</span>
 
-group &#39;nl.bioinf.nomi&#39;
-version &#39;0.0.1&#39;
+<span class="n">group</span><span class="w"> </span><span class="s1">&#39;nl.bioinf.nomi&#39;</span>
+<span class="n">version</span><span class="w"> </span><span class="s1">&#39;0.0.1&#39;</span>
 
-repositories {
-    mavenCentral()
-}
+<span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">mavenCentral</span><span class="p">()</span>
+<span class="p">}</span>
 
-dependencies {
-    //Servlets
-    implementation &#39;javax.servlet:javax.servlet-api:4.0.0&#39; # or 3.1.0
-    //Thymeleaf
-    implementation &#39;org.thymeleaf:thymeleaf:3.0.15.RELEASE&#39;
-    //JUnit
-    testImplementation &#39;org.junit.jupiter:junit-jupiter-api:5.8.1&#39;
-    testRuntimeOnly &#39;org.junit.jupiter:junit-jupiter-engine:5.8.1&#39;
-}
+<span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="sr">//</span><span class="no">Servlets</span>
+<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;javax.servlet:javax.servlet-api:4.0.0&#39;</span><span class="w"> </span><span class="c1"># or 3.1.0</span>
+<span class="w">    </span><span class="sr">//</span><span class="no">Thymeleaf</span>
+<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.thymeleaf:thymeleaf:3.0.15.RELEASE&#39;</span>
+<span class="w">    </span><span class="sr">//</span><span class="no">JUnit</span>
+<span class="w">    </span><span class="n">testImplementation</span><span class="w"> </span><span class="s1">&#39;org.junit.jupiter:junit-jupiter-api:5.8.1&#39;</span>
+<span class="w">    </span><span class="n">testRuntimeOnly</span><span class="w"> </span><span class="s1">&#39;org.junit.jupiter:junit-jupiter-engine:5.8.1&#39;</span>
+<span class="p">}</span>
 
-test {
-    useJUnitPlatform()
-}
+<span class="nb">test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">useJUnitPlatform</span><span class="p">()</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>

@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '01_getting_started/basic_program_design';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Objects and classes" href="first_look_at_objects.html" />
+    <link rel="next" title="4. Objects and classes" href="objects_and_classes.html" />
     <link rel="prev" title="2. The essence of Java" href="essentials.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="intellij.html">1. A first IntelliJ project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="essentials.html">2. The essence of Java</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Basic program structure and flow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="first_look_at_objects.html">4. Objects and classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="objects_and_classes.html">4. Objects and classes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
 <ul class="nav bd-sidenav">
@@ -387,12 +387,13 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="basic-program-structure-and-flow">
 <h1><span class="section-number">3. </span>Basic program structure and flow<a class="headerlink" href="#basic-program-structure-and-flow" title="Permalink to this headline">#</a></h1>
-<p>Basic program structure and some flow control.
-Advanced flow control (switch etc) will be described later.</p>
+<p>This chapter deals with basic program structure and some flow control.
+Flow control (switch etc) will be described in-depth in <a class="reference internal" href="../02_syntax/flow_control.html"><span class="doc">Flow control</span></a> .</p>
 <div class="section" id="basic-program-structure">
 <h2><span class="section-number">3.1. </span>Basic program structure<a class="headerlink" href="#basic-program-structure" title="Permalink to this headline">#</a></h2>
 <p>As stated before, a Java program must have a <code class="docutils literal notranslate"><span class="pre">main()</span></code> method as starting point.
 This <code class="docutils literal notranslate"><span class="pre">main()</span></code> method needs to reside in a class, because <em>all</em> Java code needs to live inside a class.</p>
+<p>This is the simplest possible app in</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * The package declaration; it defines the namespace of this class</span>
 <span class="cm"> * */</span>
@@ -400,8 +401,8 @@ This <code class="docutils literal notranslate"><span class="pre">main()</span><
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MostBasicApp</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * This is a STATIC method, which means it is a class-level method and needs no object/instance to</span>
-<span class="cm">     * be called.</span>
+<span class="cm">     * This is a STATIC method, which means it is a class-level method and needs</span>
+<span class="cm">     * no object/instance to be callable.</span>
 <span class="cm">     * The return type is &quot;void&quot;: it does not return anything.</span>
 <span class="cm">     * @param args the command-line arguments are passed here as string array</span>
 <span class="cm">     */</span>
@@ -419,7 +420,7 @@ arguments are provided, we’ll print some usage information.</p>
 If you have run the main before (by clicking on the green triangle), you
 click on the toolbar run configurations box and select “Edit configurations”- see screenshot.</p>
 <p><img alt="Run configuration" src="../_images/edit_run_configuration_1.png" /></p>
-<p>The only thing yu need to do now is enter two “Program arguments”. Here, I filled out “Henk” and “49”, with a space between them.</p>
+<p>The only thing you need to do now is enter two “Program arguments”. Here, I filled out “Henk” and “49”, with a space between them.</p>
 <p><img alt="Run configuration" src="../_images/edit_run_configuration_2.png" /></p>
 <p>An array (which is kind of a list) of String elements called <code class="docutils literal notranslate"><span class="pre">args</span></code> will be passed to <code class="docutils literal notranslate"><span class="pre">main()</span></code> as <code class="docutils literal notranslate"><span class="pre">String[]</span> <span class="pre">args</span></code>. This array will hold the command line arguments when next running the program, as demonstrated below.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -434,7 +435,12 @@ click on the toolbar run configurations box and select “Edit configurations”
 arg = Henk
 arg = 49
 </pre>
-<p>Here you hae seen the first program flow construct in action: the <strong><em>foreach loop</em></strong>. It is equivalent to for-loops in any programming language: it iterates a collection of some sort. Here the collection is an array. Note it does not have a counter; there is a different variant of the for loop for that.</p>
+<div class="note admonition">
+<p class="admonition-title">In a real terminal</p>
+<p>In a real terminal you need to enter commandline arguments like this of course:<br />
+<code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">&lt;my_app.jar&gt;</span> <span class="pre">arg1</span> <span class="pre">arg2</span></code></p>
+</div>
+<p>Here you have seen the first program flow control structure in action: the <strong><em>foreach loop</em></strong>. It is equivalent to for-loops in any programming language: it iterates a collection of some sort. Here the collection is an array. Note it does not have a counter variable; there is a different variant of the for loop for that.</p>
 <p>Let’s introduce one other flow construct: <strong><em>decisions with if/else</em></strong>.</p>
 <p>Suppose you want to give your user some uplifting message, depending on their age. First the age argument needs to be converted from String to int:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -448,6 +454,10 @@ arg = 49
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hi &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, your age is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">age</span><span class="p">);</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All commandline arguments -also the ones that may look like numbers- enter your program as String variables in a String array.</p>
+</div>
 <p>Next, the choice of message needs to be made.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;ahh the energy of youth&quot;</span><span class="p">);</span>
@@ -458,8 +468,8 @@ arg = 49
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The classic elements of the if/else decision block.</p>
-<p>Finally, let’s bring a dedicated object into play: the message maker. The class looks like this:</p>
+<p>These are the classic elements of the if/else decision block.</p>
+<p>Finally, let’s bring a dedicated object into play: the message maker which will be responsible for serving messages based on the user age. The class looks like this:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MessageMaker</span><span class="w"> </span><span class="p">{</span>
@@ -503,7 +513,31 @@ arg = 49
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>So, here we have a two-class application. Both source files are in the same package (namespace). The first is the so-called “main class” which is the entry point of the application: <code class="docutils literal notranslate"><span class="pre">MostBasicApp</span></code> in source file <code class="docutils literal notranslate"><span class="pre">MostBasicApp.java</span></code>. The main method receives the command-line arguments and parses one of them into an integer. Next, it instantiates a <code class="docutils literal notranslate"><span class="pre">MessageMaker</span></code> object and calls its <code class="docutils literal notranslate"><span class="pre">printMessage()</span></code> method.</p>
+<p>So, here we have an application consisting of two custom classes. Both source files are in the same package (namespace). The first is the so-called “main class” which is the entry point of the application: <code class="docutils literal notranslate"><span class="pre">MostBasicApp</span></code> in source file <code class="docutils literal notranslate"><span class="pre">MostBasicApp.java</span></code>. The main method receives the command-line arguments and parses one of them into an integer. Next, it instantiates a <code class="docutils literal notranslate"><span class="pre">MessageMaker</span></code> object and calls its <code class="docutils literal notranslate"><span class="pre">printMessage()</span></code> method.</p>
+<div class="note admonition">
+<p class="admonition-title">Create an executable</p>
+<p>If you want to have an executable jar it needs two things:</p>
+<ol class="arabic">
+<li><p>A class with a <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">void</span> <span class="pre">main(String[]</span> <span class="pre">args)</span></code> method signature</p></li>
+<li><p>A manifest file in the jar with a reference to this main class; something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Manifest</span><span class="o">-</span><span class="n">Version</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="n">Main</span><span class="o">-</span><span class="n">Class</span><span class="p">:</span> <span class="n">nl</span><span class="o">.</span><span class="n">bioinf</span><span class="o">.</span><span class="n">HelloWorld</span>
+</pre></div>
+</div>
+<p>This can be generated when creating the jar (using Gradle) if you include this fragment in <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jar</span> <span class="p">{</span>
+<span class="n">manifest</span> <span class="p">{</span>
+    <span class="n">attributes</span><span class="p">(</span>
+            <span class="s1">&#39;Main-Class&#39;</span><span class="p">:</span> <span class="s1">&#39;nl.bioinf.HelloWorld&#39;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>}
+```</p>
+</div>
 </div>
 <div class="section" id="summary">
 <h2><span class="section-number">3.2. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
@@ -515,14 +549,22 @@ arg = 49
 </div>
 <p>Two flow control structures were shown: the for-each loop and if/else decisions:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//foreach</span>
-<span class="k">for</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">collection</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="k">for</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">collection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/*code block*/</span>
+<span class="p">}</span>
+
 <span class="c1">//if/else</span>
-<span class="k">if</span><span class="p">(</span><span class="n">conditionIsTrue</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
-<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">alternativeConditionIsTrue</span><span class="p">){}</span>
-<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="cm">/*default logic*/</span><span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="n">conditionIsTrue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/*code block for condition*/</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">alternativeConditionIsTrue</span><span class="p">){</span>
+<span class="w">    </span><span class="cm">/*code block for alternative condition*/</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/*default logic*/</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>That’s it. Next up: Data Types.</p>
 </div>
 </div>
 
@@ -567,7 +609,7 @@ arg = 49
       </div>
     </a>
     <a class="right-next"
-       href="first_look_at_objects.html"
+       href="objects_and_classes.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

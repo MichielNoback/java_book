@@ -1,13 +1,13 @@
 # Objects and classes
 
-This chapter presents two independent discussions of what classes and objects are.
-The first "Ninjas" focuses on what an object is and does, and how it relates to a class.
-The second, "Cells" also discusses object relationships and testing.
+This chapter presents two independent reviews of what classes and objects are.
+The first part, named "Ninjas", focuses on what an object is and does, and how it relates to a class.
+The second part, "Cells", also discusses object relationships and testing.
 
 ## Ninjas
 
 Suppose you are creating a game with ninjas, trolls and all other sorts of nasty creatures.
-In an Object-Oriented Programming (OOP) environment such as Java you will start by defining the entities that play a role in the app you are developing.
+In an Object-Oriented Programming (OOP) environment such as Java you will start by defining the _entities_ that play a role in the app you are developing.
 
 In this case, `Ninja` will be one of the entities, or ***Types*** populating the application.
 Other types in this game may be `Troll`, `Game`, `Player`, `Weapon`, `ScoreBoard`, and so on.
@@ -16,8 +16,16 @@ Each of these Types will have ***properties*** and ***behavior***: things they *
 A Type is represented by a blueprint, its ***class***.
 In Java, a class resides in a single source file *with the same name as the class*.
 This is unlike for instance Python in which there is no such enforced rule.
-The class of a type specifies how it should be created and initialized when needed.
-Here is an extremely simple class that is defined within source file `Ninja.java`.
+The class of a type specifies how it should be created and initialized when needed.  
+
+:::{admonition} A class defines a type
+
+A class is a blueprint; it represents a type. Types can have properties in the form of instance or class variables - variables attached to the scope of the class body (not in method scope). Types can also have behavior in the form of methods.
+
+These properties and methods can have object-scope or class-scope. In the latter case the keyword `static` is used.
+:::
+
+Here is a simple class that is defined within source file `Ninja.java`.
 
 ```java
 class Ninja {
@@ -37,11 +45,11 @@ Ninja silentKiller = new Ninja();
 
 Although the code is simple enough, a lot is going on here, some visible and some invisible.
 
-1.  We defined a blueprint using the keyword `class`, followed by the name of the type (`Ninja`).\
-2.  Class `Ninja` resides in file `Ninja.java`\
+1.  We defined a type (blueprint) using the keyword `class`, followed by the name of the type (`Ninja`).
+2.  Class `Ninja` resides in file `Ninja.java`.
 3.  Every `Ninja` that will ever be created will have a `name` property (also called instance variable) and `fight()` behavior. The `fight()` behavior will be "dependent" on its `name`.
-4.  An instance of a class is created using the `new` keyword, followed by the class name with a pair of parentheses: `Ninja()`. `Ninja()` is *calling the constructor (method)*. There is no constructor method here of course, but we got it for free from the compiler. It's the same with Python; you can give a class an `__init__()` method but if your don't the objects will still be constructed.
-5.  Class names are nouns starting with uppercase, (instance) variables are nouns starting with lowercase and methods are verbs starting with lowercase. All names are in ***CamelCase***.
+4.  An instance of a class is created using the `new` keyword, followed by the class name with a pair of parentheses: `Ninja()`. The expression `Ninja()` is *calling the constructor*. This is a special kind of method. There is no constructor present here, but we get a default implementation for free from the compiler. It's the same with Python; you can give a class an `__init__()` method but if your don't the objects will still be constructed. The Java default constructor is
+    `public Ninja() {}`
 6.  Whenever an instance is created, its properties are initialized to their default values, unless specified otherwise. A `String` property will be `null`, and an `int` will be `0`. If you want properties to have other initial values you can specify that within the class:
 
 ```java
@@ -54,36 +62,37 @@ class Ninja {
 }
 ```
 
+:::{note}
+Class names shuold be nouns starting with uppercase; variables should be nouns starting with lowercase. Method names should be verbs starting with lowercase. All Java names are in ***CamelCase***.
+:::
+
 In the Java core packages many types are predefined.
 There are basic types, for instance `Integer` (representing whole numbers) and `String` (representing character data) but there are also more complex Types, such as `LocalDate`.
-When programming you will create novel Types all the time.
+When programming you will create custom types all the time.  
 A `Ninja` type for instance.
 
-> Java also has non-object types.
-> These are the *primitive* types representing numbers and logicals.
-> They are easily recognized because their names start with lowercase: `int`, `double` etc.
-> More on primitive types later.
+:::{note}
+Unlike Python, Java also has non-object types.
+These are the *primitive* types representing numbers and booleans (logicals).
+They are easily recognized because there are only a few and their names start with lowercase: `int`, `double` etc.
+They are discussed in detail in chapter {doc}`/02_syntax/data_types`
+:::
 
-We'll have a another look at the `Ninja` type and create a slightly more realistic blueprint for it.
+Next, we'll have a another look at the `Ninja` type and create a slightly more realistic blueprint for it.  
+
 In our game, Ninjas can do what you would expect of them: they have a name and an energy level (0 means they're dead, 100 is freshly spawned), they have a position in the game and they can move, and attack their opponents.
 
-Given the above description, this is a second version of a Ninja class.
+Given the above description, this is a second version of the Ninja class.
 
 ```java
-//package defines namespace
 package nl.bioinf.nomi.ninjas;
 
-//the actual class
 class Ninja {
-
-    //Here are the properties every Ninja will HAVE
-    //We call these INSTANCE VARIABLES
     String name;
     int energyLevel = 100;
     double topCoordinate;
     double leftCoordinate;
 
-    //Here are the methods - what every Ninja can DO
     void move(double top, double left) {
         this.topCoordinate += top;
         this.leftCoordinate += left;
@@ -95,16 +104,19 @@ class Ninja {
         //but has double effect on its opponent
         opponent.drainEnergy(power * 2);
     }
-//end of the class
 }
 ```
 
-I kept this class really clean - no access modifiers (`public`, `private`, `static`, etc) that will distract from the key points being made here.
+I kept this class really minimal - no access modifiers (`public`, `private`, `static`, etc) that will distract from the key points being made here.
 
 At the top of the file there is a ***package declaration***.
 This defines the namespace this class lives in.
-Since nobody in their right mind would use my web domain, I'm pretty sure the *fully qualified name* `nl.bioinf.nomi.ninjas.Ninja` will uniquely point to this class.
-Think about it: how many `User` classes will have been designed over the world, and how can you make distinction between those, especially when you use more than one in a single code base?
+Since nobody in their right mind would use my web domain, I'm pretty sure the *fully qualified name* `nl.bioinf.nomi.ninjas.Ninja` will uniquely point to this class.  
+
+:::{note}
+Think about it: how many `User` classes will have been designed over the world, and how can you make distinction between those, especially when you use more than one in a single code base?  
+This is the importance of the package declaration. More on this in chapter {doc}`/02_syntax/packages_imports`
+:::
 
 Next, there is the line `class Ninja {` which delimits the actual **class body**.
 No code except for the package declaration and import statements can live outside the class body - it will not compile.
@@ -132,10 +144,24 @@ is exactly te same as this:
     double leftCoordinate = 0;
 ```
 
+
+:::{admonition} Default values
+:class: warning
+
+Default values of ***instance variables*** are
+
+- **objects**: `null`
+- **numbers**: `0` (zero)
+- **booleans**: `false`
+
+***Local variables have no default***; they must be explicitly initialized!
+:::
+
 Within the class body, no statements are allowed other than declaration and assignment of its instance variables.
-All other statements should reside withing a method.
-So these are allowed: `double leftCoordinate;` and `int energyLevel = 100;`, but a `for`-loop is not.
-For example, this is illegal and will not compile (although the error message may be less than straightforward):
+All other statements should reside within methods.  
+
+These are allowed: `double leftCoordinate;` and `int energyLevel = 100;`, but a `for`-loop is not.
+For example, the following is illegal and will not compile (although the error message may be less than straightforward):
 
 ```java
 class Ninja {
@@ -149,7 +175,7 @@ class Ninja {
 }
 ```
 
-Finally, there are two methods defined: `move()` and `attack()`.
+Finally, there are two methods defined: `move()` and `attack()`.  
 Method `move()` is pretty straightforward.
 
 ```java
@@ -164,14 +190,29 @@ The use of `this.` indicates we are accessing the current objects' instance vari
 Use of `this.` is not required unless there is a naming conflict, but strongly encouraged.
 The method does not return anything; this is declared by the `void` return statement.
 
+:::{note}
+The `this.` reference is used to access a variable or method on the _currently executing object_. It is similar to the Python `self.` reference. In Python the method would ook like this:
+```python
+    move(self, top, left) {
+        self.topCoordinate += top;
+        self.leftCoordinate += left;
+    }
+```
+In Java you do not need to specify this self reference in every method though, you get it implicitly. 
+:::
+
+
 The next method, `attack()` is a little more complex.
-this is its ***signature***:
+Here it is again.
 
 ```java
-void attack(int power, GameCharacter opponent)
+void attack(int power, GameCharacter opponent) {
+    this.energyLevel -= power;
+    opponent.drainEnergy(power * 2);
+}
 ```
 
-It says it should receive a `power` value for its attack as well as an instance of the `GameCharacter` class (below) which will be the subject of the attack. This method does not return anything either.
+It signature (`void attack(int power, GameCharacter opponent)`) says it should receive a `power` value for its attack as well as an instance of the `GameCharacter` class (below) which will be the subject of the attack. This method does not return anything either.  
 Here is the `GameCharacter` class:
 
 ```java
@@ -189,9 +230,9 @@ public class GameCharacter {
 So, not only does `attack()` operate on its own instance variables, it also also ***calls*** a method on the object it is attacking: `opponent.drainEnergy(power * 2);`.
 
 
-Here is some example code usages within a class called `Game`.
-The `main()` method is the _entry point_ of this application, as discussed in a previous chapter.
-This is the second place we see the `new` keyword.
+Here is some example code usages within a class called `Game`.  
+The `main()` method is the _entry point_ of this application elsewhere.
+This is the second place we see the `new` keyword.  
 Whenever you see the `new` keyword, it means a new object is instantiated of the type specified after `new`.
 So `new Ninja();` means a new Ninja instance (object) has been created, in which the instance variables have been created and given their specified values, or the default values discussed above.
 See the section later in this chapter for more details on object construction.
@@ -241,7 +282,6 @@ public class Game {
 
 The terminal output, when `main()` is run, will be:
 
-```html
 <pre class="console_out">
 Ninja name      = Rogue Bastard
 Ninja energy    = 100
@@ -251,7 +291,11 @@ Ninja energy    = 95
 Opponent name   = Delirious Troll
 Opponent energy = 90
 </pre>
-```
+
+:::{warning}
+Printing objects like above is very inefficient. You should implement (override) the `toString()` method. 
+This is discussed in chapter {doc}`/03_apis/class_object_methods`
+:::
 
 This concludes a first acquaintance with classes and objects. We have used the core Java class `String`, and defined three of our own: `Ninja`, `GameCharacter` and `Game`.
 Besides this, we have used the _primitive types_ `int` and `double`.
@@ -261,7 +305,7 @@ As extra layer, JUnit testing will be introduced as a more structured means of v
 
 ## Growing cells
 
-This sections already peeks ahead to some more advanced topics, such as exceptions and flow control, to create a more realistic application. Don't worry if you don't get everything at once. They will be discussed in length later in the book. All code can be found in the `snippets` package of the JavaIntroProgrammingAssignments repository. 
+This sections already peeks ahead to some more advanced topics, such as exceptions and flow control, to create a more realistic application. Don't worry if you don't get everything at once. They will be discussed in length later in the book. All code can be found in the `snippets` package of the JavaIntroProgrammingAssignments [repository](https://bitbucket.org/minoba/javaintroprogrammingassignments). 
 
 Suppose you want to build a cell growth simulation application.
 After careful analysis of the domain you decided that this involves three entities: A simulator that controls the simulation process, a test tube that will hold the cells that are growing, and the cells themselves.
@@ -332,7 +376,12 @@ Select "Create Test".
 
 Select the method(s) you want to create test(s) for and press "OK".
 
-![Create JUnit class](figures/create_junit_test_class_2.png)
+
+```{image} figures/create_junit_test_class_2.png
+:alt: Create JUnit class
+:width: 600px
+:align: center
+```
 
 The test class opens in the editor and looks something like this:
 
@@ -376,7 +425,8 @@ For now, knowing the Cell class is OK, let's proceed to class TestTube.
 
 #### TestTube.java
 
-TestTube is slightly more complex. Note that much of the code is actually API documentation that describes how a method should be used in a formal way called Javadoc.
+TestTube is slightly more complex.
+Note that much of the code is actually API documentation (called _Javadoc_) that describes in a formal way how a method should be used.
 
 ```java
     /**

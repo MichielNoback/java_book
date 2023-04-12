@@ -60,7 +60,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '01_getting_started/first_look_at_objects';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01_getting_started/objects_and_classes';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Data Types" href="../02_syntax/data_types.html" />
@@ -280,7 +280,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/01_getting_started/first_look_at_objects.md" target="_blank"
+      <li><a href="../_sources/01_getting_started/objects_and_classes.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,21 +397,26 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="objects-and-classes">
 <h1><span class="section-number">4. </span>Objects and classes<a class="headerlink" href="#objects-and-classes" title="Permalink to this headline">#</a></h1>
-<p>This chapter presents two independent discussions of what classes and objects are.
-The first “Ninjas” focuses on what an object is and does, and how it relates to a class.
-The second, “Cells” also discusses object relationships and testing.</p>
+<p>This chapter presents two independent reviews of what classes and objects are.
+The first part, named “Ninjas”, focuses on what an object is and does, and how it relates to a class.
+The second part, “Cells”, also discusses object relationships and testing.</p>
 <div class="section" id="ninjas">
 <h2><span class="section-number">4.1. </span>Ninjas<a class="headerlink" href="#ninjas" title="Permalink to this headline">#</a></h2>
 <p>Suppose you are creating a game with ninjas, trolls and all other sorts of nasty creatures.
-In an Object-Oriented Programming (OOP) environment such as Java you will start by defining the entities that play a role in the app you are developing.</p>
+In an Object-Oriented Programming (OOP) environment such as Java you will start by defining the <em>entities</em> that play a role in the app you are developing.</p>
 <p>In this case, <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> will be one of the entities, or <em><strong>Types</strong></em> populating the application.
 Other types in this game may be <code class="docutils literal notranslate"><span class="pre">Troll</span></code>, <code class="docutils literal notranslate"><span class="pre">Game</span></code>, <code class="docutils literal notranslate"><span class="pre">Player</span></code>, <code class="docutils literal notranslate"><span class="pre">Weapon</span></code>, <code class="docutils literal notranslate"><span class="pre">ScoreBoard</span></code>, and so on.
 Each of these Types will have <em><strong>properties</strong></em> and <em><strong>behavior</strong></em>: things they <em>have</em> and things they <em>can do</em>.</p>
 <p>A Type is represented by a blueprint, its <em><strong>class</strong></em>.
 In Java, a class resides in a single source file <em>with the same name as the class</em>.
 This is unlike for instance Python in which there is no such enforced rule.
-The class of a type specifies how it should be created and initialized when needed.
-Here is an extremely simple class that is defined within source file <code class="docutils literal notranslate"><span class="pre">Ninja.java</span></code>.</p>
+The class of a type specifies how it should be created and initialized when needed.</p>
+<div class="admonition-a-class-defines-a-type admonition">
+<p class="admonition-title">A class defines a type</p>
+<p>A class is a blueprint; it represents a type. Types can have properties in the form of instance or class variables - variables attached to the scope of the class body (not in method scope). Types can also have behavior in the form of methods.</p>
+<p>These properties and methods can have object-scope or class-scope. In the latter case the keyword <code class="docutils literal notranslate"><span class="pre">static</span></code> is used.</p>
+</div>
+<p>Here is a simple class that is defined within source file <code class="docutils literal notranslate"><span class="pre">Ninja.java</span></code>.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="w">    </span>
@@ -427,11 +432,11 @@ Here is an extremely simple class that is defined within source file <code class
 </div>
 <p>Although the code is simple enough, a lot is going on here, some visible and some invisible.</p>
 <ol class="arabic simple">
-<li><p>We defined a blueprint using the keyword <code class="docutils literal notranslate"><span class="pre">class</span></code>, followed by the name of the type (<code class="docutils literal notranslate"><span class="pre">Ninja</span></code>).\</p></li>
-<li><p>Class <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> resides in file <code class="docutils literal notranslate"><span class="pre">Ninja.java</span></code>\</p></li>
+<li><p>We defined a type (blueprint) using the keyword <code class="docutils literal notranslate"><span class="pre">class</span></code>, followed by the name of the type (<code class="docutils literal notranslate"><span class="pre">Ninja</span></code>).</p></li>
+<li><p>Class <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> resides in file <code class="docutils literal notranslate"><span class="pre">Ninja.java</span></code>.</p></li>
 <li><p>Every <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> that will ever be created will have a <code class="docutils literal notranslate"><span class="pre">name</span></code> property (also called instance variable) and <code class="docutils literal notranslate"><span class="pre">fight()</span></code> behavior. The <code class="docutils literal notranslate"><span class="pre">fight()</span></code> behavior will be “dependent” on its <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p></li>
-<li><p>An instance of a class is created using the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, followed by the class name with a pair of parentheses: <code class="docutils literal notranslate"><span class="pre">Ninja()</span></code>. <code class="docutils literal notranslate"><span class="pre">Ninja()</span></code> is <em>calling the constructor (method)</em>. There is no constructor method here of course, but we got it for free from the compiler. It’s the same with Python; you can give a class an <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method but if your don’t the objects will still be constructed.</p></li>
-<li><p>Class names are nouns starting with uppercase, (instance) variables are nouns starting with lowercase and methods are verbs starting with lowercase. All names are in <em><strong>CamelCase</strong></em>.</p></li>
+<li><p>An instance of a class is created using the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, followed by the class name with a pair of parentheses: <code class="docutils literal notranslate"><span class="pre">Ninja()</span></code>. The expression <code class="docutils literal notranslate"><span class="pre">Ninja()</span></code> is <em>calling the constructor</em>. This is a special kind of method. There is no constructor present here, but we get a default implementation for free from the compiler. It’s the same with Python; you can give a class an <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method but if your don’t the objects will still be constructed. The Java default constructor is
+<code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Ninja()</span> <span class="pre">{}</span></code></p></li>
 <li><p>Whenever an instance is created, its properties are initialized to their default values, unless specified otherwise. A <code class="docutils literal notranslate"><span class="pre">String</span></code> property will be <code class="docutils literal notranslate"><span class="pre">null</span></code>, and an <code class="docutils literal notranslate"><span class="pre">int</span></code> will be <code class="docutils literal notranslate"><span class="pre">0</span></code>. If you want properties to have other initial values you can specify that within the class:</p></li>
 </ol>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
@@ -443,33 +448,32 @@ Here is an extremely simple class that is defined within source file <code class
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Class names shuold be nouns starting with uppercase; variables should be nouns starting with lowercase. Method names should be verbs starting with lowercase. All Java names are in <em><strong>CamelCase</strong></em>.</p>
+</div>
 <p>In the Java core packages many types are predefined.
 There are basic types, for instance <code class="docutils literal notranslate"><span class="pre">Integer</span></code> (representing whole numbers) and <code class="docutils literal notranslate"><span class="pre">String</span></code> (representing character data) but there are also more complex Types, such as <code class="docutils literal notranslate"><span class="pre">LocalDate</span></code>.
-When programming you will create novel Types all the time.
+When programming you will create custom types all the time.<br />
 A <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> type for instance.</p>
-<blockquote>
-<div><p>Java also has non-object types.
-These are the <em>primitive</em> types representing numbers and logicals.
-They are easily recognized because their names start with lowercase: <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code> etc.
-More on primitive types later.</p>
-</div></blockquote>
-<p>We’ll have a another look at the <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> type and create a slightly more realistic blueprint for it.
-In our game, Ninjas can do what you would expect of them: they have a name and an energy level (0 means they’re dead, 100 is freshly spawned), they have a position in the game and they can move, and attack their opponents.</p>
-<p>Given the above description, this is a second version of a Ninja class.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//package defines namespace</span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.ninjas</span><span class="p">;</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike Python, Java also has non-object types.
+These are the <em>primitive</em> types representing numbers and booleans (logicals).
+They are easily recognized because there are only a few and their names start with lowercase: <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code> etc.
+They are discussed in detail in chapter <a class="reference internal" href="../02_syntax/data_types.html"><span class="doc">Data Types</span></a></p>
+</div>
+<p>Next, we’ll have a another look at the <code class="docutils literal notranslate"><span class="pre">Ninja</span></code> type and create a slightly more realistic blueprint for it.</p>
+<p>In our game, Ninjas can do what you would expect of them: they have a name and an energy level (0 means they’re dead, 100 is freshly spawned), they have a position in the game and they can move, and attack their opponents.</p>
+<p>Given the above description, this is a second version of the Ninja class.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.ninjas</span><span class="p">;</span>
 
-<span class="c1">//the actual class</span>
 <span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">//Here are the properties every Ninja will HAVE</span>
-<span class="w">    </span><span class="c1">//We call these INSTANCE VARIABLES</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">energyLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">topCoordinate</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">leftCoordinate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">//Here are the methods - what every Ninja can DO</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">top</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">topCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">top</span><span class="p">;</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">leftCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
@@ -481,15 +485,18 @@ In our game, Ninjas can do what you would expect of them: they have a name and a
 <span class="w">        </span><span class="c1">//but has double effect on its opponent</span>
 <span class="w">        </span><span class="n">opponent</span><span class="p">.</span><span class="na">drainEnergy</span><span class="p">(</span><span class="n">power</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="c1">//end of the class</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>I kept this class really clean - no access modifiers (<code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, <code class="docutils literal notranslate"><span class="pre">static</span></code>, etc) that will distract from the key points being made here.</p>
+<p>I kept this class really minimal - no access modifiers (<code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, <code class="docutils literal notranslate"><span class="pre">static</span></code>, etc) that will distract from the key points being made here.</p>
 <p>At the top of the file there is a <em><strong>package declaration</strong></em>.
 This defines the namespace this class lives in.
-Since nobody in their right mind would use my web domain, I’m pretty sure the <em>fully qualified name</em> <code class="docutils literal notranslate"><span class="pre">nl.bioinf.nomi.ninjas.Ninja</span></code> will uniquely point to this class.
-Think about it: how many <code class="docutils literal notranslate"><span class="pre">User</span></code> classes will have been designed over the world, and how can you make distinction between those, especially when you use more than one in a single code base?</p>
+Since nobody in their right mind would use my web domain, I’m pretty sure the <em>fully qualified name</em> <code class="docutils literal notranslate"><span class="pre">nl.bioinf.nomi.ninjas.Ninja</span></code> will uniquely point to this class.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Think about it: how many <code class="docutils literal notranslate"><span class="pre">User</span></code> classes will have been designed over the world, and how can you make distinction between those, especially when you use more than one in a single code base?<br />
+This is the importance of the package declaration. More on this in chapter <a class="reference internal" href="../02_syntax/packages_imports.html"><span class="doc">Packages and Imports</span></a></p>
+</div>
 <p>Next, there is the line <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Ninja</span> <span class="pre">{</span></code> which delimits the actual <strong>class body</strong>.
 No code except for the package declaration and import statements can live outside the class body - it will not compile.</p>
 <p>Below the class name declaration you find its instance variables.
@@ -511,10 +518,20 @@ So this:</p>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">leftCoordinate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </div>
+<div class="warning admonition">
+<p class="admonition-title">Default values</p>
+<p>Default values of <em><strong>instance variables</strong></em> are</p>
+<ul class="simple">
+<li><p><strong>objects</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p></li>
+<li><p><strong>numbers</strong>: <code class="docutils literal notranslate"><span class="pre">0</span></code> (zero)</p></li>
+<li><p><strong>booleans</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
+<p><em><strong>Local variables have no default</strong></em>; they must be explicitly initialized!</p>
+</div>
 <p>Within the class body, no statements are allowed other than declaration and assignment of its instance variables.
-All other statements should reside withing a method.
-So these are allowed: <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">leftCoordinate;</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">energyLevel</span> <span class="pre">=</span> <span class="pre">100;</span></code>, but a <code class="docutils literal notranslate"><span class="pre">for</span></code>-loop is not.
-For example, this is illegal and will not compile (although the error message may be less than straightforward):</p>
+All other statements should reside within methods.</p>
+<p>These are allowed: <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">leftCoordinate;</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">energyLevel</span> <span class="pre">=</span> <span class="pre">100;</span></code>, but a <code class="docutils literal notranslate"><span class="pre">for</span></code>-loop is not.
+For example, the following is illegal and will not compile (although the error message may be less than straightforward):</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Ninja</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="w">    </span>
@@ -526,7 +543,7 @@ For example, this is illegal and will not compile (although the error message ma
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Finally, there are two methods defined: <code class="docutils literal notranslate"><span class="pre">move()</span></code> and <code class="docutils literal notranslate"><span class="pre">attack()</span></code>.
+<p>Finally, there are two methods defined: <code class="docutils literal notranslate"><span class="pre">move()</span></code> and <code class="docutils literal notranslate"><span class="pre">attack()</span></code>.<br />
 Method <code class="docutils literal notranslate"><span class="pre">move()</span></code> is pretty straightforward.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">top</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">topCoordinate</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">top</span><span class="p">;</span>
@@ -538,12 +555,26 @@ Method <code class="docutils literal notranslate"><span class="pre">move()</span
 The use of <code class="docutils literal notranslate"><span class="pre">this.</span></code> indicates we are accessing the current objects’ instance variables and methods.
 Use of <code class="docutils literal notranslate"><span class="pre">this.</span></code> is not required unless there is a naming conflict, but strongly encouraged.
 The method does not return anything; this is declared by the <code class="docutils literal notranslate"><span class="pre">void</span></code> return statement.</p>
-<p>The next method, <code class="docutils literal notranslate"><span class="pre">attack()</span></code> is a little more complex.
-this is its <em><strong>signature</strong></em>:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">attack</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">power</span><span class="p">,</span><span class="w"> </span><span class="n">GameCharacter</span><span class="w"> </span><span class="n">opponent</span><span class="p">)</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">this.</span></code> reference is used to access a variable or method on the <em>currently executing object</em>. It is similar to the Python <code class="docutils literal notranslate"><span class="pre">self.</span></code> reference. In Python the method would ook like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topCoordinate</span> <span class="o">+=</span> <span class="n">top</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leftCoordinate</span> <span class="o">+=</span> <span class="n">left</span><span class="p">;</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
-<p>It says it should receive a <code class="docutils literal notranslate"><span class="pre">power</span></code> value for its attack as well as an instance of the <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> class (below) which will be the subject of the attack. This method does not return anything either.
+<p>In Java you do not need to specify this self reference in every method though, you get it implicitly.</p>
+</div>
+<p>The next method, <code class="docutils literal notranslate"><span class="pre">attack()</span></code> is a little more complex.
+Here it is again.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">attack</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">power</span><span class="p">,</span><span class="w"> </span><span class="n">GameCharacter</span><span class="w"> </span><span class="n">opponent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">energyLevel</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">power</span><span class="p">;</span>
+<span class="w">    </span><span class="n">opponent</span><span class="p">.</span><span class="na">drainEnergy</span><span class="p">(</span><span class="n">power</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It signature (<code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">attack(int</span> <span class="pre">power,</span> <span class="pre">GameCharacter</span> <span class="pre">opponent)</span></code>) says it should receive a <code class="docutils literal notranslate"><span class="pre">power</span></code> value for its attack as well as an instance of the <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> class (below) which will be the subject of the attack. This method does not return anything either.<br />
 Here is the <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> class:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.nomi.ninjas</span><span class="p">;</span>
 
@@ -557,9 +588,9 @@ Here is the <code class="docutils literal notranslate"><span class="pre">GameCha
 </pre></div>
 </div>
 <p>So, not only does <code class="docutils literal notranslate"><span class="pre">attack()</span></code> operate on its own instance variables, it also also <em><strong>calls</strong></em> a method on the object it is attacking: <code class="docutils literal notranslate"><span class="pre">opponent.drainEnergy(power</span> <span class="pre">*</span> <span class="pre">2);</span></code>.</p>
-<p>Here is some example code usages within a class called <code class="docutils literal notranslate"><span class="pre">Game</span></code>.
-The <code class="docutils literal notranslate"><span class="pre">main()</span></code> method is the <em>entry point</em> of this application, as discussed in a previous chapter.
-This is the second place we see the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword.
+<p>Here is some example code usages within a class called <code class="docutils literal notranslate"><span class="pre">Game</span></code>.<br />
+The <code class="docutils literal notranslate"><span class="pre">main()</span></code> method is the <em>entry point</em> of this application elsewhere.
+This is the second place we see the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword.<br />
 Whenever you see the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, it means a new object is instantiated of the type specified after <code class="docutils literal notranslate"><span class="pre">new</span></code>.
 So <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Ninja();</span></code> means a new Ninja instance (object) has been created, in which the instance variables have been created and given their specified values, or the default values discussed above.
 See the section later in this chapter for more details on object construction.</p>
@@ -606,7 +637,7 @@ See the section later in this chapter for more details on object construction.</
 </pre></div>
 </div>
 <p>The terminal output, when <code class="docutils literal notranslate"><span class="pre">main()</span></code> is run, will be:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;console_out&quot;</span><span class="p">&gt;</span>
+<pre class="console_out">
 Ninja name      = Rogue Bastard
 Ninja energy    = 100
 Ninja position  = [0.0:0.0]
@@ -614,8 +645,11 @@ Ninja position  = [-4.4:12.5]
 Ninja energy    = 95
 Opponent name   = Delirious Troll
 Opponent energy = 90
-<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
-</pre></div>
+</pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Printing objects like above is very inefficient. You should implement (override) the <code class="docutils literal notranslate"><span class="pre">toString()</span></code> method.
+This is discussed in chapter <a class="reference internal" href="../03_apis/class_object_methods.html"><span class="doc">Methods of class Object</span></a></p>
 </div>
 <p>This concludes a first acquaintance with classes and objects. We have used the core Java class <code class="docutils literal notranslate"><span class="pre">String</span></code>, and defined three of our own: <code class="docutils literal notranslate"><span class="pre">Ninja</span></code>, <code class="docutils literal notranslate"><span class="pre">GameCharacter</span></code> and <code class="docutils literal notranslate"><span class="pre">Game</span></code>.
 Besides this, we have used the <em>primitive types</em> <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
@@ -624,7 +658,7 @@ As extra layer, JUnit testing will be introduced as a more structured means of v
 </div>
 <div class="section" id="growing-cells">
 <h2><span class="section-number">4.2. </span>Growing cells<a class="headerlink" href="#growing-cells" title="Permalink to this headline">#</a></h2>
-<p>This sections already peeks ahead to some more advanced topics, such as exceptions and flow control, to create a more realistic application. Don’t worry if you don’t get everything at once. They will be discussed in length later in the book. All code can be found in the <code class="docutils literal notranslate"><span class="pre">snippets</span></code> package of the JavaIntroProgrammingAssignments repository.</p>
+<p>This sections already peeks ahead to some more advanced topics, such as exceptions and flow control, to create a more realistic application. Don’t worry if you don’t get everything at once. They will be discussed in length later in the book. All code can be found in the <code class="docutils literal notranslate"><span class="pre">snippets</span></code> package of the JavaIntroProgrammingAssignments <a class="reference external" href="https://bitbucket.org/minoba/javaintroprogrammingassignments">repository</a>.</p>
 <p>Suppose you want to build a cell growth simulation application.
 After careful analysis of the domain you decided that this involves three entities: A simulator that controls the simulation process, a test tube that will hold the cells that are growing, and the cells themselves.</p>
 <p>The next step in the modeling process is to determine the <em><strong>relationships</strong></em> between the different entities.
@@ -682,7 +716,7 @@ In the editor, place the cursor on the class name (<code class="docutils literal
 Select “Create Test”.</p>
 <p><img alt="Create JUnit class" src="../_images/create_junit_test_class_1.png" /></p>
 <p>Select the method(s) you want to create test(s) for and press “OK”.</p>
-<p><img alt="Create JUnit class" src="../_images/create_junit_test_class_2.png" /></p>
+<a class="reference internal image-reference" href="../_images/create_junit_test_class_2.png"><img alt="Create JUnit class" class="align-center" src="../_images/create_junit_test_class_2.png" style="width: 600px;" /></a>
 <p>The test class opens in the editor and looks something like this:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube</span><span class="p">;</span>
 
@@ -717,7 +751,8 @@ Select “Create Test”.</p>
 </div>
 <div class="section" id="testtube-java">
 <h4><span class="section-number">4.2.1.2. </span>TestTube.java<a class="headerlink" href="#testtube-java" title="Permalink to this headline">#</a></h4>
-<p>TestTube is slightly more complex. Note that much of the code is actually API documentation that describes how a method should be used in a formal way called Javadoc.</p>
+<p>TestTube is slightly more complex.
+Note that much of the code is actually API documentation (called <em>Javadoc</em>) that describes in a formal way how a method should be used.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * Constructs with an initial cell count.</span>
 <span class="cm">     * An exception is thrown when the initial cell count is below 1 or above 10e4.</span>

@@ -63,7 +63,7 @@ In this project, we’ll be using Thymeleaf and JUnit5 (and the Servlet API). Si
 Fortunately, Gradle is an excellent tool for dependency management. 
 Here is the contents of a basic `build.gradle` configuration file for a web app:
 
-```groovy
+```ruby
 plugins {
     id 'war'
     id 'java'
