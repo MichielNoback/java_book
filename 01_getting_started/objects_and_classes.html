@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -382,8 +382,8 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-construction-first-iteration">4.3. Object construction (first iteration)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-first-discussion">4.4. Inheritance (first discussion)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-construction">4.3. Object construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">4.4. Inheritance</a></li>
 </ul>
             </nav>
         </div>
@@ -875,8 +875,8 @@ Here is a first version:</p>
 </div>
 </div>
 </div>
-<div class="section" id="object-construction-first-iteration">
-<h2><span class="section-number">4.3. </span>Object construction (first iteration)<a class="headerlink" href="#object-construction-first-iteration" title="Permalink to this headline">#</a></h2>
+<div class="section" id="object-construction">
+<h2><span class="section-number">4.3. </span>Object construction<a class="headerlink" href="#object-construction" title="Permalink to this headline">#</a></h2>
 <p>You have seen the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword used several times now.
 But what does happen, exactly, when you type</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="p">();</span>
@@ -901,8 +901,8 @@ The compiler-processed code will have something like this inserted:</p>
 </div>
 <p>More on constructors in later chapters.</p>
 </div>
-<div class="section" id="inheritance-first-discussion">
-<h2><span class="section-number">4.4. </span>Inheritance (first discussion)<a class="headerlink" href="#inheritance-first-discussion" title="Permalink to this headline">#</a></h2>
+<div class="section" id="inheritance">
+<h2><span class="section-number">4.4. </span>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline">#</a></h2>
 <p>Inheritance is one of the key features of object-oriented programming.</p>
 <p>This is a very powerful mechanism to introduce new or adjusted behavior in a software system because subclasses inherit all properties and methods of their superclass.
 For example, the <code class="docutils literal notranslate"><span class="pre">CancerCell</span></code> class below <code class="docutils literal notranslate"><span class="pre">extends</span> <span class="pre">Cell</span></code> and thus declares itself to be a <em><strong>subclass</strong></em> of <code class="docutils literal notranslate"><span class="pre">Cell</span></code>.
@@ -1038,8 +1038,8 @@ Moving through the body
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-construction-first-iteration">4.3. Object construction (first iteration)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-first-discussion">4.4. Inheritance (first discussion)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-construction">4.3. Object construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">4.4. Inheritance</a></li>
 </ul>
   </nav></div>
 

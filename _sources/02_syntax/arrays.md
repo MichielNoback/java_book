@@ -1,6 +1,5 @@
 # Arrays
 
-Just like any programming language, Java knows about arrays.
 Arrays are ordered collections of variables of the same type. 
 These elements can by any valid Java type: primitives, 
 object references, or even null values.
@@ -8,14 +7,20 @@ object references, or even null values.
 These variables are not individually named and managed, but collectively.
 
 In real life, you don’t use arrays too much because other types (ArrayList) 
-are often more convenient because arrays can't be extended or shortened and 
+are often more convenient because _arrays can't be extended or shortened_ and 
 don't have all those nice helper methods that ArrayList has 
 (see the [collections post](/03_apis/collections)). However, arrays 
 certainly have their use when (memory) efficiency is an issue, or when you want 
 to go multidimensional.
 
-Of course, the String array `String[] args` is the entry point of outside arguments into any 
-Java program:
+:::{admonition} Arrays have fixed length
+:class: warning
+
+Arrays keep the size they have at the time you create them.
+Don't use arrays if you need collections that need to shrink or grow: use `ArrayList` or other collection types.
+:::
+
+Of course, as seen in a previous chapter, the String array `String[] args` is the entry point of outside arguments into any Java program:
 
 ```java
 public static void main(String[] args) {
@@ -57,11 +62,19 @@ which is:
 
 An array of primitives will actually contain the primitive values.
 
-![An array of primitives](figures/array_2.png)
+```{image} figures/array_2.png
+:alt: An array of primitives
+:width: 300px
+:align: center
+```
 
 An array of objects will hold the references to the objects, not the objects themselves
 
-![an array of objects](figures/array_3.png)
+```{image} figures/array_3.png
+:alt: an array of objects
+:width: 300px
+:align: center
+```
 
 ## Printing
 
@@ -75,7 +88,11 @@ System.out.println("bytes = " + Arrays.toString(bytes));
 
 To get to an element of an array, you use an index. Java array indexing starts at zero.
 
-![Array indexing](figures/array_1.png)
+```{image} figures/array_1.png
+:alt: an array of objects
+:width: 300px
+:align: center
+```
 
 ```java
 int[] numbers = new int[7];
@@ -83,7 +100,11 @@ numbers[0] = 42;
 numbers[4] = 22;
 ```
 
-![Array indexing](figures/array_2.png)
+```{image} figures/array_2.png
+:alt: an array of objects
+:width: 300px
+:align: center
+```
 
 Arrays are often created and accessed using a for loop:
 

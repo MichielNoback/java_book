@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9. Methods &#8212; The Java Track</title>
+    <title>9. Methods and Constructors &#8212; The Java Track</title>
   
   
   
@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -362,7 +362,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Methods</h1>
+    <h1>Methods and Constructors</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,6 +383,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-state">9.2. Interacting with state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overloading">9.3. Method overloading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors">9.4. Constructors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#telescoping-constructors">9.4.1. Telescoping constructors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factory-methods">9.4.2. Factory methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#builder-pattern">9.4.3. Builder pattern</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -394,28 +400,86 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="methods">
-<h1><span class="section-number">9. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
-<p>This post constitutes the link between basic syntax and design. Variables, operators and flow control
-form the basis of your algorithms. These algorithms have to be organized and combined into bigger
-systems, and building systems is done using classes and their methods.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="methods-and-constructors">
+<h1><span class="section-number">9. </span>Methods and Constructors<a class="headerlink" href="#methods-and-constructors" title="Permalink to this headline">#</a></h1>
+<p>This chapter constitutes the link between basic syntax and design. Variables, operators and flow control form the basis of your algorithms.
+These algorithms have to be organized and combined into bigger systems, and building systems is done by combining methods in classes and these classes in packages and dependency graphs.</p>
 <p>Methods are pieces of code that are used as a “black box”: you don’t need to know how they work, as long as you know (and trust) what goes in and what comes out.</p>
-<p>In Java, there exists quite a variety of method-like structures:</p>
+<p>There exists quite a variety of method-like structures in Java:</p>
 <ul class="simple">
-<li><p><strong><em>instance methods</em></strong></p></li>
-<li><p><strong><em>class methods</em></strong></p></li>
-<li><p><strong><em>constructors</em></strong></p></li>
-<li><p><strong><em>class initializers</em></strong></p></li>
-<li><p><strong><em>object initializers</em></strong></p></li>
+<li><p><strong><em>Instance methods</em></strong>: Methods that operate on objects and have access to both class and instance variables and methods.</p></li>
+<li><p><strong><em>class methods</em></strong>: Methods that operate on classes and have access only to class (static) variables and methods.</p></li>
+<li><p><strong><em>constructors</em> (<em>object initializers</em>)</strong>: Methods that specify how objects should be initialized.</p></li>
+<li><p><strong><em>object initializers</em></strong>: Code blocks that specify how objects should be initialized. These run before any constructor but are parameterless (no input arguments);</p></li>
+<li><p><strong><em>class initializers</em></strong>: Code blocks that specify how classes should be initialized. These run at class loading but are parameterless;</p></li>
+<li><p><strong><em>Lambdas</em></strong>: In Java a lambda is a function which can be created without belonging to any class. It is a shorthand for an anonymous implementation of a Java Functional Interface (and thus it is unseen actually an anonymous local inner class); see <a class="reference external" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/package-summary.html">java.util.function</a>.</p></li>
 </ul>
-<p>This post only deals with the first two: class and instance methods.</p>
+<p>This chapter only deals with the first three of this list: class and instance methods and constructors.</p>
+<p>For completeness sake all function-like Java constructs are demonstrated in the class below.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.syntax</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FunctionTypesDemo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">zoo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/*CLASS INITIALIZER*/</span>
+<span class="w">    </span><span class="kd">static</span><span class="p">{</span>
+<span class="w">        </span><span class="n">zoo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Giraffe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Scorpion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Zebra&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*OBJECT INITIALIZER -- RUNS BEFORE ANY CONSTRUCTOR*/</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*A LAMBDA:    f -&gt; fruits.add(f)*/</span>
+<span class="w">        </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Kiwi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mango&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pear&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">fruits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// of course this would have been better,</span>
+<span class="w">        </span><span class="c1">// but then there would have been no lambda:</span>
+<span class="w">        </span><span class="c1">// fruits.addAll(List.of(&quot;Kiwi&quot;, &quot;Orange&quot;, &quot;Mango&quot;, &quot;Pear&quot;));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*OVERLOADED CONSTRUCTOR*/</span>
+<span class="w">    </span><span class="n">FunctionTypesDemo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fruits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*OVERLOADED CONSTRUCTOR*/</span>
+<span class="w">    </span><span class="n">FunctionTypesDemo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fruit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fruits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">fruit</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*INSTANCE METHOD*/</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">getFruit</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">fruits</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*A STATIC (CLASS) METHOD*/</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addAnimal</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">animal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">FunctionTypesDemo</span><span class="p">.</span><span class="na">zoo</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">animal</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*A SPECIAL CASE CLASS METHOD*/</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">FunctionTypesDemo</span><span class="w"> </span><span class="n">demo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FunctionTypesDemo</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">demo</span><span class="p">.</span><span class="na">fruits</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Fruit at index 1 is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">demo</span><span class="p">.</span><span class="na">getFruit</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">        </span><span class="n">FunctionTypesDemo</span><span class="p">.</span><span class="na">addAnimal</span><span class="p">(</span><span class="s">&quot;Platypus&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">FunctionTypesDemo</span><span class="p">.</span><span class="na">zoo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <p>Methods define the behavior of an object or a class, modified by its state.
 Methods can unseen serve the inner workings of an object, or be available to the outside world: this is something you decide upon, and which is an extremely important design aspect!</p>
 <div class="section" id="method-signature">
 <h2><span class="section-number">9.1. </span>Method signature<a class="headerlink" href="#method-signature" title="Permalink to this headline">#</a></h2>
 <p>Every method has a <strong><em>signature</em></strong>. In Java, this is a binding contract.
-The signature defines what can go in, what comes out, and what the method scope or visibility is.
-So, the signature is the description of the method contract to the outside world: everything but its implementation (the method body).</p>
+The signature defines what can go in, what comes out, and what the scope (or visibility) of the method is.
+Thus, the signature is the description of the method contract to the outside world: everything but its implementation (the method body).</p>
 <p>Here, the method signature is shown in red and the method body in blue.</p>
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
 <span style="color:darkred;">public int addInts(int x, int y)</span> {
@@ -427,6 +491,13 @@ So, the signature is the description of the method contract to the outside world
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
 <span style="color:purple;font-style:italic;">access_modifier</span> <span style="color:darkgreen;font-style:italic;">scope</span> <span style="color:darkred;font-style:italic;">return_type</span> methodName(<span style="color:orange;font-style:italic;">parameter(s)</span>) { }
 </pre>
+<ul class="simple">
+<li><p><em><strong>access modifier</strong></em> can be one of four things: <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">protected</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code> or nothing. Nothing, the default, is something in between private and protected: it has package visibility.</p></li>
+<li><p><em><strong>scope</strong></em> can be <code class="docutils literal notranslate"><span class="pre">static</span></code> or nothing. Nothing means instance-level and <code class="docutils literal notranslate"><span class="pre">static</span></code> means class level.</p></li>
+<li><p><em><strong>return type</strong></em> is the data type of the thing that is returned from the method. If it does not return anything, the return type is <code class="docutils literal notranslate"><span class="pre">void</span></code>. Constructors have the instance itself as return type. They have no return type in the signature, nor an allowed <code class="docutils literal notranslate"><span class="pre">return</span></code> statement in the body.</p></li>
+<li><p><em><strong>method name</strong></em> can be any allowed Java name.</p></li>
+<li><p><em><strong>parameters</strong></em> can be any number of any type, but need to have a defined type, as everywhere in Java.</p></li>
+</ul>
 <div class="section" id="access-modifier-public-or-private">
 <h3><span class="section-number">9.1.1. </span>access modifier: public or private?<a class="headerlink" href="#access-modifier-public-or-private" title="Permalink to this headline">#</a></h3>
 <p>The access modifier defines the <strong><em>visibility</em></strong> of your method. There are four levels of visibility, but we’ll start out with only two:</p>
@@ -435,8 +506,12 @@ So, the signature is the description of the method contract to the outside world
 <li><p><strong><em><code class="docutils literal notranslate"><span class="pre">private</span></code></em></strong> - accessible only within the same class</p></li>
 </ul>
 <p>We’ll come back to access modifiers later (see <a class="reference internal" href="../04_oop/access_modifiers.html"><span class="doc std std-doc">access modfiers</span></a>), when discussing class design. This is because access modifiers can be applied not only to methods, but to classes and instance variables as well.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The general rule is this:<br />
-<strong><em>Make a method public when it is part of your class API and make it private when it only serves the inner workings of your class</em></strong></p>
+<strong><em>Make a method public when it is part of your class API and make it private when it only serves the inner workings of your class</em></strong>.
+It is often much harder to change the signature of a public method tan of a private method.</p>
+</div>
 </div>
 <div class="section" id="scope-static-vs-instance-methods">
 <h3><span class="section-number">9.1.2. </span>Scope: static vs instance methods<a class="headerlink" href="#scope-static-vs-instance-methods" title="Permalink to this headline">#</a></h3>
@@ -582,9 +657,12 @@ beginners:</p>
 <span class="c1">//myDataClass.x = 43</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><strong>On the difference between parameters and arguments</strong><br />
 A parameter is the variable which is part of the method’s signature (method declaration)
 An argument is an expression used when calling the method.</p>
+</div>
 </div>
 <div class="section" id="cheating-the-contract">
 <h3><span class="section-number">9.1.6. </span>Cheating the contract<a class="headerlink" href="#cheating-the-contract" title="Permalink to this headline">#</a></h3>
@@ -657,9 +735,10 @@ examples showing what is legal and what isn’t.</p>
 </div>
 <div class="section" id="method-overloading">
 <h2><span class="section-number">9.3. </span>Method overloading<a class="headerlink" href="#method-overloading" title="Permalink to this headline">#</a></h2>
-<p>Java does not know about <strong><em>default parameter values</em></strong>. Fortunately, it can be implemented using a more flexible
-mechanism called <strong><em>method overloading</em></strong>. Method overloading is the implementation of multiple methods with the
-same name and return type, but with different (numbers of) arguments. It is a bit of a hassle, but more versatile at the same time, since this not only supports default values but also extra pieces of algorithm code on top of default behavior.</p>
+<p>Java does not know about <strong><em>default parameter values</em></strong>.
+Fortunately, it can be implemented using a more flexible mechanism called <strong><em>method overloading</em></strong>.
+Method overloading is the implementation of multiple methods with the same name and return type, but with different (numbers of) arguments.
+It is a bit of a hassle, but more versatile at the same time since this not only supports default values but also extra pieces of algorithm code on top of default behavior.</p>
 <p>Here is an adjusted version of the PowerUpper class, implementing different overloading techniques.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PowerUpper</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cm">/**</span>
@@ -725,6 +804,271 @@ method C
 method C
 4.7 ^ 3.9 = 418
 </pre>
+</div>
+<div class="section" id="constructors">
+<h2><span class="section-number">9.4. </span>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">#</a></h2>
+<p>Consider the case of Pizzas. Pizzas can have a normal or thick base, and one to many ingredients.
+How would you construct such an object? This data design is quite straightforward:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pizza</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toppings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Pizza{&quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                </span><span class="s">&quot;base=&#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;\&#39;&#39;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                </span><span class="s">&quot;, toppings=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">toppings</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                </span><span class="sc">&#39;}&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order for a pizza to exist it really needs a base: see the test below:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">construct</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Pizza</span><span class="w"> </span><span class="n">emptyNoBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pizza</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;emptyNoBase = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">emptyNoBase</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<pre class="console_out">
+emptyNoBase = Pizza{base='null', toppings=[]}
+</pre>
+<p>Therefore, adding a constructor seems like a good idea:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pizza</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toppings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//toString() omitted</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now you must provide a base in order to construct a pizza:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">construct</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Pizza</span><span class="w"> </span><span class="n">baseOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pizza</span><span class="p">(</span><span class="s">&quot;thin&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;baseOnly = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">baseOnly</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<pre class="console_out">
+baseOnly = Pizza{base='thin', toppings=[]}
+</pre>
+<div class="section" id="telescoping-constructors">
+<h3><span class="section-number">9.4.1. </span>Telescoping constructors<a class="headerlink" href="#telescoping-constructors" title="Permalink to this headline">#</a></h3>
+<p>But wait! Most (sane) people will want their pizza base to be thin. Making it mandatory to always provide a constructor argument is silly. This is where <em><strong>constructor overloading</strong></em> comes in. We provide two alternative constructors where one calls the other with default argument(s):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pizza</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toppings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="s">&quot;thin&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">//CALLS THE OTHER CONSTRUCTOR!</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//toString() omitted</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Providing a base is now optional, with a (very!) sensible default:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">construct</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Pizza</span><span class="w"> </span><span class="n">baseOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pizza</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;baseOnly default = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">baseOnly</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Pizza</span><span class="w"> </span><span class="n">baseOnlyThick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pizza</span><span class="p">(</span><span class="s">&quot;thick&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;baseOnly thick = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">baseOnlyThick</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<pre class="console_out">
+baseOnly default = Pizza{base='thin', toppings=[]}
+baseOnly thick = Pizza{base='thick', toppings=[]}
+</pre>
+<p>But now we have a pizza without toppings. That is no good. We could use one of these methods to add ingredients (toppings) to the pizza:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Adds a single ingredient.</span>
+<span class="cm">     * @param ingredient</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">ingredient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">toppings</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * adds multiple ingredients.</span>
+<span class="cm">     * @param ingredients</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">addIngredients</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">toppings</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">ingredients</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>But this is a little lame. Now we need to keep constructing the pizza after it has been constructed!
+The solution is the use of <em><strong>varargs</strong></em> arguments in the constructor! Here it is:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;ingredients = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ingredients</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">topping</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">toppings</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">topping</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-varargs admonition">
+<p class="admonition-title">Varargs</p>
+<p>Varargs is the use of an optional number of arguments of the same type.
+They are defined using the syntax <code class="docutils literal notranslate"><span class="pre">Type...</span> <span class="pre">nameOfCollection</span></code>.
+They can be applied to any type of function: constructors and (static) methods.
+Internally they are translated into an <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
+</div>
+<p>The alert reader will have noticed that the default <code class="docutils literal notranslate"><span class="pre">base</span></code> value has disappeared. That is because if we also want to overload this variant, the compiler does not know to distinguish between constructors anymore. A solution woould be to extract the base into an enum constant:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">PizzaBase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">THIN</span><span class="p">,</span>
+<span class="w">    </span><span class="n">THICK</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So now we have a Pizza class with four constructors which makes for a very versatile solution.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.syntax</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pizza</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toppings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">PizzaBase</span><span class="p">.</span><span class="na">THIN</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">PizzaBase</span><span class="p">.</span><span class="na">THIN</span><span class="p">,</span><span class="w"> </span><span class="n">ingredients</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">topping</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">toppings</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">topping</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//toString() omitted</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In principle this concludes the discussion of constructors. However, since this pattern of telescoping constructors is sometimes frowned upon, I present two alternatives below.</p>
+</div>
+<div class="section" id="factory-methods">
+<h3><span class="section-number">9.4.2. </span>Factory methods<a class="headerlink" href="#factory-methods" title="Permalink to this headline">#</a></h3>
+<p>Factory methods allow for the definition of an API to create complex objects without the client having to intervene with the details of this creation.</p>
+<p>Here are two factory methods for creating pizzas:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">//STATIC!</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Pizza</span><span class="w"> </span><span class="nf">createThinPizza</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">createPizza</span><span class="p">(</span><span class="n">PizzaBase</span><span class="p">.</span><span class="na">THIN</span><span class="p">,</span><span class="w"> </span><span class="n">ingredients</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Pizza</span><span class="w"> </span><span class="nf">createThickPizza</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">createPizza</span><span class="p">(</span><span class="n">PizzaBase</span><span class="p">.</span><span class="na">THICK</span><span class="p">,</span><span class="w"> </span><span class="n">ingredients</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//PRIVATE</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Pizza</span><span class="w"> </span><span class="nf">createPizza</span><span class="p">(</span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Pizza</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pizza</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">ingredients</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">addIngredient</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//PRIVATE</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addIngredient</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">addIngredient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">toppings</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="builder-pattern">
+<h3><span class="section-number">9.4.3. </span>Builder pattern<a class="headerlink" href="#builder-pattern" title="Permalink to this headline">#</a></h3>
+<p>For cases like this, the design pattern called the Builder Pattern is an excellent use case. This is of course out of scope for this course, but I like it so much I wanted to show it here as well.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pizza</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ingredients</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//A PRIVATE CONSTRUCTOR!</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Pizza</span><span class="p">(</span><span class="n">Builder</span><span class="w"> </span><span class="n">builder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">base</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ingredients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">ingredient</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">ingredients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">ingredients</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//INNER CLASS</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Builder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ingredients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="nf">Builder</span><span class="p">(</span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">ingredient</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">ingredient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">ingredients</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">ingredient</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Pizza</span><span class="w"> </span><span class="nf">build</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">ingredients</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;there should be at least one ingredient&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pizza</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//FACTORY-LIKE METHOD</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">builder</span><span class="p">(</span><span class="n">PizzaBase</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NullPointerException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;base should be provided&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Builder</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Pizza</span><span class="w"> </span><span class="n">pizza</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pizza</span>
+<span class="w">                </span><span class="p">.</span><span class="na">builder</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">ingredient</span><span class="p">(</span><span class="s">&quot;cheese&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">ingredient</span><span class="p">(</span><span class="s">&quot;onions&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">ingredient</span><span class="p">(</span><span class="s">&quot;peppers&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">ingredient</span><span class="p">(</span><span class="s">&quot;gorgonzola&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;pizza = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pizza</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -806,6 +1150,12 @@ method C
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-state">9.2. Interacting with state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overloading">9.3. Method overloading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructors">9.4. Constructors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#telescoping-constructors">9.4.1. Telescoping constructors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factory-methods">9.4.2. Factory methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#builder-pattern">9.4.3. Builder pattern</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

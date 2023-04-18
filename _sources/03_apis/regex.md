@@ -1,10 +1,12 @@
 # Regular Expressions
 
-Often, when your data is well-structured, a `String.split()` with a simple separator is all you need to process your data,maybe with some conversion methods for creating ints and doubles and such from strings. However, there are cases when you need more: finding restriction enzyme sites, parsing zip codes in addresses for instance.
+Often, when your data is well-structured, a `String.split()` with a simple separator is all you need to process your data, maybe with some conversion methods for converting String objects into `int`s and `double`s and such. However, there are cases when you need more, for instance finding restriction enzyme sites, parsing zip codes in addresses.
 
+:::{warning}
 This part only introduces the Java regex API
-It is NOT a tutorial on regex!
-(PS, I borrowed some examples from http://www.vogella.com)
+It is NOT a tutorial on regex!  
+(PS, I used some examples from http://www.vogella.com)
+:::
 
 Regular expressions are used to search for patterns in text
 For instance, if you want to find occurrences of Dutch zip codes, you could use this: `[a-zA-Z]{4} ?[0-9]{2}`
@@ -23,6 +25,7 @@ A regular expression is used to describe a pattern that is not literal - differe
 
 Backslashes have meanings both in String literals and in regex. They denote special characters, but also negate the special meaning
 Thus, to match a literal backslash, your regex will be `\\\\` !! 
+Usually, `\\` suffices, as in _any digit_ `\\d`.
 
 ### Character classes
 
@@ -41,9 +44,9 @@ You can specify groups of characters that are all equally valid to match a posit
 | \w \W           | A word character, short for [a-zA-Z_0-9];  same but negated                                                        |
 | \b              | Word boundary                                                                                                      |
 
-### Regex quantifiers
+### Quantifiers
 
-Quantifiers let you modify how often a group or character is allowed.
+Quantifiers let you modify how often a group or character (class) is allowed.
 
 | Quantifier | Description                                                                                              |
 |------------|----------------------------------------------------------------------------------------------------------|
@@ -144,21 +147,22 @@ For more complex tasks, use class `Pattern` to specify it and class `Matcher` to
 Here is a typical use case:
 
 ```java
-        //with case insensitive matching
-        Pattern hinc2 = Pattern.compile("(?i)(GT([CT][AG])AC)");
-        Matcher matcher = hinc2.matcher("GTCAACtgttgaccc");
+//with case insensitive matching
+Pattern hinc2 = Pattern.compile("(?i)(GT([CT][AG])AC)");
+Matcher matcher = hinc2.matcher("GTCAACtgttgaccc");
 
-        while (matcher.find()) {
-            System.out.println("matcher.group() = " + matcher.group());
-            //whole pattern - same as group()
-            System.out.println("matcher.group(0) = " + matcher.group(0));
-            System.out.println("matcher.group(2) = " + matcher.group(2));
-            System.out.println("matcher.start() = " + matcher.start());
-        }
+while (matcher.find()) {
+    System.out.println("matcher.group() = " + matcher.group());
 
-        //with chained method calls - replace with group capture
-        final String replaced = hinc2.matcher("GTCAACtgttgaccc").replaceAll("[[$1]]");
-        System.out.println("replaced = " + replaced);
+    //whole pattern - same as group()
+    System.out.println("matcher.group(0) = " + matcher.group(0));
+    System.out.println("matcher.group(2) = " + matcher.group(2));
+    System.out.println("matcher.start() = " + matcher.start());
+}
+
+//with chained method calls - replace with group capture
+final String replaced = hinc2.matcher("GTCAACtgttgaccc").replaceAll("[[$1]]");
+System.out.println("replaced = " + replaced);
 ```
 
 outputs
@@ -175,6 +179,8 @@ matcher.start() = 7
 replaced = [[GTCAAC]]t[[gttgac]]cc
 </pre>
 
-Note: **when a `Pattern` object is used more than once, a compiled version should be cashed!** Usually this is done in an instance or class variable.
+:::{caution}
+**when a `Pattern` object is used more than once, a compiled version should be cashed!** Usually this is done in an instance or class variable.
+:::
 
 There is much more to regex of course; GIYF for more detailed use cases.

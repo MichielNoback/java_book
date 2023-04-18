@@ -1,13 +1,19 @@
 # Sorting
 
-Sorting is one of the fundamental operations on data. You want the best student, the closest cafe, all players with a top 10% ranking...this all involves sorting.
+Sorting is one of the fundamental operations on data. You want the best student, the closest cafe, all players with a top 10% ranking...these all involve sorting.
 
-Sorting in "classic" Java (not using the Streams API) is done using the the `Collections.sort()` methods and, since Java 8, some methods in class List. These methods require either (a) that the objects you want to sort implement the `Comparable` interface or (b) that you provide a sorter object implementing the `Comparator` interface.  
-Arrays of primitives (int, double, float, boolean etc.) or objects (if the objects implement `Comparable` - see below) can be sorted (in-place) using the `Arrays.sort()` and Arrays.parallelSort()` functions. Have a look at the docs; they will not be discussed here.  
+Sorting in "classic" Java (not using the Functional Programming API) is done using the the `Collections.sort()` methods and, since Java 8, some methods in class List. These methods require either  
+
+1. that the objects you want to sort implement the `Comparable` interface or  
+2. that you provide a sorter object implementing the `Comparator` interface.  
+
+:::{note}
+Arrays of primitives (int, double, float, boolean etc.) or objects that implement `Comparable` (see below) can be sorted in-place using the `Arrays.sort()` and Arrays.parallelSort()` functions. Have a look at the docs; they will not be discussed here.  
+:::
 
 ## "Natural" sorting with the `Comparable` interface
 
-This is the first and main sorting strategy. Whenever the type in your collection implements the Comparable interface, it is said to have "natural ordering". This interface is described in detail later. Java classes such as String, Integer, and Double all implement the Comparable interface. In IntelliJ you can see this when you select a String variable declaration and press F1 (or \^Q):
+This is the first and main sorting strategy. Whenever the type in your collection implements the Comparable interface, it is said to have "natural ordering". This interface is described in detail below. Java classes such as String, Integer, and Double all implement the Comparable interface. In IntelliJ you can see this when you select a String variable declaration and press F1 (or \^Q):
 
 ![Javadoc of class String](figures/String_Javadoc.png)
 
@@ -15,20 +21,20 @@ You can see `Comparable<String>` in the `implements` declaration.
 
 For Strings, natural order means alphabetic order and for numbers numeric order (from low to high). Using natural ordering can be achieved in two places (since Java 8): In the Collections class and in the List interface.
 
+### Sorting using `Collections.sort()`
+
 We'll start with the "classic" method of `Collections`.
+Its signature is rather impressive, but fortunately using it is not.
 
-Its signature is rather complex, but fortunately using it is not.
-
-```html
-<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
-public static <span style="color:darkorange;">&lt;T extends Comparable&lt;? super T&gt;&gt;</span> void sort(<span style="color:darkgreen;">List&lt;T&gt; list</span>)
-</pre>
+```java
+public static <T extends Comparable<? super T>> void sort(List<T> list)
 ```
+
 This signature tells us a lot:
 
--   it is static, so it can be used directly on the Collections class
+-   it is static, so it can be used directly on the `Collections` class
 -   it has `void` as return type, so it sorts a list ***in place*** instead of returning a sorted copy.
--   it takes as argument a `List`
+-   it takes as argument a `List`, so it is applicable to all List-implementing classes such as `ArrayList`, `LinkedList` etc.
 -   the elements of the list are of type `T` (a generic placeholder), where the constraint on type `T` is that it should implement the `Comparable` interface - more specifically: a `Comparable` comparing T or its supertypes.
 
 Key here is the `Comparable` interface (package `java.util`):
@@ -36,17 +42,33 @@ Key here is the `Comparable` interface (package `java.util`):
 ``` java
 package java.util;
 public interface Comparable<T> {
+    // This is the abstract method that you need to implement
     int compareTo(T other);
 }
 ```
 
-The contract is really simple. To be comparable to other objects (of the same class), a class needs to implement the method `compareTo(T other)` where `T` is the class implementing the interface. The method signature of `compareTo()` states that it should receive an instance of `T` and return an integer indicating the sort order of the current object with respect to the other object. The convention for this return value is
+The contract is really simple. To be comparable to other objects of the same class, a class needs to implement the method `compareTo(T other)` where `T` is the class implementing the interface. The method signature of `compareTo()` states that it should receive an instance of `T` and return an integer indicating the sort order of the current object with respect to the other object. 
 
--   a negative value if `this` \< `other`
+:::{admonition} The contract of Comparable
+The convention for the return value of `int compareTo(T other)` is
+
+-   a negative value if `this` &lt; `other`
 -   zero if `this` equals `that`
--   a positive value if `this` \> `other`
+-   a positive value if `this` &gt; `other`
+:::
 
-Since String and other Java classes already implement this interface, you can sort them without any further work:
+Many Java classes already implement this interface. For instance, here is the `Integer` implementation:
+
+![compareTo_in_Integer.png](figures/compareTo_in_Integer.png)
+
+The `compareTo()` method itself delegates to static function `compare`, passing `this.value` and `anotherInteger.value` as arguments. The `compare()` method itself uses two nested ternary operators to figure out the return value.  
+
+:::{tip}
+Have a look at the String implementation of `compareTo()` yourself.  
+You can use `Ctrl/Cmd + B` to go from method call to implementation.
+:::
+
+Thus, since String, Integer and other Java classes already implement this interface, you can sort them without any further work:
 
 ``` java
 List<String> names = new ArrayList<>();
@@ -58,14 +80,14 @@ System.out.println("names after natural sort: " + names);
 
 This will output
 
-```html
 <pre class="console_out">
 names before sort: [Jordan, Wanda, James, rose, Aaron]
 names after natural sort: [Aaron, James, Jordan, Wanda, rose]
 </pre>
-```
+
 As you can see, capitals come before lower case letters.
 
+### Alternative: `list.sort()`
 The exact same thing could have been achieved using the `sort()` method of class `List`, added in Java 8:
 
 ``` java
@@ -79,7 +101,7 @@ The signature of this sort method is:
 public void sort(@Nullable java.util.Comparator<? super E> c)
 ```
 
-It takes a `Comparator` instance; this interface is described in the next section. Some common default Comparators have already been implemented, for natural (`Comparator.naturalOrder()`) and reverse (`Comparator.reverseOrder()`) order for use with classes that implement Comparable. Note that the `@Nullable` in the above signature means that if `null` is passed, it defaults to `Comparator.naturalOrder()` An overloaded method would have been better design in my opinion, because this `names.sort(null);` is really ugly.
+It takes a `Comparator` instance; this interface is described in the next section. Some common default Comparators have already been implemented, for natural (`Comparator.naturalOrder()`) and reverse order (`Comparator.reverseOrder()`) for use with classes that already implement Comparable. Note that the `@Nullable` in the above signature means that if `null` is passed, it defaults to `Comparator.naturalOrder()` An overloaded method would have been better design in my opinion, because this `names.sort(null);` is really ugly.
 
 Here is the reverse ordering:
 
@@ -109,35 +131,31 @@ outputs
 names case insensitive sort [Aaron, James, Jordan, rose, Wanda]
 </pre>
 ```
-### Custom comparable implementations {.unnumbered}
+
+:::{note}
+The `Comparator` class provides many utility functions that serve Comparator implementations:
+
+```{image} figures/Comparator_factories.png
+:alt: Comparator factory methods
+:width: 600px
+:align: center
+```
+
+Have a look at the docs for details.
+:::
+
+### Custom comparable implementations
 
 Let's create our own implementation of the Comparable interface in a custom class and demonstrate its use.
 
-Here is a simple Bird class.
+Here is a Bird **_record_** (see previous chapter).
 
-``` java
+```java
 package snippets.apis;
 
-public class Bird {
-    String englishName;
-    double wingSpan;
-    int maximumAge;
-
-    public Bird(String englishName, double wingSpan, int maximumAge) {
-        this.englishName = englishName;
-        this.wingSpan = wingSpan;
-        this.maximumAge = maximumAge;
-    }
-
-    @Override
-    public String toString() {
-        return "Bird{" +
-                "englishName='" + englishName + '\'' +
-                ", wingSpan=" + wingSpan +
-                ", maximumAge=" + maximumAge +
-                '}';
-    }
+public record Bird(String englishName, double wingSpan, int maximumAge) {
 }
+
 ```
 
 The first thing you need to figure out when implementing sorting is ***what is the natural sort order of this class?*** This depends entirely on you application: which aspect of your class will be used primarily for sorting. In this case, I choose the `wingSpan` property.
@@ -152,9 +170,9 @@ Step 2 is done by IntelliJ once you've done 1 and selected te context menu (`alt
 
 ![Implement interface methods](figures/implement_interface_methods.png)
 
-Select the single method and press enter. This is the result.
+Select the `compareTo()`` method and press enter. This is the result.
 
-``` java
+```java
 @Override
 public int compareTo(Bird other) {
     return 0;
@@ -199,7 +217,6 @@ birds.stream().forEach(bird -> System.out.println("\t" + bird));
 
 outputs
 
-```html
 <pre class="console_out">
 Before:
     Buzzard', ws=1.3, max.age=29
@@ -216,7 +233,7 @@ After sort on wingspan:
     Griffon vulture', ws=2.5, max.age=25
     White-tailed eagle', ws=2.5, max.age=25
 </pre>
-```
+
 Note the ascending order of wingspan. What if the natural order is descending in your opinion? Simply reverse the sort logic:
 
 ``` java
@@ -243,7 +260,9 @@ After:
     Kestrel', ws=0.35, max.age=15
 </pre>
 ```
-Although this sort logic is just fine, it is often better to use classes that are dedicated to dealing with the datatype and ***delegate*** to their implemented and tested methods:
+
+:::{admonition} Delegate if you can
+Although this logic is just fine, it is often better to use classes that are dedicated to dealing with the datatype and ***delegate*** to their implemented and tested methods:
 
 ``` java
 @Override
@@ -252,23 +271,22 @@ public int compareTo(Bird other) {
     return Double.compare(this.wingSpan, other.wingSpan);
 }
 ```
+:::
 
 ## Sorting using a custom `Comparator`
 
 What if you want to sort in other ways as well, or if you do not want to settle on a natural sort order? Then there is the second form of the `Collections.sort()` method, also supported by the `List.sort()` method since Java 8:
 
-```html
-<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
-public static <span style="color:darkred;">&lt;T&gt;</span> void sort(<span style="color:darkgreen;">List&lt;T&gt; list</span>, <span style="color:darkorange;">Comparator&lt;? super T&gt; c</span>)
-</pre>
+```java
+public static <T> void sort(List<T> list, Comparator<? super T> c)
 ```
+
 or
 
-```html
-<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
-public void sort(<span style="font-style: italic;">@Nullable</span> <span style="color:darkorange;">Comparator&lt;? super E&gt; comparator</span>)
-</pre>
+```java
+public void sort(@Nullable Comparator<? super E> comparator)
 ```
+
 The `Comparator` interface has a single abstract method:
 
 ``` java
@@ -288,7 +306,7 @@ import java.util.Comparator;
 public class BirdNameComparator implements Comparator<Bird> {
     @Override
     public int compare(Bird first, Bird second) {
-        return first.englishName.compareTo(second.englishName);
+        return first.englishName().compareTo(second.englishName());
     }
 }
 ```
@@ -297,6 +315,7 @@ This one sorts on name, and again delegates to the type of the instance variable
 
 ``` java
 Collections.sort(birds, new BirdNameComparator());
+
 //or, the Java8+ way
 birds.sort(new BirdNameComparator())
 ```
@@ -312,26 +331,35 @@ Collections.sort(birds, new Comparator<Bird>(){
 });
 ```
 
-Actually, since Java8, sorting has become much versatile, but you need to climb the learning curve of lambdas first:
+Actually, since Java 8, sorting has become much versatile, but you need to climb the learning curve of lambdas first:
 
 ``` java
 //Java8+ alternative: OK
-Collections.sort(birds, (birdOne, birdTwo) -> Integer.compare(birdOne.maximumAge, birdTwo.maximumAge));
+Collections.sort(birds, (birdOne, birdTwo) -> Integer.compare(birdOne.maximumAge(), birdTwo.maximumAge()));
+
+//Java8+ alternative: better
+Collections.sort(birds, Comparator.comparingInt(bird -> bird.maximumAge()));
+
 //Java8+ alternative: best
-Collections.sort(birds, Comparator.comparingInt(bird -> bird.maximumAge));
+Collections.sort(birds, Comparator.comparingInt(Bird::maximumAge));
 ```
 
-Lambdas are out of scope for this course, unfortunately.
+:::{note}
+Lambdas are discussed in the chapter {doc}`/03_apis/functional_programming`.
+:::
 
 ## Multilevel sorting
 
-The final part of this post does not deal with the API but with the logic to implement it. You have seen how to code simple comparison logic. But what if you want to sort on multiple properties? Suppose, in the case of the birds example, we wanted to sort on wingspan first and then on name. No matter how many properties, the pattern is always the same: check the primary property, return this if they are not equal. If they are equal, check on the secondary property:
+You have seen how to code simple comparison logic. But what if you want to sort on multiple properties? Suppose, in the case of the birds example, we wanted to sort on wingspan first and then on name. No matter how many properties, the pattern is always the same: check the primary property, return this if they are not equal. If they are equal, check on the secondary property:
 
 ``` java
 @Override
 public int compareTo(Bird other) {
+    // primary property
     int compareWingSpan = Double.compare(this.wingSpan, other.wingSpan);
+    
     if (compareWingSpan == 0) {
+        // primary property is the same; check secondary property
         return this.englishName.compareTo(other.englishName);
     }
     return compareWingSpan;
@@ -340,4 +368,4 @@ public int compareTo(Bird other) {
 
 Note that with alphabetical sorting capitals come before lower case letters. This is because the numeric values of the table of ASCII codes are used:
 
-![The ASVII code](figures/Ascii-codes-table.png)
+![The ASCII code](figures/Ascii-codes-table.png)

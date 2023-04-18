@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '02_syntax/flow_control';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Methods" href="methods.html" />
+    <link rel="next" title="9. Methods and Constructors" href="methods.html" />
     <link rel="prev" title="7. Operators" href="operators.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operators.html">7. Operators</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -372,14 +372,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-if-else">8.1. if [else if] [else]</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while">8.2. while</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for">8.3. for</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreach">8.3.1. foreach {-}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deciding-with-if-else-if-else">8.1. Deciding with <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span> <span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-line-blocks">8.1.1. Single-line blocks</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-and-continue">8.4. break and continue</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switch-case">8.5. switch/case</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-with-for">8.2. Looping with <code class="docutils literal notranslate"><span class="pre">for</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreach">8.2.1. foreach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-with-while">8.3. Looping with <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-and-continue">8.4. <code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-options-with-switch-case">8.5. Discrete options with <code class="docutils literal notranslate"><span class="pre">switch/case</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -394,8 +397,8 @@ document.write(`
   <div class="tex2jax_ignore mathjax_ignore section" id="flow-control">
 <h1><span class="section-number">8. </span>Flow control<a class="headerlink" href="#flow-control" title="Permalink to this headline">#</a></h1>
 <p>This is a straightforward listing of the Java flow control structures.</p>
-<div class="section" id="if-else-if-else">
-<h2><span class="section-number">8.1. </span>if [else if] [else]<a class="headerlink" href="#if-else-if-else" title="Permalink to this headline">#</a></h2>
+<div class="section" id="deciding-with-if-else-if-else">
+<h2><span class="section-number">8.1. </span>Deciding with <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span> <span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span></code><a class="headerlink" href="#deciding-with-if-else-if-else" title="Permalink to this headline">#</a></h2>
 <p>If/else is the basic decision-making mechanism in every programming language.
 In Java, both “else if” and “else” are optional.</p>
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
@@ -404,31 +407,53 @@ if (<span style="color:darkred;font-style:italic;">condition</span>) {}
 <span style="color:darkgreen;">[</span>else {}<span style="color:darkgreen;">]?</span>
 </pre>
 <p>So, the “if” block is the required basis, “else if” can be used zero to many times - but only directly following the “if”, and the entire statement is closed by an optional “else”.</p>
-<p>So this is not legal:</p>
+<p>So these are not legal:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">foo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>and neither is this, because the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">number</span> <span class="pre">=</span> <span class="pre">2;</span></code> interrupts the if/else block:</p>
+<p>(the <code class="docutils literal notranslate"><span class="pre">else</span> <span class="pre">if()</span></code> comes after the <code class="docutils literal notranslate"><span class="pre">else</span></code>)</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">foo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>(two <code class="docutils literal notranslate"><span class="pre">else</span></code> blocks)</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">foo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
+<p>(the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">number</span> <span class="pre">=</span> <span class="pre">2;</span></code> interrupts the if/else block)</p>
+<p>But this <em>is</em> legal:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">foo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="while">
-<h2><span class="section-number">8.2. </span>while<a class="headerlink" href="#while" title="Permalink to this headline">#</a></h2>
-<p>While has two variants:</p>
-<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
-while (<span style="color:darkred;font-style:italic;">condition</span>) { } 
-do { } while (<span style="color:darkred;font-style:italic;">condition</span>);
-</pre>
-<p>The difference is that <code class="docutils literal notranslate"><span class="pre">do{}while()</span></code> is guaranteed to be executed at least once, whereas <code class="docutils literal notranslate"><span class="pre">while(condition)</span> <span class="pre">{}</span></code> can be skipped entirely if “condition” is false at the first evaluation.</p>
+<div class="section" id="single-line-blocks">
+<h3><span class="section-number">8.1.1. </span>Single-line blocks<a class="headerlink" href="#single-line-blocks" title="Permalink to this headline">#</a></h3>
+<p>When there is a single statement in a block (the part between the curly braces) you are allowed to keep it on the same line and omit the braces, as in this example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">boolean</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getFoo</span><span class="p">();</span>
+<span class="k">if</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Foo is true!&quot;</span><span class="p">);</span>
+<span class="k">else</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;The foo says no...&quot;</span><span class="p">);</span>
+</pre></div>
 </div>
-<div class="section" id="for">
-<h2><span class="section-number">8.3. </span>for<a class="headerlink" href="#for" title="Permalink to this headline">#</a></h2>
-<p>Iterates over a collection or a defined series of steps:</p>
+<p>But in such cases you may want to consider using the ternary operator:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">boolean</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getFoo</span><span class="p">();</span>
+<span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">foo</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Foo is true!&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The foo says no...&quot;</span><span class="p">)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="looping-with-for">
+<h2><span class="section-number">8.2. </span>Looping with <code class="docutils literal notranslate"><span class="pre">for</span></code><a class="headerlink" href="#looping-with-for" title="Permalink to this headline">#</a></h2>
+<p>The “classic” control structure with <code class="docutils literal notranslate"><span class="pre">for</span></code> iterates over a collection or a defined series of steps:</p>
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
 for (<span style="color:darkred;font-style:italic;">init</span>; <span style="color:darkred;font-style:italic;">condition</span>; <span style="color:darkred;font-style:italic;">change</span>) { } 
 </pre>
@@ -444,7 +469,7 @@ for (<span style="color:darkred;font-style:italic;">init</span>; <span style="co
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>All three elements are optional. This, for instance, is a legal for-loop:</p>
+<p>All three elements are optional. This, for instance, is also a legal for-loop:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">nucleotides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Adenine&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Cytosine&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Guanine&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Thymine&quot;</span><span class="p">};</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nucleotides</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="o">--</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -452,7 +477,7 @@ for (<span style="color:darkred;font-style:italic;">init</span>; <span style="co
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Note that the change does not need to be an increment.<br />
+<p>Note that the change does not need to be an increment but can be any change, like the decremet in this example.<br />
 Even this one is legal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(;;)</span> <span class="p">{</span>
     <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Hello &quot;</span><span class="p">);</span>
@@ -473,7 +498,7 @@ are quite often used to wait for user input in a terminal setting:</p>
 </pre></div>
 </div>
 <div class="section" id="foreach">
-<h3><span class="section-number">8.3.1. </span>foreach {-}<a class="headerlink" href="#foreach" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.1. </span>foreach<a class="headerlink" href="#foreach" title="Permalink to this headline">#</a></h3>
 <p>The for-loop also has a variant. It is called the <strong><em>foreach</em></strong> loop. The difference is that there is no increment or condition; it is simply used to iterate a collection (Arrays or Collection types dealt with later).</p>
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
 for (<span style="color:darkred;font-style:italic;">element</span> : <span style="color:darkred;font-style:italic;">collection</span>) { } 
@@ -487,19 +512,43 @@ for (<span style="color:darkred;font-style:italic;">element</span> : <span style
 </div>
 </div>
 </div>
+<div class="section" id="looping-with-while">
+<h2><span class="section-number">8.3. </span>Looping with <code class="docutils literal notranslate"><span class="pre">while</span></code><a class="headerlink" href="#looping-with-while" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">while</span></code> loop is used to loop when there is no predefined number of iterations and/or no underlying collection.</p>
+<p>It has two variants:</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+while (<span style="color:darkred;font-style:italic;">condition</span>) { } 
+</pre>
+<p>and</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+do { } while (<span style="color:darkred;font-style:italic;">condition</span>) 
+</pre>
+<p>The difference is that <code class="docutils literal notranslate"><span class="pre">do{}</span> <span class="pre">while()</span></code> is guaranteed to execute at least once, whereas <code class="docutils literal notranslate"><span class="pre">while(condition)</span> <span class="pre">{}</span></code> can be skipped entirely if “condition” is <code class="docutils literal notranslate"><span class="pre">false</span></code> at the first evaluation.</p>
+</div>
 <div class="section" id="break-and-continue">
-<h2><span class="section-number">8.4. </span>break and continue<a class="headerlink" href="#break-and-continue" title="Permalink to this headline">#</a></h2>
-<p>All iteration structures (the while <code class="docutils literal notranslate"><span class="pre">while</span></code> variants and both <code class="docutils literal notranslate"><span class="pre">for</span></code> variants) have the possibility to leave the current iteration early, or the loop entirely.</p>
+<h2><span class="section-number">8.4. </span><code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code><a class="headerlink" href="#break-and-continue" title="Permalink to this headline">#</a></h2>
+<p>All iteration structures (the <code class="docutils literal notranslate"><span class="pre">while</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span></code> variants) and the <code class="docutils literal notranslate"><span class="pre">switch</span></code> structure have the possibility to leave the current iteration early, or the loop entirely.</p>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> - leave the loop (or the <code class="docutils literal notranslate"><span class="pre">switch</span></code> block)</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> - abort current iteration and go to next iteration</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> - abort current iteration of the loop and go to next iteration</p></li>
 </ul>
+<p>Here the loop is designed to do nothing with Scorpions.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">zoo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Giraffe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Scorpion&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Zebra&quot;</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">zoo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">animal</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Scorpion&quot;</span><span class="p">))</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;animal = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">animal</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="switch-case">
-<h2><span class="section-number">8.5. </span>switch/case<a class="headerlink" href="#switch-case" title="Permalink to this headline">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">switch/case</span></code> structure is a decision flow control structure that is always replaceable by if/else. However,
-<code class="docutils literal notranslate"><span class="pre">switch/case</span></code> is often more efficient, and better suited to deal with choosing between different discrete options.
+</div>
+<div class="section" id="discrete-options-with-switch-case">
+<h2><span class="section-number">8.5. </span>Discrete options with <code class="docutils literal notranslate"><span class="pre">switch/case</span></code><a class="headerlink" href="#discrete-options-with-switch-case" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">switch/case</span></code> structure is a decision flow control structure that is always replaceable by if/else. However, <code class="docutils literal notranslate"><span class="pre">switch/case</span></code> is often more efficient, and better suited to deal with choosing between different discrete options.
 Where <code class="docutils literal notranslate"><span class="pre">if/else</span></code> works with boolean conditions, <code class="docutils literal notranslate"><span class="pre">switch/case</span></code> works with discrete cases.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This structure requires <em>compile time constants</em> to be legal (compilable). These include booleans, Strings, integers and enums, but not float or double or mutable object instances.</p>
+</div>
 <p>The formal description is</p>
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
 switch (<span style="color:darkred;font-style:italic;">actual case</span>) {
@@ -515,10 +564,10 @@ switch (<span style="color:darkred;font-style:italic;">actual case</span>) {
 <span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Some weather, huh?&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;Belgium&quot;</span><span class="p">:</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;It is Belgian fries!&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Let&#39;s get a beer!&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="k">default</span><span class="p">:</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Have a beer?&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;What shall we talk about?&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -558,7 +607,7 @@ Have a beer?
 </pre>
 <p>Although this seems rather illogical, there are uses for this behavior. For example, consider this error
 handler for a web application:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="nf">errorMessage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">errorCode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">errorMessage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">errorCode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
 <span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">errorCode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">401</span><span class="p">:</span>
@@ -566,6 +615,9 @@ handler for a web application:</p>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">403</span><span class="p">:</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">405</span><span class="p">:</span>
 <span class="w">            </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;You are trying to do something that is not allowed&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">418</span><span class="p">:</span>
+<span class="w">            </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I am a teapot; I cannot brew coffee&quot;</span><span class="p">;</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">404</span><span class="p">:</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">503</span><span class="p">:</span>
@@ -641,7 +693,7 @@ Some exotic error occurred. Try again later
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Methods</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Methods and Constructors</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -663,14 +715,17 @@ Some exotic error occurred. Try again later
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-if-else">8.1. if [else if] [else]</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while">8.2. while</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for">8.3. for</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreach">8.3.1. foreach {-}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deciding-with-if-else-if-else">8.1. Deciding with <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span> <span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-line-blocks">8.1.1. Single-line blocks</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-and-continue">8.4. break and continue</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switch-case">8.5. switch/case</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-with-for">8.2. Looping with <code class="docutils literal notranslate"><span class="pre">for</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foreach">8.2.1. foreach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-with-while">8.3. Looping with <code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-and-continue">8.4. <code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-options-with-switch-case">8.5. Discrete options with <code class="docutils literal notranslate"><span class="pre">switch/case</span></code></a></li>
 </ul>
   </nav></div>
 

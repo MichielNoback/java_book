@@ -124,7 +124,11 @@ public class HelloWorld {
 
 Click the green triangle within the editor border and select "run 'HelloWorld.main()' Note there is also a shortcut for running `main()`: `^ + shift + R`.
 
-![Run the app](figures/run_main.png)
+```{image} figures/run_main.png
+:alt: Run the app
+:width: 600px
+:align: center
+```
 
 In the console output on the lower pane, you will see this output, including the "Hello, World" message:
 

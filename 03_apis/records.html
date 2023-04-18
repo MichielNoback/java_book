@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>16. Records &#8212; The Java Track</title>
+    <title>15. Records &#8212; The Java Track</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '03_apis/records';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Sorting" href="sorting.html" />
-    <link rel="prev" title="15. Methods of class Object" href="class_object_methods.html" />
+    <link rel="next" title="16. Sorting" href="sorting.html" />
+    <link rel="prev" title="14. Methods of class Object" href="class_object_methods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -372,8 +372,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">16.1. Basics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization">16.2. Customization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">15.1. Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization">15.2. Customization</a></li>
 </ul>
             </nav>
         </div>
@@ -386,10 +386,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="records">
-<h1><span class="section-number">16. </span>Records<a class="headerlink" href="#records" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">15. </span>Records<a class="headerlink" href="#records" title="Permalink to this headline">#</a></h1>
 <div class="section" id="basics">
-<h2><span class="section-number">16.1. </span>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">#</a></h2>
-<p>One of the strongest points of criticism of the Java language is its verbosity - so much code is used to specify simple data constructs. Consider this class, which models the data of a biological Species in a simplified way:</p>
+<h2><span class="section-number">15.1. </span>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">#</a></h2>
+<p>One of the strongest points of criticism of the Java language is its verbosity - so much code is used to specify simple data constructs. Up to Java 14 this was certainly a justified criticism. Consider this class, which models the properties of a biological Species:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.records</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Species</span><span class="w"> </span><span class="p">{</span>
@@ -447,7 +447,11 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>That is a <em>lot</em> of code to for a class that simple models the data associated with a Species entity - a <em>data class</em>. We call this <em>boilerplate</em> code, and don’t like it. Of course, in modern IDEs like IntelliJ you can autogenerate almost all of this code (I only typed the class name and properties), but all this code also makes it harder to understand what this class really models: a Species entity with English name, Latin name and conservation status. Moreover, when a new field is added or an existing field is changed (e.g. status from String to enum), this requires a careful refactoring of the class.</p>
+<p>That is a <em>lot</em> of code to for a class that simply models the data associated with a Species entity - a <em>data class</em>. We call this <em>boilerplate</em> code, and we don’t like it. Of course, in modern IDEs like IntelliJ you can autogenerate almost all of this code - I only typed the class name and properties and the rest was generated though the keyboard shortcut <code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">N</span></code> - but all this code also makes it harder to understand what this class really models: a Species entity with English name, Latin name and conservation status. <strong><em>Moreover, when a new field is added or an existing field is changed (e.g. status from String to enum), this requires a careful refactoring of the class</em></strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">Biolerplate code</p>
+<p>In computer programming, boilerplate code, or simply boilerplate, are sections of code that are repeated in multiple places with little to no variation (<a class="reference external" href="https://en.wikipedia.org/wiki/Boilerplate_code">Wikipedia</a>). Wikipedia omits to say “and without the possibility to abstract this code away into functions or other constructs”.</p>
+</div>
 <p>Some would maybe suggest to simply take out all boilerplate, and access modifiers, like in the next example.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Species</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">;</span>
@@ -467,11 +471,17 @@ document.write(`
 </div>
 <p>This way, you simply set and get the properties directly, and rely on tha class Object <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code> definitions. Pause a moment to think why this would be a bad idea before continuing.</p>
 <p>The huge difference lies of course in immutability and encapsulation!</p>
-<p>Since Java 14, this has been overcome with addition of the new <code class="docutils literal notranslate"><span class="pre">record</span></code> type. Records are <strong><em>immutable data classes</em></strong> that require only the type and name of its fields. Here is the <code class="docutils literal notranslate"><span class="pre">Species</span></code> class as a record:</p>
+<p>Since Java 14, this has been overcome with addition of the new <code class="docutils literal notranslate"><span class="pre">record</span></code> type.</p>
+<div class="note admonition">
+<p class="admonition-title">Record</p>
+<p>Records are <strong><em>immutable data classes</em></strong> that require only specification of the type and name of its fields.<br />
+By using records, all boilerplate code is still created, but behind the scenes by the compiler. The <code class="docutils literal notranslate"><span class="pre">equals()</span></code>, <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code>, and <code class="docutils literal notranslate"><span class="pre">toString()</span></code> methods as well as the private, final instance variables, getters for each of these, and a public constructor are generated by the compiler.</p>
+</div>
+<p>Here is the <code class="docutils literal notranslate"><span class="pre">Species</span></code> class as a record:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Species</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genus</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>By using records, all boilerplate code is still created, but behind the scenes by the compiler. The <code class="docutils literal notranslate"><span class="pre">equals()</span></code>, <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code>, and <code class="docutils literal notranslate"><span class="pre">toString()</span></code> methods as well as the private, final instance variables, getters for each of these, and a public constructor are generated by the compiler. So, this single line of code will generate the same class as the first example, but only in its compiled form.</p>
+<p>This single line of code will generate the same class as the first example, but only in its compiled form.</p>
 <p>Here you see the auto-generated constructor and toString methods in action.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Species</span><span class="w"> </span><span class="n">bonobo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Species</span><span class="p">(</span><span class="s">&quot;Bonobo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pan paniscus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Endangered&quot;</span><span class="p">);</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;bonobo = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bonobo</span><span class="p">);</span>
@@ -492,9 +502,13 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="warning admonition">
+<p class="admonition-title">Standard getter names have changed</p>
+<p>Note that the compiler-provided getter names have changed to the name of the instance variable themselves. In records the compiler-generated getter for <code class="docutils literal notranslate"><span class="pre">englishName</span></code> will be <code class="docutils literal notranslate"><span class="pre">englishName()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">getEnglishName()</span></code>.</p>
+</div>
 </div>
 <div class="section" id="customization">
-<h2><span class="section-number">16.2. </span>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.2. </span>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">#</a></h2>
 <p>The default implementation of the constructor is simply this:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">Species</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">latinName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">englishName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">englishName</span><span class="p">;</span>
@@ -504,14 +518,14 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
 </pre></div>
 </div>
 <p>But you can override this by supplying your own. This can serve two purposes. The first is that you want to add some checks or initialization, and the second is to provide more than one constructor, publishing different argument lists.</p>
-<p>This constructor adds null-checking to two of the fields. Note that there is no parameter-list here: it is no regular constructor - it merely adds behavior to the auto-generated constructor.</p>
+<p>This constructor adds null-checking to two of the fields. Note that <strong><em>there is no parameter-list here</em></strong>: it is no regular constructor - it merely adds behavior to the auto-generated constructor.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Species</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">englishName</span><span class="p">);</span>
 <span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">latinName</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>So the first of these assertions passes and the second fails:</p>
+<p>So the first of these assertions passes and the second fails with a <code class="docutils literal notranslate"><span class="pre">NullPointerException</span></code>:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Test</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">testNullArguments</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">//passes</span>
@@ -524,31 +538,52 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This constructor provides a constructor that sets a default conservation status.</p>
+<p>This extra, custom constructor provides a means to set a default conservation status at construction time (this one is <strong><em>with</em></strong> an argument list).</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">Species</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">latinName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">this</span><span class="p">(</span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">latinName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Least Concern&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>So Species objects can be instantiated with only English and Latin names.</p>
+<p>So Species objects can be instantiated with only values for English and Latin names provided.</p>
+<div class="warning admonition">
+<p class="admonition-title">Immutability is not optional</p>
+<p>There are two things not allowed: changing the fields that are defined in the record parameter list, or adding new instance variables.
+The class below attempts to do both these illegal things; they will be spotted and forbidden by the compiler.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Species</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genus</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//instance field is not allowed in records</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">countries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setEnglishName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">newName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// cannot assign a value to a final variable</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">englishName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newName</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <p>Finally, you can add static and nonstatic method and fields, just as regular classes.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Species</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">latinName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DEFAULT_CONSERVATION_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Least Concern&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Overrides constructor behavior</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Species</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">englishName</span><span class="p">);</span>
 <span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">latinName</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
+<span class="w">    </span><span class="c1">// Adds an extra constructor</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Species</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">latinName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="n">latinName</span><span class="p">,</span><span class="w"> </span><span class="n">DEFAULT_CONSERVATION_STATUS</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
+<span class="w">    </span><span class="c1">// Publishes a &quot;derived&quot; property </span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">description</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">englishName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">latinName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; ]: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
+<span class="w">    </span><span class="c1">// A static factory method</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Species</span><span class="w"> </span><span class="nf">fromGenusAndSpecies</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">genus</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">species</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">latinName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Species</span><span class="p">(</span><span class="s">&quot;NO ENGLISH NAME&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">latinName</span><span class="p">);</span>
@@ -557,7 +592,10 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
 </pre></div>
 </div>
 <p>but when you are going in this direction, you lose the clean purpose of records and it may be advisable to go back to a regular class.</p>
-<p>In summary, whenever you need a simple data class, use the record type. When your class starts to show logic, use regular classes.</p>
+<div class="note admonition">
+<p class="admonition-title">Design rule</p>
+<p>In summary, whenever you need a simple data class, use the record type. When your class starts to show serious logic, use regular classes.</p>
+</div>
 </div>
 </div>
 
@@ -598,7 +636,7 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Methods of class Object</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Methods of class Object</p>
       </div>
     </a>
     <a class="right-next"
@@ -606,7 +644,7 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Sorting</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Sorting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -628,8 +666,8 @@ bonobo = Species[englishName=Bonobo, latinName=Pan paniscus, status=Endangered]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">16.1. Basics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization">16.2. Customization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">15.1. Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization">15.2. Customization</a></li>
 </ul>
   </nav></div>
 

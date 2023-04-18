@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -375,12 +375,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives">5.1. Primitives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-types">5.2. Reference types</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-reference-type-variable">5.2.1. Creating a reference type variable</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-string">5.2.2. Type String</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-string-is-immutable">5.2.2. Type String is Immutable!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-equality-of-strings">5.2.3. Testing equality (of Strings)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-special-case-null">5.2.4. A special case: <em>null</em></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference">5.3. What is the difference?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-or-object-what-s-the-difference">5.3. Primitive or Object: What’s the difference?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-passed-around-as-primitive">5.3.1. To be passed around as primitive</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-passed-around-as-reference-type">5.3.2. To be passed around as reference type</a></li>
 </ul>
@@ -399,14 +399,19 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="data-types">
 <h1><span class="section-number">5. </span>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">#</a></h1>
-<p>Data forms the <strong><em>state</em></strong> of an object. They define the properties that define how it will <strong><em>behave</em></strong> through methods.
-As stated before, Java is a <strong><em>strongly typed</em></strong> language. That means every variable, method parameter and method return type needs to have a declared type. These types can be <strong><em>primitives</em></strong> or <strong><em>reference types</em></strong>. This post deals with both, and with the “behavioral” differences between them.</p>
+<p>All instance variables together, its data, form the <strong><em>state</em></strong> of an object. These properties influence how methods <strong><em>behave</em></strong>.<br />
+As stated before, Java is a <strong><em>statically, strongly typed</em></strong> language. That means every variable, method parameter and method return type needs to have a declared type. These types can be <strong><em>primitives</em></strong> or <strong><em>reference types</em></strong>. This post deals with both, and with the “behavioral” differences between them.</p>
+<div class="admonition-statically-strongly admonition">
+<p class="admonition-title">Statically? Strongly?</p>
+<p>Static/dynamic typing refers to the time when type checking occurs: compile time for static typing, and run time for dynamic languages. Likewise, strong/weak typing refers to how aggressive a language is in enforcing its type system.</p>
+</div>
 <div class="section" id="primitives">
 <h2><span class="section-number">5.1. </span>Primitives<a class="headerlink" href="#primitives" title="Permalink to this headline">#</a></h2>
-<p>In essence, every programming language knows about the same data types: integers, floats, booleans, Strings. Java is no different. However, there are a few major distinctions. First, you need to declare the type of every variable. Also, conversion between them usually needs to be done explicitly. Finally, for memory efficiency reasons, there are “subtypes” of integers and floats. Floating-point numbers for instance (numbers with a decimal part), can be represented by the <code class="docutils literal notranslate"><span class="pre">float</span></code> type (“floating point number) or the <code class="docutils literal notranslate"><span class="pre">double</span></code> (“double-precision floating point number”) which takes twice as much of memory. You have to realise Java was first launched in the 1990s, when memory was a scarce and valuable asset in a computer…</p>
+<p>In essence, every programming language knows about the same data types: integers, floats, booleans, Strings. Java is no different. However, there are a few major distinctions. First, you need to declare the type of every variable (statically typed). Also, conversion between them usually needs to be done explicitly, using <em>type casting</em>.<br />
+Finally, for memory efficiency reasons, there are “subtypes” of integers and floats. Floating-point numbers for instance (numbers with a decimal part), can be represented by the <code class="docutils literal notranslate"><span class="pre">float</span></code> type (“floating point number) or the <code class="docutils literal notranslate"><span class="pre">double</span></code> (“double-precision floating point number”) which takes twice as much of memory. You have to realise Java was first launched in the 1990s, when memory was a scarce and valuable asset in a computer…</p>
 <p>Here are all the primitive types:</p>
 <p><img alt="Primitive types" src="../_images/primitive_types.png" /></p>
-<p>The three steps of primitive type creation are these.</p>
+<p>The three steps of primitive type creation are depicted below.</p>
 <p><img alt="Create primitive" src="../_images/create_primitive.png" /></p>
 <p>First, a variable of a certain type is declared. A memory slot of the appropriate size is reserved. Then the bit-pattern representing the declared value is created and put into the memory slot. Finally the variable is “coupled” to the memory slot.</p>
 <p>Here is some demo code where some of these types are used.</p>
@@ -445,9 +450,8 @@ As stated before, Java is a <strong><em>strongly typed</em></strong> language. T
 <span class="n">kill</span> <span class="n">average</span> <span class="o">=</span> <span class="mf">10.55</span>
 </pre></div>
 </div>
-<p>In the above example, all variables were declared and initialized in one statement, but it is allowed
-to split this up. The only thing that is illegal (not compilable) is to leave a declared variable uninitialized and
-access it:</p>
+<p>In the above example, all variables were declared and initialized in one statement, but it is allowed to split this up.
+The only thing that is illegal (not compilable) is to leave a declared variable uninitialized and then try to access it:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//LEGAL</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">killCount</span><span class="p">;</span>
 <span class="n">killCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -457,7 +461,7 @@ access it:</p>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;livesLived = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">livesLived</span><span class="p">);</span><span class="w"> </span><span class="c1">//but here!</span>
 </pre></div>
 </div>
-<p>When combining primitives in mathematical operations, they usually behave as expected. However, when you start combining them in a “mixed” environment, it becomes a bit tricky. The general rule is <strong><em>it is always safe to “up” the precision or keep it equal, but dangerous to “lower” the precision</em></strong>. For that reason, lowering the precision needs to be done explicitly, through a <strong><em>(type) cast</em></strong>. Here are a few examples using primitives.</p>
+<p>When combining primitives in mathematical operations they usually behave as expected. However, when you start combining them in a “mixed” environment, it becomes a bit tricky. The general rule is <strong><em>it is always safe to “up” the precision or keep it equal, but dangerous to “lower” the precision</em></strong>. For that reason, lowering the precision needs to be done explicitly, through a <strong><em>(type) cast</em></strong>. Here are a few examples using primitives.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">squareSurface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="c1">//200</span>
@@ -473,11 +477,11 @@ used in two ways. <code class="docutils literal notranslate"><span class="pre">M
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;division = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">division</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>the output is, slightly unexpected</p>
+<p>The output is, slightly unexpected</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">division</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
-<p>Can you explain?
+<p>Can you explain?<br />
 Two <code class="docutils literal notranslate"><span class="pre">int</span></code>s were divided (<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">/</span> <span class="pre">20</span></code>), resulting in an int. Since ints do not have a decimal part,
 this is 0. Casting a zero to a double subsequently resulted in 0.0.</p>
 <p>How to circumvent this problem? You need to convert one of them in an early stage into a double. Although both would work,
@@ -520,15 +524,17 @@ it is more logical to cast the numerator (<code class="docutils literal notransl
 Java class -also the ones you create- represent reference types.</p>
 <p>With primitive-typed variables, the value of the variable is simply the value, in bits, but with reference variables,
 the value of the variable is bits representing a way to get to a specific object (like a remote control)</p>
-<p><img alt="A remote control" src="../_images/remote_control.png" /></p>
+<a class="reference internal image-reference" href="../_images/remote_control.png"><img alt="A remote control" class="align-center" src="../_images/remote_control.png" style="width: 150px;" /></a>
 <div class="section" id="creating-a-reference-type-variable">
 <h3><span class="section-number">5.2.1. </span>Creating a reference type variable<a class="headerlink" href="#creating-a-reference-type-variable" title="Permalink to this headline">#</a></h3>
+<p>When looking at the figure below you can see how this differs from creating a primitive type variable.</p>
 <p><img alt="A reference-type variable" src="../_images/create_reference_type.png" /></p>
 </div>
-<div class="section" id="type-string">
-<h3><span class="section-number">5.2.2. </span>Type String<a class="headerlink" href="#type-string" title="Permalink to this headline">#</a></h3>
-<p>Type String needs some special attention. It is actually NOT a primitive type, although always dealt with alongside them.
-You could have guessed from the name, which starts with a capital. It is a full-fledged Java class that can be instantiated and that has many nice methods. It is however immutable as in most languages, and has a shortcuts that most other classes do not have: you can create them from a literal.
+<div class="section" id="type-string-is-immutable">
+<h3><span class="section-number">5.2.2. </span>Type String is Immutable!<a class="headerlink" href="#type-string-is-immutable" title="Permalink to this headline">#</a></h3>
+<p>Type String needs some special attention.<br />
+It is actually NOT a primitive type, although always dealt with alongside them.
+You could have guessed from the name, which starts with a capital. It is a full-fledged Java class that can be instantiated and that has many nice methods. It is however immutable, as in most languages, and has a shortcuts that most other classes do not have: you can create them from a literal.
 Here is some example usage of class String.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">dnaOne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AGAGGTCTAGCTGA&quot;</span><span class="p">;</span>
 <span class="n">String</span><span class="w"> </span><span class="n">dnaTwo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GGTCTAGC&quot;</span><span class="p">;</span>
@@ -571,6 +577,11 @@ dnaOne == dnaFive: false
 dnaOne == dnaSix: true
 </pre>
 <p>And this has to do with String literal caching by the JVM.</p>
+<div class="warning admonition">
+<p class="admonition-title">Testing equality</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">==</span></code> to test <strong><em>sameness</em></strong>. This returns true if the variables are the same primitives or point to the same object on the heap.<br />
+Use the <code class="docutils literal notranslate"><span class="pre">.equals()</span></code> method to test for <strong><em>logical equality</em></strong>.</p>
+</div>
 </div>
 <div class="section" id="a-special-case-null">
 <h3><span class="section-number">5.2.4. </span>A special case: <em>null</em><a class="headerlink" href="#a-special-case-null" title="Permalink to this headline">#</a></h3>
@@ -596,8 +607,8 @@ java.lang.NullPointerException
 </pre>
 </div>
 </div>
-<div class="section" id="what-is-the-difference">
-<h2><span class="section-number">5.3. </span>What is the difference?<a class="headerlink" href="#what-is-the-difference" title="Permalink to this headline">#</a></h2>
+<div class="section" id="primitive-or-object-what-s-the-difference">
+<h2><span class="section-number">5.3. </span>Primitive or Object: What’s the difference?<a class="headerlink" href="#primitive-or-object-what-s-the-difference" title="Permalink to this headline">#</a></h2>
 <div class="section" id="to-be-passed-around-as-primitive">
 <h3><span class="section-number">5.3.1. </span>To be passed around as primitive<a class="headerlink" href="#to-be-passed-around-as-primitive" title="Permalink to this headline">#</a></h3>
 <p>Java is pass-by-copy, so to pass a primitive means to pass a copy of it. Whatever happens with the copy has no impact on the original:</p>
@@ -756,12 +767,12 @@ these and primitives are.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives">5.1. Primitives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-types">5.2. Reference types</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-reference-type-variable">5.2.1. Creating a reference type variable</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-string">5.2.2. Type String</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-string-is-immutable">5.2.2. Type String is Immutable!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-equality-of-strings">5.2.3. Testing equality (of Strings)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-special-case-null">5.2.4. A special case: <em>null</em></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference">5.3. What is the difference?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-or-object-what-s-the-difference">5.3. Primitive or Object: What’s the difference?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-passed-around-as-primitive">5.3.1. To be passed around as primitive</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#to-be-passed-around-as-reference-type">5.3.2. To be passed around as reference type</a></li>
 </ul>

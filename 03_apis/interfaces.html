@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>13. Interfaces &#8212; The Java Track</title>
+    <title>12. Interfaces &#8212; The Java Track</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '03_apis/interfaces';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. The Java Collections API" href="collections.html" />
-    <link rel="prev" title="12. The power of naming" href="../02_syntax/demo_case_naming.html" />
+    <link rel="next" title="13. The Collections API" href="collections.html" />
+    <link rel="prev" title="11. Naming and commenting stuff" href="../02_syntax/naming_commenting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -372,8 +372,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-contract-without-implementation-interface">13.1. A contract without implementation: interface</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">13.2. Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-contract-without-implementation-interface">12.1. A contract without implementation: interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.2. Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -386,7 +386,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="interfaces">
-<h1><span class="section-number">13. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">12. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">#</a></h1>
 <p>So far, you have seen two basic types: primitives and classes. Classes have instance variables and methods acting on these. Here is an example.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Sequence</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
@@ -422,7 +422,7 @@ document.write(`
 <p>So the <strong><em>contract</em></strong> (or API, if you like) of class Sequence is that it can deliver its molecular weight and can generate a mutated copy of itself. Both are <strong><em>concrete</em></strong> methods that are implemented with a method body.</p>
 <p>Sometimes, however, you want to <strong><em>separate the contract from its implementation.</em></strong></p>
 <div class="section" id="a-contract-without-implementation-interface">
-<h2><span class="section-number">13.1. </span>A contract without implementation: interface<a class="headerlink" href="#a-contract-without-implementation-interface" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.1. </span>A contract without implementation: interface<a class="headerlink" href="#a-contract-without-implementation-interface" title="Permalink to this headline">#</a></h2>
 <p>Maybe you remember from Python the <code class="docutils literal notranslate"><span class="pre">print()</span></code> method. It has this signature</p>
 <p><code class="docutils literal notranslate"><span class="pre">print(*objects,</span> <span class="pre">sep='</span> <span class="pre">',</span> <span class="pre">end='\n',</span> <span class="pre">file=sys.stdout,</span> <span class="pre">flush=False)</span></code>.</p>
 <p>By default it writes to the console, <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code>, but you can change this
@@ -595,7 +595,7 @@ not interested in sequence really deadly anymore
 <p><img alt="File cretaed" src="../_images/finished_sequences_file.png" /></p>
 </div>
 <div class="section" id="summary">
-<h2><span class="section-number">13.2. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.2. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>Interfaces make it possible to define a contract or API in a way that makes it possible to deal with an object as <em>being of the contract type</em>, without knowing its implementation, and without using inheritance.</p>
 </div>
 </div>
@@ -632,12 +632,12 @@ not interested in sequence really deadly anymore
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../02_syntax/demo_case_naming.html"
+       href="../02_syntax/naming_commenting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>The power of naming</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Naming and commenting stuff</p>
       </div>
     </a>
     <a class="right-next"
@@ -645,7 +645,7 @@ not interested in sequence really deadly anymore
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>The Java Collections API</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>The Collections API</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -667,8 +667,8 @@ not interested in sequence really deadly anymore
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-contract-without-implementation-interface">13.1. A contract without implementation: interface</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">13.2. Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-contract-without-implementation-interface">12.1. A contract without implementation: interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">12.2. Summary</a></li>
 </ul>
   </nav></div>
 

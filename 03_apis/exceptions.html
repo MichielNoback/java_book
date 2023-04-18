@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>18. Exceptions &#8212; The Java Track</title>
+    <title>17. Exception handling &#8212; The Java Track</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '03_apis/exceptions';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. File IO" href="io.html" />
-    <link rel="prev" title="17. Sorting" href="sorting.html" />
+    <link rel="next" title="18. File IO" href="io.html" />
+    <link rel="prev" title="16. Sorting" href="sorting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sorting.html">17. Sorting</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sorting.html">16. Sorting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -362,7 +362,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exceptions</h1>
+    <h1>Exception handling</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,15 +372,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-exceptions">18.1. What are exceptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-and-unchecked-exceptions">18.2. Checked and unchecked exceptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-exceptions">18.2.1. Checked exceptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unchecked-exceptions">18.2.2. Unchecked exceptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">18.2.3. Errors</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-try-catch-elements">18.3. All try/catch elements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-with-resources">18.4. Try-with resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-exceptions">17.1. What are exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-vs-unchecked-exceptions">17.2. Checked vs unchecked exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-exceptions">17.3. Checked exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unchecked-exceptions">17.4. Unchecked exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">17.5. Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-try-catch-elements">17.6. All try/catch elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-with-resources">17.7. Try-with resources</a></li>
 </ul>
             </nav>
         </div>
@@ -392,13 +390,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="exceptions">
-<h1><span class="section-number">18. </span>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">#</a></h1>
-<p>Before dealing with file IO, exceptions need to be discussed. You need to deal with exceptions whenever you deal with the outside world. Why? The outside world is dangerous and unpredictable: files do not exist, or are not accessible to you, internet connections can be down, a database has a new password or URL…</p>
-<p>All these scenarios will <strong><em>throw</em></strong> an <code class="docutils literal notranslate"><span class="pre">Exception</span></code> your way. It is up to you, the application programmer, to <strong><em>catch</em></strong> them and deal with them. Either by following an alternative program path, or to quit the application elegantly.</p>
-<p>Exceptions are method return values that do not follow regular program flow; they are instantiated when something goes wrong and usually cause the program to behave differently.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="exception-handling">
+<h1><span class="section-number">17. </span>Exception handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">#</a></h1>
+<p>Before dealing with file IO, exceptions need to be discussed. Whenever you deal with the outside world (keyboard input, files, databases etc.) you need to deal with exceptions . Why? The outside world is dangerous and unpredictable: files do not exist, or are not accessible to you, internet connections can be down, a database has a new password or URL the possibilities for disaster are endless.</p>
+<p>All these scenarios will <strong><em>throw</em></strong> an <code class="docutils literal notranslate"><span class="pre">Exception</span></code> your way. It is up to you, the application programmer, to <strong><em>catch</em></strong> them and deal with them in an elegant manner. Either by following an alternative program path, or to quit the application with acceptable error messages.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>Exceptions are method return values that do not follow regular program flow; they are instantiated when something goes wrong. They usually cause the program to behave differently from normal flow.</p>
+</div>
 <div class="section" id="what-are-exceptions">
-<h2><span class="section-number">18.1. </span>What are exceptions<a class="headerlink" href="#what-are-exceptions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.1. </span>What are exceptions<a class="headerlink" href="#what-are-exceptions" title="Permalink to this headline">#</a></h2>
 <p>Consider this code.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.apis</span><span class="p">;</span>
 
@@ -431,14 +432,15 @@ The current executing function is always on top.
 When an exception or error occurs, you will see a <strong><em>traceback</em></strong> through this stack, from the top (where the error occurred) back to the main() function.
 This gives you information about the origin and nature of the error.</p>
 </div>
-<div class="section" id="checked-and-unchecked-exceptions">
-<h2><span class="section-number">18.2. </span>Checked and unchecked exceptions<a class="headerlink" href="#checked-and-unchecked-exceptions" title="Permalink to this headline">#</a></h2>
+<div class="section" id="checked-vs-unchecked-exceptions">
+<h2><span class="section-number">17.2. </span>Checked vs unchecked exceptions<a class="headerlink" href="#checked-vs-unchecked-exceptions" title="Permalink to this headline">#</a></h2>
 <p>Although the name <code class="docutils literal notranslate"><span class="pre">Exception</span></code> was used in this example, there are actually quite a few in the Java API. They are all related to each other through inheritance. The base type of all is class <code class="docutils literal notranslate"><span class="pre">Throwable</span></code>. It has two children: <code class="docutils literal notranslate"><span class="pre">Error</span></code> and <code class="docutils literal notranslate"><span class="pre">Exception</span></code>. See figure below.</p>
 <p><img alt="Exception hierarchy" src="../_images/exceptionhierarchy.jpg" /></p>
 <p>There are exceptions for standard IO operations. These are called <strong><em>checked exceptions</em></strong> because their fate is checked by the compiler: whenever you call a method throwing one of these, you <strong><em>must</em></strong> catch it, or add a throws clause to your method. There is a subbranch extending from <code class="docutils literal notranslate"><span class="pre">RuntimeException</span></code> that represent the <strong><em>unchecked</em></strong> exceptions. These are not checked by the compiler: you can throw or catch these explicitly, but that is not required.</p>
+</div>
 <div class="section" id="checked-exceptions">
-<h3><span class="section-number">18.2.1. </span>Checked exceptions<a class="headerlink" href="#checked-exceptions" title="Permalink to this headline">#</a></h3>
-<p>Whenever a method publishes a throws clause of a checked exception in its method signature, you must take one of these two courses of action:</p>
+<h2><span class="section-number">17.3. </span>Checked exceptions<a class="headerlink" href="#checked-exceptions" title="Permalink to this headline">#</a></h2>
+<p>Whenever a method publishes a throws clause of a checked exception in its method signature, you must take one of these <strong><em>two courses of action</em></strong>:</p>
 <ul>
 <li><p>Catch it yourself: place this code in a <strong><em><code class="docutils literal notranslate"><span class="pre">try/catch</span></code></em></strong> structure</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
@@ -449,14 +451,15 @@ This gives you information about the origin and nature of the error.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Make other code solve the problem: place a <strong><em><code class="docutils literal notranslate"><span class="pre">throws</span></code></em></strong> clause in the method signature:</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doRisky</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">        </span><span class="o">/*</span><span class="n">risky</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">body</span><span class="o">*</span>
-<span class="w">    </span><span class="p">}</span>
+<li><p>Make other code solve the problem: place a <strong><em><code class="docutils literal notranslate"><span class="pre">throws</span></code></em></strong> clause in the method signature:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doRisky</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="o">/*</span><span class="n">risky</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">body</span><span class="o">*</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>You should use the Exception hierarchy to make a robust error-handling backbone in your application. Have a look at this basic example and read the code comments carefully.</p>
+</li>
+</ul>
+<p>You should use the Exception hierarchy to make a robust error-handling backbone in your application. Have a look at this example and read the code comments carefully.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.apis</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileNotFoundException</span><span class="p">;</span>
@@ -482,6 +485,7 @@ This gives you information about the origin and nature of the error.</p>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">Logger</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">).</span><span class="na">log</span><span class="p">(</span><span class="n">Level</span><span class="p">.</span><span class="na">SEVERE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IO error!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
 <span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;An error occurred. See the log for details.&quot;</span><span class="p">);</span>
+
 <span class="w">            </span><span class="c1">//don&#39;t use stacktrace in production!</span>
 <span class="w">            </span><span class="c1">//e.printStackTrace();</span>
 <span class="w">        </span><span class="p">}</span>
@@ -513,16 +517,18 @@ This gives you information about the origin and nature of the error.</p>
 </div>
 </div>
 <div class="section" id="unchecked-exceptions">
-<h3><span class="section-number">18.2.2. </span>Unchecked exceptions<a class="headerlink" href="#unchecked-exceptions" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">17.4. </span>Unchecked exceptions<a class="headerlink" href="#unchecked-exceptions" title="Permalink to this headline">#</a></h2>
 <p>Unchecked exceptions are quite similar to checked exceptions, but with the difference that you do not</p>
 <ul class="simple">
-<li><p>need to declare them</p></li>
-<li><p>need to try/catch or throw them explicitly.</p></li>
+<li><p>need to declare them - although you may do so!</p></li>
+<li><p>need to try/catch or throw them explicitly - although you may do so!</p></li>
 </ul>
-<p>Unchecked exceptions include <code class="docutils literal notranslate"><span class="pre">NumberFormatException</span></code>, <code class="docutils literal notranslate"><span class="pre">NullPointerException</span></code>, <code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code> and <code class="docutils literal notranslate"><span class="pre">UnsupportedOperationException</span></code>. In modern Java, unchecked exceptions are preferred above checked exceptions. Try to work with these as much as possible.</p>
+<p>Unchecked exceptions include <code class="docutils literal notranslate"><span class="pre">NumberFormatException</span></code>, <code class="docutils literal notranslate"><span class="pre">NullPointerException</span></code>, <code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code> and <code class="docutils literal notranslate"><span class="pre">UnsupportedOperationException</span></code>. In modern Java, unchecked exceptions are preferred over checked exceptions because they do not clutter your code so much. Try to work with these as much as possible.</p>
 </div>
 <div class="section" id="errors">
-<h3><span class="section-number">18.2.3. </span>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">17.5. </span>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>You should never ever try to catch errors. There is no possible use case for that:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">thirdMethod</span><span class="p">();</span>
@@ -534,39 +540,38 @@ This gives you information about the origin and nature of the error.</p>
 </div>
 </div>
 <div class="section" id="all-try-catch-elements">
-<h2><span class="section-number">18.3. </span>All try/catch elements<a class="headerlink" href="#all-try-catch-elements" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.6. </span>All try/catch elements<a class="headerlink" href="#all-try-catch-elements" title="Permalink to this headline">#</a></h2>
 <p>Here are all the try/catch flow control elements. Note that the supertype of more specific exceptions need to be caught last, after the specific types.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">{</span>
-<span class="w">	</span><span class="cm">/*The risky thing. </span>
-<span class="cm">    This block will run until an exception occurs </span>
-<span class="cm">    - also exceptions that are not explicitly caught*/</span>
+<span class="w">    </span><span class="cm">/* The risky thing.  </span>
+<span class="cm">    This block will run until an exception occurs - also exceptions that are not </span>
+<span class="cm">    explicitly caught */</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="o">|</span>
 <span class="w">	</span><span class="n">EndOfFileException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">	</span><span class="cm">/*Deal with some specific file problems*/</span>
+<span class="w">    </span><span class="cm">/* Deal with some specific file problems */</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">	</span><span class="cm">/*IOException is supertype to FileNotFoundException and EndOfFileException.</span>
-<span class="cm">    Deal with all other IO problems in this catchall*/</span>
+<span class="w">    </span><span class="cm">/* IOException is supertype to FileNotFoundException and EndOfFileException. </span>
+<span class="cm">    Deal with all other IO problems in this catchall */</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="cm">/*Deal with database problems. </span>
-<span class="cm">    SQLException is a sibling to IOException*/</span>
+<span class="w">    </span><span class="cm">/* Deal with database problems. </span>
+<span class="cm">    SQLException is a sibling to IOException */</span>
 <span class="p">}</span>
 <span class="k">finally</span><span class="w"> </span><span class="p">{</span>
-<span class="w">	</span><span class="cm">/*Always runs, exception or not!  </span>
-<span class="cm">    Do things that need to be done, no </span>
-<span class="cm">	matter what, like closing a file or </span>
-<span class="cm">	database connection*/</span>
+<span class="w">    </span><span class="cm">/* Always runs, exception or not! </span>
+<span class="cm">    Do things that need to be done, no matter what, like closing a file or database connection */</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="try-with-resources">
-<h2><span class="section-number">18.4. </span>Try-with resources<a class="headerlink" href="#try-with-resources" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.7. </span>Try-with resources<a class="headerlink" href="#try-with-resources" title="Permalink to this headline">#</a></h2>
 <p>Java 7 introduced the try-with resources structure, which automatically closes the resource once the try block has finished:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="o">&lt;</span><span class="n">OPEN</span><span class="w"> </span><span class="n">RESOURCE</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="o">&lt;</span><span class="n">RESOURCE</span><span class="w"> </span><span class="n">EXCEPTION</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>This form assures that a resource will be closed() after the try{} block exits, with or without error. See the post on IO for its usage.</p>
+<p>This form assures that a resource will be closed() after the try{} block exits, with or without error.</p>
+<p>See the next chapter <a class="reference internal" href="io.html"><span class="doc">File IO</span></a> for details on its usage.</p>
 </div>
 </div>
 
@@ -607,7 +612,7 @@ This gives you information about the origin and nature of the error.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Sorting</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Sorting</p>
       </div>
     </a>
     <a class="right-next"
@@ -615,7 +620,7 @@ This gives you information about the origin and nature of the error.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">19. </span>File IO</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>File IO</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -637,15 +642,13 @@ This gives you information about the origin and nature of the error.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-exceptions">18.1. What are exceptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-and-unchecked-exceptions">18.2. Checked and unchecked exceptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-exceptions">18.2.1. Checked exceptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unchecked-exceptions">18.2.2. Unchecked exceptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">18.2.3. Errors</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-try-catch-elements">18.3. All try/catch elements</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-with-resources">18.4. Try-with resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-exceptions">17.1. What are exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-vs-unchecked-exceptions">17.2. Checked vs unchecked exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checked-exceptions">17.3. Checked exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unchecked-exceptions">17.4. Unchecked exceptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">17.5. Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-try-catch-elements">17.6. All try/catch elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-with-resources">17.7. Try-with resources</a></li>
 </ul>
   </nav></div>
 

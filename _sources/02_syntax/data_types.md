@@ -1,17 +1,23 @@
 # Data Types
 
-Data forms the **_state_** of an object. They define the properties that define how it will **_behave_** through methods.
-As stated before, Java is a **_strongly typed_** language. That means every variable, method parameter and method return type needs to have a declared type. These types can be **_primitives_** or **_reference types_**. This post deals with both, and with the "behavioral" differences between them.
+All instance variables together, its data, form the **_state_** of an object. These properties influence how methods **_behave_**.  
+As stated before, Java is a **_statically, strongly typed_** language. That means every variable, method parameter and method return type needs to have a declared type. These types can be **_primitives_** or **_reference types_**. This post deals with both, and with the "behavioral" differences between them.
+
+:::{admonition} Statically? Strongly?
+Static/dynamic typing refers to the time when type checking occurs: compile time for static typing, and run time for dynamic languages. Likewise, strong/weak typing refers to how aggressive a language is in enforcing its type system.
+:::
+
 
 ## Primitives
 
-In essence, every programming language knows about the same data types: integers, floats, booleans, Strings. Java is no different. However, there are a few major distinctions. First, you need to declare the type of every variable. Also, conversion between them usually needs to be done explicitly. Finally, for memory efficiency reasons, there are "subtypes" of integers and floats. Floating-point numbers for instance (numbers with a decimal part), can be represented by the `float` type ("floating point number) or the `double` ("double-precision floating point number") which takes twice as much of memory. You have to realise Java was first launched in the 1990s, when memory was a scarce and valuable asset in a computer...
+In essence, every programming language knows about the same data types: integers, floats, booleans, Strings. Java is no different. However, there are a few major distinctions. First, you need to declare the type of every variable (statically typed). Also, conversion between them usually needs to be done explicitly, using _type casting_.  
+Finally, for memory efficiency reasons, there are "subtypes" of integers and floats. Floating-point numbers for instance (numbers with a decimal part), can be represented by the `float` type ("floating point number) or the `double` ("double-precision floating point number") which takes twice as much of memory. You have to realise Java was first launched in the 1990s, when memory was a scarce and valuable asset in a computer...
 
 Here are all the primitive types:
 
 ![Primitive types](figures/primitive_types.png)
 
-The three steps of primitive type creation are these.
+The three steps of primitive type creation are depicted below.
 
 ![Create primitive](figures/create_primitive.png)
 
@@ -57,9 +63,8 @@ kill count =   42
 kill average = 10.55
 ```
 
-In the above example, all variables were declared and initialized in one statement, but it is allowed 
-to split this up. The only thing that is illegal (not compilable) is to leave a declared variable uninitialized and 
-access it:
+In the above example, all variables were declared and initialized in one statement, but it is allowed to split this up. 
+The only thing that is illegal (not compilable) is to leave a declared variable uninitialized and then try to access it:
 
 ```java
 //LEGAL
@@ -71,7 +76,7 @@ int livesLived; //no compile error here
 System.out.println("livesLived = " + livesLived); //but here!
 ```
 
-When combining primitives in mathematical operations, they usually behave as expected. However, when you start combining them in a "mixed" environment, it becomes a bit tricky. The general rule is **_it is always safe to "up" the precision or keep it equal, but dangerous to "lower" the precision_**. For that reason, lowering the precision needs to be done explicitly, through a **_(type) cast_**. Here are a few examples using primitives.
+When combining primitives in mathematical operations they usually behave as expected. However, when you start combining them in a "mixed" environment, it becomes a bit tricky. The general rule is **_it is always safe to "up" the precision or keep it equal, but dangerous to "lower" the precision_**. For that reason, lowering the precision needs to be done explicitly, through a **_(type) cast_**. Here are a few examples using primitives.
 
 ```java
 int x = 10;
@@ -93,13 +98,13 @@ double division = x / y;
 System.out.println("division = " + division);
 ```
 
-the output is, slightly unexpected
+The output is, slightly unexpected
 
 ```
 division = 0.0
 ```
 
-Can you explain?
+Can you explain?  
 Two `int`s were divided (`x / y` or `10 / 20`), resulting in an int. Since ints do not have a decimal part,
 this is 0. Casting a zero to a double subsequently resulted in 0.0.
 
@@ -153,16 +158,25 @@ Java class -also the ones you create- represent reference types.
 With primitive-typed variables, the value of the variable is simply the value, in bits, but with reference variables, 
 the value of the variable is bits representing a way to get to a specific object (like a remote control)
 
-![A remote control](figures/remote_control.png)
+```{image} figures/remote_control.png
+:alt: A remote control
+:width: 150px
+:align: center
+```
+
 
 ### Creating a reference type variable
 
+When looking at the figure below you can see how this differs from creating a primitive type variable.
+
+
 ![A reference-type variable](figures/create_reference_type.png)
 
-### Type String
+### Type String is Immutable!
 
-Type String needs some special attention. It is actually NOT a primitive type, although always dealt with alongside them.
-You could have guessed from the name, which starts with a capital. It is a full-fledged Java class that can be instantiated and that has many nice methods. It is however immutable as in most languages, and has a shortcuts that most other classes do not have: you can create them from a literal.
+Type String needs some special attention.  
+It is actually NOT a primitive type, although always dealt with alongside them.
+You could have guessed from the name, which starts with a capital. It is a full-fledged Java class that can be instantiated and that has many nice methods. It is however immutable, as in most languages, and has a shortcuts that most other classes do not have: you can create them from a literal.
 Here is some example usage of class String.
 
 ```java
@@ -214,6 +228,14 @@ dnaOne == dnaSix: true
 
 And this has to do with String literal caching by the JVM.
 
+:::{admonition} Testing equality
+:class: warning
+
+Use `==` to test **_sameness_**. This returns true if the variables are the same primitives or point to the same object on the heap.  
+Use the `.equals()` method to test for **_logical equality_**.
+:::
+
+
 ### A special case: _null_
 
 There s a special value for reference type variables: the **_null_** value. It can be assigned to all Java 
@@ -240,7 +262,7 @@ java.lang.NullPointerException
     (stack trace continues)
 </pre>
 
-## What is the difference?
+## Primitive or Object: What's the difference?
 
 ### To be passed around as primitive
 

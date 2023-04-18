@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>17. Sorting &#8212; The Java Track</title>
+    <title>16. Sorting &#8212; The Java Track</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '03_apis/sorting';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. Exceptions" href="exceptions.html" />
-    <link rel="prev" title="16. Records" href="records.html" />
+    <link rel="next" title="17. Exception handling" href="exceptions.html" />
+    <link rel="prev" title="15. Records" href="records.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_syntax/demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="records.html">16. Records</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="records.html">15. Records</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -372,12 +372,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-sorting-with-the-comparable-interface">17.1. “Natural” sorting with the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-comparable-implementations-unnumbered">17.1.1. Custom comparable implementations {.unnumbered}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-sorting-with-the-comparable-interface">16.1. “Natural” sorting with the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-using-collections-sort">16.1.1. Sorting using <code class="docutils literal notranslate"><span class="pre">Collections.sort()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-list-sort">16.1.2. Alternative: <code class="docutils literal notranslate"><span class="pre">list.sort()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-comparable-implementations">16.1.3. Custom comparable implementations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-using-a-custom-comparator">17.2. Sorting using a custom <code class="docutils literal notranslate"><span class="pre">Comparator</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multilevel-sorting">17.3. Multilevel sorting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-using-a-custom-comparator">16.2. Sorting using a custom <code class="docutils literal notranslate"><span class="pre">Comparator</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multilevel-sorting">16.3. Multilevel sorting</a></li>
 </ul>
             </nav>
         </div>
@@ -390,44 +392,64 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="sorting">
-<h1><span class="section-number">17. </span>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">#</a></h1>
-<p>Sorting is one of the fundamental operations on data. You want the best student, the closest cafe, all players with a top 10% ranking…this all involves sorting.</p>
-<p>Sorting in “classic” Java (not using the Streams API) is done using the the <code class="docutils literal notranslate"><span class="pre">Collections.sort()</span></code> methods and, since Java 8, some methods in class List. These methods require either (a) that the objects you want to sort implement the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface or (b) that you provide a sorter object implementing the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface.<br />
-Arrays of primitives (int, double, float, boolean etc.) or objects (if the objects implement <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> - see below) can be sorted (in-place) using the <code class="docutils literal notranslate"><span class="pre">Arrays.sort()</span></code> and Arrays.parallelSort()` functions. Have a look at the docs; they will not be discussed here.</p>
+<h1><span class="section-number">16. </span>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">#</a></h1>
+<p>Sorting is one of the fundamental operations on data. You want the best student, the closest cafe, all players with a top 10% ranking…these all involve sorting.</p>
+<p>Sorting in “classic” Java (not using the Functional Programming API) is done using the the <code class="docutils literal notranslate"><span class="pre">Collections.sort()</span></code> methods and, since Java 8, some methods in class List. These methods require either</p>
+<ol class="arabic simple">
+<li><p>that the objects you want to sort implement the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface or</p></li>
+<li><p>that you provide a sorter object implementing the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Arrays of primitives (int, double, float, boolean etc.) or objects that implement <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> (see below) can be sorted in-place using the <code class="docutils literal notranslate"><span class="pre">Arrays.sort()</span></code> and Arrays.parallelSort()` functions. Have a look at the docs; they will not be discussed here.</p>
+</div>
 <div class="section" id="natural-sorting-with-the-comparable-interface">
-<h2><span class="section-number">17.1. </span>“Natural” sorting with the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface<a class="headerlink" href="#natural-sorting-with-the-comparable-interface" title="Permalink to this headline">#</a></h2>
-<p>This is the first and main sorting strategy. Whenever the type in your collection implements the Comparable interface, it is said to have “natural ordering”. This interface is described in detail later. Java classes such as String, Integer, and Double all implement the Comparable interface. In IntelliJ you can see this when you select a String variable declaration and press F1 (or ^Q):</p>
+<h2><span class="section-number">16.1. </span>“Natural” sorting with the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface<a class="headerlink" href="#natural-sorting-with-the-comparable-interface" title="Permalink to this headline">#</a></h2>
+<p>This is the first and main sorting strategy. Whenever the type in your collection implements the Comparable interface, it is said to have “natural ordering”. This interface is described in detail below. Java classes such as String, Integer, and Double all implement the Comparable interface. In IntelliJ you can see this when you select a String variable declaration and press F1 (or ^Q):</p>
 <p><img alt="Javadoc of class String" src="../_images/String_Javadoc.png" /></p>
 <p>You can see <code class="docutils literal notranslate"><span class="pre">Comparable&lt;String&gt;</span></code> in the <code class="docutils literal notranslate"><span class="pre">implements</span></code> declaration.</p>
 <p>For Strings, natural order means alphabetic order and for numbers numeric order (from low to high). Using natural ordering can be achieved in two places (since Java 8): In the Collections class and in the List interface.</p>
-<p>We’ll start with the “classic” method of <code class="docutils literal notranslate"><span class="pre">Collections</span></code>.</p>
-<p>Its signature is rather complex, but fortunately using it is not.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;&quot;</span><span class="p">&gt;</span>
-public static <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkorange;&quot;</span><span class="p">&gt;</span><span class="ni">&amp;lt;</span>T extends Comparable<span class="ni">&amp;lt;</span>? super T<span class="ni">&amp;gt;&amp;gt;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> void sort(<span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkgreen;&quot;</span><span class="p">&gt;</span>List<span class="ni">&amp;lt;</span>T<span class="ni">&amp;gt;</span> list<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>)
-<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+<div class="section" id="sorting-using-collections-sort">
+<h3><span class="section-number">16.1.1. </span>Sorting using <code class="docutils literal notranslate"><span class="pre">Collections.sort()</span></code><a class="headerlink" href="#sorting-using-collections-sort" title="Permalink to this headline">#</a></h3>
+<p>We’ll start with the “classic” method of <code class="docutils literal notranslate"><span class="pre">Collections</span></code>.
+Its signature is rather impressive, but fortunately using it is not.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This signature tells us a lot:</p>
 <ul class="simple">
-<li><p>it is static, so it can be used directly on the Collections class</p></li>
+<li><p>it is static, so it can be used directly on the <code class="docutils literal notranslate"><span class="pre">Collections</span></code> class</p></li>
 <li><p>it has <code class="docutils literal notranslate"><span class="pre">void</span></code> as return type, so it sorts a list <em><strong>in place</strong></em> instead of returning a sorted copy.</p></li>
-<li><p>it takes as argument a <code class="docutils literal notranslate"><span class="pre">List</span></code></p></li>
+<li><p>it takes as argument a <code class="docutils literal notranslate"><span class="pre">List</span></code>, so it is applicable to all List-implementing classes such as <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>, <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> etc.</p></li>
 <li><p>the elements of the list are of type <code class="docutils literal notranslate"><span class="pre">T</span></code> (a generic placeholder), where the constraint on type <code class="docutils literal notranslate"><span class="pre">T</span></code> is that it should implement the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface - more specifically: a <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> comparing T or its supertypes.</p></li>
 </ul>
 <p>Key here is the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface (package <code class="docutils literal notranslate"><span class="pre">java.util</span></code>):</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">java.util</span><span class="p">;</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This is the abstract method that you need to implement</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">other</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The contract is really simple. To be comparable to other objects (of the same class), a class needs to implement the method <code class="docutils literal notranslate"><span class="pre">compareTo(T</span> <span class="pre">other)</span></code> where <code class="docutils literal notranslate"><span class="pre">T</span></code> is the class implementing the interface. The method signature of <code class="docutils literal notranslate"><span class="pre">compareTo()</span></code> states that it should receive an instance of <code class="docutils literal notranslate"><span class="pre">T</span></code> and return an integer indicating the sort order of the current object with respect to the other object. The convention for this return value is</p>
+<p>The contract is really simple. To be comparable to other objects of the same class, a class needs to implement the method <code class="docutils literal notranslate"><span class="pre">compareTo(T</span> <span class="pre">other)</span></code> where <code class="docutils literal notranslate"><span class="pre">T</span></code> is the class implementing the interface. The method signature of <code class="docutils literal notranslate"><span class="pre">compareTo()</span></code> states that it should receive an instance of <code class="docutils literal notranslate"><span class="pre">T</span></code> and return an integer indicating the sort order of the current object with respect to the other object.</p>
+<div class="admonition-the-contract-of-comparable admonition">
+<p class="admonition-title">The contract of Comparable</p>
+<p>The convention for the return value of <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">compareTo(T</span> <span class="pre">other)</span></code> is</p>
 <ul class="simple">
 <li><p>a negative value if <code class="docutils literal notranslate"><span class="pre">this</span></code> &lt; <code class="docutils literal notranslate"><span class="pre">other</span></code></p></li>
 <li><p>zero if <code class="docutils literal notranslate"><span class="pre">this</span></code> equals <code class="docutils literal notranslate"><span class="pre">that</span></code></p></li>
 <li><p>a positive value if <code class="docutils literal notranslate"><span class="pre">this</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">other</span></code></p></li>
 </ul>
-<p>Since String and other Java classes already implement this interface, you can sort them without any further work:</p>
+</div>
+<p>Many Java classes already implement this interface. For instance, here is the <code class="docutils literal notranslate"><span class="pre">Integer</span></code> implementation:</p>
+<p><img alt="compareTo_in_Integer.png" src="../_images/compareTo_in_Integer.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">compareTo()</span></code> method itself delegates to static function <code class="docutils literal notranslate"><span class="pre">compare</span></code>, passing <code class="docutils literal notranslate"><span class="pre">this.value</span></code> and <code class="docutils literal notranslate"><span class="pre">anotherInteger.value</span></code> as arguments. The <code class="docutils literal notranslate"><span class="pre">compare()</span></code> method itself uses two nested ternary operators to figure out the return value.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Have a look at the String implementation of <code class="docutils literal notranslate"><span class="pre">compareTo()</span></code> yourself.<br />
+You can use <code class="docutils literal notranslate"><span class="pre">Ctrl/Cmd</span> <span class="pre">+</span> <span class="pre">B</span></code> to go from method call to implementation.</p>
+</div>
+<p>Thus, since String, Integer and other Java classes already implement this interface, you can sort them without any further work:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="n">names</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Jordan&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Wanda&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;James&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rose&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Aaron&quot;</span><span class="p">));</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;names before sort: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">names</span><span class="p">);</span>
@@ -436,13 +458,14 @@ public static <span class="p">&lt;</span><span class="nt">span</span> <span clas
 </pre></div>
 </div>
 <p>This will output</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;console_out&quot;</span><span class="p">&gt;</span>
+<pre class="console_out">
 names before sort: [Jordan, Wanda, James, rose, Aaron]
 names after natural sort: [Aaron, James, Jordan, Wanda, rose]
-<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
-</pre></div>
-</div>
+</pre>
 <p>As you can see, capitals come before lower case letters.</p>
+</div>
+<div class="section" id="alternative-list-sort">
+<h3><span class="section-number">16.1.2. </span>Alternative: <code class="docutils literal notranslate"><span class="pre">list.sort()</span></code><a class="headerlink" href="#alternative-list-sort" title="Permalink to this headline">#</a></h3>
 <p>The exact same thing could have been achieved using the <code class="docutils literal notranslate"><span class="pre">sort()</span></code> method of class <code class="docutils literal notranslate"><span class="pre">List</span></code>, added in Java 8:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">naturalOrder</span><span class="p">());</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;names after sort on List &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">names</span><span class="p">);</span>
@@ -452,7 +475,7 @@ names after natural sort: [Aaron, James, Jordan, Wanda, rose]
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Comparator</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It takes a <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> instance; this interface is described in the next section. Some common default Comparators have already been implemented, for natural (<code class="docutils literal notranslate"><span class="pre">Comparator.naturalOrder()</span></code>) and reverse (<code class="docutils literal notranslate"><span class="pre">Comparator.reverseOrder()</span></code>) order for use with classes that implement Comparable. Note that the <code class="docutils literal notranslate"><span class="pre">&#64;Nullable</span></code> in the above signature means that if <code class="docutils literal notranslate"><span class="pre">null</span></code> is passed, it defaults to <code class="docutils literal notranslate"><span class="pre">Comparator.naturalOrder()</span></code> An overloaded method would have been better design in my opinion, because this <code class="docutils literal notranslate"><span class="pre">names.sort(null);</span></code> is really ugly.</p>
+<p>It takes a <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> instance; this interface is described in the next section. Some common default Comparators have already been implemented, for natural (<code class="docutils literal notranslate"><span class="pre">Comparator.naturalOrder()</span></code>) and reverse order (<code class="docutils literal notranslate"><span class="pre">Comparator.reverseOrder()</span></code>) for use with classes that already implement Comparable. Note that the <code class="docutils literal notranslate"><span class="pre">&#64;Nullable</span></code> in the above signature means that if <code class="docutils literal notranslate"><span class="pre">null</span></code> is passed, it defaults to <code class="docutils literal notranslate"><span class="pre">Comparator.naturalOrder()</span></code> An overloaded method would have been better design in my opinion, because this <code class="docutils literal notranslate"><span class="pre">names.sort(null);</span></code> is really ugly.</p>
 <p>Here is the reverse ordering:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">reverseOrder</span><span class="p">());</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;names after reverse sort &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">names</span><span class="p">);</span>
@@ -475,31 +498,20 @@ names case insensitive sort [Aaron, James, Jordan, rose, Wanda]
 <span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<div class="section" id="custom-comparable-implementations-unnumbered">
-<h3><span class="section-number">17.1.1. </span>Custom comparable implementations {.unnumbered}<a class="headerlink" href="#custom-comparable-implementations-unnumbered" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> class provides many utility functions that serve Comparator implementations:</p>
+<a class="reference internal image-reference" href="../_images/Comparator_factories.png"><img alt="Comparator factory methods" class="align-center" src="../_images/Comparator_factories.png" style="width: 600px;" /></a>
+<p>Have a look at the docs for details.</p>
+</div>
+</div>
+<div class="section" id="custom-comparable-implementations">
+<h3><span class="section-number">16.1.3. </span>Custom comparable implementations<a class="headerlink" href="#custom-comparable-implementations" title="Permalink to this headline">#</a></h3>
 <p>Let’s create our own implementation of the Comparable interface in a custom class and demonstrate its use.</p>
-<p>Here is a simple Bird class.</p>
+<p>Here is a Bird <strong><em>record</em></strong> (see previous chapter).</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.apis</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Bird</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">wingSpan</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumAge</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Bird</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">wingSpan</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumAge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">englishName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">englishName</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">wingSpan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wingSpan</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">maximumAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maximumAge</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Bird{&quot;</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="s">&quot;englishName=&#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">englishName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;\&#39;&#39;</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="s">&quot;, wingSpan=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wingSpan</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="s">&quot;, maximumAge=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">maximumAge</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="sc">&#39;}&#39;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Bird</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">englishName</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">wingSpan</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumAge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -512,7 +524,7 @@ names case insensitive sort [Aaron, James, Jordan, rose, Wanda]
 </ol>
 <p>Step 2 is done by IntelliJ once you’ve done 1 and selected te context menu (<code class="docutils literal notranslate"><span class="pre">alt</span> <span class="pre">+</span> <span class="pre">enter</span></code>):</p>
 <p><img alt="Implement interface methods" src="../_images/implement_interface_methods.png" /></p>
-<p>Select the single method and press enter. This is the result.</p>
+<p>Select the `compareTo()`` method and press enter. This is the result.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
 <span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">Bird</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -552,24 +564,22 @@ names case insensitive sort [Aaron, James, Jordan, rose, Wanda]
 </pre></div>
 </div>
 <p>outputs</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;console_out&quot;</span><span class="p">&gt;</span>
+<pre class="console_out">
 Before:
-    Buzzard&#39;, ws=1.3, max.age=29
-    Griffon vulture&#39;, ws=2.5, max.age=25
-    Kestrel&#39;, ws=0.35, max.age=15
-    White-tailed eagle&#39;, ws=2.5, max.age=25
-    Red kite&#39;, ws=1.8, max.age=23
-    Steppe eagle&#39;, ws=2.1, max.age=41
+    Buzzard', ws=1.3, max.age=29
+    Griffon vulture', ws=2.5, max.age=25
+    Kestrel', ws=0.35, max.age=15
+    White-tailed eagle', ws=2.5, max.age=25
+    Red kite', ws=1.8, max.age=23
+    Steppe eagle', ws=2.1, max.age=41
 After sort on wingspan:
-    Kestrel&#39;, ws=0.35, max.age=15
-    Buzzard&#39;, ws=1.3, max.age=29
-    Red kite&#39;, ws=1.8, max.age=23
-    Steppe eagle&#39;, ws=2.1, max.age=41
-    Griffon vulture&#39;, ws=2.5, max.age=25
-    White-tailed eagle&#39;, ws=2.5, max.age=25
-<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
-</pre></div>
-</div>
+    Kestrel', ws=0.35, max.age=15
+    Buzzard', ws=1.3, max.age=29
+    Red kite', ws=1.8, max.age=23
+    Steppe eagle', ws=2.1, max.age=41
+    Griffon vulture', ws=2.5, max.age=25
+    White-tailed eagle', ws=2.5, max.age=25
+</pre>
 <p>Note the ascending order of wingspan. What if the natural order is descending in your opinion? Simply reverse the sort logic:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
 <span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">Bird</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -593,7 +603,9 @@ After:
 <span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>Although this sort logic is just fine, it is often better to use classes that are dedicated to dealing with the datatype and <em><strong>delegate</strong></em> to their implemented and tested methods:</p>
+<div class="admonition-delegate-if-you-can admonition">
+<p class="admonition-title">Delegate if you can</p>
+<p>Although this logic is just fine, it is often better to use classes that are dedicated to dealing with the datatype and <em><strong>delegate</strong></em> to their implemented and tested methods:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
 <span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">Bird</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">//delegate to class double</span>
@@ -603,18 +615,15 @@ After:
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="sorting-using-a-custom-comparator">
-<h2><span class="section-number">17.2. </span>Sorting using a custom <code class="docutils literal notranslate"><span class="pre">Comparator</span></code><a class="headerlink" href="#sorting-using-a-custom-comparator" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">16.2. </span>Sorting using a custom <code class="docutils literal notranslate"><span class="pre">Comparator</span></code><a class="headerlink" href="#sorting-using-a-custom-comparator" title="Permalink to this headline">#</a></h2>
 <p>What if you want to sort in other ways as well, or if you do not want to settle on a natural sort order? Then there is the second form of the <code class="docutils literal notranslate"><span class="pre">Collections.sort()</span></code> method, also supported by the <code class="docutils literal notranslate"><span class="pre">List.sort()</span></code> method since Java 8:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;&quot;</span><span class="p">&gt;</span>
-public static <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkred;&quot;</span><span class="p">&gt;</span><span class="ni">&amp;lt;</span>T<span class="ni">&amp;gt;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> void sort(<span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkgreen;&quot;</span><span class="p">&gt;</span>List<span class="ni">&amp;lt;</span>T<span class="ni">&amp;gt;</span> list<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>, <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkorange;&quot;</span><span class="p">&gt;</span>Comparator<span class="ni">&amp;lt;</span>? super T<span class="ni">&amp;gt;</span> c<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>)
-<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">pre</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;&quot;</span><span class="p">&gt;</span>
-public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font-style: italic;&quot;</span><span class="p">&gt;</span>@Nullable<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;color:darkorange;&quot;</span><span class="p">&gt;</span>Comparator<span class="ni">&amp;lt;</span>? super E<span class="ni">&amp;gt;</span> comparator<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>)
-<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface has a single abstract method:</p>
@@ -632,13 +641,14 @@ public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span c
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BirdNameComparator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bird</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Bird</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">Bird</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">first</span><span class="p">.</span><span class="na">englishName</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">second</span><span class="p">.</span><span class="na">englishName</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">first</span><span class="p">.</span><span class="na">englishName</span><span class="p">().</span><span class="na">compareTo</span><span class="p">(</span><span class="n">second</span><span class="p">.</span><span class="na">englishName</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>This one sorts on name, and again delegates to the type of the instance variable - class String. This is its usage.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">birds</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BirdNameComparator</span><span class="p">());</span>
+
 <span class="c1">//or, the Java8+ way</span>
 <span class="n">birds</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BirdNameComparator</span><span class="p">())</span>
 </pre></div>
@@ -652,22 +662,32 @@ public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span c
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Actually, since Java8, sorting has become much versatile, but you need to climb the learning curve of lambdas first:</p>
+<p>Actually, since Java 8, sorting has become much versatile, but you need to climb the learning curve of lambdas first:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Java8+ alternative: OK</span>
-<span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">birds</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">birdOne</span><span class="p">,</span><span class="w"> </span><span class="n">birdTwo</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">birdOne</span><span class="p">.</span><span class="na">maximumAge</span><span class="p">,</span><span class="w"> </span><span class="n">birdTwo</span><span class="p">.</span><span class="na">maximumAge</span><span class="p">));</span>
+<span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">birds</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">birdOne</span><span class="p">,</span><span class="w"> </span><span class="n">birdTwo</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">birdOne</span><span class="p">.</span><span class="na">maximumAge</span><span class="p">(),</span><span class="w"> </span><span class="n">birdTwo</span><span class="p">.</span><span class="na">maximumAge</span><span class="p">()));</span>
+
+<span class="c1">//Java8+ alternative: better</span>
+<span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">birds</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">bird</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bird</span><span class="p">.</span><span class="na">maximumAge</span><span class="p">()));</span>
+
 <span class="c1">//Java8+ alternative: best</span>
-<span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">birds</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">bird</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bird</span><span class="p">.</span><span class="na">maximumAge</span><span class="p">));</span>
+<span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">birds</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Bird</span><span class="p">::</span><span class="n">maximumAge</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Lambdas are out of scope for this course, unfortunately.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lambdas are discussed in the chapter <a class="reference internal" href="functional_programming.html"><span class="doc">Functional programming</span></a>.</p>
+</div>
 </div>
 <div class="section" id="multilevel-sorting">
-<h2><span class="section-number">17.3. </span>Multilevel sorting<a class="headerlink" href="#multilevel-sorting" title="Permalink to this headline">#</a></h2>
-<p>The final part of this post does not deal with the API but with the logic to implement it. You have seen how to code simple comparison logic. But what if you want to sort on multiple properties? Suppose, in the case of the birds example, we wanted to sort on wingspan first and then on name. No matter how many properties, the pattern is always the same: check the primary property, return this if they are not equal. If they are equal, check on the secondary property:</p>
+<h2><span class="section-number">16.3. </span>Multilevel sorting<a class="headerlink" href="#multilevel-sorting" title="Permalink to this headline">#</a></h2>
+<p>You have seen how to code simple comparison logic. But what if you want to sort on multiple properties? Suppose, in the case of the birds example, we wanted to sort on wingspan first and then on name. No matter how many properties, the pattern is always the same: check the primary property, return this if they are not equal. If they are equal, check on the secondary property:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
 <span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">Bird</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// primary property</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">compareWingSpan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Double</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">wingSpan</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">wingSpan</span><span class="p">);</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">compareWingSpan</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// primary property is the same; check secondary property</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">englishName</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">englishName</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">compareWingSpan</span><span class="p">;</span>
@@ -675,7 +695,7 @@ public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span c
 </pre></div>
 </div>
 <p>Note that with alphabetical sorting capitals come before lower case letters. This is because the numeric values of the table of ASCII codes are used:</p>
-<p><img alt="The ASVII code" src="../_images/Ascii-codes-table.png" /></p>
+<p><img alt="The ASCII code" src="../_images/Ascii-codes-table.png" /></p>
 </div>
 </div>
 
@@ -716,7 +736,7 @@ public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span c
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Records</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Records</p>
       </div>
     </a>
     <a class="right-next"
@@ -724,7 +744,7 @@ public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span c
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Exceptions</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Exception handling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -746,12 +766,14 @@ public void sort(<span class="p">&lt;</span><span class="nt">span</span> <span c
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-sorting-with-the-comparable-interface">17.1. “Natural” sorting with the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-comparable-implementations-unnumbered">17.1.1. Custom comparable implementations {.unnumbered}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-sorting-with-the-comparable-interface">16.1. “Natural” sorting with the <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-using-collections-sort">16.1.1. Sorting using <code class="docutils literal notranslate"><span class="pre">Collections.sort()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-list-sort">16.1.2. Alternative: <code class="docutils literal notranslate"><span class="pre">list.sort()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-comparable-implementations">16.1.3. Custom comparable implementations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-using-a-custom-comparator">17.2. Sorting using a custom <code class="docutils literal notranslate"><span class="pre">Comparator</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multilevel-sorting">17.3. Multilevel sorting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-using-a-custom-comparator">16.2. Sorting using a custom <code class="docutils literal notranslate"><span class="pre">Comparator</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multilevel-sorting">16.3. Multilevel sorting</a></li>
 </ul>
   </nav></div>
 

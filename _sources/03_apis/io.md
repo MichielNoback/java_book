@@ -217,5 +217,5 @@ More advanced splitting is discussed in a next topic: regular expressions.
 
 ## Note on character sets
 
-All these examples worked with the default characterset of Java, **_UTF-8_**. When other sets are required, these can be specified in the `Files.newBufferedReader()` and `Files.newBufferedWriter()` factory methods. See docs for details.
+All these examples worked with the default character set of Java, **_UTF-8_**. When other sets are required, these can be specified in the `Files.newBufferedReader()` and `Files.newBufferedWriter()` factory methods. See docs for details.
 

@@ -172,21 +172,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operators.html">7. Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flow_control.html">8. Flow control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">9. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">9. Methods and Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages_imports.html">10. Packages and Imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="naming_commenting.html">11. Naming and commenting stuff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demo_case_naming.html">12. The power of naming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">13. Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">14. The Java Collections API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">15. Methods of class Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">16. Records</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">17. Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">18. Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">19. File IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">20. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
@@ -389,19 +389,22 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="arrays">
 <h1><span class="section-number">6. </span>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">#</a></h1>
-<p>Just like any programming language, Java knows about arrays.
-Arrays are ordered collections of variables of the same type.
+<p>Arrays are ordered collections of variables of the same type.
 These elements can by any valid Java type: primitives,
 object references, or even null values.</p>
 <p>These variables are not individually named and managed, but collectively.</p>
 <p>In real life, you don’t use arrays too much because other types (ArrayList)
-are often more convenient because arrays can’t be extended or shortened and
+are often more convenient because <em>arrays can’t be extended or shortened</em> and
 don’t have all those nice helper methods that ArrayList has
 (see the <a class="reference internal" href="../03_apis/collections.html"><span class="doc std std-doc">collections post</span></a>). However, arrays
 certainly have their use when (memory) efficiency is an issue, or when you want
 to go multidimensional.</p>
-<p>Of course, the String array <code class="docutils literal notranslate"><span class="pre">String[]</span> <span class="pre">args</span></code> is the entry point of outside arguments into any
-Java program:</p>
+<div class="warning admonition">
+<p class="admonition-title">Arrays have fixed length</p>
+<p>Arrays keep the size they have at the time you create them.
+Don’t use arrays if you need collections that need to shrink or grow: use <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> or other collection types.</p>
+</div>
+<p>Of course, as seen in a previous chapter, the String array <code class="docutils literal notranslate"><span class="pre">String[]</span> <span class="pre">args</span></code> is the entry point of outside arguments into any Java program:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">args</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;argument &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">args</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
@@ -437,9 +440,9 @@ which is:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">null</span></code> for reference types</p></li>
 </ul>
 <p>An array of primitives will actually contain the primitive values.</p>
-<p><img alt="An array of primitives" src="../_images/array_2.png" /></p>
+<a class="reference internal image-reference" href="../_images/array_2.png"><img alt="An array of primitives" class="align-center" src="../_images/array_2.png" style="width: 300px;" /></a>
 <p>An array of objects will hold the references to the objects, not the objects themselves</p>
-<p><img alt="an array of objects" src="../_images/array_3.png" /></p>
+<a class="reference internal image-reference" href="../_images/array_3.png"><img alt="an array of objects" class="align-center" src="../_images/array_3.png" style="width: 300px;" /></a>
 </div>
 <div class="section" id="printing">
 <h2><span class="section-number">6.2. </span>Printing<a class="headerlink" href="#printing" title="Permalink to this headline">#</a></h2>
@@ -451,13 +454,13 @@ which is:</p>
 <div class="section" id="accessing">
 <h2><span class="section-number">6.3. </span>Accessing<a class="headerlink" href="#accessing" title="Permalink to this headline">#</a></h2>
 <p>To get to an element of an array, you use an index. Java array indexing starts at zero.</p>
-<p><img alt="Array indexing" src="../_images/array_1.png" /></p>
+<a class="reference internal image-reference" href="../_images/array_1.png"><img alt="an array of objects" class="align-center" src="../_images/array_1.png" style="width: 300px;" /></a>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">7</span><span class="o">]</span><span class="p">;</span>
 <span class="n">numbers</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
 <span class="n">numbers</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
 </pre></div>
 </div>
-<p><img alt="Array indexing" src="../_images/array_2.png" /></p>
+<a class="reference internal image-reference" href="../_images/array_2.png"><img alt="an array of objects" class="align-center" src="../_images/array_2.png" style="width: 300px;" /></a>
 <p>Arrays are often created and accessed using a for loop:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Cell</span><span class="o">[]</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cell</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">;</span>
 <span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

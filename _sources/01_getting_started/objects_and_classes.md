@@ -564,7 +564,7 @@ The final model now has this chain of relationships:
 
 ***CellGrowthSimulator HAS-A TestTube and TestTube HAS one or more Cells***.
 
-## Object construction (first iteration)
+## Object construction 
 
 You have seen the `new` keyword used several times now.
 But what does happen, exactly, when you type
@@ -595,7 +595,7 @@ public Cell() {}
 
 More on constructors in later chapters.
 
-## Inheritance (first discussion)
+## Inheritance 
 
 Inheritance is one of the key features of object-oriented programming.
 

@@ -2,7 +2,7 @@
 
 This is a straightforward listing of the Java flow control structures.
 
-## if [else if] [else]
+## Deciding with `if`/`else if`/`else`
 
 If/else is the basic decision-making mechanism in every programming language. 
 In Java, both "else if" and "else" are optional.
@@ -15,7 +15,7 @@ if (<span style="color:darkred;font-style:italic;">condition</span>) {}
 
 So, the "if" block is the required basis, "else if" can be used zero to many times - but only directly following the "if", and the entire statement is closed by an optional "else".
 
-So this is not legal:
+So these are not legal:
 
 ```java
 if (foo) { }
@@ -23,7 +23,15 @@ else { }
 else if (bar) { }
 ```
 
-and neither is this, because the `int number = 2;` interrupts the if/else block:
+(the `else if()` comes after the `else`)
+
+```java
+if (foo) { }
+else { }
+else { }
+```
+
+(two `else` blocks)
 
 ```java
 if (foo) { }
@@ -31,20 +39,40 @@ int number = 2;
 else { }
 ```
 
-## while
+(the `int number = 2;` interrupts the if/else block)
 
-While has two variants:
+But this _is_ legal:
 
-<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
-while (<span style="color:darkred;font-style:italic;">condition</span>) { } 
-do { } while (<span style="color:darkred;font-style:italic;">condition</span>);
-</pre>
+```java
+if (foo) { }
+else if { 
+    if (bar) { }
+    else { }    
+}
+else { }
+```
 
-The difference is that `do{}while()` is guaranteed to be executed at least once, whereas `while(condition) {}` can be skipped entirely if "condition" is false at the first evaluation.
+### Single-line blocks
 
-## for
+When there is a single statement in a block (the part between the curly braces) you are allowed to keep it on the same line and omit the braces, as in this example:
 
-Iterates over a collection or a defined series of steps:
+```java
+boolean foo = getFoo();
+if(foo) System.out.println("Foo is true!");
+else System.out.println("The foo says no...");
+```
+
+But in such cases you may want to consider using the ternary operator:
+
+```java
+boolean foo = getFoo();
+String message = (foo ? "Foo is true!" : "The foo says no...")
+System.out.println(message);
+```
+
+## Looping with `for`
+
+The "classic" control structure with `for` iterates over a collection or a defined series of steps:
 
 <pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
 for (<span style="color:darkred;font-style:italic;">init</span>; <span style="color:darkred;font-style:italic;">condition</span>; <span style="color:darkred;font-style:italic;">change</span>) { } 
@@ -63,7 +91,7 @@ for( int i = 0; i < nucleotides.length; i++) {
 }
 ```
 
-All three elements are optional. This, for instance, is a legal for-loop:
+All three elements are optional. This, for instance, is also a legal for-loop:
 
 ```java
 String[] nucleotides = {"Adenine", "Cytosine", "Guanine", "Thymine"};
@@ -73,7 +101,7 @@ for( ; i >= 0; --i) {
 }
 ```
 
-Note that the change does not need to be an increment.  
+Note that the change does not need to be an increment but can be any change, like the decremet in this example.  
 Even this one is legal:
 
 ```
@@ -97,7 +125,7 @@ are quite often used to wait for user input in a terminal setting:
 }
 ```
 
-### foreach {-}
+### foreach
 
 The for-loop also has a variant. It is called the **_foreach_** loop. The difference is that there is no increment or condition; it is simply used to iterate a collection (Arrays or Collection types dealt with later).
 
@@ -115,19 +143,51 @@ for( String nucleotide : nucleotides) {
 ```
 
 
-## break and continue
+## Looping with `while`
 
-All iteration structures (the while `while` variants and both `for` variants) have the possibility to leave the current iteration early, or the loop entirely.
+The `while` loop is used to loop when there is no predefined number of iterations and/or no underlying collection.
+
+It has two variants:
+
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+while (<span style="color:darkred;font-style:italic;">condition</span>) { } 
+</pre>
+
+and 
+
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+do { } while (<span style="color:darkred;font-style:italic;">condition</span>) 
+</pre>
+
+The difference is that `do{} while()` is guaranteed to execute at least once, whereas `while(condition) {}` can be skipped entirely if "condition" is `false` at the first evaluation.
+
+
+## `break` and `continue`
+
+All iteration structures (the `while` and `for` variants) and the `switch` structure have the possibility to leave the current iteration early, or the loop entirely.
 
 - **`break`** - leave the loop (or the `switch` block)
-- **`continue`** - abort current iteration and go to next iteration
+- **`continue`** - abort current iteration of the loop and go to next iteration
+
+Here the loop is designed to do nothing with Scorpions.
+
+```java
+List<String> zoo = List.of("Giraffe", "Mouse", "Scorpion", "Zebra");
+for (String animal : zoo) {
+    if (animal.equals("Scorpion")) continue;
+    System.out.println("animal = " + animal);
+}
+```
 
 
-## switch/case
+## Discrete options with `switch/case`
 
-The `switch/case` structure is a decision flow control structure that is always replaceable by if/else. However, 
-`switch/case` is often more efficient, and better suited to deal with choosing between different discrete options.
-Where `if/else` works with boolean conditions, `switch/case` works with discrete cases.
+The `switch/case` structure is a decision flow control structure that is always replaceable by if/else. However, `switch/case` is often more efficient, and better suited to deal with choosing between different discrete options.
+Where `if/else` works with boolean conditions, `switch/case` works with discrete cases.  
+
+:::{caution}
+This structure requires _compile time constants_ to be legal (compilable). These include booleans, Strings, integers and enums, but not float or double or mutable object instances.
+:::
 
 The formal description is
 
@@ -149,10 +209,10 @@ void switchCase(String country) {
             System.out.println("Some weather, huh?");
             break;
         case "Belgium":
-            System.out.println("It is Belgian fries!");
+            System.out.println("Let's get a beer!");
             break;
         default:
-            System.out.println("Have a beer?");
+            System.out.println("What shall we talk about?");
     }
 }
 ```
@@ -205,7 +265,7 @@ Although this seems rather illogical, there are uses for this behavior. For exam
 handler for a web application:
 
 ```java
-String errorMessage(int errorCode) {
+public String errorMessage(int errorCode) {
     String message;
     switch (errorCode) {
         case 401:
@@ -213,6 +273,9 @@ String errorMessage(int errorCode) {
         case 403:
         case 405:
             message = "You are trying to do something that is not allowed";
+            break;
+        case 418:
+            message = "I am a teapot; I cannot brew coffee";
             break;
         case 404:
         case 503:
