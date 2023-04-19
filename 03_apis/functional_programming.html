@@ -192,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
@@ -373,7 +373,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lambdas-implement-interfaces">20.1. Lambdas implement interfaces</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-java-util-package">20.2. The <code class="docutils literal notranslate"><span class="pre">java.util</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-java-function-package">20.2. The <code class="docutils literal notranslate"><span class="pre">java.function</span></code> package</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streams">20.3. Streams</a></li>
 </ul>
             </nav>
@@ -464,8 +464,8 @@ The two input arguments for the method</p>
 </div>
 <p>Clear and concise!</p>
 </div>
-<div class="section" id="the-java-util-package">
-<h2><span class="section-number">20.2. </span>The <code class="docutils literal notranslate"><span class="pre">java.util</span></code> package<a class="headerlink" href="#the-java-util-package" title="Permalink to this headline">#</a></h2>
+<div class="section" id="the-java-function-package">
+<h2><span class="section-number">20.2. </span>The <code class="docutils literal notranslate"><span class="pre">java.function</span></code> package<a class="headerlink" href="#the-java-function-package" title="Permalink to this headline">#</a></h2>
 <p>Since a combining operation as shown above - taking two arguments and returning a new value - is a common operation, we could create a <strong><em>generic</em></strong> version of our combiner:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">interface</span> <span class="nc">Combiner</span><span class="o">&lt;</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="p">{</span>
 <span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="nf">combine</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
@@ -550,7 +550,7 @@ CUCKOOS
 </pre>
 <p>Streams can be chained to new streams or can have terminal operations. In the example above, all functions except for <code class="docutils literal notranslate"><span class="pre">forEach()</span></code> returned new streams.</p>
 <p>The main stream operations are these:</p>
-<a class="reference internal image-reference" href="../_images/overview_streams.png"><img alt="Streams" class="align-center" src="../_images/overview_streams.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/overview_streams.png"><img alt="Streams" class="align-center" src="../_images/overview_streams.png" style="width: 450px;" /></a>
 <p>The <code class="docutils literal notranslate"><span class="pre">map()</span></code> function has many variants, such as <code class="docutils literal notranslate"><span class="pre">mapToInt</span></code>, <code class="docutils literal notranslate"><span class="pre">mapToDouble</span></code>, <code class="docutils literal notranslate"><span class="pre">mapToObject</span></code>. Choose the appropriate one!</p>
 <p>Note that the last code snippet could also have been written using <em>method references</em>, something your IDE may suggest instead of the normal lambda notation:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;One&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;flew&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;the&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cuckoos&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nest&quot;</span><span class="p">);</span>
@@ -633,7 +633,7 @@ CUCKOOS
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lambdas-implement-interfaces">20.1. Lambdas implement interfaces</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-java-util-package">20.2. The <code class="docutils literal notranslate"><span class="pre">java.util</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-java-function-package">20.2. The <code class="docutils literal notranslate"><span class="pre">java.function</span></code> package</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streams">20.3. Streams</a></li>
 </ul>
   </nav></div>

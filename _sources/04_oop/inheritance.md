@@ -1,10 +1,10 @@
-# Inheritance and UML
+# Inheritance (and a bit of UML)
 
-In this post, the concept of inheritance will be revisited and expanded. Since this is a good place for it, a visualization standard called UML (Unified Modelling Language) is also introduced.
+In this chapter, the concept of inheritance will be revisited and expanded. Since this is a good place for it, a visualization standard called UML (Unified Modelling Language) is also introduced.
 
 ## The TestTube with cells
 
-Here is the TestTube at the end of this post \@ref(encapsulation). Instead of showing code, a UML diagram is displayed.
+Here is the TestTube at the end of this post {doc}`/04_oop/encapsulation`). Instead of showing code, a UML diagram is displayed.
 
 ![Test tube UML](figures/testtube2_all_s.png)
 
@@ -191,7 +191,15 @@ public abstract class Cell {
 }
 ```
 
-Note that both the class declaration and the method `grow()` have been marked `abstract`. **_An abstract method has no method body, only a signature_** - the same as with interfaces. **_An abstract class cannot be instantiated._**. This snippet `Cell cell = new Cell(12)` will not compile.
+Note that both the class declaration and the method `grow()` have been marked `abstract`. 
+
+:::{admonition} Being abstract
+- An abstract method has no method body, only a signature the same as with interfaces. 
+- An abstract class cannot be instantiated.  
+:::
+
+
+Therefore, this statement `Cell cell = new Cell(12)` will not compile because Cell is now abstract.
 
 The next step is declaring your subclasses to `extend` the superclass (only Bacterium shown here):
 
@@ -315,7 +323,7 @@ public class CellGrowthSimulator {
 
 outputs
 
-<pre class="console_output">
+<pre class="console_out">
 Grow cycle 10 finished; 5 cells present
 Grow cycle 20 finished; 5 cells present
 Grow cycle 30 finished; 55 cells present
@@ -409,4 +417,6 @@ Note that this class extends `Eukaryote` and thereby inherits the `grow()` metho
     }
 ```
 
-The lesson here: **Objects never ever change type, only the reference to them changes.**
+:::{note}
+Objects never change type, only the reference to them may change.
+:::

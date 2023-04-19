@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '04_oop/access_modifiers';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Inheritance and UML" href="inheritance.html" />
+    <link rel="next" title="23. Inheritance (and a bit of UML)" href="inheritance.html" />
     <link rel="prev" title="21. Encapsulation" href="encapsulation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -192,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation_revisited.html">25. Encapsulation revisited</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design_rules.html">26. Design rules summary</a></li>
@@ -439,15 +439,18 @@ Public members can be accessed by the members of any class.</p></li>
 </tbody>
 </table>
 <p>Careful choice of access levels is fundamental to good Java design. Although there are no strict rules, fields (instance and class variables) should usually be private, where public (or default) getters and/or setters privide read and/or write access. API methods should be public. When classes in the same package work intimately together, default access can be appropriate. The same holds for inheritance relationships and the <code class="docutils literal notranslate"><span class="pre">protected</span></code> modifier.</p>
-<p><strong><em>Design rule: Minimize the accessibility of class members.</em></strong></p>
+<div class="admonition-design-rule admonition">
+<p class="admonition-title">Design Rule</p>
+<p>Minimize the accessibility of class members (fields and methods).</p>
+</div>
 <p>Changing public API methods is almost impossible since it will create backward incompatibility.</p>
 </div>
 <div class="section" id="other-keywords">
 <h2><span class="section-number">22.2. </span>Other keywords<a class="headerlink" href="#other-keywords" title="Permalink to this headline">#</a></h2>
-<p>This is a list of keywords in the Java programming language. I omitted the access modifiers (discussed separately), the primitive types, flow control keywords as well as some I do not deem essential in an introduction of Java. You cannot use any of the these as identifiers. Text was copied from Wikipedia and edited.</p>
+<p>This is a list of keywords in the Java programming language. I omitted the access modifiers (discussed separately), the primitive types, flow control keywords as well as some I do not deem essential in an introduction of Java. You cannot use any of the these as identifiers. Text was copied from <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Java_keywords">Wikipedia</a> and edited.</p>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">abstract</span></code></strong>
-Abstracts are used to implement an abstraction in Java. A method with no definition must be declared as abstract and the class containing it must be declared as abstract. Abstract classes cannot be instantiated. Abstract methods must be implemented in the first concrete subclass. Note that an abstract class isn’t required to have an abstract method at all.</p></li>
+A method with no definition must be declared as abstract and the class containing it must be declared as abstract. Abstract classes cannot be instantiated. Abstract methods must be implemented in the first concrete subclass. Note that an abstract class isn’t required to have an abstract method at all.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">assert</span></code></strong> (added in J2SE 1.4)
 Assert describes a predicate (a true–false statement) placed in a Java program to indicate that the developer thinks that the predicate is always true at that place. If an assertion evaluates to false at run-time, an assertion failure results, which typically causes execution to abort.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">class</span></code></strong>
@@ -531,7 +534,7 @@ The <code class="docutils literal notranslate"><span class="pre">void</span></co
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>Inheritance and UML</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Inheritance (and a bit of UML)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

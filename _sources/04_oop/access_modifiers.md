@@ -29,17 +29,19 @@ This is the same info in table form:
 
 Careful choice of access levels is fundamental to good Java design. Although there are no strict rules, fields (instance and class variables) should usually be private, where public (or default) getters and/or setters privide read and/or write access. API methods should be public. When classes in the same package work intimately together, default access can be appropriate. The same holds for inheritance relationships and the `protected` modifier. 
 
-**_Design rule: Minimize the accessibility of class members._**
+:::{admonition} Design Rule
+Minimize the accessibility of class members (fields and methods).
+:::
 
 Changing public API methods is almost impossible since it will create backward incompatibility.
 
 
 ## Other keywords
 
-This is a list of keywords in the Java programming language. I omitted the access modifiers (discussed separately), the primitive types, flow control keywords as well as some I do not deem essential in an introduction of Java. You cannot use any of the these as identifiers. Text was copied from Wikipedia and edited. 
+This is a list of keywords in the Java programming language. I omitted the access modifiers (discussed separately), the primitive types, flow control keywords as well as some I do not deem essential in an introduction of Java. You cannot use any of the these as identifiers. Text was copied from [Wikipedia](https://en.wikipedia.org/wiki/List_of_Java_keywords) and edited. 
 
 - **`abstract`**
-    Abstracts are used to implement an abstraction in Java. A method with no definition must be declared as abstract and the class containing it must be declared as abstract. Abstract classes cannot be instantiated. Abstract methods must be implemented in the first concrete subclass. Note that an abstract class isn't required to have an abstract method at all.
+    A method with no definition must be declared as abstract and the class containing it must be declared as abstract. Abstract classes cannot be instantiated. Abstract methods must be implemented in the first concrete subclass. Note that an abstract class isn't required to have an abstract method at all.
 
 - **`assert`** (added in J2SE 1.4)
     Assert describes a predicate (a true–false statement) placed in a Java program to indicate that the developer thinks that the predicate is always true at that place. If an assertion evaluates to false at run-time, an assertion failure results, which typically causes execution to abort. 

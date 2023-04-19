@@ -386,7 +386,7 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="encapsulation">
 <h1><span class="section-number">21. </span>Encapsulation<a class="headerlink" href="#encapsulation" title="Permalink to this headline">#</a></h1>
-<p>So far, we have not dealt with the concept of <strong><em>data hiding</em></strong> which actually is a pivotal aspect of object-oriented programming. This concept will be illustrated here, starting with the <code class="docutils literal notranslate"><span class="pre">Cell</span></code> class from <strong>Part one</strong> (see &#64;ref(first-look-at-objects)). I modified it a bit for demonstration purposes. All access modifiers were removed and a check was introduced, so that the program crashes when a Cell grows too big.</p>
+<p>So far, we have not dealt with the concept of <strong><em>data hiding</em></strong> which actually is a pivotal aspect of object-oriented programming. This concept will be illustrated here, starting with the <code class="docutils literal notranslate"><span class="pre">Cell</span></code> class from <strong>Part one</strong> (see <a class="reference internal" href="../01_getting_started/objects_and_classes.html"><span class="doc">Objects and classes</span></a>). I modified it a bit for demonstration purposes. All access modifiers were removed and a check was introduced, so that the program crashes when a Cell grows too big.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube2</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cell</span><span class="w"> </span><span class="p">{</span>
@@ -400,6 +400,7 @@ document.write(`
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">//grow by 1 micrometer</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">growthIncrement</span><span class="p">;</span>
+
 <span class="w">        </span><span class="c1">//we can grow many cycles safely before resources run out</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">diameter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Error</span><span class="p">(</span><span class="s">&quot;TestTube will explode in 5 seconds&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
@@ -407,7 +408,7 @@ document.write(`
 </pre></div>
 </div>
 <p>So, the logic of this cell is based on the assumption that it starts growing at size 5 with an increment of 1 at each cycle. Nothing funny going on.</p>
-<p>Now here is a very simple version of class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code>.</p>
+<p>Now here is a simple version of class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code>.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube2</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nc">TestTube</span><span class="w"> </span><span class="p">{</span>
@@ -444,9 +445,12 @@ Exception in thread "main" java.lang.Error: TestTube will explode in 5 seconds
 </pre>
 <p>The TestTube developer was working with nanometer units while the Cell developer was working with micrometer units. The result is a crashing application (or Mars orbiter).</p>
 <p>Besides this big problem, when another class tries to run the <code class="docutils literal notranslate"><span class="pre">growCells()</span></code> method on a TestTube instance, it will get a <code class="docutils literal notranslate"><span class="pre">NullPointerException</span></code>. Can you figure out why?</p>
-<p><strong><em>So we need a way to protect the inner state of objects</em></strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong><em>We need a way to protect the inner state of objects</em></strong></p>
+</div>
 <p>Java has a heap of techniques for preventing illegal access or modification to your instance variables (and methods). These techniques start with the use of <strong><em>access modifiers</em></strong>.</p>
-<p>Let’s improve and secure this <code class="docutils literal notranslate"><span class="pre">Cell</span></code> and <code class="docutils literal notranslate"><span class="pre">TesTube</span></code> and keep access open only to that which needs to be publicly accessible.</p>
+<p>Let’s improve and secure this <code class="docutils literal notranslate"><span class="pre">Cell</span></code> and <code class="docutils literal notranslate"><span class="pre">TestTube</span></code> and keep access open only to that which needs to be publicly accessible.</p>
 <p>Here is a new and improved Cell class:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube2</span><span class="p">;</span>
 
@@ -497,13 +501,13 @@ Exception in thread "main" java.lang.Error: TestTube will explode in 5 seconds
 </div>
 <p>Quite a lot has changed:</p>
 <ol class="arabic simple">
-<li><p>All instance variables have been marked <code class="docutils literal notranslate"><span class="pre">private</span></code> which means only code inside class Cell can access them.</p></li>
+<li><p>All instance variables have been marked <strong><code class="docutils literal notranslate"><span class="pre">private</span></code></strong> which means only code inside class Cell can access them.</p></li>
 <li><p>Variables have been renamed to be more reflective of what they represent.</p></li>
-<li><p>A Constructor was added to provide a single point of assignment to both variables, at construction time.</p></li>
+<li><p>A Constructor was added to provide a single point of initialization to both variables, at construction time.</p></li>
 <li><p>The constructor performs a check on its parameters so that illegal arguments are caught early.</p></li>
 <li><p>Javadoc was added to explain the public API.</p></li>
-<li><p>A single <strong><em>getter</em></strong> was introduced for property diameter, making it a <strong><em>read-only property</em></strong>.</p></li>
-<li><p>No getter was created for property <code class="docutils literal notranslate"><span class="pre">growthIncrementInMicrometers</span></code> because it was decided by the developer (me) that it should only be set once during the life cycle of a Cell object. For that reason, instance variable <code class="docutils literal notranslate"><span class="pre">growthIncrementInMicrometers</span></code> was <strong><em>marked final</em></strong>.</p></li>
+<li><p>A single <em>getter</em> was introduced for property diameter, making it a <strong><em>read-only property</em></strong>.</p></li>
+<li><p>No getter was created for property <code class="docutils literal notranslate"><span class="pre">growthIncrementInMicrometers</span></code> because it was decided by the developer (me) that it should only be set once during the life cycle of a Cell object. For that reason, instance variable <code class="docutils literal notranslate"><span class="pre">growthIncrementInMicrometers</span></code> was marked <strong><em>final</em></strong>.</p></li>
 </ol>
 <p>One setback of this whole procedure: class <code class="docutils literal notranslate"><span class="pre">TestTube</span></code> will not compile anymore because (a) it attempts to access the <code class="docutils literal notranslate"><span class="pre">private</span></code> members of class Cell and (b) because there is no <strong><em>no-arg constructor</em></strong> anymore:</p>
 <p><img alt="Compile errors" src="../_images/compile_errors.png" /></p>
@@ -580,10 +584,11 @@ Exception in thread "main" java.lang.Error: TestTube will explode in 5 seconds
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cell</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">cells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">cell</span><span class="p">.</span><span class="na">grow</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="c1">//since Java 8, this is also possible:</span>
-<span class="w">        </span><span class="c1">//this.cells.forEach(c -&gt; c.grow());</span>
-<span class="w">        </span><span class="c1">//or</span>
-<span class="w">        </span><span class="c1">//this.cells.forEach(Cell::grow);</span>
+<span class="w">        </span><span class="c1">// This is also possible:</span>
+<span class="w">        </span><span class="c1">// this.cells.forEach(c -&gt; c.grow());</span>
+<span class="w">        </span><span class="c1">// or</span>
+<span class="w">        </span><span class="c1">// this.cells.forEach(Cell::grow);</span>
+<span class="w">        </span><span class="c1">// see chapter on Functional Programming</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -592,9 +597,13 @@ Exception in thread "main" java.lang.Error: TestTube will explode in 5 seconds
 <p>There are several noteworthy changes here:</p>
 <ol class="arabic simple">
 <li><p>All instance variables are <code class="docutils literal notranslate"><span class="pre">private</span></code>. Note a pattern here?</p></li>
-<li><p>Two public setters were provided (making <code class="docutils literal notranslate"><span class="pre">defaultCellDiameter</span></code> and  <code class="docutils literal notranslate"><span class="pre">defaultSizeIncrement</span></code> <strong><em>write-only</em></strong>), a public constructor and one public <strong><em>API method</em></strong> that will start the testtube: <code class="docutils literal notranslate"><span class="pre">start()</span></code></p></li>
-<li><p>All functionality is divided into very small methods with a very clear (and testable) responsibility. This is the <strong><em>Single responsibility Principle</em></strong> at work.</p></li>
+<li><p>Two public setters were provided (making <code class="docutils literal notranslate"><span class="pre">defaultCellDiameter</span></code> and  <code class="docutils literal notranslate"><span class="pre">defaultSizeIncrement</span></code> <strong><em>write-only</em></strong>), a public constructor and one public API method that will start the testtube: <code class="docutils literal notranslate"><span class="pre">start()</span></code></p></li>
+<li><p>All functionality is divided into very small methods with a very clear (and testable) responsibility. This is the <strong><em>Single Responsibility Principle</em></strong> at work.</p></li>
 </ol>
+<div class="admonition-srp admonition">
+<p class="admonition-title">SRP</p>
+<p>The Single Responsibility Principle (SRP) states that all code elements (methods and classes) should only have a single purpose (or, more formal, a single reason to change).</p>
+</div>
 <p>Finally, here is the <strong><em>controller</em></strong> class <code class="docutils literal notranslate"><span class="pre">CellGrowthSimulator</span></code>. Its sole purpose is now to start the simulation process.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube2</span><span class="p">;</span>
 
@@ -616,9 +625,9 @@ Exception in thread "main" java.lang.Error: TestTube will explode in 5 seconds
 </div>
 <div class="section" id="summary">
 <h2><span class="section-number">21.1. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
-<p>This post has introduced a fundamental concept of Object-Oriented Programming and design: <strong><em>encapsulation</em></strong>; hiding the inner workings of a class, mostly through the use of the private keyword and usage of getters and setters. It has also shown a first view of <strong><em>abstraction</em></strong> in class TestTube: this class has a single simple public API method (<code class="docutils literal notranslate"><span class="pre">start()</span></code>) and has hidden all the complexities of its simulation algorithm.</p>
-<p>You have seen two access modifiers; there are two more that are dealt with in the next post.</p>
-<p>Also, there is another post covering some more sophisticated aspects of encapsulation.</p>
+<p>This post has introduced a fundamental concept of Object-Oriented Programming and design: <strong><em>encapsulation</em></strong>; hiding the inner workings of a class, mostly through the use of the private keyword and usage of getters and setters. It has also shown a first view of <strong><em>abstraction</em></strong> in class TestTube: this class has a single simple public API method (<code class="docutils literal notranslate"><span class="pre">start()</span></code>) and has hidden all the complexities of its simulation algorithm in <em>private</em> methods.</p>
+<p>You have seen two access modifiers; there are two more that are dealt with in the next chapter.</p>
+<p>Also, there is another chapter (<a class="reference internal" href="encapsulation_revisited.html"><span class="doc">Encapsulation revisited</span></a>) covering some more advanced aspects of encapsulation.</p>
 </div>
 </div>
 

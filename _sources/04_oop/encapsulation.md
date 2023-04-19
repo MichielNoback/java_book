@@ -1,6 +1,6 @@
 # Encapsulation
 
-So far, we have not dealt with the concept of **_data hiding_** which actually is a pivotal aspect of object-oriented programming. This concept will be illustrated here, starting with the `Cell` class from **Part one** (see \@ref(first-look-at-objects)). I modified it a bit for demonstration purposes. All access modifiers were removed and a check was introduced, so that the program crashes when a Cell grows too big.
+So far, we have not dealt with the concept of **_data hiding_** which actually is a pivotal aspect of object-oriented programming. This concept will be illustrated here, starting with the `Cell` class from **Part one** (see {doc}`/01_getting_started/objects_and_classes`). I modified it a bit for demonstration purposes. All access modifiers were removed and a check was introduced, so that the program crashes when a Cell grows too big.
 
 ```java
 package snippets.testtube2;
@@ -16,6 +16,7 @@ public class Cell {
     void grow() {
         //grow by 1 micrometer
         this.diameter += growthIncrement;
+
         //we can grow many cycles safely before resources run out
         if (this.diameter > 1000) throw new Error("TestTube will explode in 5 seconds");
     }
@@ -24,7 +25,7 @@ public class Cell {
 
 So, the logic of this cell is based on the assumption that it starts growing at size 5 with an increment of 1 at each cycle. Nothing funny going on.
 
-Now here is a very simple version of class `TestTube`.
+Now here is a simple version of class `TestTube`.
 
 ```java
 package snippets.testtube2;
@@ -67,11 +68,13 @@ The TestTube developer was working with nanometer units while the Cell developer
 
 Besides this big problem, when another class tries to run the `growCells()` method on a TestTube instance, it will get a `NullPointerException`. Can you figure out why?
 
-**_So we need a way to protect the inner state of objects_**
+:::{warning}
+**_We need a way to protect the inner state of objects_**
+:::
 
 Java has a heap of techniques for preventing illegal access or modification to your instance variables (and methods). These techniques start with the use of **_access modifiers_**.
 
-Let's improve and secure this `Cell` and `TesTube` and keep access open only to that which needs to be publicly accessible.
+Let's improve and secure this `Cell` and `TestTube` and keep access open only to that which needs to be publicly accessible.
 
 Here is a new and improved Cell class:
 
@@ -124,13 +127,13 @@ public class Cell {
 ```
 
 Quite a lot has changed:
-1. All instance variables have been marked `private` which means only code inside class Cell can access them. 
+1. All instance variables have been marked **`private`** which means only code inside class Cell can access them. 
 2. Variables have been renamed to be more reflective of what they represent.
-3. A Constructor was added to provide a single point of assignment to both variables, at construction time. 
+3. A Constructor was added to provide a single point of initialization to both variables, at construction time. 
 4. The constructor performs a check on its parameters so that illegal arguments are caught early.
 5. Javadoc was added to explain the public API.
-6. A single **_getter_** was introduced for property diameter, making it a **_read-only property_**. 
-7. No getter was created for property `growthIncrementInMicrometers` because it was decided by the developer (me) that it should only be set once during the life cycle of a Cell object. For that reason, instance variable `growthIncrementInMicrometers` was **_marked final_**.
+6. A single _getter_ was introduced for property diameter, making it a **_read-only property_**. 
+7. No getter was created for property `growthIncrementInMicrometers` because it was decided by the developer (me) that it should only be set once during the life cycle of a Cell object. For that reason, instance variable `growthIncrementInMicrometers` was marked **_final_**.
 
 One setback of this whole procedure: class `TestTube` will not compile anymore because (a) it attempts to access the `private` members of class Cell and (b) because there is no **_no-arg constructor_** anymore:
 
@@ -213,10 +216,11 @@ public class TestTube {
         for (Cell cell : this.cells) {
             cell.grow();
         }
-        //since Java 8, this is also possible:
-        //this.cells.forEach(c -> c.grow());
-        //or
-        //this.cells.forEach(Cell::grow);
+        // This is also possible:
+        // this.cells.forEach(c -> c.grow());
+        // or
+        // this.cells.forEach(Cell::grow);
+        // see chapter on Functional Programming
     }
 }
 
@@ -227,8 +231,12 @@ Yes, the class file became substantially larger - one of the setbacks of safe de
 There are several noteworthy changes here:
 
 1. All instance variables are `private`. Note a pattern here?
-2. Two public setters were provided (making `defaultCellDiameter` and  `defaultSizeIncrement` **_write-only_**), a public constructor and one public **_API method_** that will start the testtube: `start()`
-3. All functionality is divided into very small methods with a very clear (and testable) responsibility. This is the **_Single responsibility Principle_** at work. 
+2. Two public setters were provided (making `defaultCellDiameter` and  `defaultSizeIncrement` **_write-only_**), a public constructor and one public API method that will start the testtube: `start()`
+3. All functionality is divided into very small methods with a very clear (and testable) responsibility. This is the **_Single Responsibility Principle_** at work. 
+
+:::{admonition} SRP
+The Single Responsibility Principle (SRP) states that all code elements (methods and classes) should only have a single purpose (or, more formal, a single reason to change).
+:::
 
 Finally, here is the **_controller_** class `CellGrowthSimulator`. Its sole purpose is now to start the simulation process.
 
@@ -253,8 +261,8 @@ public class CellGrowthSimulator {
 
 ## Summary
 
-This post has introduced a fundamental concept of Object-Oriented Programming and design: **_encapsulation_**; hiding the inner workings of a class, mostly through the use of the private keyword and usage of getters and setters. It has also shown a first view of **_abstraction_** in class TestTube: this class has a single simple public API method (`start()`) and has hidden all the complexities of its simulation algorithm. 
+This post has introduced a fundamental concept of Object-Oriented Programming and design: **_encapsulation_**; hiding the inner workings of a class, mostly through the use of the private keyword and usage of getters and setters. It has also shown a first view of **_abstraction_** in class TestTube: this class has a single simple public API method (`start()`) and has hidden all the complexities of its simulation algorithm in _private_ methods. 
 
-You have seen two access modifiers; there are two more that are dealt with in the next post.
+You have seen two access modifiers; there are two more that are dealt with in the next chapter.
 
-Also, there is another post covering some more sophisticated aspects of encapsulation.
+Also, there is another chapter ({doc}`/04_oop/encapsulation_revisited`) covering some more advanced aspects of encapsulation.

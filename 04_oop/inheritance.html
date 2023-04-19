@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>23. Inheritance and UML &#8212; The Java Track</title>
+    <title>23. Inheritance (and a bit of UML) &#8212; The Java Track</title>
   
   
   
@@ -192,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Inheritance and UML</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation_revisited.html">25. Encapsulation revisited</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design_rules.html">26. Design rules summary</a></li>
@@ -362,7 +362,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Inheritance and UML</h1>
+    <h1>Inheritance (and a bit of UML)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -394,12 +394,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="inheritance-and-uml">
-<h1><span class="section-number">23. </span>Inheritance and UML<a class="headerlink" href="#inheritance-and-uml" title="Permalink to this headline">#</a></h1>
-<p>In this post, the concept of inheritance will be revisited and expanded. Since this is a good place for it, a visualization standard called UML (Unified Modelling Language) is also introduced.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="inheritance-and-a-bit-of-uml">
+<h1><span class="section-number">23. </span>Inheritance (and a bit of UML)<a class="headerlink" href="#inheritance-and-a-bit-of-uml" title="Permalink to this headline">#</a></h1>
+<p>In this chapter, the concept of inheritance will be revisited and expanded. Since this is a good place for it, a visualization standard called UML (Unified Modelling Language) is also introduced.</p>
 <div class="section" id="the-testtube-with-cells">
 <h2><span class="section-number">23.1. </span>The TestTube with cells<a class="headerlink" href="#the-testtube-with-cells" title="Permalink to this headline">#</a></h2>
-<p>Here is the TestTube at the end of this post &#64;ref(encapsulation). Instead of showing code, a UML diagram is displayed.</p>
+<p>Here is the TestTube at the end of this post <a class="reference internal" href="encapsulation.html"><span class="doc">Encapsulation</span></a>). Instead of showing code, a UML diagram is displayed.</p>
 <p><img alt="Test tube UML" src="../_images/testtube2_all_s.png" /></p>
 <p>You can generate such a thing yourself in IntelliJ by selecting the source files you want to visualize → right-click → Diagrams → Show Diagram.</p>
 <p>The diagram above shows everything: fields, methods, constructors, with any access level. Using the Diagrams menu (and general settings - see the <a class="reference external" href="https://www.jetbrains.com/help/idea/class-diagram.html">doc</a>) you can filter what you want to show. Here are the same classes with only the public fields shown, and no constructors:</p>
@@ -571,7 +571,15 @@ And didn’t I tell you? They should be able to divide as well.”</em></p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Note that both the class declaration and the method <code class="docutils literal notranslate"><span class="pre">grow()</span></code> have been marked <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. <strong><em>An abstract method has no method body, only a signature</em></strong> - the same as with interfaces. <strong><em>An abstract class cannot be instantiated.</em></strong>. This snippet <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">cell</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Cell(12)</span></code> will not compile.</p>
+<p>Note that both the class declaration and the method <code class="docutils literal notranslate"><span class="pre">grow()</span></code> have been marked <code class="docutils literal notranslate"><span class="pre">abstract</span></code>.</p>
+<div class="admonition-being-abstract admonition">
+<p class="admonition-title">Being abstract</p>
+<ul class="simple">
+<li><p>An abstract method has no method body, only a signature the same as with interfaces.</p></li>
+<li><p>An abstract class cannot be instantiated.</p></li>
+</ul>
+</div>
+<p>Therefore, this statement <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">cell</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Cell(12)</span></code> will not compile because Cell is now abstract.</p>
 <p>The next step is declaring your subclasses to <code class="docutils literal notranslate"><span class="pre">extend</span></code> the superclass (only Bacterium shown here):</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.testtube3</span><span class="p">;</span>
 
@@ -684,7 +692,7 @@ And didn’t I tell you? They should be able to divide as well.”</em></p>
 </pre></div>
 </div>
 <p>outputs</p>
-<pre class="console_output">
+<pre class="console_out">
 Grow cycle 10 finished; 5 cells present
 Grow cycle 20 finished; 5 cells present
 Grow cycle 30 finished; 55 cells present
@@ -761,7 +769,10 @@ Grow cycle 100 finished; 111230 cells present
 <span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>The lesson here: <strong>Objects never ever change type, only the reference to them changes.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Objects never change type, only the reference to them may change.</p>
+</div>
 </div>
 </div>
 </div>

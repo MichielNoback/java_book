@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="25. Encapsulation revisited" href="encapsulation_revisited.html" />
-    <link rel="prev" title="23. Inheritance and UML" href="inheritance.html" />
+    <link rel="prev" title="23. Inheritance (and a bit of UML)" href="inheritance.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -192,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation_revisited.html">25. Encapsulation revisited</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design_rules.html">26. Design rules summary</a></li>
@@ -373,8 +373,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constants-are-everywhere">24.1. Constants are everywhere</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basic-enum">24.2. A basic enum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-custom-constructor">24.3. A custom constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-enums">24.2. Working with enums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-and-extension">24.3. Customization and extension</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-custom-constructor">24.3.1. A custom constructor</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#added-functionality">24.4. Added functionality</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-stuff">24.5. Advanced stuff</a></li>
 </ul>
@@ -393,28 +396,40 @@ document.write(`
 <div class="section" id="constants-are-everywhere">
 <h2><span class="section-number">24.1. </span>Constants are everywhere<a class="headerlink" href="#constants-are-everywhere" title="Permalink to this headline">#</a></h2>
 <p>Constants are everywhere: the number pi, the number e, the URL to a web service
-you use in your app. These are really simple constants that do not need anything
-special besides being defined as a</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1416</span><span class="p">;</span>
+you use in your app. Here are two if these.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.1416</span><span class="p">;</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">API_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://www.example.com&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Of course, any alert observer might state that pi is already defined in class
-Math as PI, and in much more detail: 3.141592653589793. And of course, URLs
-should not be defined as hard-coded strings, but in a neat little properties
-file.</p>
-<p>But this post is not about simple constants. This post is about sets of constants
+<p>Constants are declared as <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">final</span></code> variables (sometimes <code class="docutils literal notranslate"><span class="pre">private</span></code>).</p>
+<p>Of course, an alert observer might state that pi is already defined in class
+Math as PI, and in much more detail: 3.141592653589793.
+And also that URLs should not be defined as hard-coded strings, but in a properties file.</p>
+<p>But this post is not about simple constants. This post is about related sets of constants
 that all refer to a given property with your application. This is where enums come
-in. I love them and hope that, after reading this post, you will too. I will
-show you that Java enums are so much more than simple constants. In fact, enums
-are regular Java classes, but only special in the fact that only the instances
-defined in the enum class file will ever see the day of light!</p>
+in.
+Java enums are so much more than simple constants.
+In fact, enums are regular Java classes, but very special in the fact that only the instances defined in the enum class file will ever see the day of light!</p>
 </div>
-<div class="section" id="a-basic-enum">
-<h2><span class="section-number">24.2. </span>A basic enum<a class="headerlink" href="#a-basic-enum" title="Permalink to this headline">#</a></h2>
-<p>For instance, the roles of visitors in your web application: <code class="docutils literal notranslate"><span class="pre">GUEST</span></code>, <code class="docutils literal notranslate"><span class="pre">LOGGED_IN_USER</span></code>,
-<code class="docutils literal notranslate"><span class="pre">ADMIN</span></code>, or pizza sizes in your online ordering form: <code class="docutils literal notranslate"><span class="pre">SMALL</span></code>, <code class="docutils literal notranslate"><span class="pre">MEDIUM</span></code>, <code class="docutils literal notranslate"><span class="pre">LARGE</span></code>,
-<code class="docutils literal notranslate"><span class="pre">LUNATIC</span></code>. Or the four letters of the DNA alphabet: <code class="docutils literal notranslate"><span class="pre">G</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>. Let’s look at an example using the nucleotides.</p>
+<div class="section" id="working-with-enums">
+<h2><span class="section-number">24.2. </span>Working with enums<a class="headerlink" href="#working-with-enums" title="Permalink to this headline">#</a></h2>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>A Java enum is a class declared with the keyword <code class="docutils literal notranslate"><span class="pre">enum</span></code>. It defines all possible discrete values for tha class.
+Here is an example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Role</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GUEST</span><span class="p">,</span>
+<span class="w">    </span><span class="n">USER</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">ADMIN</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example the enum of type <code class="docutils literal notranslate"><span class="pre">Role</span></code> has been defined, with three possible values (instances) of the enum.</p>
+</div>
+<p>Other examples of typical use cases for enums are the roles of visitors in your web application: <code class="docutils literal notranslate"><span class="pre">GUEST</span></code>, <code class="docutils literal notranslate"><span class="pre">LOGGED_IN_USER</span></code>, <code class="docutils literal notranslate"><span class="pre">ADMIN</span></code>, or pizza sizes in an online ordering form: <code class="docutils literal notranslate"><span class="pre">SMALL</span></code>, <code class="docutils literal notranslate"><span class="pre">MEDIUM</span></code>, <code class="docutils literal notranslate"><span class="pre">LARGE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">LUNATIC</span></code>.
+An example in the bioinformatics domain is the letters of the DNA alphabet: <code class="docutils literal notranslate"><span class="pre">G</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>.
+Let’s look at this example in more detail.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Nucleotide</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">A</span><span class="p">,</span>
 <span class="w">    </span><span class="n">C</span><span class="p">,</span><span class="w"> </span>
@@ -423,9 +438,11 @@ defined in the enum class file will ever see the day of light!</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Here, I have defined an enum with four values: G, A, T, and C. As a convention, enum value names must always be all-caps.<br />
-You can do some nice things with it already.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">enums</span><span class="p">;</span>
+<p>Here, I have defined an enum with four values (possible instances): G, A, T, and C.
+As a convention, enum value names should be all-caps.<br />
+You can already do a variety of things with this implementation .
+See the next snippet for examples of usage.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.enums</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EnumDemo</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -434,15 +451,30 @@ You can do some nice things with it already.</p>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// declare a specific instance of the type</span>
 <span class="w">        </span><span class="n">Nucleotide</span><span class="w"> </span><span class="n">nucA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">A</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">//print it</span>
+
+<span class="w">        </span><span class="n">Nucleotide</span><span class="w"> </span><span class="n">otherNucA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">A</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// both variables point to the same object!</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nucA and otherNucA are the same: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">nucA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">otherNucA</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// print it to show the constant value (this can be overridden -- see below)</span>
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nucA = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nucA</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">//test its nature</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nucA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;We&#39;ve got an A!&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="c1">//switch on it!</span>
-<span class="w">        </span><span class="n">switchOnNucleotide</span><span class="p">(</span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">G</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// get its ordinal (the rank in the declaration list)</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nucA.ordinal() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nucA</span><span class="p">.</span><span class="na">ordinal</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Nucleotide.G.ordinal() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">G</span><span class="p">.</span><span class="na">ordinal</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// get all possible values</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Nucleotide.values() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">values</span><span class="p">()));</span>
+
+<span class="w">        </span><span class="c1">// convert from string</span>
+<span class="w">        </span><span class="n">Nucleotide</span><span class="w"> </span><span class="n">nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;created from String with valueOf() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nuc</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// switch on it</span>
+<span class="w">        </span><span class="n">switchOnNucleotide</span><span class="p">(</span><span class="n">nuc</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">switchOnNucleotide</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Nucleotide</span><span class="w"> </span><span class="n">nuc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -466,13 +498,59 @@ You can do some nice things with it already.</p>
 </div>
 <p>When printed, an enum will simply be displayed as the name of its value:</p>
 <pre class="console_out">
+nucA and otherNucA are the same: true
 nucA = A
-We've got an A!
-It is an G
+nucA.ordinal() = 0
+Nucleotide.G.ordinal() = 2
+Nucleotide.values() = [A, C, G, T]
+created from String with valueOf() = C
+It is a C
 </pre>
+<p>The <em>factory</em> function <code class="docutils literal notranslate"><span class="pre">valueOf()</span></code> is an often overlooked utility, converting from string to enum.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;G&quot;</span><span class="p">;</span>
+<span class="n">Nucleotide</span><span class="w"> </span><span class="n">nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">letter</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nuc = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nuc</span><span class="p">);</span>
+</pre></div>
 </div>
+<p>This will output</p>
+<pre class="console_out">
+nuc = G
+</pre>
+<p>This <code class="docutils literal notranslate"><span class="pre">valueOf()</span></code> call returned the <code class="docutils literal notranslate"><span class="pre">Nucleotide.G</span></code> constant. Note that no new instance will be created!
+Only one instance will of each possible instance will exist during your app life cycle.</p>
+<p>When you use a non-existing value you get an <code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;P&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This will output something like this</p>
+<pre class="console_out">
+Exception in thread "main" java.lang.IllegalArgumentException: No enum constant enums.Nucleotide.P
+	at java.lang.Enum.valueOf(Enum.java:238)
+	at enums.Nucleotide.valueOf(Nucleotide.java:11)
+	at enums.EnumDemo.start(EnumDemo.java:41)
+	at enums.EnumDemo.main(EnumDemo.java:19)
+</pre>
+<p>Also, the fact that you can do flow control on the basis of the ordinal value can be useful but hardly ever used.
+See below for an example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">PizzaSize</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SMALL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MEDIUM</span><span class="p">,</span>
+<span class="w">    </span><span class="n">LARGE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">LUNATIC</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">PizzaSize</span><span class="w"> </span><span class="n">pz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PizzaSize</span><span class="p">.</span><span class="na">LUNATIC</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pz</span><span class="p">.</span><span class="na">ordinal</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">PizzaSize</span><span class="p">.</span><span class="na">LARGE</span><span class="p">.</span><span class="na">ordinal</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Are you sure? This size is for really hungry people.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customization-and-extension">
+<h2><span class="section-number">24.3. </span>Customization and extension<a class="headerlink" href="#customization-and-extension" title="Permalink to this headline">#</a></h2>
 <div class="section" id="a-custom-constructor">
-<h2><span class="section-number">24.3. </span>A custom constructor<a class="headerlink" href="#a-custom-constructor" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">24.3.1. </span>A custom constructor<a class="headerlink" href="#a-custom-constructor" title="Permalink to this headline">#</a></h3>
 <p>If you want something else printed by default besides the name of the constant,
 you can provide this value through a constructor:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">enums</span><span class="p">;</span>
@@ -497,60 +575,46 @@ you can provide this value through a constructor:</p>
 </pre></div>
 </div>
 <p>Now, when you print an enum you will get its string value given via the constructor
-argument. Yes, this <code class="docutils literal notranslate"><span class="pre">A(&quot;Adenine&quot;)</span></code> constructs a Nucleotide enum constant of type <code class="docutils literal notranslate"><span class="pre">Nucleotide.A</span></code> with “name” property “Adenine”.
-The reverse is also a much-used aspect: you have some string value and want to create an enum from it.<br />
-This is how it’s done:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;G&quot;</span><span class="p">;</span>
-<span class="n">Nucleotide</span><span class="w"> </span><span class="n">nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">letter</span><span class="p">);</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nuc = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nuc</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This will output</p>
-<pre class="console_out">
-nuc = Guanine
-</pre>
-<p>This <code class="docutils literal notranslate"><span class="pre">valueOf()</span></code> call returned the <code class="docutils literal notranslate"><span class="pre">Nucleotide.G</span></code> constant. Note it will not be created, since only one instance will exist during your app life cycle.</p>
-<p>When you use a non-existing value you get an <code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code>:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">letter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">;</span>
-<span class="n">nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">letter</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This will output</p>
-<pre class="console_out">
-Exception in thread "main" java.lang.IllegalArgumentException: No enum constant enums.Nucleotide.P
-	at java.lang.Enum.valueOf(Enum.java:238)
-	at enums.Nucleotide.valueOf(Nucleotide.java:11)
-	at enums.EnumDemo.start(EnumDemo.java:41)
-	at enums.EnumDemo.main(EnumDemo.java:19)
-</pre>
+argument. Yes, this <code class="docutils literal notranslate"><span class="pre">A(&quot;Adenine&quot;)</span></code> constructs a Nucleotide enum constant of type <code class="docutils literal notranslate"><span class="pre">Nucleotide.A</span></code> with “name” property “Adenine”.</p>
 <p>This is already pretty neat, yes? And we’re only just getting started!</p>
+</div>
 </div>
 <div class="section" id="added-functionality">
 <h2><span class="section-number">24.4. </span>Added functionality<a class="headerlink" href="#added-functionality" title="Permalink to this headline">#</a></h2>
-<p>Let’s add some functionality. First something simple: provide access to the
-nucleotides’ molecular weight. I’ll use a HashMap to store these values and
-define a simple method that serves them.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">//rest of class omitted</span>
+<p>Let’s add some functionality.
+First something simple: provide access to the nucleotides’ molecular weight.
+I’ll use a HashMap to store these values and define a simple method that serves them.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.enums</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Nucleotide</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">;</span>
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * static initializer to populate the map.</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mf">313.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="mf">304.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="w"> </span><span class="mf">329.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mf">304.2</span><span class="p">);</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Nucleotide</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">A</span><span class="p">(</span><span class="s">&quot;Adenine&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">C</span><span class="p">(</span><span class="s">&quot;Guanine&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">G</span><span class="p">(</span><span class="s">&quot;Cytosine&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">T</span><span class="p">(</span><span class="s">&quot;Thymine&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Nucleotide</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mf">313.2</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="mf">304.2</span><span class="p">,</span><span class="w"> </span><span class="n">G</span><span class="p">,</span><span class="w"> </span><span class="mf">329.2</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mf">304.2</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Nucleotide</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fullName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fullName</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * returns the molecular weight of this nucleotide in single-stranded DNA, in Daltons.</span>
+<span class="cm">     * returns the molecular weight of the nucleotide, in Daltons.</span>
 <span class="cm">     * @return molecularWeight</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMolecularWeight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">//rest of class omitted</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>See how you can use the reference to <code class="docutils literal notranslate"><span class="pre">this</span></code> to fetch the molecular weight?
@@ -559,36 +623,31 @@ Here are two lines using this functionality:</p>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nuc C weight = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Nucleotide</span><span class="p">.</span><span class="na">C</span><span class="p">.</span><span class="na">getMolecularWeight</span><span class="p">());</span>
 </pre></div>
 </div>
-<p>But how about the complements of these values (you know, the letter on the other
-strand of DNA in the double helix, the one it pairs with)? “A” has as complement
-“T”, “G” has “C” etc. I want to be able to get a complement for all nucleotides,
-given its original value. Exactly the same as the molecular weights, but the
-value is another nucleotide.</p>
+<p>Note that this property could have been implemented in a constructor setting as well, just like the nucleotide name.</p>
+<p>But how about the complements of these values (you know, the letter on the other strand of DNA in the double helix, the one it pairs with)?
+“A” has as complement “T”, “G” has “C” etc.
+I want to be able to get a complement for all nucleotides, given its original value.
+The solution is the same: use a constructor value or a Map-like solution as with the nucleotide name.</p>
 </div>
 <div class="section" id="advanced-stuff">
 <h2><span class="section-number">24.5. </span>Advanced stuff<a class="headerlink" href="#advanced-stuff" title="Permalink to this headline">#</a></h2>
-<p>Still this is not the whole story. The <em>piece de resistance</em> has yet to come. As
-you may know, there is another nucleotide that does not occur in DNA but solely
-in RNA: U (Uracil). DNA has A, C, G and T while RNA has A, C, G, and U. Thus, U
-replaces T in RNA. I want to add that one to my Nucleotide enum, and also provide
-a method that will tell me whether a nucleotide only occurs in RNA. I could
-simply provide a map for that, but this is not as efficient (or cool) as
-another solution. In fact, ONLY the U is exclusive for RNA. Therefore, I could
-provide some default functionality and override that behavior for Uracil.</p>
+<p>Still this is not the whole story. The <em>piece de resistance</em> has yet to come. As you may know, there is another nucleotide that does not occur in DNA but solely in RNA: U (Uracil). DNA has A, C, G and T while RNA has A, C, G, and U.
+Thus, U replaces T in RNA. I want to add that one to my Nucleotide enum, and also provide a method that will tell me whether a nucleotide only occurs in RNA. I could simply provide a map for that, but this is not as efficient (or cool) as another solution. In fact, ONLY the U is exclusive for RNA. Therefore, I could provide some default functionality and override that behavior for Uracil.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">//rest of enum omitted</span>
 <span class="w">    </span><span class="n">A</span><span class="p">(</span><span class="s">&quot;Adenine&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">C</span><span class="p">(</span><span class="s">&quot;Guanine&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">G</span><span class="p">(</span><span class="s">&quot;Cytosine&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">T</span><span class="p">(</span><span class="s">&quot;Thymine&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">U</span><span class="p">(</span><span class="s">&quot;Uracil&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="cm">/*yes! a CONSTANT-SPECIFIC CLASS BODY!*/</span>
+<span class="w">        </span><span class="cm">/*yes! a CONSTANT-SPECIFIC CLASS BODY! An override for single nucleotide*/</span>
 <span class="w">        </span><span class="nd">@Override</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isExclusiveRNA</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">//override for single RNA nucleotide</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
+
 <span class="w">    </span><span class="c1">//rest of enum omitted</span>
+
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * returns whether this nucleotide is only found in RNA.</span>
 <span class="cm">     *</span>
@@ -598,19 +657,16 @@ provide some default functionality and override that behavior for Uracil.</p>
 <span class="w">        </span><span class="c1">//the default value</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="c1">//rest of enum omitted</span>
 </pre></div>
 </div>
 <p>This is an example of a <strong><em>constant-specific class body</em></strong>, something only certified
-Java programmers seem to know about. And now you do, too. Its purpose is to
-provide an override for some generic functionality that applies to most of the
-other constants of the enum.</p>
-<p>Below follows the complete code of the enum. Of course, there is at least one
-major flaw in the model with respect to adherence to molecular biology – there
-awaits eternal fame for you if you find it.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">enums</span><span class="p">;</span>
+Java programmers seem to know about. And now you do, too. Its purpose is to provide an override for some generic functionality that applies to most of the other constants of the enum.</p>
+<p>Below follows the complete code of the enum. Of course, there is at least one major flaw in the model with respect to adherence to molecular biology – there awaits eternal fame for you if you find it.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.enums</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Nucleotide</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">A</span><span class="p">(</span><span class="s">&quot;Adenine&quot;</span><span class="p">),</span>
@@ -618,47 +674,18 @@ awaits eternal fame for you if you find it.</p>
 <span class="w">    </span><span class="n">G</span><span class="p">(</span><span class="s">&quot;Cytosine&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">T</span><span class="p">(</span><span class="s">&quot;Thymine&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="n">U</span><span class="p">(</span><span class="s">&quot;Uracil&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="cm">/*yes! a CONSTANT-SPECIFIC CLASS BODY!*/</span>
+<span class="w">        </span><span class="cm">/*yes! a CONSTANT-SPECIFIC CLASS BODY! An override for single nucleotide*/</span>
 <span class="w">        </span><span class="nd">@Override</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isExclusiveRNA</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Nucleotide</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Nucleotide</span><span class="p">,</span><span class="w"> </span><span class="n">Nucleotide</span><span class="o">&gt;</span><span class="w"> </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};;</span>
 
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">//MOL WEIGHTS</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mf">331.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="mf">307.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="w"> </span><span class="mf">347.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mf">322.2</span><span class="p">);</span>
-<span class="w">        </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mf">324.2</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">//REV COMPLS</span>
-<span class="w">        </span><span class="n">REVERSE_COMPLEMENTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">);</span>
-<span class="w">        </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">G</span><span class="p">);</span>
-<span class="w">        </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">);</span>
-<span class="w">        </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">);</span>
-<span class="w">        </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Nucleotide</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mf">313.2</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="mf">304.2</span><span class="p">,</span><span class="w"> </span><span class="n">G</span><span class="p">,</span><span class="w"> </span><span class="mf">329.2</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mf">304.2</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMolecularWeight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Nucleotide</span><span class="w"> </span><span class="nf">complement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">REVERSE_COMPLEMENTS</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isExclusiveRNA</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Nucleotide</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fullName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Nucleotide</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fullName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fullName</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -666,9 +693,26 @@ awaits eternal fame for you if you find it.</p>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns the molecular weight of the nucleotide, in Daltons.</span>
+<span class="cm">     * @return molecularWeight</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMolecularWeight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MOLECULAR_WEIGHTS</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns whether this nucleotide is only found in RNA.</span>
+<span class="cm">     * @return isExclusiveRNA</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isExclusiveRNA</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>That’s it. You have now seen almost everything there is to know about enums in Java.</p>
 </div>
 </div>
 
@@ -709,7 +753,7 @@ awaits eternal fame for you if you find it.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>Inheritance and UML</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Inheritance (and a bit of UML)</p>
       </div>
     </a>
     <a class="right-next"
@@ -740,8 +784,11 @@ awaits eternal fame for you if you find it.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constants-are-everywhere">24.1. Constants are everywhere</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basic-enum">24.2. A basic enum</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-custom-constructor">24.3. A custom constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-enums">24.2. Working with enums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-and-extension">24.3. Customization and extension</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-custom-constructor">24.3.1. A custom constructor</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#added-functionality">24.4. Added functionality</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-stuff">24.5. Advanced stuff</a></li>
 </ul>

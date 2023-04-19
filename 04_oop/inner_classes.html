@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>27. Inner classes &#8212; The Java Track</title>
+    <title>26. Inner classes &#8212; The Java Track</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '04_oop/inner_classes';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="28. A refresher" href="../05_web/refresher.html" />
-    <link rel="prev" title="26. Design rules summary" href="design_rules.html" />
+    <link rel="next" title="27. Design rules summary" href="design_rules.html" />
+    <link rel="prev" title="25. Encapsulation revisited" href="encapsulation_revisited.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -192,11 +192,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation_revisited.html">25. Encapsulation revisited</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design_rules.html">26. Design rules summary</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">27. Inner classes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">26. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_rules.html">27. Design rules summary</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
 <ul class="nav bd-sidenav">
@@ -375,66 +375,69 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="inner-classes">
-<h1><span class="section-number">27. </span>Inner classes<a class="headerlink" href="#inner-classes" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">26. </span>Inner classes<a class="headerlink" href="#inner-classes" title="Permalink to this headline">#</a></h1>
 <p>While we have done so almost always, there is a  misconception about how many classes can exist in one source file.
-<strong><em>There can be only one public top-level class per source file.</em></strong>
-A source file can, however, have many static and non-static inner classes, non-public classes, anonymous inner classes and interface implementers.</p>
+<strong><em>There can and must be a single top-level public class per source file.</em></strong>
+A source file can, however, have many static and non-static inner classes, non-public classes, anonymous inner classes and interface implementers, and lambda’s of course.</p>
 <p>Here is an example showing some inner class types.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">snippets.oop</span><span class="p">;</span>
 
-<span class="c1">//top level public class</span>
+<span class="c1">//top level public class -- public is mandatory here</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">//inner anonymous implementer of inner interface</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="n">usable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Usable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/* A non-static inner class that needs an instance of Outer to exist.</span>
+<span class="cm">    * Usually it is extremely tightly bound to the Outer class logic. */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Inner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doIt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doing it inner&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// It has access to instance fields of the outer class!</span>
+<span class="w">            </span><span class="n">usableTwo</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    * A static (although not explicitly stated) interface</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Usable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* static implementer of inner interface */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsableUsable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doing it the other way&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* an inner anonymous implementer of inner interface attached to an instance variable */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="n">usableOne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Usable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doing it this way&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="c1">//idem, same interface</span>
+
+<span class="w">    </span><span class="cm">/* idem, same interface */</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="n">usableTwo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Usable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doing it that way&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="c1">//non-anonymous inner class instance</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="n">usable3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsableUsable</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* a non-anonymous inner class instance */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="n">usableThree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsableUsable</span><span class="p">();</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Outer</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Outer</span><span class="p">();</span>
-<span class="w">        </span><span class="n">outer</span><span class="p">.</span><span class="na">usable</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
+<span class="w">        </span><span class="n">outer</span><span class="p">.</span><span class="na">usableOne</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
 <span class="w">        </span><span class="n">outer</span><span class="p">.</span><span class="na">usableTwo</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
-<span class="w">        </span><span class="n">outer</span><span class="p">.</span><span class="na">usable3</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
+<span class="w">        </span><span class="n">outer</span><span class="p">.</span><span class="na">usableThree</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
 <span class="w">        </span><span class="n">outer</span><span class="p">.</span><span class="na">useInners</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">useInners</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Inner</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inner</span><span class="p">();</span>
 <span class="w">        </span><span class="n">i</span><span class="p">.</span><span class="na">doIt</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/* A non-static inner class that needs an instance of Outer to exist.</span>
-<span class="cm">    * Usually it is extremely tightly bound to the Outer class logic*/</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Inner</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doIt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doing it inner&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">//access to instance fields!</span>
-<span class="w">            </span><span class="n">usableTwo</span><span class="p">.</span><span class="na">use</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/*</span>
-<span class="cm">    * A static (although not explicity stated) interface</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Usable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/*static implementer*/</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsableUsable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Usable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nd">@Override</span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">use</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;doing it the other way&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span><span class="w"> </span>
 </pre></div>
@@ -449,9 +452,9 @@ doing it that way
 </pre>
 <p>Some general rules on the use of inner classes:</p>
 <ul class="simple">
-<li><p>Use an inner class when it is tightly bound to the Outer class, and there is no reason for existence outside the outer class.</p></li>
-<li><p>Use an anonymous inner class when there is no scenario of reusability</p></li>
-<li><p>only use a non-static inner class when it should be bound to an instance of the outer class, else use a static inner class (a nested class)</p></li>
+<li><p>Use an inner class when it is tightly bound to the Outer class, and there is no reason for existence outside the outer class (for instance, the class <code class="docutils literal notranslate"><span class="pre">Map.Entry</span></code> of the Java Map interface).</p></li>
+<li><p>Use an anonymous inner class when there is no scenario of reusability in other contexts.</p></li>
+<li><p>Only use a non-static inner class when it should be bound to an instance of the outer class, else use a static inner class (a nested class).</p></li>
 </ul>
 </div>
 
@@ -487,20 +490,20 @@ doing it that way
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="design_rules.html"
+       href="encapsulation_revisited.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">26. </span>Design rules summary</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>Encapsulation revisited</p>
       </div>
     </a>
     <a class="right-next"
-       href="../05_web/refresher.html"
+       href="design_rules.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">28. </span>A refresher</p>
+        <p class="prev-next-title"><span class="section-number">27. </span>Design rules summary</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

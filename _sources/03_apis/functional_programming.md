@@ -96,7 +96,7 @@ useAcombiner(5, 3, (x, y) -> x * y);
 
 Clear and concise!
 
-## The `java.util` package
+## The `java.function` package
 
 Since a combining operation as shown above - taking two arguments and returning a new value - is a common operation, we could create a **_generic_** version of our combiner:
 
@@ -205,7 +205,7 @@ The main stream operations are these:
 
 ```{image} figures/overview_streams.png
 :alt: Streams
-:width: 500px
+:width: 450px
 :align: center
 ```
 
