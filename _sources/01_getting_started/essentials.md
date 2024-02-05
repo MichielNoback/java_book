@@ -1,6 +1,6 @@
 # The essence of Java
 
-This chapter deals with some key characteristics of the Java programming language. Java is a very popular platform for several reasons: it is "compile once, run everywhere", it is the basis of Android, it is embedded in many domestic appliances, and it has a nice object-oriented design which makes it very suitablefor building larger (server side) applications.
+This chapter deals with some key characteristics of the Java programming language. Java is a very popular platform for several reasons: it is "compile once, run everywhere", it is the basis of Android, it is embedded in many domestic appliances, and it has a nice object-oriented design which makes it very suitable for building larger (server side) applications.
 
 ## Cross-platform
 

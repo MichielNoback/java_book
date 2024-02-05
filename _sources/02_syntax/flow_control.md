@@ -101,7 +101,7 @@ for( ; i >= 0; --i) {
 }
 ```
 
-Note that the change does not need to be an increment but can be any change, like the decremet in this example.  
+Note that the change does not need to be an increment but can be any change, like the decrement in this example.  
 Even this one is legal:
 
 ```

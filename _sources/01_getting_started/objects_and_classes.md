@@ -73,7 +73,7 @@ A `Ninja` type for instance.
 
 :::{note}
 Unlike Python, Java also has non-object types.
-These are the *primitive* types representing numbers and booleans (logicals).
+These are the *primitive* types representing numbers and booleans (logical values).
 They are easily recognized because there are only a few and their names start with lowercase: `int`, `double` etc.
 They are discussed in detail in chapter {doc}`/02_syntax/data_types`
 :::
@@ -419,7 +419,7 @@ When you click on the little green triangle in the editor margin, the test will 
 
 ![Create JUnit method](figures/create_junit_test_method_1.png)
 
-The green checks indicate the test ***assertions*** passed. You should really experiment whith this a little bit: change the test (e.g. `assertTrue(cell.diameter == 7)`) or the production code, rerun the test and see what happens.
+The green checks indicate the test ***assertions*** passed. You should really experiment with this a little bit: change the test (e.g. `assertTrue(cell.diameter == 7)`) or the production code, rerun the test and see what happens.
 
 For now, knowing the Cell class is OK, let's proceed to class TestTube.
 

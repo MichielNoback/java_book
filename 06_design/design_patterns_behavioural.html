@@ -1,0 +1,1203 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>38. Design Patterns - Behavioural &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_design/design_patterns_behavioural';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="39. Design Patterns - Creational" href="design_patterns_creational.html" />
+    <link rel="prev" title="37. UML" href="UML.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/objects_and_classes.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces_abstract_classes.html">12. Interfaces &amp; Abstract Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming_first.html">20. Functional programming intro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance (and a bit of UML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">26. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">27. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/demo_case_refactoring.html">28. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Advanced APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_basics.html">29. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_advanced.html">30. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/picoCLI.html">31. Command-line processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/functional_programming.html">32. Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/streams.html">33. The Streams API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/basic_multithreading.html">34. Basic Multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/advanced_multithreading.html">35. The Java concurrency API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Design</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="clean_code.html">36. General coding principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UML.html">37. UML</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">38. Design Patterns - Behavioural</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns_creational.html">39. Design Patterns - Creational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns_structural.html">40. Design Patterns - Structural</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">41. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">42. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">43. Core (Spring) annotations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 8 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_web/refresher.html">44. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/toolbox.html">45. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/first_project.html">46. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/mvc.html">47. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_expressions.html">48. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_flow_control.html">49. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/sessions.html">50. Sessions &amp; Scopes &amp; authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/servlet_details.html">51. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/databases.html">52. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/ajax.html">53. Serving data using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/filters_upload.html">54. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/html_cheatsheet.html">55. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/webbased_exercises1.html">56. Web Exercises</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/06_design/design_patterns_behavioural.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Design Patterns - Behavioural</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#null-or-special-case-object">38.1. Null or Special Case Object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strategy">38.2. Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#template-method">38.3. Template Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observer">38.4. Observer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command">38.5. Command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state">38.6. State</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="design-patterns-behavioural">
+<h1><span class="section-number">38. </span>Design Patterns - Behavioural<a class="headerlink" href="#design-patterns-behavioural" title="Permalink to this headline">#</a></h1>
+<p>Design patterns are proven solutions to a wide variety of design challenges
+Here we’ll deal with a selection of often-used ones in a quick review. Many books and websites have much more extensive discussion and examples. For instance: <a class="reference external" href="https://refactoring.guru/design-patterns/template-method">Refactoring Guru</a></p>
+<p>Behavioural patterns target algorithm flexibility and -polymorphism.</p>
+<div class="section" id="null-or-special-case-object">
+<h2><span class="section-number">38.1. </span>Null or Special Case Object<a class="headerlink" href="#null-or-special-case-object" title="Permalink to this headline">#</a></h2>
+<p>This is not one of the classic design patterns, but it warrants some attention and is rather simple.</p>
+<p>Suppose you have an application processing information of <code class="docutils literal notranslate"><span class="pre">Person</span></code> objects:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//other properties omitted</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">firstName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">lastName</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">address</span><span class="p">){</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>and these Person objects also have <code class="docutils literal notranslate"><span class="pre">Address</span></code>-es of course:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">zipCode</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is a collection of persons (imagine you have around 19 million of them):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">persons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">persons</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Henk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Boer&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="s">&quot;Zernikeplein&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;9746BA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Groningen&quot;</span><span class="p">)));</span>
+<span class="n">persons</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Hans&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Anders&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="s">&quot;Dam&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1012JS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Amsterdam&quot;</span><span class="p">)));</span>
+<span class="n">persons</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Agnes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Dakloos&quot;</span><span class="p">,</span><span class="kc">null</span><span class="p">));</span>
+<span class="n">persons</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Joost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Wandel&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="s">&quot;Spuistraat&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2511BD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Den Haag&quot;</span><span class="p">)));</span>
+<span class="n">persons</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Ingrid&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Dommel&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="s">&quot;Leidseplein&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1017PR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Amsterdam&quot;</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>Finally, here is some example usage of a Person Stream: looking for Persons from Amsterdam:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">persons</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">address</span><span class="p">().</span><span class="na">city</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Amsterdam&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">firstName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">lastName</span><span class="p">()));</span>
+</pre></div>
+</div>
+<pre class="console_out">
+Hans Anders
+
+java.lang.NullPointerException: Cannot invoke "nl.bioinf.designpatterns.null_object.Address.city()" because the return value of "nl.bioinf.designpatterns.null_object.Person.address()" is null
+	at nl.bioinf.designpatterns.null_object.PersonTest.lambda$testPersonStream$0(PersonTest.java:25)
+    &lt;many more lines of stacktrace&gt;
+</pre>
+<p>What happens here is we have a homeless person causing a <code class="docutils literal notranslate"><span class="pre">NullPointerException</span></code> when a method is invoked on the address instance variable.
+You could of course deal with this by putting an extra test clause, an if/else block or an extra filter step everywhere you deal with Addresses:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">persons</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">address</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">address</span><span class="p">().</span><span class="na">city</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Amsterdam&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">firstName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">lastName</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>But wouldn’t it be nice to deal with this beforehand, by creating a <strong>special null case object</strong> when someone is homeless.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">firstName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">lastName</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">address</span><span class="p">){</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="nf">address</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">address</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Address</span><span class="p">.</span><span class="na">NULL_ADDRESS</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">zipCode</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">NULL_ADDRESS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="s">&quot;UNDERTHEBRIDGE&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0000AA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOWHERE&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Null Object</p>
+<p>The intent of a Null Object is to encapsulate the absence of an object by providing a substitutable
+alternative that offers suitable default do nothing behavior.</p>
+</div>
+<p>Note that many methods in the functional programming domain now return <code class="docutils literal notranslate"><span class="pre">Optional</span></code> objects, which is also a valid solution to this predicament.</p>
+</div>
+<div class="section" id="strategy">
+<h2><span class="section-number">38.2. </span>Strategy<a class="headerlink" href="#strategy" title="Permalink to this headline">#</a></h2>
+<p>Suppose we are building a Probe (Primer) evaluation tool. A Probe (in molecular biology) is a short DNA sequence
+complementary to a target (genomic) sequence that can be used to prove its existence. Many applications exist for
+probes: PCR, sequencing, DNA arrays, SNP detection, etc.
+Probe quality can be assessed by looking at several properties: melting temperature, single-nucleotide stretches (homopolymers) and others.</p>
+<p>Probe melting temperature can be calculated in several ways:</p>
+<ol class="arabic simple">
+<li><p>Basic. This is calculated with
+<span class="math notranslate nohighlight">\(T_m = 4N_C \times (N_G + N_C) + 2N_C \times (N_A + N_T)\)</span></p></li>
+<li><p>Salt adjusted: Calculated with
+<span class="math notranslate nohighlight">\(T_m = 81.5C + 7.21C \times log(molar salt) + (0.41 \times GC) - (675 / L)\)</span>
+where L is primer Length.</p></li>
+<li><p>Nearest neighbour using base stacking information. <span class="math notranslate nohighlight">\(T_m = ((1000 \times dh)/(ds+(R \times log(C)))) - 273.15\)</span>
+where C is the primer concentration, R is a constant (1.987) and dh and ds refer to stacking energy.</p></li>
+</ol>
+<p>You have implemented all three algorithms in class Primer:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Primer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Primer</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getBasicMeltingPoint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//LOGIC omitted</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">43</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getSaltAdjustedMeltingPoint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//LOGIC omitted</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">45</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getNearestNeighborMeltingPoint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//LOGIC omitted</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">47</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//much more code</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the app you are building, you want to let the used decide which method should be used to calculate the Tm, at runtime.</p>
+<p>So everywhere in your app, whenever the melting temperature is requested, you will have logic like this (assuming you use an enum for this):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//the enum</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">MeltingTempMethod</span><span class="p">{</span>
+<span class="w">    </span><span class="n">BASIC</span><span class="p">,</span>
+<span class="w">    </span><span class="n">SALT_ADJUSTED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NEAREST_NEIGHBOUR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and this is the logic you use all over the place:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">analysePrimer</span><span class="p">(</span><span class="n">Primer</span><span class="w"> </span><span class="n">primer</span><span class="p">,</span><span class="w"> </span><span class="n">MeltingTempMethod</span><span class="w"> </span><span class="n">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">BASIC</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">primer</span><span class="p">.</span><span class="na">getBasicMeltingPoint</span><span class="p">();</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">SALT_ADJUSTED</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">primer</span><span class="p">.</span><span class="na">getSaltAdjustedMeltingPoint</span><span class="p">();</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">NEAREST_NEIGHBOUR</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">primer</span><span class="p">.</span><span class="na">getNearestNeighborMeltingPoint</span><span class="p">();</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unknown method: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">method</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Code Smell!</p>
+<p>Whenever you see (multiple) uses of switch or if/else blocks on some property,
+and have algorithmic logic choices based on that, chances are that you can do it better
+with some nice object-oriented design pattern.</p>
+</div>
+<p>Code Smells are certain structures in the code that indicate violation of fundamental design principles and negatively impact design quality.<br />
+The solution to this code smell is the <strong>Strategy Pattern</strong>:</p>
+<div class="note admonition">
+<p class="admonition-title">Strategy Pattern</p>
+<p>The Strategy pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable
+Strategy lets the algorithm vary independently from the clients that use it</p>
+</div>
+<p>Let’s refactor the Primer example to Strategy. Here is the interface defining the base functionality: calculating melting temperature:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">interface</span> <span class="nc">MeltingTemperatureCalculator</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMeltingTemperature</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Refactor the three methods of class primer into their own classes (only one is shown here):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BasicMeltingTemperatureCalculator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">MeltingTemperatureCalculator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMeltingTemperature</span><span class="p">(</span><span class="n">Primer</span><span class="w"> </span><span class="n">primer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//LOGIC omitted</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">43</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And class Primer becomes much simpler:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Primer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MeltingTemperatureCalculator</span><span class="w"> </span><span class="n">meltingTemperatureCalculator</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Primer</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setMeltingTemperatureCalculator</span><span class="p">(</span><span class="n">MeltingTemperatureCalculator</span><span class="w"> </span><span class="n">calculator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">meltingTemperatureCalculator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calculator</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getMeltingTemperature</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">meltingTemperatureCalculator</span><span class="p">.</span><span class="na">getMeltingTemperature</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is a demo usage of this system:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">PrimerAnalyser</span><span class="w"> </span><span class="n">analyser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PrimerAnalyser</span><span class="p">();</span>
+<span class="n">Primer</span><span class="w"> </span><span class="n">primer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Primer</span><span class="p">(</span><span class="s">&quot;atttaggtgacactatag&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;self_annealing1&quot;</span><span class="p">);</span>
+<span class="n">primer</span><span class="p">.</span><span class="na">setMeltingTemperatureCalculator</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SaltAdjustedMeltingTemperatureCalculator</span><span class="p">());</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">meltingTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analyser</span><span class="p">.</span><span class="na">analysePrimer</span><span class="p">(</span><span class="n">primer</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;meltingTemperature = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">meltingTemperature</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Below is the UML diagram of this example.</p>
+<p><img alt="" src="../_images/strategy.png" /></p>
+<p>You can vary in this design depending on your specifications: specify some default melting temperature calculator,
+choose to define the calculator as static property of all primers, or set the calculator depending on some primer property (e.g. its length).</p>
+</div>
+<div class="section" id="template-method">
+<h2><span class="section-number">38.3. </span>Template Method<a class="headerlink" href="#template-method" title="Permalink to this headline">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">Template Method Pattern</p>
+<p>Template Method is a behavioural design pattern that defines the skeleton of an algorithm in the superclass but lets subclasses implement (override) specific steps of the algorithm without changing its structure.</p>
+</div>
+<p>In the chapter “Interfaces &amp; Abstract Classes” the following example was presented, which is in fact a typical (simple) use case of the Template Method Pattern (not relevant code omitted):</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NucleicAcidSequence</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">NucleicAcidSequence</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//ABSTRACT METHOD!</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">getComplementCharacter</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">DNASequence</span><span class="w"> </span><span class="nf">complement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">newSequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sequence</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//CALL ABSTRACT METHOD THAT DOES NOT EXIST YET!</span>
+<span class="w">            </span><span class="n">newSequence</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">getComplementCharacter</span><span class="p">(</span><span class="n">sequence</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DNASequence</span><span class="p">(</span><span class="n">newSequence</span><span class="p">.</span><span class="na">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">NucleicAcidSequence</span><span class="w"> </span><span class="nf">reverse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">newSeq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">sequence</span><span class="p">).</span><span class="na">reverse</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">DNASequence</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DNASequence</span><span class="p">(</span><span class="n">newSeq</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">RNASequence</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RNASequence</span><span class="p">(</span><span class="n">newSeq</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unknown sequence type&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">NucleicAcidSequence</span><span class="w"> </span><span class="nf">reverseComplement</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">complement</span><span class="p">().</span><span class="na">reverse</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In class <code class="docutils literal notranslate"><span class="pre">NucleicAcidSequence</span></code>, an algorithm is defined (<code class="docutils literal notranslate"><span class="pre">complement()</span></code>) that has several concrete steps applicable to all subtypes (DNA and RNA), and one step (<code class="docutils literal notranslate"><span class="pre">getComplementCharacter()</span></code> that cannot be defined generically and has to be specific to subtypes.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">DNASequence</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">NucleicAcidSequence</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Character</span><span class="p">,</span><span class="w"> </span><span class="n">Character</span><span class="o">&gt;</span><span class="w"> </span><span class="n">complements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">complements</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">complements</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">complements</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">complements</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="sc">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DNASequence</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">getComplementCharacter</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">complements</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(Class RNASequence is very similar of course)</p>
+<p>As you can see, the UML of this pattern is pretty straightforward.<br />
+<img alt="" src="../_images/template_method.png" /></p>
+<div class="note admonition">
+<p class="admonition-title">Template Method vs Strategy</p>
+<p>Actually, Template Method and Strategy achieve the same through different means.<br />
+Strategy through composition and template method through inheritance.<br />
+Can you implement the previous Nucleic acids complementing solution using Strategy instead of Template?</p>
+</div>
+</div>
+<div class="section" id="observer">
+<h2><span class="section-number">38.4. </span>Observer<a class="headerlink" href="#observer" title="Permalink to this headline">#</a></h2>
+<p>Observer is a pattern that can be seen whenever an application uses jobs or other processes of which
+it is not known when they finish, or when new data is ready to be served.</p>
+<div class="note admonition">
+<p class="admonition-title">Observer Pattern</p>
+<p>Define a one-to-many dependency relationship between objects so that when one object changes state,
+all its dependents are notified and updated automatically.</p>
+</div>
+<p>Imagine you have a sequencer determining DNA sequences in swimming pond water.
+The sequencer generates new sequences at a constant rate.
+You want to have realtime updates whenever a sequence is finished so that you can check whether the new sequence belongs to a known pathogen. You can couple the detection of “pathogenic sequences” to an early warning system.</p>
+<p>Your app does not know when new sequences arrive, but wants to know at the moment they finish. In short, you want to <strong>observe the sequencer</strong>.</p>
+<p>Here is the Sequence class as a record:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Sequence</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sequence</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">quality</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>And this is the pivotal interface, <code class="docutils literal notranslate"><span class="pre">SequencerObserver</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SequencerObserver</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Client will get notified here when a new sequence has been determined/finished.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">newSequenceDetermined</span><span class="p">(</span><span class="n">Sequence</span><span class="w"> </span><span class="n">sequence</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Below is an implementer of this interface.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleSequencerObserver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SequencerObserver</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">newSequenceDetermined</span><span class="p">(</span><span class="n">Sequence</span><span class="w"> </span><span class="n">sequence</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;A new sequence was determined!\n&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sequence</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//Do pathogenicity analysis on the sequence</span>
+<span class="w">        </span><span class="c1">//Alert other clients when a pathogenic bacterium is found.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And here is the <code class="docutils literal notranslate"><span class="pre">Sequencer</span></code> class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Sequencer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SequencerObserver</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerObserver</span><span class="p">(</span><span class="n">SequencerObserver</span><span class="w"> </span><span class="n">observer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">observers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">unregisterObserver</span><span class="p">(</span><span class="n">SequencerObserver</span><span class="w"> </span><span class="n">observer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">observers</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">observers</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">notifyObservers</span><span class="p">(</span><span class="n">Sequence</span><span class="w"> </span><span class="n">seq</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SequencerObserver</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">observers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">obs</span><span class="p">.</span><span class="na">newSequenceDetermined</span><span class="p">(</span><span class="n">seq</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sequence</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//this simulates tha actual sequencing process</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Sequence</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">getDummyData</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">notifyObservers</span><span class="p">(</span><span class="n">seq</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<pre class="console_out">
+A new sequence was determined!
+Sequence[sequence=AAGCGACCCCGAATGATTAGAATTA, quality=A$A!559$AC11ECE555I1AC!9C, id=0]
+A new sequence was determined!
+Sequence[sequence=GCCTTACACGATAAACTACAAACGT, quality=I90A1A5509A!CE!1$10!!0I$$, id=1]
+A new sequence was determined!
+Sequence[sequence=ATATGATCTGTAGTAGCATGATGCC, quality=01CI55!AIEAC00019!0AAIC09, id=2]
+</pre>
+<p>Here is the UML.</p>
+<p><img alt="" src="../_images/observer_pattern.png" /></p>
+<p>We’ll see this example code base again when discussing the Filter Pattern.</p>
+</div>
+<div class="section" id="command">
+<h2><span class="section-number">38.5. </span>Command<a class="headerlink" href="#command" title="Permalink to this headline">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">Command Pattern</p>
+<p>Encapsulate a request in a stand-alone object, a <code class="docutils literal notranslate"><span class="pre">command</span></code> object, that contains all information about the request.
+This lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.</p>
+</div>
+<p>Suppose you have a sequence editing application, a very simple GUI with a sequence view and some editing operations that you can do on
+the displayed sequence: add a nucleotide, toggle the case of the sequence (uppercase ↔ lowercase). But besides these editing operations you also want to be able to <em>undo</em> all of these.</p>
+<p>This is a typical case for the command pattern. It starts, as almost all patterns with the definition of the core interface, in this case the <code class="docutils literal notranslate"><span class="pre">Command</span></code> interface:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Command</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">undo</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">redo</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">undo()</span></code> and <code class="docutils literal notranslate"><span class="pre">redo()</span></code> operations are not always included in implementations of this pattern, but we’ll have a look at them as well.
+To keep things simple, only two command implementations are presented here: <code class="docutils literal notranslate"><span class="pre">ToggleCaseCommand</span></code> and <code class="docutils literal notranslate"><span class="pre">AddNucleotideCommand</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ToggleCaseCommand</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="w"> </span><span class="n">receiver</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ToggleCaseCommand</span><span class="p">(</span><span class="n">NucleotideSequenceReceiver</span><span class="w"> </span><span class="n">receiver</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">receiver</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="p">.</span><span class="na">toggleCase</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">undo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="p">.</span><span class="na">toggleCase</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">redo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="p">.</span><span class="na">toggleCase</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Receiver</span></code> in the code above is the “wrapper” for sequence objects that are being edited (code will follow).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AddNucleotideCommand</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">nucleotides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="o">[]</span><span class="p">{</span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">};</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="w"> </span><span class="n">receiver</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">lastChar</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AddNucleotideCommand</span><span class="p">(</span><span class="n">NucleotideSequenceReceiver</span><span class="w"> </span><span class="n">receiver</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">receiver</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Random</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">nucleotides</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">undo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">lastChar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">receiver</span><span class="p">.</span><span class="na">deleteLast</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">redo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">receiver</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">lastChar</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is the Receiver class.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NucleotideSequenceReceiver</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sequence</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">isUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Character</span><span class="p">.</span><span class="na">isUpperCase</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isUpperCase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">length</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isUpperCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isUpperCase</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">clearAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">deleteLast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">deleteCharAt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">last</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">toggleCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isUpperCase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">();</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">isUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">isUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//have call on empty sequence pass silently</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;sequence=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, here is the “GUI” serving functionality to users and transforming actions in command objects operating on th Receiver instance.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NucleotideGuiClient</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AddNucleotideInvoker</span><span class="w"> </span><span class="n">invoker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AddNucleotideInvoker</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addButtonClicked</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">invoker</span><span class="p">.</span><span class="na">addCommand</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AddNucleotideCommand</span><span class="p">(</span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">toggleCaseButtonClicked</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">invoker</span><span class="p">.</span><span class="na">addCommand</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ToggleCaseCommand</span><span class="p">(</span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">undoButtonClicked</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">invoker</span><span class="p">.</span><span class="na">undoCommand</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">redoButtonClicked</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">invoker</span><span class="p">.</span><span class="na">redoCommand</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, I have decoupled the management of Command objects from the GUI; they are in the Invoker class listed below.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AddNucleotideInvoker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Command</span><span class="o">&gt;</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Command</span><span class="o">&gt;</span><span class="w"> </span><span class="n">undoneCommands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCommand</span><span class="p">(</span><span class="n">Command</span><span class="w"> </span><span class="n">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">command</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">commands</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">command</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">undoneCommands</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">undoCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Command</span><span class="w"> </span><span class="n">undo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">commands</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="w">        </span><span class="n">undo</span><span class="p">.</span><span class="na">undo</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">undoneCommands</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">undo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">redoCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Command</span><span class="w"> </span><span class="n">redo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">undoneCommands</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="w">        </span><span class="n">redo</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">commands</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">redo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is some sample code and output.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">NucleotideGuiClient</span><span class="w"> </span><span class="n">nucleotideGuiClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NucleotideGuiClient</span><span class="p">();</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">addButtonClicked</span><span class="p">();</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">addButtonClicked</span><span class="p">();</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">addButtonClicked</span><span class="p">();</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">addButtonClicked</span><span class="p">();</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">addButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;after add button clicked five times : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">toggleCaseButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;toggled case: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">addButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;added again: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">undoButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;after undo button clicked : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">undoButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;after undo button clicked : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">redoButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;after redo button clicked : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+<span class="n">nucleotideGuiClient</span><span class="p">.</span><span class="na">redoButtonClicked</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;after redo button clicked : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NucleotideSequenceReceiver</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+</pre></div>
+</div>
+<pre class="console_out">
+after add button clicked five times : sequence=GCCCT
+toggled case: sequence=gccct
+added again: sequence=gccctc
+after undo button clicked : sequence=gccct
+after undo button clicked : sequence=GCCCT
+after redo button clicked : sequence=gccct
+after redo button clicked : sequence=gccctc
+</pre>
+<p>This example is simple; each command can be undone and redone quite easily.
+Most often, your actual use case wil be more complicated. In that case you have to think about how to
+store the state of your data: a complete frozen copy, an incremental approach? That is the hardest thing in this pattern.</p>
+<p>The UML for this pattern is below.</p>
+<p><img alt="" src="../_images/command_pattern.png" /></p>
+</div>
+<div class="section" id="state">
+<h2><span class="section-number">38.6. </span>State<a class="headerlink" href="#state" title="Permalink to this headline">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">State Pattern</p>
+<p>State is a behavioural pattern that lets an object alter its behaviour when its internal state changes. It appears as if the object changed its class: it looks like polymorphism but it is not, in the strict sense of the meaning.</p>
+</div>
+<p>Let’s do a classic for this one: coffee machine state.</p>
+<ul class="simple">
+<li><p>Coffee machines should not serve coffee when there is no cup to pour it in.</p></li>
+<li><p>Coffee machines should not serve coffee when there is already a full cup that is not removed yet.</p></li>
+<li><p>Coffee machines can only serve coffee when there is an empty cup present.</p></li>
+</ul>
+<p>The pivotal interface is <code class="docutils literal notranslate"><span class="pre">CupState</span></code> that defines the contract for what to do when a cup of  coffee is requested:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CupState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">coffeeRequest</span><span class="p">(</span><span class="n">CoffeeMachine</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It needs a reference to its containing object, <code class="docutils literal notranslate"><span class="pre">CoffeeMachine</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CoffeeMachine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CupState</span><span class="w"> </span><span class="n">cupState</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCupState</span><span class="p">(</span><span class="n">CupState</span><span class="w"> </span><span class="n">cupState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cupState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cupState</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">CupState</span><span class="w"> </span><span class="nf">getCupState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">cupState</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">coffeeRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cupState</span><span class="p">.</span><span class="na">coffeeRequest</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Below are the three cup states:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmptyCupState</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CupState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">coffeeRequest</span><span class="p">(</span><span class="n">CoffeeMachine</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Pouring a nice Java!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">context</span><span class="p">.</span><span class="na">setCupState</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FullCupState</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FullCupState</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CupState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">coffeeRequest</span><span class="p">(</span><span class="n">CoffeeMachine</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Empty your cup before getting a new one please!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NoCupState</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CupState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">coffeeRequest</span><span class="p">(</span><span class="n">CoffeeMachine</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Placing a cup first..&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">context</span><span class="p">.</span><span class="na">setCupState</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">EmptyCupState</span><span class="p">());</span>
+<span class="w">        </span><span class="n">context</span><span class="p">.</span><span class="na">coffeeRequest</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is the test code:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CoffeeMachine</span><span class="w"> </span><span class="n">coffeeMachine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CoffeeMachine</span><span class="p">();</span>
+<span class="c1">//machine is empty</span>
+<span class="n">coffeeMachine</span><span class="p">.</span><span class="na">setCupState</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">NoCupState</span><span class="p">());</span>
+<span class="n">coffeeMachine</span><span class="p">.</span><span class="na">coffeeRequest</span><span class="p">();</span><span class="w"> </span><span class="c1">//request 1</span>
+<span class="n">coffeeMachine</span><span class="p">.</span><span class="na">coffeeRequest</span><span class="p">();</span><span class="w"> </span><span class="c1">//request 2</span>
+<span class="n">coffeeMachine</span><span class="p">.</span><span class="na">setCupState</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">EmptyCupState</span><span class="p">());</span>
+<span class="n">coffeeMachine</span><span class="p">.</span><span class="na">coffeeRequest</span><span class="p">();</span><span class="w"> </span><span class="c1">//request 3</span>
+</pre></div>
+</div>
+<pre class="console_out">
+Placing a cup first..
+Pouring a nice Java!
+Empty your cup before getting a new one please!
+Pouring a nice Java!
+</pre>
+<p>Below is the UML if this pattern. Yes, it looks a lot like Strategy…</p>
+<p><img alt="" src="../_images/state_pattern.png" /></p>
+<div class="note admonition">
+<p class="admonition-title">State vs Strategy</p>
+<p>They really look the same in UML:</p>
+<p><img alt="" src="../_images/state_vs_strategy.png" /></p>
+<p>But their intent is different:</p>
+<p>Intent of Strategy Pattern is to have a family of interchangeable algorithms which can be chosen based on the context and/or client needs
+On the other hand, State Pattern’s intent is to manage states of the object along with object’s behavior which changes with its state.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./06_design"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="UML.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">37. </span>UML</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="design_patterns_creational.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">39. </span>Design Patterns - Creational</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#null-or-special-case-object">38.1. Null or Special Case Object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strategy">38.2. Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#template-method">38.3. Template Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observer">38.4. Observer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command">38.5. Command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state">38.6. State</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

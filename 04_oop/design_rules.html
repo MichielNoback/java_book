@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '04_oop/design_rules';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="28. A refresher" href="../05_web/refresher.html" />
+    <link rel="next" title="28. Demo case refactoring" href="demo_case_refactoring.html" />
     <link rel="prev" title="26. Inner classes" href="inner_classes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces_abstract_classes.html">12. Interfaces &amp; Abstract Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
@@ -186,7 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming_first.html">20. Functional programming intro</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="current nav bd-sidenav">
@@ -197,35 +197,47 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="encapsulation_revisited.html">25. Encapsulation revisited</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inner_classes.html">26. Inner classes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">27. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_case_refactoring.html">28. Demo case refactoring</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Advanced APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_basics.html">29. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_advanced.html">30. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/picoCLI.html">31. Command-line processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/functional_programming.html">32. Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/streams.html">33. The Streams API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/basic_multithreading.html">34. Basic Multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/advanced_multithreading.html">35. The Java concurrency API</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Design</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/clean_code.html">36. General coding principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/UML.html">37. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_behavioural.html">38. Design Patterns - Behavioural</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_creational.html">39. Design Patterns - Creational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_structural.html">40. Design Patterns - Structural</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">46. Dependency Injection in Spring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">47. Core (Spring) annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">41. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">42. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">43. Core (Spring) annotations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 8 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_web/refresher.html">44. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/toolbox.html">45. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/first_project.html">46. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/mvc.html">47. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_expressions.html">48. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_flow_control.html">49. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/sessions.html">50. Sessions &amp; Scopes &amp; authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/servlet_details.html">51. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/databases.html">52. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/ajax.html">53. Serving data using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/filters_upload.html">54. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/html_cheatsheet.html">55. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/webbased_exercises1.html">56. Web Exercises</a></li>
 </ul>
 
     </div>
@@ -372,14 +384,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-methods-small">27.1. Keep methods small</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">27.2. Classes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#access-modifiers">27.3. Access modifiers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-and-hashcode">27.4. <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-against-interfaces-not-implementations">27.5. Code against interfaces, not implementations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">27.6. Exceptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-responsibility-principle">27.7. Single Responsibility Principle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#various">27.8. Various</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">27.1. General</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-modifiers">27.1.1. Access modifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-and-hashcode">27.1.2. <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-against-interfaces-not-implementations">27.1.3. Code against interfaces, not implementations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">27.1.4. Exceptions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">27.2. Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rules">27.2.1. General rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-methods-small">27.2.2. Keep methods small</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">27.3. Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-responsibility-principle">27.4. Single Responsibility Principle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#various">27.5. Various</a></li>
 </ul>
             </nav>
         </div>
@@ -393,24 +412,11 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="design-rules-summary">
 <h1><span class="section-number">27. </span>Design rules summary<a class="headerlink" href="#design-rules-summary" title="Permalink to this headline">#</a></h1>
-<div class="section" id="keep-methods-small">
-<h2><span class="section-number">27.1. </span>Keep methods small<a class="headerlink" href="#keep-methods-small" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Keep methods short and simple: not too deep nesting of flow control blocks (maximum four) and not too many method parameters. Prefer a small data class (record) as return value over complex data structures.</p></li>
-</ul>
-</div>
-<div class="section" id="classes">
-<h2><span class="section-number">27.2. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>When a class defines an instance variable that needs to be initialized in order to have an object that makes sense, and you can not give it a reasonable default value, you should make it a constructor parameter</p></li>
-<li><p>Chain constructors using <code class="docutils literal notranslate"><span class="pre">this(fieldValue,</span> <span class="pre">fieldValue)</span></code></p></li>
-<li><p>Consider the use of factory methods instead of constructors</p></li>
-<li><p>Make classes abstract that should not be instantiated</p></li>
-<li><p>Preferably use records for data classes instead of normal classes; they have immutability in their nature already.</p></li>
-</ul>
-</div>
+<div class="section" id="general">
+<h2><span class="section-number">27.1. </span>General<a class="headerlink" href="#general" title="Permalink to this headline">#</a></h2>
+<p>These principles are discussed in more detail in Part 6 - Design.</p>
 <div class="section" id="access-modifiers">
-<h2><span class="section-number">27.3. </span>Access modifiers<a class="headerlink" href="#access-modifiers" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">27.1.1. </span>Access modifiers<a class="headerlink" href="#access-modifiers" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Keep the number of public methods as low as possible</p></li>
 <li><p>Minimize the accessibility of class members(fields, methods, member classes).</p></li>
@@ -419,7 +425,7 @@ document.write(`
 <p>Changing public API methods is a nuisance since it may create backward incompatibility.</p>
 </div>
 <div class="section" id="equals-and-hashcode">
-<h2><span class="section-number">27.4. </span><code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code><a class="headerlink" href="#equals-and-hashcode" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">27.1.2. </span><code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code><a class="headerlink" href="#equals-and-hashcode" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Always implement equals() and hashCode() when objects are going to live in collections (which is quite often!)</p></li>
 <li><p>Always implement both equals and hashCode; never only one!</p></li>
@@ -427,11 +433,11 @@ document.write(`
 </ul>
 </div>
 <div class="section" id="code-against-interfaces-not-implementations">
-<h2><span class="section-number">27.5. </span>Code against interfaces, not implementations<a class="headerlink" href="#code-against-interfaces-not-implementations" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">27.1.3. </span>Code against interfaces, not implementations<a class="headerlink" href="#code-against-interfaces-not-implementations" title="Permalink to this headline">#</a></h3>
 <p>Use interfaces and abstract classes as the declared type of your variables. That way, implementation details may change without serious repercussions.</p>
 </div>
 <div class="section" id="exceptions">
-<h2><span class="section-number">27.6. </span>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">27.1.4. </span>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Never let exceptions pass silently</p></li>
 <li><p>Deal with exceptions at an appropriate location</p></li>
@@ -439,15 +445,48 @@ document.write(`
 <li><p>Never ever try to catch an Error</p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="methods">
+<h2><span class="section-number">27.2. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
+<div class="section" id="general-rules">
+<h3><span class="section-number">27.2.1. </span>General rules<a class="headerlink" href="#general-rules" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Methods have very descriptive names (verb), in <code class="docutils literal notranslate"><span class="pre">camelCase()</span></code> with lowercase-first.</p></li>
+<li><p>They do one thing only (SRP!)</p></li>
+<li><p>They preferably define no more than 2 or 3 parameters. This keeps testing at an acceptable level of difficulty.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>KEEP METHODS TESTABLE</strong></p>
+</div>
+</div>
+<div class="section" id="keep-methods-small">
+<h3><span class="section-number">27.2.2. </span>Keep methods small<a class="headerlink" href="#keep-methods-small" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Keep methods short and simple: not too deep nesting of flow control blocks (maximum four) and not too many method parameters. Prefer a small data class (record) as return value over complex data structures.</p></li>
+<li><p>Keep a maximum of two indentation levels.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="classes">
+<h2><span class="section-number">27.3. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>When a class defines an instance variable that needs to be initialized in order to have an object that makes sense, and you can not give it a reasonable default value, you should make it a constructor parameter</p></li>
+<li><p>Chain constructors using <code class="docutils literal notranslate"><span class="pre">this(fieldValue,</span> <span class="pre">fieldValue)</span></code></p></li>
+<li><p>Consider the use of factory methods instead of constructors</p></li>
+<li><p>Make classes abstract that should not be instantiated</p></li>
+<li><p>Preferably use records for data classes instead of normal classes; they have immutability in their nature already.</p></li>
+</ul>
+</div>
 <div class="section" id="single-responsibility-principle">
-<h2><span class="section-number">27.7. </span>Single Responsibility Principle<a class="headerlink" href="#single-responsibility-principle" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.4. </span>Single Responsibility Principle<a class="headerlink" href="#single-responsibility-principle" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>A module, class or method should have one, and only one, reason to change.</p></li>
 </ul>
 <p>Alternative description: every module, class, or function should have responsibility over a single part of the functionality, and that responsibility should be entirely encapsulated by the class</p>
 </div>
 <div class="section" id="various">
-<h2><span class="section-number">27.8. </span>Various<a class="headerlink" href="#various" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">27.5. </span>Various<a class="headerlink" href="#various" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Prefer enums to define a static set of possible values for a given property above <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">final</span></code> constants</p></li>
 <li><p>Always put Java classes in well-defined packages with a correct name structure</p></li>
@@ -496,11 +535,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../05_web/refresher.html"
+       href="demo_case_refactoring.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">28. </span>A refresher</p>
+        <p class="prev-next-title"><span class="section-number">28. </span>Demo case refactoring</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -522,14 +561,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-methods-small">27.1. Keep methods small</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">27.2. Classes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#access-modifiers">27.3. Access modifiers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-and-hashcode">27.4. <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-against-interfaces-not-implementations">27.5. Code against interfaces, not implementations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">27.6. Exceptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-responsibility-principle">27.7. Single Responsibility Principle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#various">27.8. Various</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">27.1. General</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-modifiers">27.1.1. Access modifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-and-hashcode">27.1.2. <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-against-interfaces-not-implementations">27.1.3. Code against interfaces, not implementations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">27.1.4. Exceptions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">27.2. Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rules">27.2.1. General rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-methods-small">27.2.2. Keep methods small</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">27.3. Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-responsibility-principle">27.4. Single Responsibility Principle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#various">27.5. Various</a></li>
 </ul>
   </nav></div>
 

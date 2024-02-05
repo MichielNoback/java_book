@@ -33,7 +33,7 @@ For classes in `java.lang` and the _current package_, you do not have to use the
 Have a look at [https://docs.oracle.com/javase/10/docs/api/java.base-summary.html](https://docs.oracle.com/javase/10/docs/api/java.base-summary.html), find package `java.lang` and you will see all the familiar classes Double, String, Math, Character etc.
 
 Packages are represented in the directory structure of your source folder (`src/main/java` in Gradle managed projects).
-When you have a package `nl.bioinf.sequences` and this package contains a source file `Sequence.java` containg top-level class `Sequence`, you will have to place the class file of Sequence at:
+When you have a package `nl.bioinf.sequences` and this package contains a source file `Sequence.java` containing top-level class `Sequence`, you will have to place the class file of Sequence at:
 `.../nl/bioinf/sequences/Sequence.class`.
 The IDE will takes care of these matters for you.
 

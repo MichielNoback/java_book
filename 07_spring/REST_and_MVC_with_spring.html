@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>45. REST and MVC with Spring &#8212; The Java Track</title>
+    <title>41. REST and MVC with Spring &#8212; The Java Track</title>
   
   
   
@@ -63,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '07_spring/REST_and_MVC_with_spring';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="46. Dependency Injection in Spring" href="Dependency_injection.html" />
-    <link rel="prev" title="44. Demo case refactoring" href="../06_leftovers/demo_case_refactoring.html" />
+    <link rel="next" title="42. Dependency Injection in Spring" href="Dependency_injection.html" />
+    <link rel="prev" title="40. Design Patterns - Structural" href="../06_design/design_patterns_structural.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces_abstract_classes.html">12. Interfaces &amp; Abstract Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
@@ -186,46 +186,58 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming_first.html">20. Functional programming intro</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">26. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">27. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/demo_case_refactoring.html">28. Demo case refactoring</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Advanced APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_basics.html">29. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_advanced.html">30. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/picoCLI.html">31. Command-line processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/functional_programming.html">32. Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/streams.html">33. The Streams API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/basic_multithreading.html">34. Basic Multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/advanced_multithreading.html">35. The Java concurrency API</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Design</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/clean_code.html">36. General coding principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/UML.html">37. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_behavioural.html">38. Design Patterns - Behavioural</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_creational.html">39. Design Patterns - Creational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_structural.html">40. Design Patterns - Structural</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">45. REST and MVC with Spring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Dependency_injection.html">46. Dependency Injection in Spring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="spring_annotations.html">47. Core (Spring) annotations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">41. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency_injection.html">42. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spring_annotations.html">43. Core (Spring) annotations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 8 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_web/refresher.html">44. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/toolbox.html">45. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/first_project.html">46. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/mvc.html">47. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_expressions.html">48. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_flow_control.html">49. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/sessions.html">50. Sessions &amp; Scopes &amp; authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/servlet_details.html">51. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/databases.html">52. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/ajax.html">53. Serving data using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/filters_upload.html">54. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/html_cheatsheet.html">55. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/webbased_exercises1.html">56. Web Exercises</a></li>
 </ul>
 
     </div>
@@ -372,12 +384,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-project">45.1. Create a new project</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-rest-response">45.2. Create a REST response</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-json-literals">45.2.1. Serve Json literals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variables">45.2.2. Path Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-parameters">45.2.3. Request Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-html-view-instead-of-json">45.2.4. An html view instead of Json</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-project">41.1. Create a new project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-rest-response">41.2. Create a REST response</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-json-literals">41.2.1. Serve Json literals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variables">41.2.2. Path Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-parameters">41.2.3. Request Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-html-view-instead-of-json">41.2.4. An html view instead of Json</a></li>
 </ul>
 </li>
 </ul>
@@ -392,10 +404,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="rest-and-mvc-with-spring">
-<h1><span class="section-number">45. </span>REST and MVC with Spring<a class="headerlink" href="#rest-and-mvc-with-spring" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">41. </span>REST and MVC with Spring<a class="headerlink" href="#rest-and-mvc-with-spring" title="Permalink to this headline">#</a></h1>
 <p>These tutorials assume you have Jetbrands IntelliJ Idea ultimate. They also assume you have a working knowledge of http, Java - in particular Servlets, and annotations, Gradle, Thymeleaf and html. It is recommended to use Postman for testing your endpoints (visit <a class="reference external" href="https://www.postman.com/">Website</a>).</p>
 <div class="section" id="create-a-new-project">
-<h2><span class="section-number">45.1. </span>Create a new project<a class="headerlink" href="#create-a-new-project" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.1. </span>Create a new project<a class="headerlink" href="#create-a-new-project" title="Permalink to this headline">#</a></h2>
 <p>Let’s start with a quick rundown of how you create and run a Spring MVC Web application.</p>
 <ol class="arabic">
 <li><p>Open IntelliJ</p></li>
@@ -443,7 +455,7 @@ e. Choose location → Next &amp; Finish</p>
 <p>OK, the app works, but there nothing (no data or web page) being served by the application at this url. Therefore you get an <code class="docutils literal notranslate"><span class="pre">404/Not</span> <span class="pre">Found</span></code>. Let’s fix that</p>
 </div>
 <div class="section" id="create-a-rest-response">
-<h2><span class="section-number">45.2. </span>Create a REST response<a class="headerlink" href="#create-a-rest-response" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">41.2. </span>Create a REST response<a class="headerlink" href="#create-a-rest-response" title="Permalink to this headline">#</a></h2>
 <p>Right click on base package → New → Package → name = <code class="docutils literal notranslate"><span class="pre">webcontrol</span></code>
 Right click on this package → New → Java Class → name = <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code></p>
 <p>In the  editor, modify the class so it looks like this</p>
@@ -469,7 +481,7 @@ You should get this:</p>
 <div><p>Hello Spring Boot!</p>
 </div></blockquote>
 <div class="section" id="serve-json-literals">
-<h3><span class="section-number">45.2.1. </span>Serve Json literals<a class="headerlink" href="#serve-json-literals" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.1. </span>Serve Json literals<a class="headerlink" href="#serve-json-literals" title="Permalink to this headline">#</a></h3>
 <p>Create a new package (<code class="docutils literal notranslate"><span class="pre">model</span></code>) with a new class, <code class="docutils literal notranslate"><span class="pre">Bird</span></code>, and generate a constructor, <code class="docutils literal notranslate"><span class="pre">toString()</span></code> and getters for all fields.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">nl.bioinf.model</span><span class="p">;</span>
 
@@ -494,7 +506,7 @@ You should get this:</p>
 <p>Hit the endpoint <a class="reference external" href="http://localhost:8080/hello/rest2">http://localhost:8080/hello/rest2</a>. As you can see, a JSON literal is returned representing a Java Bird instance. That is because your annotated the class with <code class="docutils literal notranslate"><span class="pre">&#64;RestController</span></code>. All objects returned from the controller methods will be converted into a Json representation. In fact, it works for the whole object graph, so if you return a list of Java objects you will get a Javascript array containing these objects as json!</p>
 </div>
 <div class="section" id="path-variables">
-<h3><span class="section-number">45.2.2. </span>Path Variables<a class="headerlink" href="#path-variables" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.2. </span>Path Variables<a class="headerlink" href="#path-variables" title="Permalink to this headline">#</a></h3>
 <p>Create a new method within <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/echo/{msg}&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">doEcho</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -507,7 +519,7 @@ You should get this:</p>
 <p>There is a new annotation here: <code class="docutils literal notranslate"><span class="pre">&#64;PathVariable</span></code>. It is used on a method parameter. Together with the <code class="docutils literal notranslate"><span class="pre">value=&quot;/echo/{msg}&quot;</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">&#64;GetMapping</span></code>, it tells the container that there is a request variable embedded in the url and it should be extracted into <code class="docutils literal notranslate"><span class="pre">String</span> <span class="pre">msg</span></code>.</p>
 </div>
 <div class="section" id="request-parameters">
-<h3><span class="section-number">45.2.3. </span>Request Parameters<a class="headerlink" href="#request-parameters" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.3. </span>Request Parameters<a class="headerlink" href="#request-parameters" title="Permalink to this headline">#</a></h3>
 <p>Create a new method within <code class="docutils literal notranslate"><span class="pre">HelloRest</span></code></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/echo_name&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">doEchoName</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -528,7 +540,7 @@ You should get this:</p>
 </div>
 </div>
 <div class="section" id="an-html-view-instead-of-json">
-<h3><span class="section-number">45.2.4. </span>An html view instead of Json<a class="headerlink" href="#an-html-view-instead-of-json" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">41.2.4. </span>An html view instead of Json<a class="headerlink" href="#an-html-view-instead-of-json" title="Permalink to this headline">#</a></h3>
 <p>So far you have seen three basic ways of serving data using a REST endpoint. Now we’ll switch to serving an html view using Thymeleaf.
 Create a new class within package <code class="docutils literal notranslate"><span class="pre">webcontrol</span></code> called <code class="docutils literal notranslate"><span class="pre">HelloMvc</span></code>, with this content</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Controller</span>
@@ -604,12 +616,12 @@ Create a new class within package <code class="docutils literal notranslate"><sp
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../06_leftovers/demo_case_refactoring.html"
+       href="../06_design/design_patterns_structural.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">44. </span>Demo case refactoring</p>
+        <p class="prev-next-title"><span class="section-number">40. </span>Design Patterns - Structural</p>
       </div>
     </a>
     <a class="right-next"
@@ -617,7 +629,7 @@ Create a new class within package <code class="docutils literal notranslate"><sp
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">46. </span>Dependency Injection in Spring</p>
+        <p class="prev-next-title"><span class="section-number">42. </span>Dependency Injection in Spring</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -639,12 +651,12 @@ Create a new class within package <code class="docutils literal notranslate"><sp
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-project">45.1. Create a new project</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-rest-response">45.2. Create a REST response</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-json-literals">45.2.1. Serve Json literals</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variables">45.2.2. Path Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-parameters">45.2.3. Request Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-html-view-instead-of-json">45.2.4. An html view instead of Json</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-project">41.1. Create a new project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-rest-response">41.2. Create a REST response</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serve-json-literals">41.2.1. Serve Json literals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#path-variables">41.2.2. Path Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-parameters">41.2.3. Request Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-html-view-instead-of-json">41.2.4. An html view instead of Json</a></li>
 </ul>
 </li>
 </ul>

@@ -345,7 +345,7 @@ Collections.sort(birds, Comparator.comparingInt(Bird::maximumAge));
 ```
 
 :::{note}
-Lambdas are discussed in the chapter {doc}`/03_apis/functional_programming`.
+Lambdas are discussed in the chapter {doc}`/03_apis/functional_programming_first`.
 :::
 
 ## Multilevel sorting

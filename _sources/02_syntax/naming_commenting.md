@@ -232,7 +232,7 @@ package nl.michielnoback.sequence_analysis;
  * @author Michiel Noback [*********@gmail.com]
  * @version 0.0.1
  */
-public final class ConservationAnalyserApp {
+public final class ConservationAnalyzerApp {
     /**
      * Primary entry point of the application.
      * It expects these command-line arguments to be provided:

@@ -12,7 +12,7 @@ with a more detailed description of the less obvious ones.
 Operators can be classified as **_assigning_** (e.g. `=` and `-=`), **_modifying_**, as in `count++` and they can be **_comparing_**, as in `count < maximum`. 
 Another way to classify them is to look at the number of operands they work on. They 
 can have one (**_unary_** - `count++;`), two (**_binary_** - `count < maximum`) or 
-three (**_ternairy-** - `boolean old = (age > 65 ? true : false);`) operands.
+three (**_ternary-** - `boolean old = (age > 65 ? true : false);`) operands.
 
 Operators can be ordered by their **_precedence_**, which is the priority (order) in 
 which they will be evaluated. 

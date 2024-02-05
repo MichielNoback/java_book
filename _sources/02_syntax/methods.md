@@ -408,7 +408,7 @@ static class PowerUpper {
         return Math.pow(x, power);
     }
 
-    //WON'T COMPILE! is not an overload, but a redefenition of "int powerUp(double x, double power)"
+    //WON'T COMPILE! is not an overload, but a re-definition of "int powerUp(double x, double power)"
     //double powerUp(double x, double power) {
     //    return Math.pow(x, power);
     //}
@@ -582,7 +582,7 @@ They can be applied to any type of function: constructors and (static) methods.
 Internally they are translated into an `array`.
 :::
 
-The alert reader will have noticed that the default `base` value has disappeared. That is because if we also want to overload this variant, the compiler does not know to distinguish between constructors anymore. A solution woould be to extract the base into an enum constant:
+The alert reader will have noticed that the default `base` value has disappeared. That is because if we also want to overload this variant, the compiler does not know to distinguish between constructors anymore. A solution would be to extract the base into an enum constant:
 
 ```java
 public enum PizzaBase {

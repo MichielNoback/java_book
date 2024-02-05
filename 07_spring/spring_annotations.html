@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>47. Core (Spring) annotations &#8212; The Java Track</title>
+    <title>43. Core (Spring) annotations &#8212; The Java Track</title>
   
   
   
@@ -63,7 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '07_spring/spring_annotations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="46. Dependency Injection in Spring" href="Dependency_injection.html" />
+    <link rel="next" title="44. A refresher" href="../08_web/refresher.html" />
+    <link rel="prev" title="42. Dependency Injection in Spring" href="Dependency_injection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -177,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces.html">12. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces_abstract_classes.html">12. Interfaces &amp; Abstract Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
@@ -185,46 +186,58 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming.html">20. Functional programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming_first.html">20. Functional programming intro</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance and UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance (and a bit of UML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">26. Design rules summary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">27. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">26. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">27. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/demo_case_refactoring.html">28. Demo case refactoring</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Web Apps</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Advanced APIs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../05_web/refresher.html">28. A refresher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/toolbox.html">29. The toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/first_project.html">30. A first project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/mvc.html">31. Implementing MVC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_expressions.html">32. Thymeleaf expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/thymeleaf_flow_control.html">33. Thymeleaf flow control and fragments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/sessions.html">34. Sessions &amp; Scopes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/servlet_details.html">35. Servlet details and lifecycle hooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/databases.html">36. Database interaction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/ajax.html">37. A simple web service using Ajax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/filters_upload.html">38. Web filters and File uploads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/webbased_exercises1.html">39. Exercises intro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_web/html_cheatsheet.html">40. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_basics.html">29. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_advanced.html">30. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/picoCLI.html">31. Command-line processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/functional_programming.html">32. Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/streams.html">33. The Streams API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/basic_multithreading.html">34. Basic Multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/advanced_multithreading.html">35. The Java concurrency API</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Leftovers</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Design</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_basics.html">41. JUnit 5 basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/JUnit_advanced.html">42. JUnit 5 advanced features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/UML.html">43. UML</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_leftovers/demo_case_refactoring.html">44. Demo case refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/clean_code.html">36. General coding principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/UML.html">37. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_behavioural.html">38. Design Patterns - Behavioural</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_creational.html">39. Design Patterns - Creational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_structural.html">40. Design Patterns - Structural</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="REST_and_MVC_with_spring.html">45. REST and MVC with Spring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Dependency_injection.html">46. Dependency Injection in Spring</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">47. Core (Spring) annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="REST_and_MVC_with_spring.html">41. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency_injection.html">42. Dependency Injection in Spring</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">43. Core (Spring) annotations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 8 - Web Apps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_web/refresher.html">44. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/toolbox.html">45. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/first_project.html">46. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/mvc.html">47. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_expressions.html">48. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/thymeleaf_flow_control.html">49. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/sessions.html">50. Sessions &amp; Scopes &amp; authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/servlet_details.html">51. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/databases.html">52. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/ajax.html">53. Serving data using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/filters_upload.html">54. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/html_cheatsheet.html">55. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_web/webbased_exercises1.html">56. Web Exercises</a></li>
 </ul>
 
     </div>
@@ -371,8 +384,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-annotations">47.1. Generic annotations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-oriented-annotations">47.2. Web oriented annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-annotations">43.1. Generic annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-oriented-annotations">43.2. Web oriented annotations</a></li>
 </ul>
             </nav>
         </div>
@@ -385,7 +398,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="core-spring-annotations">
-<h1><span class="section-number">47. </span>Core (Spring) annotations<a class="headerlink" href="#core-spring-annotations" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">43. </span>Core (Spring) annotations<a class="headerlink" href="#core-spring-annotations" title="Permalink to this headline">#</a></h1>
 <p>This page lists the most common annotations of the Spring (MVC) framework.</p>
 <p>The Component scan process is central to all annotations. Annotated classes, methods and fields will only be found and processed if they are included in the component scanning process. Spring Boot automatically includes all source folders in this scan. Many annotations are actually subtypes of each other. In particular, <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> is the supertype for many other class-level annotations such as <code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>. For instance, if you look up class <code class="docutils literal notranslate"><span class="pre">Controller</span></code> by pressing <code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">(Ctr)</span> <span class="pre">+</span> <span class="pre">B</span></code> when the cursor is on the name where it is used, you can see it is itself annotated with <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -421,7 +434,7 @@ document.write(`
 </div>
 <p>Note that by looking these up you can also see which properties can be set, and what the default is when they are not required. Also note that the Javadoc section is highly informative!</p>
 <div class="section" id="generic-annotations">
-<h2><span class="section-number">47.1. </span>Generic annotations<a class="headerlink" href="#generic-annotations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">43.1. </span>Generic annotations<a class="headerlink" href="#generic-annotations" title="Permalink to this headline">#</a></h2>
 <ul>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code></strong> – tells the Spring container that this class published components, i.e. Beans</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code></strong> – annotated on methods, telling the container that the method serves a component. The bean will have the name of the method by default.</p>
@@ -452,7 +465,7 @@ document.write(`
 </ul>
 </div>
 <div class="section" id="web-oriented-annotations">
-<h2><span class="section-number">47.2. </span>Web oriented annotations<a class="headerlink" href="#web-oriented-annotations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">43.2. </span>Web oriented annotations<a class="headerlink" href="#web-oriented-annotations" title="Permalink to this headline">#</a></h2>
 <ul>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code></strong> – tells the framework this class deals with http requests.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;RestController</span></code></strong> – See <code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code>, but for REST endpoints and will return json by default.</p></li>
@@ -527,8 +540,17 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">46. </span>Dependency Injection in Spring</p>
+        <p class="prev-next-title"><span class="section-number">42. </span>Dependency Injection in Spring</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../08_web/refresher.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">44. </span>A refresher</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
@@ -548,8 +570,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-annotations">47.1. Generic annotations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-oriented-annotations">47.2. Web oriented annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-annotations">43.1. Generic annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-oriented-annotations">43.2. Web oriented annotations</a></li>
 </ul>
   </nav></div>
 

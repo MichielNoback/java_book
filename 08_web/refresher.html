@@ -1,0 +1,795 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>44. A refresher &#8212; The Java Track</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_web/refresher';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="45. The toolbox" href="toolbox.html" />
+    <link rel="prev" title="43. Core (Spring) annotations" href="../07_spring/spring_annotations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/java_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/java_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../keyboard_shortcuts.html">Keyboard shortcuts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 1 - Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/intellij.html">1. A first IntelliJ project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/essentials.html">2. The essence of Java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/basic_program_design.html">3. Basic program structure and flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_getting_started/objects_and_classes.html">4. Objects and classes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 2 - Syntax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/data_types.html">5. Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/arrays.html">6. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/operators.html">7. Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/flow_control.html">8. Flow control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/methods.html">9. Methods and Constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/packages_imports.html">10. Packages and Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_syntax/naming_commenting.html">11. Naming and commenting stuff</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 3 - Core APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/interfaces_abstract_classes.html">12. Interfaces &amp; Abstract Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/collections.html">13. The Collections API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/class_object_methods.html">14. Methods of class Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/records.html">15. Records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/sorting.html">16. Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/exceptions.html">17. Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/io.html">18. File IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/regex.html">19. Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_apis/functional_programming_first.html">20. Functional programming intro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 4 - OOP</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation.html">21. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/access_modifiers.html">22. Access modifiers &amp; Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inheritance.html">23. Inheritance (and a bit of UML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/enums.html">24. Enums: constants on steroids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/encapsulation_revisited.html">25. Encapsulation revisited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/inner_classes.html">26. Inner classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/design_rules.html">27. Design rules summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_oop/demo_case_refactoring.html">28. Demo case refactoring</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 5 - Advanced APIs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_basics.html">29. JUnit 5 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/JUnit_advanced.html">30. JUnit 5 advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/picoCLI.html">31. Command-line processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/functional_programming.html">32. Functional Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/streams.html">33. The Streams API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/basic_multithreading.html">34. Basic Multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_adv_apis/advanced_multithreading.html">35. The Java concurrency API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 6 - Design</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_design/clean_code.html">36. General coding principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/UML.html">37. UML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_behavioural.html">38. Design Patterns - Behavioural</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_creational.html">39. Design Patterns - Creational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_design/design_patterns_structural.html">40. Design Patterns - Structural</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 7 - Spring (Boot)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/REST_and_MVC_with_spring.html">41. REST and MVC with Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/Dependency_injection.html">42. Dependency Injection in Spring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_spring/spring_annotations.html">43. Core (Spring) annotations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part 8 - Web Apps</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">44. A refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolbox.html">45. The toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_project.html">46. A first project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">47. Implementing MVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_expressions.html">48. Thymeleaf expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thymeleaf_flow_control.html">49. Thymeleaf flow control and fragments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sessions.html">50. Sessions &amp; Scopes &amp; authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servlet_details.html">51. Servlet details and lifecycle hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="databases.html">52. Database interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajax.html">53. Serving data using Ajax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters_upload.html">54. Web filters and File uploads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html_cheatsheet.html">55. HTML5 tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webbased_exercises1.html">56. Web Exercises</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/08_web/refresher.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A refresher</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">44.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basics-of-web">44.2. The basics of web</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-players">44.2.1. The players</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-client">44.2.1.1. The client</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-server">44.2.1.2. The server</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-types">44.2.1.3. Request types</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-html-request-form">44.2.2. A simple html request form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-get-request">44.2.3. A GET request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-post-request">44.2.4. A POST request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-http-response">44.2.5. The HTTP response</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-or-post">44.2.6. GET or POST?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-url">44.2.7. The URL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tcp-ports">44.2.8. TCP ports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-versus-dynamic-content">44.2.9. Static versus dynamic content</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-java">44.2.10. Why use Java?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#old-versus-modern-web-apps">44.2.11. “old” versus “modern” web apps</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-refresher">
+<h1><span class="section-number">44. </span>A refresher<a class="headerlink" href="#a-refresher" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">44.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Here starts the contents of the course Web-based Information Systems.<br />
+In this course, we will investigate the power of dynamic web pages using server-side and client-side technology, and the ways they interact</p>
+<p>Before embarking on the technological aspects of web app development, some very useful guidelines should be taken in (source: PLoS Computational Biology, Volume 7, Issue 5).</p>
+<ol class="arabic simple">
+<li><p>Plan Your Resource</p></li>
+<li><p>Discuss Responsibilities</p></li>
+<li><p>Know Your User Base</p></li>
+<li><p>Use Services Available to You during Development</p></li>
+<li><p>Ensure Portability</p></li>
+<li><p>Create an Open Source Project</p></li>
+<li><p>Provide Ample Documentation and Listen to Feedback</p></li>
+<li><p>Facilitate Reproducibility</p></li>
+<li><p>Plan Ahead: Long-Term Maintenance</p></li>
+<li><p>Switch off an Unused Resource</p></li>
+</ol>
+</div>
+<div class="section" id="the-basics-of-web">
+<h2><span class="section-number">44.2. </span>The basics of web<a class="headerlink" href="#the-basics-of-web" title="Permalink to this headline">#</a></h2>
+<p>When you click a simple link in a web page (the client), you <strong><em>request</em></strong> a resource.
+The web server receives the request, locates the resource and returns something to the user: a <strong><em>response</em></strong>.</p>
+<p><img alt="Request and Response" src="../_images/request_response.png" /></p>
+<div class="section" id="the-players">
+<h3><span class="section-number">44.2.1. </span>The players<a class="headerlink" href="#the-players" title="Permalink to this headline">#</a></h3>
+<div class="section" id="the-client">
+<h4><span class="section-number">44.2.1.1. </span>The client<a class="headerlink" href="#the-client" title="Permalink to this headline">#</a></h4>
+<p>The client (usually a web browser) formats a request and sends it to the server.
+The client receives the response and processes it
+when the response is html, the response is <strong><em>rendered</em></strong> by the browser into a web page <strong><em>view</em></strong>.</p>
+</div>
+<div class="section" id="the-server">
+<h4><span class="section-number">44.2.1.2. </span>The server<a class="headerlink" href="#the-server" title="Permalink to this headline">#</a></h4>
+<p>The server receives the request, locates the correct resource and formats the response before sending it to the client.
+The server can not:</p>
+<ul class="simple">
+<li><p>save anything</p></li>
+<li><p>generate dynamic content</p></li>
+<li><p>remember you or your previous requests</p></li>
+</ul>
+<p>These tasks have to be delegated</p>
+</div>
+<div class="section" id="request-types">
+<h4><span class="section-number">44.2.1.3. </span>Request types<a class="headerlink" href="#request-types" title="Permalink to this headline">#</a></h4>
+<p>Http requests come in 7 flavors. In 99.99999% of the use cases, it will be one of these two:</p>
+<ul class="simple">
+<li><p><strong>get</strong> a simple resource fetch request</p></li>
+<li><p><strong>post</strong> a request that sends data to the server or requests to change its data</p></li>
+</ul>
+<p>There are others, not often used and not always supported because of security issues:</p>
+<ul class="simple">
+<li><p>delete</p></li>
+<li><p>head</p></li>
+<li><p>options</p></li>
+<li><p>put</p></li>
+<li><p>trace</p></li>
+</ul>
+<p>We will deal only with the first two.</p>
+</div>
+</div>
+<div class="section" id="a-simple-html-request-form">
+<h3><span class="section-number">44.2.2. </span>A simple html request form<a class="headerlink" href="#a-simple-html-request-form" title="Permalink to this headline">#</a></h3>
+<p>Below you see a very simple html request form. The request will be send to <code class="docutils literal notranslate"><span class="pre">/birdpic</span></code> on the root of the current application context.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>a page with a form<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>request bird pictures<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;birdpic&quot;</span><span class="p">&gt;</span>
+      Species name: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;species&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+      Minimum rating: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;rating&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;find&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The form will be rendered into the page below. Note that with the absence of a <code class="docutils literal notranslate"><span class="pre">method=...</span></code> attribute to the <code class="docutils literal notranslate"><span class="pre">form</span></code> tag, it will default to GET.</p>
+<p><img alt="A request form" src="../_images/request_form1s.png" /></p>
+</div>
+<div class="section" id="a-get-request">
+<h3><span class="section-number">44.2.3. </span>A GET request<a class="headerlink" href="#a-get-request" title="Permalink to this headline">#</a></h3>
+<p>Filling out the form and clicking find generates this location (URL) in your browsers’ location bar (only with GET requests).</p>
+<p><img alt="Request URL" src="../_images/request_url1.png" /></p>
+<p>An http GET request will be formed, looking like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GET ~michiel/WebBased/birdpic?species=Roodborst&amp;rating=4 HTTP/1.1 
+Host: www.bioinf.nl
+User-Agent: Mozilla/5.0(...)
+Accept: text/xml.application/xml,(...)
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8,q=0.7,*;q=0.7
+Keep-Alife: 300
+Connection: keep-alife
+</pre></div>
+</div>
+<p>You can look at this request with for instance you web browsers developer toolbox (discussed later).</p>
+<p>Note that the parameters of your request have been put at the top of the request. Some other parameters have been added as well, as <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> pairs.</p>
+</div>
+<div class="section" id="a-post-request">
+<h3><span class="section-number">44.2.4. </span>A POST request<a class="headerlink" href="#a-post-request" title="Permalink to this headline">#</a></h3>
+<p>Adding the <code class="docutils literal notranslate"><span class="pre">method=POST</span></code> attribute to the <code class="docutils literal notranslate"><span class="pre">&lt;form&gt;</span></code> tag,</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;birdpic&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span> <span class="p">&gt;</span>
+  Species name: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;species&quot;</span><span class="p">&gt;</span>
+  Minimum rating: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;rating&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;find&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>will make the url-appended parameters disappear,</p>
+<p><img alt="Request URL" src="../_images/request_url2.png" /></p>
+<p>And the parameters are now located at the end of the http request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">~</span><span class="n">michiel</span><span class="o">/</span><span class="n">WebBased</span><span class="o">/</span><span class="n">birdpic</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> 
+<span class="n">Host</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">bioinf</span><span class="o">.</span><span class="n">nl</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">xml</span><span class="o">.</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">,(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">en</span><span class="o">-</span><span class="n">us</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span><span class="n">deflate</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Charset</span><span class="p">:</span> <span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="o">*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span>
+<span class="n">Keep</span><span class="o">-</span><span class="n">Alife</span><span class="p">:</span> <span class="mi">300</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">keep</span><span class="o">-</span><span class="n">alife</span>
+
+<span class="n">species</span><span class="o">=</span><span class="n">Roodborst</span><span class="o">&amp;</span><span class="n">rating</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-http-response">
+<h3><span class="section-number">44.2.5. </span>The HTTP response<a class="headerlink" href="#the-http-response" title="Permalink to this headline">#</a></h3>
+<p>The response coming back from the server will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+<span class="n">Set</span><span class="o">-</span><span class="n">Cookie</span><span class="p">:</span> <span class="n">JSESSIONID</span><span class="o">=</span><span class="mi">0</span><span class="n">AAB6CGSTGGC56DS3FF78</span><span class="p">;</span> <span class="n">Path</span><span class="o">=/</span><span class="n">WebBased</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">397</span>
+<span class="n">Date</span><span class="p">:</span> <span class="n">Sun</span><span class="p">,</span> <span class="mi">9</span> <span class="n">Nov</span> <span class="mi">2018</span> <span class="mi">02</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">40</span> <span class="n">CET</span>
+<span class="n">Server</span><span class="p">:</span> <span class="n">Apache</span><span class="o">-</span><span class="n">Coyote</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+
+<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+  <span class="o">...</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>At the top, there is the HTTP response header with a status code (200 / OK), a cookie and other important information about the response. Below the header is the HTTP response body, with the HTML that the browser is going to display.</p>
+</div>
+<div class="section" id="get-or-post">
+<h3><span class="section-number">44.2.6. </span>GET or POST?<a class="headerlink" href="#get-or-post" title="Permalink to this headline">#</a></h3>
+<p>Use GET for (simple) requests that do not alter the data on the server side. These are called <strong><em>idempotent</em></strong> because they can be made over and over again without any effect on the server.
+Use POST for complex requests and requests that alter the data on the server side, and always if you are going to send sensitive data (passwords, usernames).</p>
+</div>
+<div class="section" id="the-url">
+<h3><span class="section-number">44.2.7. </span>The URL<a class="headerlink" href="#the-url" title="Permalink to this headline">#</a></h3>
+<p>URL stands for <strong><em>Uniform Resource Locator</em></strong>.
+Every web resource has its own unique address in the URL format:</p>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+http://<span style="color:darkred;">www.bioinf.nl</span><span style="color:darkgreen;">:80</span><span style="color:purple;">/WebBased/</span><span style="color:orange;">index.hml</span>
+</pre>
+<pre style="color:darkblue;font-weight:bold;font-family:courier;font-size:1.2em;">
+http://         protocol
+<span style="color:darkred;">www.bioinf.nl   server</span>
+<span style="color:darkgreen;">:80             TCP port</span> 
+<span style="color:purple;">/WebBased/      path</span>
+<span style="color:orange;">index.hml       resource</span>
+</pre>
+<p>If you don’t specify a port, it will default to the HTTP port which is 80.</p>
+</div>
+<div class="section" id="tcp-ports">
+<h3><span class="section-number">44.2.8. </span>TCP ports<a class="headerlink" href="#tcp-ports" title="Permalink to this headline">#</a></h3>
+<p>The TCP port is a 16-bit number that identifies a specific software program on the server hardware.
+A server can have up to 65536 different server apps running
+TCP port numbers from 0 to 1023 are reserved for well-known services:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">21</span></code></strong> FTP (file transfer protocol)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">22</span></code></strong> SSH (secure shell)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">25</span></code></strong> SMTP (mail)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">80</span></code></strong> HTTP (Hypertext Transfer Protocol)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">443</span></code></strong>	HTTPS</p></li>
+</ul>
+<p>Don’t use these ports for your own server programs!</p>
+<p>Tomcat usually runs on port 8080</p>
+</div>
+<div class="section" id="static-versus-dynamic-content">
+<h3><span class="section-number">44.2.9. </span>Static versus dynamic content<a class="headerlink" href="#static-versus-dynamic-content" title="Permalink to this headline">#</a></h3>
+<p>Web servers can ONLY serve static content (html pages, pictures, xml documents etc).
+If you want dynamic content, you have to delegate this to another application. A web server can’t help you with this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    The current time is [insertTimeOnServer]
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Non-Java programs that can do this are often called CGI (Common Gateway Interface) scripts. Examples of languages used to write these are Perl, PHP, Python etc</p>
+<p>This is a PHP script printing current time:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    The current time is 
+      <span class="cp">&lt;?php</span>
+<span class="cp">        //Prints something like: Wednesday 29th of May 2019 03:12:46 PM  </span>
+<span class="cp">        echo date(&#39;l jS \of F Y h:i:s A&#39;); </span>
+<span class="cp">      ?&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="why-use-java">
+<h3><span class="section-number">44.2.10. </span>Why use Java?<a class="headerlink" href="#why-use-java" title="Permalink to this headline">#</a></h3>
+<p>Although Java is more of a fuss to get up and running, it is much better in serving heavy-duty analysis tools.
+If you want a simple interface with forms accessing database data and presenting them, use Python.
+If you want a real analysis tool running behind a web application, use Java
+But always…</p>
+<p>Always separate the responsibilities of the view, the data and the model!
+Avoid mixing html, styling, scripting, database access and application logic at all costs!
+This is the essence of the Model View Controller (MVC) design pattern (or paradigm). In this course, we’ll only skim the essence of this principle. Here is a schematic representation of the top-level application components and how they should interact - and be separated.</p>
+<p><img alt="The MVC pattern" src="../_images/mvc_pattern2s.png" /></p>
+<p>MVC can be applied on different levels</p>
+<ul class="simple">
+<li><p>at the server for whole-application architecture (Servlet control – Thymeleaf view – Java model)</p></li>
+<li><p>In a single web page DOM element: A Form HTML/css view, its Javascript controller and a Javascript model (vue.js has this principle at its core).</p></li>
+</ul>
+</div>
+<div class="section" id="old-versus-modern-web-apps">
+<h3><span class="section-number">44.2.11. </span>“old” versus “modern” web apps<a class="headerlink" href="#old-versus-modern-web-apps" title="Permalink to this headline">#</a></h3>
+<p>In the old days, almost every action or resource requested from the server resulted in a completely new page.
+Now, single-page web apps are becoming the standard.
+The key to this is Javascript and Ajax: it lets you load and update only those parts of the page where this is required.
+Also, Javascript can take  a LOT of logic away from the server</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./08_web"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../07_spring/spring_annotations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">43. </span>Core (Spring) annotations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="toolbox.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">45. </span>The toolbox</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">44.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basics-of-web">44.2. The basics of web</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-players">44.2.1. The players</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-client">44.2.1.1. The client</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-server">44.2.1.2. The server</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-types">44.2.1.3. Request types</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-html-request-form">44.2.2. A simple html request form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-get-request">44.2.3. A GET request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-post-request">44.2.4. A POST request</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-http-response">44.2.5. The HTTP response</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-or-post">44.2.6. GET or POST?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-url">44.2.7. The URL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tcp-ports">44.2.8. TCP ports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-versus-dynamic-content">44.2.9. Static versus dynamic content</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-java">44.2.10. Why use Java?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#old-versus-modern-web-apps">44.2.11. “old” versus “modern” web apps</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michiel Noback
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

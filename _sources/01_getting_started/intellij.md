@@ -19,7 +19,7 @@ Start IntelliJ and select "`New Project`" from the start screen (or New &rarr; P
 ![Start screen](figures/IntelliJ_start_screen.png)
 
 In the New Project wizard, enter a name (e.g. "my-first-java-app") select Java for "Language" and Gradle for "Build system". Choose a JDK (a Java Development Kit) that is installed (the number indicates which Java version you are going to use - this example shows Java 18). Leave Gradle DSL on Groovy (the scripting language used to configure your project).
-Expand "Advanced Settings" section which is hidden by default and give your project a **_GroupId_** which is your webdomain reversed. Leave the **_ArtifactId_** the same as your project name.  
+Expand "Advanced Settings" section which is hidden by default and give your project a **_GroupId_** which is your web domain reversed. Leave the **_ArtifactId_** the same as your project name.  
 
 The group ID should be a unique identifier; in Java this is usually the web domain of you or your employer, reversed and with a project name appended. It is a way to guarantee a unique _name space_. Note the underscores; in Java you specify package names with underscores and lowercase letters. The artifact ID is the name of your project, also in lowercase but usually with hyphens between words.
 
