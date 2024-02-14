@@ -640,7 +640,6 @@ public class DataSource {
 }
 ```
 
-
 ## Another refactoring example
 
 Here is another worked example emphasising te principles above.
@@ -779,3 +778,36 @@ class Cell {
 }
 ```
 
+## Refactoring techniques overview
+
+Below is a (non-exhaustive) overview of possible problems and associated refactoring techniques. 
+
+1. Use clear and descriptive names for all code elements: 
+    * Nouns for variables and classes.
+    * Verbs for methods.
+1. Replace literal values with variables/constants/enums.
+1. Extract deeply nested flow control structures into methods. Allow no more than 3 or 4 levels of indentation.
+1. Split longer functions into several smaller ones.
+1. Replace complex boolean expressions with a method call.
+1. Replace complex data structures with data objects, preferably records.
+1. Split complex classes into several simple ones.
+1. Use factory methods or builder pattern for complex classes.
+1. Catch `NullPointerException` as soon as possible.
+1. Never spill your guts: catch exceptions and convert them to informative error messages to the user.
+1. Use well-designed error flow control with the exception mechanism.
+1. Have only one entry- and exit point for the application - prevent the use of `System.exit()` in production code.
+1. Use `stdout` for program output and `stderr` for error messages.
+
+And finally:
+
+:::{admonition} Repeated code is a code-smell!  
+:class: warning  
+
+Repeated code (often with only minor variations) can be very diverse: 
+* simple repeated operations - refactor to method call
+* a repeated code block creating complex objects - refactor with Builder or Factory Method Pattern
+* repeated if/else or switch blocks - refactor with Inheritance, Strategy Pattern or Template Method Pattern, or other
+* Biolerplate class code - refactor with records
+
+This is not a complete listing.
+:::

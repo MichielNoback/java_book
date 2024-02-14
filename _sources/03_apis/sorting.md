@@ -90,14 +90,14 @@ As you can see, capitals come before lower case letters.
 ### Alternative: `list.sort()`
 The exact same thing could have been achieved using the `sort()` method of class `List`, added in Java 8:
 
-``` java
+```java
 names.sort(Comparator.naturalOrder());
 System.out.println("names after sort on List " + names);
 ```
 
 The signature of this sort method is:
 
-``` java
+```java
 public void sort(@Nullable java.util.Comparator<? super E> c)
 ```
 
@@ -105,7 +105,7 @@ It takes a `Comparator` instance; this interface is described in the next sectio
 
 Here is the reverse ordering:
 
-``` java
+```java
 names.sort(Comparator.reverseOrder());
 System.out.println("names after reverse sort " + names);
 ```
@@ -119,7 +119,7 @@ names after reverse sort [rose, Wanda, Jordan, James, Aaron]
 ```
 Another interesting Comparator is the CASE_INSENSITIVE_ORDER comparator defined in the String class:
 
-``` java
+```java
 names.sort(String.CASE_INSENSITIVE_ORDER);
 System.out.println("names case insensitive sort " + names);
 ```
@@ -181,7 +181,7 @@ public int compareTo(Bird other) {
 
 This compiles just fine, but logic is missing. The next snipped solves that.
 
-``` java
+```java
 @Override
 public int compareTo(Bird other) {
     //declare named variables for readability
@@ -197,7 +197,7 @@ public int compareTo(Bird other) {
 
 Time for a test drive. The toString method was adjusted for readability and compactness. Also, a Java8+ feature (Streams API) was used for printing (not part of this courses' material).
 
-``` java
+```java
 List<Bird> birds = new ArrayList<>();
 
 birds.add(new Bird("Buzzard", 1.3, 29));
@@ -236,7 +236,7 @@ After sort on wingspan:
 
 Note the ascending order of wingspan. What if the natural order is descending in your opinion? Simply reverse the sort logic:
 
-``` java
+```java
 @Override
 public int compareTo(Bird other) {
     final int BEFORE = -1;
@@ -264,7 +264,7 @@ After:
 :::{admonition} Delegate if you can
 Although this logic is just fine, it is often better to use classes that are dedicated to dealing with the datatype and ***delegate*** to their implemented and tested methods:
 
-``` java
+```java
 @Override
 public int compareTo(Bird other) {
     //delegate to class double
@@ -289,7 +289,7 @@ public void sort(@Nullable Comparator<? super E> comparator)
 
 The `Comparator` interface has a single abstract method:
 
-``` java
+```java
 package java.util
 
 public interface Comparator<T> {
@@ -299,7 +299,7 @@ public interface Comparator<T> {
 
 Let's start with the most straightforward implementation.
 
-``` java
+```java
 package snippets.apis;
 import java.util.Comparator;
 
@@ -313,7 +313,7 @@ public class BirdNameComparator implements Comparator<Bird> {
 
 This one sorts on name, and again delegates to the type of the instance variable - class String. This is its usage.
 
-``` java
+```java
 Collections.sort(birds, new BirdNameComparator());
 
 //or, the Java8+ way
@@ -322,7 +322,7 @@ birds.sort(new BirdNameComparator())
 
 Implementations of the Comparator interface are often created on-the-fly. For instance, look at this ***anonymous inner class***.
 
-``` java
+```java
 Collections.sort(birds, new Comparator<Bird>(){
     @Override
     public int compare(Bird first, Bird second) {
@@ -352,7 +352,7 @@ Lambdas are discussed in the chapter {doc}`/03_apis/functional_programming_first
 
 You have seen how to code simple comparison logic. But what if you want to sort on multiple properties? Suppose, in the case of the birds example, we wanted to sort on wingspan first and then on name. No matter how many properties, the pattern is always the same: check the primary property, return this if they are not equal. If they are equal, check on the secondary property:
 
-``` java
+```java
 @Override
 public int compareTo(Bird other) {
     // primary property

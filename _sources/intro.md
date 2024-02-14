@@ -8,7 +8,7 @@ This gitbook accompanies several Java-based courses -called the Java Track- of t
 It covers the basics of Java (Part I - III), some OOP fundamentals (Part IV), Java for the web using Servlets and Thymeleaf (Part V), JUnit testing (Part VI), Advanced design principles including Design Patterns (Part VII), and some tutorials on the Spring framework (Part VIII).  
 
 
-Copyright &copy; (2019-2023) Michiel Noback 
+Copyright &copy; (2019-2024) Michiel Noback 
 
 
 
