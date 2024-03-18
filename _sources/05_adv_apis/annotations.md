@@ -34,8 +34,6 @@ should be written to file at application shutdown time.
 
 ## Custom annotations
 
-Let's start by describing the 
-
 ### Declaration
 Annotations are declared using the `@interface` keyword
 

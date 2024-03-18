@@ -273,7 +273,15 @@ java.lang.IllegalStateException: Balance is negative: -20!
 </pre>
 
 As you can see, there are not one, but two overdrawing operations, leaving the bank account at -20!  
-This is because `account.canWithdraw(toWithdraw)` and `account.withdraw(toWithdraw)` are not coupled into a single transaction (atomic operation) making it possible for other Threads to come in between when the permission has been "granted" but before the actual withdraw has been executed.
+This is because `account.canWithdraw(toWithdraw)` and `account.withdraw(toWithdraw)` are not coupled into a single transaction (atomic operation) making it possible for other Threads to come in between when the permission has been "granted" but before the actual withdraw has been executed.  
+
+This is an example of a race condition. A race condition occurs when multiple threads access 
+shared data concurrently, and the outcome depends on the timing of their execution. 
+
+:::{admonition} Race condition
+:class: important
+In computer programming, a race condition is a situation where two or more threads can access shared data and they try to change it at the same time. This often leads to unpredictable results.
+:::
 
 To prevent this, we need to put all statements that need to be executed "as one" into a `synchronized` block. 
 Here is the safe way to do this.
@@ -324,6 +332,144 @@ SimpleWorker '_1_' doing its thing
 balance = 10
 </pre>
 
-There are multiple ways to to make use of the synchronized keyword; this is a very common one.
-The block `synchronized (SimpleWorker.class) {}` is marked synchronized, or locked, meaning that only a thread holding the key will be able to enter. The key can be any object, but usually this will be the class object of the current executing class, which is guaranteed to be present in single copy during runtime (singleton).
+The above example makes the entire operation **atomic**.
 
+
+There are multiple ways to to make use of the synchronized keyword; this is a very common one.  
+The block `synchronized (SimpleWorker.class) {}` is marked synchronized, or locked, meaning that only a 
+thread holding the key will be able to enter. The key can be any object, but usually this will be the 
+class object of the current executing class, which is guaranteed to be present in single copy 
+during runtime (singleton). You can also mark a method synchronized. A general advise is to keep 
+the synchronized pieces as small as possible.
+
+Besides the `synchronized` keyword, there is also the `ReentrantLock` class. Here is a classic example 
+with a Counter:
+
+```java
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Counter {
+    private int count = 0;
+    private final Lock lock = new ReentrantLock();
+
+    public void increment() {
+        lock.lock();  //use a lock to restrict access for one thread only
+        try {
+            count++;
+        } finally {
+            lock.unlock(); //release the lock
+        }
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+public class CounterTest {
+    public static void main(String[] args) {
+        final Counter counter = new Counter();
+
+        Runnable task = () -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.increment();
+            }
+        };
+
+        Thread thread1 = new Thread(task);
+        Thread thread2 = new Thread(task);
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join(); //waiting for both threads to finish
+            thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Final count: " + counter.getCount());
+    }
+}
+```
+
+Both `synchronized` blocks and `ReentrantLock` are mechanisms provided by Java for achieving mutual exclusion and synchronization in multithreaded programs. They both ensure that only one thread can access a critical section of code at a time.  
+However, there are differences between the two. These are the main ones:
+
+1. **Locking Mechanism**:
+   - `synchronized` blocks are built into the Java language and are associated with an object's intrinsic lock (also known as a monitor lock). Each object has a single associated monitor lock.
+   - `ReentrantLock` is a class provided by the `java.util.concurrent.locks` package. It's a separate class that provides more flexible locking mechanisms compared to `synchronized` blocks. You explicitly create instances of `ReentrantLock` and use them to lock and unlock code blocks.
+
+2. **Lock Acquisition**:
+   - With `synchronized` blocks, the lock is automatically acquired when a thread enters a synchronized block and released when the thread exits the block.
+   - With `ReentrantLock`, you manually acquire the lock using the `lock()` method and release it using the `unlock()` method. This gives you more control over lock acquisition and release, allowing for finer-grained locking.
+
+In summary, synchronized blocks are simpler to use and generally sufficient for most synchronization needs. However, ReentrantLock provides more flexibility and advanced features for specialized synchronization requirements. The choice between them depends on the specific needs and complexity of the multithreaded program.
+
+### Lazy instantiation
+
+Another example of data corruption in multithreaded Java programs involves the improper use of lazy initialization in singleton patterns. Lazy initialization is a technique where an object is created only when it is first accessed, rather than when the program starts. Singleton patterns ensure that only one instance of a class is created.
+
+Consider the following singleton implementation:
+
+```java
+public class LazySingleton {
+    private static LazySingleton instance;
+
+    private LazySingleton() {}
+
+    public static LazySingleton getInstance() {
+        if (instance == null) {
+            instance = new LazySingleton();
+        }
+        return instance;
+    }
+}
+```
+
+This implementation is not thread-safe. If multiple threads concurrently access the getInstance() method when instance is still null, they might all create separate instances of the singleton, leading to incorrect behavior and data corruption.
+
+To solve this issue, you can use synchronization to make the initialization thread-safe:
+
+```java
+public class LazySingleton {
+    private static LazySingleton instance;
+
+    private LazySingleton() {}
+
+    public static synchronized LazySingleton getInstance() {
+        if (instance == null) {
+            instance = new LazySingleton();
+        }
+        return instance;
+    }
+}
+```
+
+In this modified version, the getInstance() method is synchronized, ensuring that only one thread can enter it at a time. However, this approach has performance implications as every access to getInstance() is now synchronized, even though synchronization is only necessary during the first instantiation.
+
+An alternative, more efficient approach is to use **double-checked locking**:
+
+```java
+public class LazySingleton {
+    private static volatile LazySingleton instance; //no thread-local caching
+
+    private LazySingleton() {}
+
+    public static LazySingleton getInstance() {
+        if (instance == null) {
+            synchronized (LazySingleton.class) {
+                if (instance == null) {
+                    instance = new LazySingleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+```
+
+In this version, the instance variable is marked as `volatile`, ensuring that changes to it are immediately visible to all threads. The double-checked locking idiom is used to minimize the performance impact of synchronization by only synchronizing the critical section where instance is instantiated if it is null. This ensures thread safety while avoiding the synchronization overhead on subsequent calls to getInstance() once the instance has been initialized.

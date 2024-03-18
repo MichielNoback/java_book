@@ -390,7 +390,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-threads-and-daemon-threads">36.2. User Threads and Daemon threads</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-threat-of-threads">36.3. The threat of Threads</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uncertainty-principle">36.4. The Uncertainty principle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-corruption-danger">36.5. The Data Corruption danger</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-corruption-danger">36.5. The Data Corruption danger</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lazy-instantiation">36.5.1. Lazy instantiation</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -641,6 +644,12 @@ java.lang.IllegalStateException: Balance is negative: -20!
 </pre>
 <p>As you can see, there are not one, but two overdrawing operations, leaving the bank account at -20!<br />
 This is because <code class="docutils literal notranslate"><span class="pre">account.canWithdraw(toWithdraw)</span></code> and <code class="docutils literal notranslate"><span class="pre">account.withdraw(toWithdraw)</span></code> are not coupled into a single transaction (atomic operation) making it possible for other Threads to come in between when the permission has been “granted” but before the actual withdraw has been executed.</p>
+<p>This is an example of a race condition. A race condition occurs when multiple threads access
+shared data concurrently, and the outcome depends on the timing of their execution.</p>
+<div class="important admonition">
+<p class="admonition-title">Race condition</p>
+<p>In computer programming, a race condition is a situation where two or more threads can access shared data and they try to change it at the same time. This often leads to unpredictable results.</p>
+</div>
 <p>To prevent this, we need to put all statements that need to be executed “as one” into a <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> block.
 Here is the safe way to do this.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nd">@Override</span>
@@ -686,8 +695,137 @@ balance = 10
 SimpleWorker '_1_' doing its thing
 balance = 10
 </pre>
-<p>There are multiple ways to to make use of the synchronized keyword; this is a very common one.
-The block <code class="docutils literal notranslate"><span class="pre">synchronized</span> <span class="pre">(SimpleWorker.class)</span> <span class="pre">{}</span></code> is marked synchronized, or locked, meaning that only a thread holding the key will be able to enter. The key can be any object, but usually this will be the class object of the current executing class, which is guaranteed to be present in single copy during runtime (singleton).</p>
+<p>The above example makes the entire operation <strong>atomic</strong>.</p>
+<p>There are multiple ways to to make use of the synchronized keyword; this is a very common one.<br />
+The block <code class="docutils literal notranslate"><span class="pre">synchronized</span> <span class="pre">(SimpleWorker.class)</span> <span class="pre">{}</span></code> is marked synchronized, or locked, meaning that only a
+thread holding the key will be able to enter. The key can be any object, but usually this will be the
+class object of the current executing class, which is guaranteed to be present in single copy
+during runtime (singleton). You can also mark a method synchronized. A general advise is to keep
+the synchronized pieces as small as possible.</p>
+<p>Besides the <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> keyword, there is also the <code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code> class. Here is a classic example
+with a Counter:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.Lock</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.ReentrantLock</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Counter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Lock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">increment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w">  </span><span class="c1">//use a lock to restrict access for one thread only</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"> </span><span class="c1">//release the lock</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CounterTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Counter</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Counter</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">counter</span><span class="p">.</span><span class="na">increment</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">thread1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">thread2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">thread1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">thread2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">thread1</span><span class="p">.</span><span class="na">join</span><span class="p">();</span><span class="w"> </span><span class="c1">//waiting for both threads to finish</span>
+<span class="w">            </span><span class="n">thread2</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Final count: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="na">getCount</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Both <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> blocks and <code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code> are mechanisms provided by Java for achieving mutual exclusion and synchronization in multithreaded programs. They both ensure that only one thread can access a critical section of code at a time.<br />
+However, there are differences between the two. These are the main ones:</p>
+<ol class="arabic simple">
+<li><p><strong>Locking Mechanism</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">synchronized</span></code> blocks are built into the Java language and are associated with an object’s intrinsic lock (also known as a monitor lock). Each object has a single associated monitor lock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code> is a class provided by the <code class="docutils literal notranslate"><span class="pre">java.util.concurrent.locks</span></code> package. It’s a separate class that provides more flexible locking mechanisms compared to <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> blocks. You explicitly create instances of <code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code> and use them to lock and unlock code blocks.</p></li>
+</ul>
+</li>
+<li><p><strong>Lock Acquisition</strong>:</p>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">synchronized</span></code> blocks, the lock is automatically acquired when a thread enters a synchronized block and released when the thread exits the block.</p></li>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">ReentrantLock</span></code>, you manually acquire the lock using the <code class="docutils literal notranslate"><span class="pre">lock()</span></code> method and release it using the <code class="docutils literal notranslate"><span class="pre">unlock()</span></code> method. This gives you more control over lock acquisition and release, allowing for finer-grained locking.</p></li>
+</ul>
+</li>
+</ol>
+<p>In summary, synchronized blocks are simpler to use and generally sufficient for most synchronization needs. However, ReentrantLock provides more flexibility and advanced features for specialized synchronization requirements. The choice between them depends on the specific needs and complexity of the multithreaded program.</p>
+<div class="section" id="lazy-instantiation">
+<h3><span class="section-number">36.5.1. </span>Lazy instantiation<a class="headerlink" href="#lazy-instantiation" title="Permalink to this headline">#</a></h3>
+<p>Another example of data corruption in multithreaded Java programs involves the improper use of lazy initialization in singleton patterns. Lazy initialization is a technique where an object is created only when it is first accessed, rather than when the program starts. Singleton patterns ensure that only one instance of a class is created.</p>
+<p>Consider the following singleton implementation:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LazySingleton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">LazySingleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LazySingleton</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This implementation is not thread-safe. If multiple threads concurrently access the getInstance() method when instance is still null, they might all create separate instances of the singleton, leading to incorrect behavior and data corruption.</p>
+<p>To solve this issue, you can use synchronization to make the initialization thread-safe:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LazySingleton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">LazySingleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LazySingleton</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this modified version, the getInstance() method is synchronized, ensuring that only one thread can enter it at a time. However, this approach has performance implications as every access to getInstance() is now synchronized, even though synchronization is only necessary during the first instantiation.</p>
+<p>An alternative, more efficient approach is to use <strong>double-checked locking</strong>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LazySingleton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w"> </span><span class="c1">//no thread-local caching</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">LazySingleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LazySingleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">LazySingleton</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LazySingleton</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this version, the instance variable is marked as <code class="docutils literal notranslate"><span class="pre">volatile</span></code>, ensuring that changes to it are immediately visible to all threads. The double-checked locking idiom is used to minimize the performance impact of synchronization by only synchronizing the critical section where instance is instantiated if it is null. This ensures thread safety while avoiding the synchronization overhead on subsequent calls to getInstance() once the instance has been initialized.</p>
+</div>
 </div>
 </div>
 
@@ -762,7 +900,10 @@ The block <code class="docutils literal notranslate"><span class="pre">synchroni
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-threads-and-daemon-threads">36.2. User Threads and Daemon threads</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-threat-of-threads">36.3. The threat of Threads</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-uncertainty-principle">36.4. The Uncertainty principle</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-corruption-danger">36.5. The Data Corruption danger</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-corruption-danger">36.5. The Data Corruption danger</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lazy-instantiation">36.5.1. Lazy instantiation</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
